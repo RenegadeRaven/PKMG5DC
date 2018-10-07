@@ -1,4 +1,5 @@
 ﻿Public Class Form1
+#Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath
     Dim comp(4) As Integer
     Dim dt As Boolean = False
@@ -12,7 +13,8 @@ this box is all you can fit. A maximum of 7
 lines, max 36 characters per line, and a 
 maximum of 252 characters total.
 Make sure you put the new lines(ENTER key)"
-
+#End Region
+#Region "Syncs"
     Private Sub comp_ch()
         comp(4) = (comp(0) Xor comp(1) Xor comp(2) Xor comp(3))
         Dim co As String = Hex(comp(4))
@@ -39,6 +41,20 @@ Make sure you put the new lines(ENTER key)"
             Label1.Font = New Font(Label1.Font, FontStyle.Regular)
         End If
         'save(apppath & "\work.bin")
+    End Sub
+    Private Sub RichTextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles RichTextBox2.KeyPress
+        '97 - 122 = Ascii codes for simple letters
+        '65 - 90  = Ascii codes for capital letters
+        '48 - 57  = Ascii codes for numbers
+
+        If Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 127 Then
+            e.Handled = True
+        End If
+    End Sub
+#End Region
+#Region "Builder"
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        build()
     End Sub
     Private Shared Sub Main(ByVal args As String())
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo()
@@ -82,6 +98,8 @@ Make sure you put the new lines(ENTER key)"
         MsgBox("Built as " & TextBox1.Text & ".nds", 0)
         Application.Restart()
     End Sub
+#End Region
+
     Private Sub Form1_Close(sender As Object, e As EventArgs) Handles MyBase.Closing
         System.IO.File.Delete(apppath & "\work.bin")
     End Sub
@@ -128,6 +146,74 @@ Make sure you put the new lines(ENTER key)"
         CheckBox4.Checked = True
         save(apppath & "\work.bin")
     End Sub
+    Private Sub initial()
+        RichTextBox1.Text = RichTextBox1.Text.Remove(1, 1)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(1, "1")
+        Dim f As Integer = RichTextBox1.Text.Length - 16
+        RichTextBox1.Text = RichTextBox1.Text.Remove(f, 2)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(f, "14")
+        RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 2)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(1438, "02")
+        save(apppath & "/work.bin")
+        DateTimePicker1.Value = System.DateTime.Today
+        DateTimePicker2.Value = System.DateTime.Today
+        lim()
+        Dim ft As String = ""
+        Dim mx As Integer = 1012
+        For i = 0 To mx - 1 Step 1
+            ft = ft & "F"
+        Next i
+        RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
+        save(apppath & "\work.bin")
+    End Sub
+    Private Function lted(ByVal int As Integer)
+        Dim s As String
+        If Hex(int).Length < 4 Then
+            s = "0" & Hex(int)
+        Else
+            s = Hex(int)
+        End If
+        Dim s2 As String = s.Skip(2).ToArray() & s.Remove(2, 2).ToArray()
+        Return s2
+    End Function
+    Private Sub lim()
+        Dim d As Integer = DateTimePicker1.Value.Date.Day
+        Dim m As Integer = DateTimePicker1.Value.Date.Month
+        Dim y As Integer = DateTimePicker1.Value.Date.Year
+
+        Dim d2 As Integer = DateTimePicker2.Value.Date.Day
+        Dim m2 As Integer = DateTimePicker2.Value.Date.Month
+        Dim y2 As Integer = DateTimePicker2.Value.Date.Year
+
+        Dim hm As String = Hex(m)
+        Dim hd As String = Hex(d)
+        Dim s As String = lted(y)
+
+        Dim hm2 As String = Hex(m2)
+        Dim hd2 As String = Hex(d2)
+        Dim s2 As String = lted(y2)
+
+        If hm.Length < 2 Then
+            hm = "0" & hm
+        End If
+        If hm2.Length < 2 Then
+            hm2 = "0" & hm2
+        End If
+        If hd.Length < 2 Then
+            hd = "0" & hd
+        End If
+        If hd2.Length < 2 Then
+            hd2 = "0" & hd2
+        End If
+        RichTextBox1.Text = RichTextBox1.Text.Remove(17288, 16)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(17288, (s & hm & hd & s2 & hm2 & hd2))
+    End Sub
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Form2.ShowDialog()
+    End Sub
+
+#Region "File Care"
     Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
         Dim length As Integer
         Dim bOutput As Byte()
@@ -166,27 +252,8 @@ Make sure you put the new lines(ENTER key)"
         Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
         My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
     End Sub
-    Private Sub initial()
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1, 1)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1, "1")
-        Dim f As Integer = RichTextBox1.Text.Length - 16
-        RichTextBox1.Text = RichTextBox1.Text.Remove(f, 2)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(f, "14")
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 2)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1438, "02")
-        save(apppath & "/work.bin")
-        DateTimePicker1.Value = System.DateTime.Today
-        DateTimePicker2.Value = System.DateTime.Today
-        lim()
-        Dim ft As String = ""
-        Dim mx As Integer = 1012
-        For i = 0 To mx - 1 Step 1
-            ft = ft & "F"
-        Next i
-        RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
-        save(apppath & "\work.bin")
-    End Sub
+#End Region
+#Region "Settings"
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         OpenFileDialog1.Filter = "Gen 5 Event Files (*.pgf)|*.pgf|All files (*.*)|*.*"
         OpenFileDialog1.ShowDialog()
@@ -205,7 +272,6 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Remove(352, 8)
         RichTextBox1.Text = RichTextBox1.Text.Insert(352, "00000000")
     End Sub
-
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then
             comp(0) = 32
@@ -238,49 +304,6 @@ Make sure you put the new lines(ENTER key)"
         End If
         comp_ch()
     End Sub
-    Private Function lted(ByVal int As Integer)
-        Dim s As String
-        If Hex(int).Length < 4 Then
-            s = "0" & Hex(int)
-        Else
-            s = Hex(int)
-        End If
-        Dim s2 As String = s.Skip(2).ToArray() & s.Remove(2, 2).ToArray()
-        Return s2
-    End Function
-
-    Private Sub lim()
-        Dim d As Integer = DateTimePicker1.Value.Date.Day
-        Dim m As Integer = DateTimePicker1.Value.Date.Month
-        Dim y As Integer = DateTimePicker1.Value.Date.Year
-
-        Dim d2 As Integer = DateTimePicker2.Value.Date.Day
-        Dim m2 As Integer = DateTimePicker2.Value.Date.Month
-        Dim y2 As Integer = DateTimePicker2.Value.Date.Year
-
-        Dim hm As String = Hex(m)
-        Dim hd As String = Hex(d)
-        Dim s As String = lted(y)
-
-        Dim hm2 As String = Hex(m2)
-        Dim hd2 As String = Hex(d2)
-        Dim s2 As String = lted(y2)
-
-        If hm.Length < 2 Then
-            hm = "0" & hm
-        End If
-        If hm2.Length < 2 Then
-            hm2 = "0" & hm2
-        End If
-        If hd.Length < 2 Then
-            hd = "0" & hd
-        End If
-        If hd2.Length < 2 Then
-            hd2 = "0" & hd2
-        End If
-        RichTextBox1.Text = RichTextBox1.Text.Remove(17288, 16)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(17288, (s & hm & hd & s2 & hm2 & hd2))
-    End Sub
     Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox5.CheckedChanged
         If CheckBox5.Checked = True Then
             Label3.Enabled = False
@@ -288,7 +311,8 @@ Make sure you put the new lines(ENTER key)"
             t = DateTimePicker1.Value
             t2 = DateTimePicker2.Value
             DateTimePicker1.Value = "1/1/1753"
-            DateTimePicker2.Value = "12/31/9998"
+            'DateTimePicker2.Value = "12/31/9998"
+            DateTimePicker2.Value = "31/12/9998"
             DateTimePicker1.Enabled = False
             DateTimePicker2.Enabled = False
         ElseIf CheckBox5.Checked = False Then
@@ -394,25 +418,21 @@ Make sure you put the new lines(ENTER key)"
             RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         End If
     End Sub
-
     Public Sub New()
         InitializeComponent()
         RichTextBox2.Text = rtd
         RichTextBox2.ForeColor = Color.Gray
         TextBox1.Text = "compiled"
         TextBox1.ForeColor = Color.Gray
-
         'RichTextBox2.Enter += New EventHandler(AddressOf richTextBox2_GotFocus)
         'RichTextBox2.LostFocus += New EventHandler(AddressOf richTextBox2_LostFocus)
     End Sub
-
     Private Sub richTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Leave
         If RichTextBox2.Text = Nothing Then
             RichTextBox2.Text = rtd
             RichTextBox2.ForeColor = Color.Gray
         End If
     End Sub
-
     Private Sub richTextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Enter
         If RichTextBox2.Text = rtd Then
             RichTextBox2.Text = Nothing
@@ -433,34 +453,18 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         RichTextBox2.ForeColor = Color.Black
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        build()
-    End Sub
-
-    'Public Sub New()
-    '    InitializeComponent()
-    '    TextBox1.Text = "compiled"
-    '    TextBox1.ForeColor = Color.Gray
-
-    '    'RichTextBox2.Enter += New EventHandler(AddressOf richTextBox2_GotFocus)
-    '    'RichTextBox2.LostFocus += New EventHandler(AddressOf richTextBox2_LostFocus)
-    'End Sub
-
     Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Leave
         If TextBox1.Text = Nothing Then
             TextBox1.Text = "compiled"
             TextBox1.ForeColor = Color.Gray
         End If
     End Sub
-
     Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Enter
         If TextBox1.Text = "compiled" Then
             TextBox1.Text = Nothing
             TextBox1.ForeColor = Color.Black
         End If
     End Sub
+#End Region
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Form2.ShowDialog()
-    End Sub
 End Class
