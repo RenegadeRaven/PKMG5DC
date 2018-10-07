@@ -134,6 +134,11 @@ Make sure you put the new lines(ENTER key)"
                 GoTo 1
             End If
         End If
+#If DEBUG Then
+        Size = New Size(850, 489)
+#Else
+        Size = New Size(452, 489)
+#End If
         System.IO.File.WriteAllBytes(apppath & "/work.bin", My.Resources.data)
         open(apppath & "/work.bin")
         initial()
@@ -441,6 +446,7 @@ Make sure you put the new lines(ENTER key)"
     End Sub
     Private Sub rt2ch(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.TextChanged
         RichTextBox2.ForeColor = Color.Black
+        Button2_Click(sender, e)
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         RichTextBox2.Text = Nothing
