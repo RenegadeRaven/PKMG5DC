@@ -22,3 +22,4 @@ C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen5 Dist
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen5 Distribution Creator.vbproj.CoreCompileInputs.cache
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen 5 Pokémon Distribution ROM Creator.exe
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen 5 Pokémon Distribution ROM Creator.pdb
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen5_Distribution_Creator.Form3.resources

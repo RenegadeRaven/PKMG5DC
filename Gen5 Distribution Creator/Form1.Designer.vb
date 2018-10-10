@@ -56,6 +56,7 @@ Partial Class Form1
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -82,7 +83,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(345, 24)
+        Me.Button1.Location = New System.Drawing.Point(287, 24)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 2
@@ -96,7 +97,7 @@ Partial Class Form1
         Me.Label2.Location = New System.Drawing.Point(13, 28)
         Me.Label2.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(330, 17)
+        Me.Label2.Size = New System.Drawing.Size(268, 17)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Open .pgf ------->"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -332,6 +333,7 @@ Partial Class Form1
         Me.Button2.TabIndex = 8
         Me.Button2.Text = "Save Text"
         Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
         '
         'Button3
         '
@@ -398,11 +400,21 @@ Partial Class Form1
         Me.Button5.Text = "?"
         Me.Button5.UseVisualStyleBackColor = True
         '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(368, 24)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(51, 23)
+        Me.Button6.TabIndex = 16
+        Me.Button6.Text = "Custom"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(834, 450)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
@@ -466,4 +478,5 @@ Partial Class Form1
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Button5 As Button
+    Friend WithEvents Button6 As Button
 End Class

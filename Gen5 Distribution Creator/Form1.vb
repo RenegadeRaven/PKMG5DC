@@ -75,7 +75,7 @@ Make sure you put the new lines(ENTER key)"
     Private Sub build()
         System.IO.Directory.CreateDirectory(apppath & "\cards\")
         save(apppath & "\cards\01.bin")
-        System.IO.File.Delete(apppath & "\work.bin")
+        'System.IO.File.Delete(apppath & "\work.bin")
         System.IO.Directory.CreateDirectory(apppath & "\tools\")
         System.IO.File.Copy(My.Settings.ticket, apppath & "\tools\ticket.nds")
         System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", My.Resources._12distro1)
@@ -101,7 +101,7 @@ Make sure you put the new lines(ENTER key)"
 #End Region
 
     Private Sub Form1_Close(sender As Object, e As EventArgs) Handles MyBase.Closing
-        System.IO.File.Delete(apppath & "\work.bin")
+        'System.IO.File.Delete(apppath & "\work.bin")
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 1:
@@ -139,8 +139,9 @@ Make sure you put the new lines(ENTER key)"
 #Else
         Size = New Size(452, 489)
 #End If
-        System.IO.File.WriteAllBytes(apppath & "/work.bin", My.Resources.data)
-        open(apppath & "/work.bin")
+        Button4.Location = New Point(296, 296)
+        'System.IO.File.WriteAllBytes(apppath & "/work.bin", My.Resources.data)
+        'open(apppath & "/work.bin")
         initial()
         dt = True
         RadioButton1.PerformClick()
@@ -149,9 +150,14 @@ Make sure you put the new lines(ENTER key)"
         CheckBox2.Checked = True
         CheckBox3.Checked = True
         CheckBox4.Checked = True
-        save(apppath & "\work.bin")
+        'save(apppath & "\work.bin")
     End Sub
     Private Sub initial()
+        Dim st As String = Nothing
+        For n = 0 To 17503 Step 1
+            st = st & "0"
+        Next n
+        RichTextBox1.Text = st
         RichTextBox1.Text = RichTextBox1.Text.Remove(1, 1)
         RichTextBox1.Text = RichTextBox1.Text.Insert(1, "1")
         Dim f As Integer = RichTextBox1.Text.Length - 16
@@ -159,7 +165,7 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(f, "14")
         RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 2)
         RichTextBox1.Text = RichTextBox1.Text.Insert(1438, "02")
-        save(apppath & "/work.bin")
+        'save(apppath & "/work.bin")
         DateTimePicker1.Value = System.DateTime.Today
         DateTimePicker2.Value = System.DateTime.Today
         lim()
@@ -170,7 +176,7 @@ Make sure you put the new lines(ENTER key)"
         Next i
         RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
         RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
-        save(apppath & "\work.bin")
+        'save(apppath & "\work.bin")
     End Sub
     Private Function lted(ByVal int As Integer)
         Dim s As String
@@ -315,9 +321,8 @@ Make sure you put the new lines(ENTER key)"
             Label4.Enabled = False
             t = DateTimePicker1.Value
             t2 = DateTimePicker2.Value
-            DateTimePicker1.Value = "1/1/1753"
-            'DateTimePicker2.Value = "12/31/9998"
-            DateTimePicker2.Value = "31/12/9998"
+            DateTimePicker1.Value = New DateTime(1753, 1, 1)
+            DateTimePicker2.Value = New DateTime(9998, 12, 31)
             DateTimePicker1.Enabled = False
             DateTimePicker2.Enabled = False
         ElseIf CheckBox5.Checked = False Then
@@ -421,6 +426,14 @@ Make sure you put the new lines(ENTER key)"
 
             RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
             RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
+        Else
+            Dim ft As String = ""
+            Dim mx As Integer = 1012
+            For i = 0 To mx - 1 Step 1
+                ft = ft & "F"
+            Next i
+            RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
+            RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         End If
     End Sub
     Public Sub New()
@@ -470,6 +483,10 @@ Make sure you put the new lines(ENTER key)"
             TextBox1.Text = Nothing
             TextBox1.ForeColor = Color.Black
         End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Form3.ShowDialog()
     End Sub
 #End Region
 

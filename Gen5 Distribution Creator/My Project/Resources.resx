@@ -124,9 +124,6 @@
   <data name="armips_readme" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\armips readme.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="data" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="ndstool" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ndstool.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
