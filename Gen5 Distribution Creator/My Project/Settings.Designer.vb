@@ -65,6 +65,30 @@ Namespace My
                 Me("ticket") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("E")>  _
+        Public Property Language() As String
+            Get
+                Return CType(Me("Language"),String)
+            End Get
+            Set
+                Me("Language") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("020000BC83")>  _
+        Public Property Region() As String
+            Get
+                Return CType(Me("Region"),String)
+            End Get
+            Set
+                Me("Region") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

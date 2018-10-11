@@ -5,5 +5,11 @@
     <Setting Name="ticket" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E</Value>
+    </Setting>
+    <Setting Name="Region" Type="System.String" Scope="User">
+      <Value Profile="(Default)">020000BC83</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

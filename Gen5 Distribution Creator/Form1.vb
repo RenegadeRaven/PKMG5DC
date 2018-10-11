@@ -5,7 +5,8 @@
     Dim dt As Boolean = False
     Dim t As Date
     Dim t2 As Date
-    Dim r As String = "BC83"
+    Dim r As String = My.Settings.Region
+
     Dim rtd As String = "Input Event Text Here.
 
 This textbox is sized perfectly, so what fits in
@@ -13,6 +14,10 @@ this box is all you can fit. A maximum of 7
 lines, max 36 characters per line, and a 
 maximum of 252 characters total.
 Make sure you put the new lines(ENTER key)"
+    Dim Yes As String = "Yes"
+    Dim No As String = "No"
+    Dim tl As String = "Need Liberty Ticket ROM"
+    Dim msl As String = "This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?"
 #End Region
 #Region "Syncs"
     Private Sub comp_ch()
@@ -25,8 +30,8 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(420, co)
     End Sub
     Private Sub reg()
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1444, 4)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1444, r)
+        RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 10)
+        RichTextBox1.Text = RichTextBox1.Text.Insert(1438, r)
     End Sub
     Private Sub RT_ch(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
         Label1.Text = RichTextBox1.Text.Length & " / 17504"
@@ -40,13 +45,11 @@ Make sure you put the new lines(ENTER key)"
             Label1.ForeColor = Color.Green
             Label1.Font = New Font(Label1.Font, FontStyle.Regular)
         End If
-        'save(apppath & "\work.bin")
     End Sub
     Private Sub RichTextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles RichTextBox2.KeyPress
         '97 - 122 = Ascii codes for simple letters
         '65 - 90  = Ascii codes for capital letters
         '48 - 57  = Ascii codes for numbers
-
         If Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 127 Then
             e.Handled = True
         End If
@@ -75,7 +78,6 @@ Make sure you put the new lines(ENTER key)"
     Private Sub build()
         System.IO.Directory.CreateDirectory(apppath & "\cards\")
         save(apppath & "\cards\01.bin")
-        'System.IO.File.Delete(apppath & "\work.bin")
         System.IO.Directory.CreateDirectory(apppath & "\tools\")
         System.IO.File.Copy(My.Settings.ticket, apppath & "\tools\ticket.nds")
         System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", My.Resources._12distro1)
@@ -88,7 +90,6 @@ Make sure you put the new lines(ENTER key)"
         Dim p As String() = {"3", "
 "}
         Main(p)
-
         System.IO.File.Delete(apppath & "\12distro.bat")
         System.IO.File.Delete(apppath & "\12distro.nds")
         System.IO.File.Delete(apppath & "\readme.txt")
@@ -99,58 +100,115 @@ Make sure you put the new lines(ENTER key)"
         Application.Restart()
     End Sub
 #End Region
-
-    Private Sub Form1_Close(sender As Object, e As EventArgs) Handles MyBase.Closing
-        'System.IO.File.Delete(apppath & "\work.bin")
-    End Sub
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub tickchk()
 1:
-        If My.Settings.ticket = Nothing Then
-            Dim a = MsgBox("This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?", MsgBoxStyle.YesNo, "Need Liberty Ticket ROM")
-            If a = 6 Then
-                MsgBox("Can you select it for me?", 0)
-                OpenFileDialog1.Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"
-                OpenFileDialog1.ShowDialog()
-                Dim myFile As String = OpenFileDialog1.FileName
+        If System.IO.File.Exists(apppath & "/ticket.nds") Then
+            Dim myFile As String = apppath & "/ticket.nds"
+            Dim l = System.IO.File.ReadAllText(myFile)
+            If l.Contains("POKWBLIBERTYY8KP01") Then
+                My.Settings.ticket = apppath & "/ticket.nds"
+            Else
+                MsgBox("Error: Invaild File", 0)
+                Close()
+            End If
+        Else
+            If My.Settings.ticket = apppath & "/ticket.nds" And System.IO.File.Exists(My.Settings.ticket) Then
+                Dim myFile As String = My.Settings.ticket
                 Dim l = System.IO.File.ReadAllText(myFile)
                 If l.Contains("POKWBLIBERTYY8KP01") Then
-                    If System.IO.File.Exists(apppath & "/ticket.nds") Then
-                        System.IO.File.Delete(apppath & "/ticket.nds")
-                    End If
-                    System.IO.File.Copy(myFile, apppath & "/ticket.nds")
-                    My.Settings.ticket = apppath & "/ticket.nds"
                 Else
                     MsgBox("Error: Invaild File", 0)
                     Close()
                 End If
-            ElseIf a = 7 Then
-                MsgBox("Google is your friend.", 0)
-                Close()
-            End If
-        Else
-            If System.IO.File.Exists(My.Settings.ticket) Then
-            Else
+            ElseIf My.Settings.ticket <> apppath & "/ticket.nds" And My.Settings.ticket <> Nothing And System.IO.File.Exists(My.Settings.ticket) Then
+                Dim myFile As String = My.Settings.ticket
+                If System.IO.File.Exists(apppath & "/ticket.nds") Then
+                    System.IO.File.Delete(apppath & "/ticket.nds")
+                End If
+                System.IO.File.Copy(myFile, apppath & "/ticket.nds")
+                My.Settings.ticket = apppath & "/ticket.nds"
+            ElseIf My.Settings.ticket <> Nothing And (System.IO.File.Exists(My.Settings.ticket) = False) Then
                 My.Settings.ticket = Nothing
                 GoTo 1
+            ElseIf My.Settings.ticket = Nothing Then
+                Dim a = MsgB(msl, 2, Yes, No, "", tl)
+                If a = 6 Then
+                    MsgBox("Can you select it for me?", 0)
+                    OpenFileDialog1.Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"
+                    OpenFileDialog1.ShowDialog()
+                    Dim myFile As String = OpenFileDialog1.FileName
+                    Dim l = System.IO.File.ReadAllText(myFile)
+                    If l.Contains("POKWBLIBERTYY8KP01") Then
+                        If System.IO.File.Exists(apppath & "/ticket.nds") Then
+                            System.IO.File.Delete(apppath & "/ticket.nds")
+                        End If
+                        System.IO.File.Copy(myFile, apppath & "/ticket.nds")
+                        My.Settings.ticket = apppath & "/ticket.nds"
+                    Else
+                        MsgBox("Error: Invaild File", 0)
+                        Close()
+                    End If
+                ElseIf a = 7 Then
+                    MsgBox("Google is your friend.", 0)
+                    Close()
+                End If
             End If
         End If
+    End Sub
+    Private Sub lang()
+        Select Case My.Settings.Language
+            Case "E"
+                RadioButton1.PerformClick()
+            Case "F"
+                RadioButton2.PerformClick()
+            Case "I"
+                RadioButton3.PerformClick()
+            Case "G"
+                RadioButton4.PerformClick()
+            Case "S"
+                RadioButton5.PerformClick()
+            Case "J"
+                RadioButton6.PerformClick()
+            Case "K"
+                RadioButton7.PerformClick()
+        End Select
+    End Sub
+    Private Function MsgB(ByVal mes As String, ByVal numB As Integer, ByVal But1 As String, ByVal But2 As String, ByVal But3 As String, ByVal head As String)
+        Dim msg As New CustomMessageBox(mes, numB, But1, But2, But3, head)
+        Dim result = msg.ShowDialog()
+        Dim Ans As Integer
+        If result = Windows.Forms.DialogResult.Yes Then
+            'user clicked "B1"
+            Ans = 6
+        ElseIf result = Windows.Forms.DialogResult.No Then
+            'user clicked "B2"
+            Ans = 7
+        ElseIf result = Windows.Forms.DialogResult.Cancel Then
+            'user clicked "B3"
+            Ans = 8
+        Else
+            'user closed the window without clicking a button
+            Ans = -1
+            Close()
+        End If
+        Return Ans
+    End Function 'custom MsgBox
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        tickchk()
 #If DEBUG Then
-        Size = New Size(850, 489)
+        Size = New Size(850, 490)
 #Else
-        Size = New Size(452, 489)
+        Size = New Size(452, 490)
 #End If
         Button4.Location = New Point(296, 296)
-        'System.IO.File.WriteAllBytes(apppath & "/work.bin", My.Resources.data)
-        'open(apppath & "/work.bin")
         initial()
         dt = True
-        RadioButton1.PerformClick()
+        lang()
         reg()
         CheckBox1.Checked = True
         CheckBox2.Checked = True
         CheckBox3.Checked = True
         CheckBox4.Checked = True
-        'save(apppath & "\work.bin")
     End Sub
     Private Sub initial()
         Dim st As String = Nothing
@@ -165,7 +223,6 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(f, "14")
         RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 2)
         RichTextBox1.Text = RichTextBox1.Text.Insert(1438, "02")
-        'save(apppath & "/work.bin")
         DateTimePicker1.Value = System.DateTime.Today
         DateTimePicker2.Value = System.DateTime.Today
         lim()
@@ -176,7 +233,6 @@ Make sure you put the new lines(ENTER key)"
         Next i
         RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
         RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
-        'save(apppath & "\work.bin")
     End Sub
     Private Function lted(ByVal int As Integer)
         Dim s As String
@@ -192,19 +248,15 @@ Make sure you put the new lines(ENTER key)"
         Dim d As Integer = DateTimePicker1.Value.Date.Day
         Dim m As Integer = DateTimePicker1.Value.Date.Month
         Dim y As Integer = DateTimePicker1.Value.Date.Year
-
         Dim d2 As Integer = DateTimePicker2.Value.Date.Day
         Dim m2 As Integer = DateTimePicker2.Value.Date.Month
         Dim y2 As Integer = DateTimePicker2.Value.Date.Year
-
         Dim hm As String = Hex(m)
         Dim hd As String = Hex(d)
         Dim s As String = lted(y)
-
         Dim hm2 As String = Hex(m2)
         Dim hd2 As String = Hex(d2)
         Dim s2 As String = lted(y2)
-
         If hm.Length < 2 Then
             hm = "0" & hm
         End If
@@ -223,7 +275,6 @@ Make sure you put the new lines(ENTER key)"
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Form2.ShowDialog()
     End Sub
-
 #Region "File Care"
     Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
         Dim length As Integer
@@ -247,11 +298,6 @@ Make sure you put the new lines(ENTER key)"
         Return (bOutput)
     End Function
     Private Sub open(ByVal myFile As String)
-        'OpenFileDialog1.Filter = "All Supported Files (FULLWonderCards, *.ek#)|*.wc7full;*.wc6full;*.pcd;*.ek7;*.ek6;*.ek5;*.ek4|WonderCards (*.wc7full, *.wc6full, *.pcd)|*.wc7full;*.wc6full;*.pcd|Encrypted PK Files (*.ek#)|*.ek7;*.ek6;*.ek5;*.ek4;*.ek3;*.ek2;*.ek1|All files (*.*)|*.*"
-        'OpenFileDialog1.ShowDialog()
-        'Dim myFile As String = OpenFileDialog1.FileName
-        'Dim ext() As String = myFile.Split(".")
-
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
         Dim txtTemp As New System.Text.StringBuilder()
         For Each myByte As Byte In myBytes
@@ -273,7 +319,6 @@ Make sure you put the new lines(ENTER key)"
         Dim fn2 As String = Fn(UBound(Fn))
         Label2.Text = fn2
         RichTextBox1.Text = RichTextBox1.Text.Remove(8, 408)
-
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
         Dim txtTemp As New System.Text.StringBuilder()
         For Each myByte As Byte In myBytes
@@ -346,61 +391,67 @@ Make sure you put the new lines(ENTER key)"
     End Sub
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
         If RadioButton1.Checked = True Then
-            r = "BC83"
+            r = "020000BC83"
             reg()
+            My.Settings.Language = "E"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
         If RadioButton2.Checked = True Then
-            r = "369D"
+            r = "030000369D"
             reg()
+            My.Settings.Language = "F"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
         If RadioButton3.Checked = True Then
-            r = "AA39"
+            r = "040000AA39"
             reg()
+            My.Settings.Language = "I"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
         If RadioButton4.Checked = True Then
-            r = "1844"
+            r = "0500001844"
             reg()
+            My.Settings.Language = "G"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton5.CheckedChanged
         If RadioButton5.Checked = True Then
-            r = "61E0"
+            r = "06000061E0"
             reg()
+            My.Settings.Language = "S"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton6.CheckedChanged
         If RadioButton6.Checked = True Then
-            r = "7AF5"
+            r = "0200007AF5"
             reg()
+            My.Settings.Language = "J"
         Else
             r = Nothing
         End If
     End Sub
     Private Sub RadioButton7_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton7.CheckedChanged
         If RadioButton7.Checked = True Then
-            r = "7AF5"
+            r = "0200007AF5"
             reg()
+            My.Settings.Language = "K"
         Else
             r = Nothing
         End If
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If RichTextBox2.Text <> "" Then
             Dim ch As Char() = RichTextBox2.Text.ToCharArray
@@ -419,11 +470,9 @@ Make sure you put the new lines(ENTER key)"
             Dim mx As Integer = 1012
             Dim mn As Integer = ft.Length
             Dim req As Integer = mx - mn
-
             For n = 0 To req - 1 Step 1
                 ft = ft & "F"
             Next n
-
             RichTextBox1.Text = RichTextBox1.Text.Remove(424, mx)
             RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         Else
@@ -484,10 +533,8 @@ Make sure you put the new lines(ENTER key)"
             TextBox1.ForeColor = Color.Black
         End If
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Form3.ShowDialog()
     End Sub
 #End Region
-
 End Class

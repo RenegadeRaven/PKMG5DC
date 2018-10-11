@@ -55,29 +55,21 @@
         Dim Fn() As String = myFile.Split("\")
         Dim fn2 As String = Fn(UBound(Fn))
         Label2.Text = fn2
-
-        'RichTextBox1.Text = RichTextBox1.Text.Remove(8, 408)
-
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
         Dim txtTemp As New System.Text.StringBuilder()
         For Each myByte As Byte In myBytes
             txtTemp.Append(myByte.ToString("X2"))
         Next
         RichTextBox1.Text = txtTemp.ToString()
-
         store()
         RichTextBox1.Text = Nothing
         construct()
-
         GroupBox1.Enabled = True
         TextBox1.Enabled = True
         NumericUpDown1.Enabled = True
         Label1.Enabled = True
         Label3.Enabled = True
         checks()
-        'RichTextBox1.Text = RichTextBox1.Text.Insert(8, txtTemp.ToString())
-        'RichTextBox1.Text = RichTextBox1.Text.Remove(352, 8)
-        'RichTextBox1.Text = RichTextBox1.Text.Insert(352, "00000000")
     End Sub
     Private Function tgh(ByVal int As Integer, ByVal suplen As Integer)
         Dim gh As String = Hex(int)
@@ -157,7 +149,6 @@
             sat = nat
             ComboBox1.Enabled = True
         End If
-
         RichTextBox1.Text = tid & sid & ori & "000000" & "00000000" & rib & ball & "00" & item & moves & dex & "00" & lang &
             nick & sat & gen & abl & shy & emet & met & lvl & "000000000000" & hiv(0) & hiv(1) & hiv(2) & hiv(3) & hiv(4) &
             hiv(5) & "00" & otn & otg & lvl & egg & "000000"
@@ -193,7 +184,6 @@
         nat = RichTextBox1.Text.Remove(132).ToArray().Skip(130).ToArray()
         emet = RichTextBox1.Text.Remove(256).ToArray().Skip(252).ToArray()
         met = RichTextBox1.Text.Remove(260).ToArray().Skip(256).ToArray()
-        'lvl = RichTextBox1.Text.Remove().ToArray().Skip().ToArray()
         bloc = RichTextBox1.Text.Remove(120).ToArray().Skip(112).ToArray()
         Dim bl As String = lted(bloc, 8)
         Dim bi As Integer = Convert.ToInt32(bl, 16)
@@ -220,8 +210,6 @@
             Next i
         End If
         otg = "0" & ob.Remove(1)
-        Debug.Print(ob)
-
         Dim wf As String = RichTextBox1.Text.Remove(130).ToArray().Skip(128).ToArray()
         Dim wi As Integer = Convert.ToInt32(wf, 16)
         Dim wb As String = Convert.ToString(wi, 2)
@@ -252,11 +240,9 @@
                 Dim mx As Integer = 148
                 Dim mn As Integer = ft.Length
                 Dim req As Integer = mx - mn
-
                 For n = 0 To req - 1 Step 1
                     ft = ft & "F"
                 Next n
-
                 RichTextBox1.Text = RichTextBox1.Text.Remove(192, mx)
                 RichTextBox1.Text = RichTextBox1.Text.Insert(192, ft)
             Else
@@ -270,7 +256,6 @@
             End If
         End If
     End Sub
-
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
         id = NumericUpDown1.Value
         construct()
@@ -282,7 +267,6 @@
         End If
         construct()
     End Sub
-
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
         If RadioButton1.Checked = True Then
             gen = "00"
@@ -301,7 +285,6 @@
         End If
         construct()
     End Sub
-
     Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
         If RadioButton4.Checked = True Then
             otg = "00"
@@ -320,7 +303,6 @@
         End If
         construct()
     End Sub
-
     Private Sub RadioButton7_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton7.CheckedChanged
         If RadioButton7.Checked = True Then
             shy = "00"
@@ -369,7 +351,6 @@
         End If
         construct()
     End Sub
-
     Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If DEBUG Then
         Size = New Size(876, 489)
@@ -382,7 +363,6 @@
         Label1.Enabled = False
         Label3.Enabled = False
     End Sub
-
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         construct()
     End Sub
@@ -401,12 +381,10 @@
     Private Sub CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
         construct()
     End Sub
-
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         nat = tgh(ComboBox1.SelectedIndex, 2)
         construct()
     End Sub
-
     Private Sub CheckBox7_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox7.CheckedChanged
         construct()
     End Sub

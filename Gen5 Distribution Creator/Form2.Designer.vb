@@ -29,6 +29,8 @@ Partial Class Form2
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LinkLabel4 = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'Timer1
@@ -86,11 +88,32 @@ Partial Class Form2
         Me.LinkLabel3.TabStop = True
         Me.LinkLabel3.Text = "Pokémon Duodecuple Distribution hack"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(13, 290)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(72, 13)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Source Code:"
+        '
+        'LinkLabel4
+        '
+        Me.LinkLabel4.AutoSize = True
+        Me.LinkLabel4.Location = New System.Drawing.Point(92, 289)
+        Me.LinkLabel4.Name = "LinkLabel4"
+        Me.LinkLabel4.Size = New System.Drawing.Size(40, 13)
+        Me.LinkLabel4.TabIndex = 6
+        Me.LinkLabel4.TabStop = True
+        Me.LinkLabel4.Text = "GitHub"
+        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(275, 365)
+        Me.Controls.Add(Me.LinkLabel4)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.LinkLabel3)
         Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.LinkLabel1)
@@ -109,4 +132,6 @@ Partial Class Form2
     Friend WithEvents LinkLabel1 As LinkLabel
     Friend WithEvents LinkLabel2 As LinkLabel
     Friend WithEvents LinkLabel3 As LinkLabel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents LinkLabel4 As LinkLabel
 End Class
