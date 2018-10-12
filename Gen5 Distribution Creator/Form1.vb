@@ -1,6 +1,7 @@
 ﻿Public Class Form1
 #Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath
+    Dim res As String = System.IO.Path.GetFullPath(My.Resources.ResourceManager.BaseName)
     Dim comp(4) As Integer
     Dim dt As Boolean = False
     Dim t As Date
@@ -197,6 +198,9 @@ Make sure you put the new lines(ENTER key)"
         tickchk()
 #If DEBUG Then
         Size = New Size(850, 490)
+        System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
+        'Dim v As String = System.IO.File.ReadAllText("https://raw.githubusercontent.com/PlasticJustice/VB-TicTacToe/master/TicTacToe/bin/Debug/version.txt")
+        'System.IO.File.WriteAllText(res & "/date.txt", System.DateTime.Today)
 #Else
         Size = New Size(452, 490)
 #End If
@@ -209,6 +213,7 @@ Make sure you put the new lines(ENTER key)"
         CheckBox2.Checked = True
         CheckBox3.Checked = True
         CheckBox4.Checked = True
+        LinkLabel1.Hide()
     End Sub
     Private Sub initial()
         Dim st As String = Nothing
