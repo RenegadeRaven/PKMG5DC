@@ -199,8 +199,17 @@ Make sure you put the new lines(ENTER key)"
 #If DEBUG Then
         Size = New Size(850, 490)
         System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
-        'Dim v As String = System.IO.File.ReadAllText("https://raw.githubusercontent.com/PlasticJustice/VB-TicTacToe/master/TicTacToe/bin/Debug/version.txt")
-        'System.IO.File.WriteAllText(res & "/date.txt", System.DateTime.Today)
+        If My.Computer.Network.IsAvailable Then
+            Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp"
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
+            Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
+            Dim v As String = Reader.ReadToEnd
+            Reader.Close()
+            System.IO.File.Delete(TempPath & "\vsn.txt")
+            If Application.ProductVersion <> v Then
+                System.IO.File.WriteAllText(res & "/date.txt", System.DateTime.Today)
+            End If
+        End If
 #Else
         Size = New Size(452, 490)
 #End If
