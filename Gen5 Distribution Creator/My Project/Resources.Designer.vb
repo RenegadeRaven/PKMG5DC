@@ -130,6 +130,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to 2018/10/11.
+        '''</summary>
+        Friend ReadOnly Property _date() As String
+            Get
+                Return ResourceManager.GetString("_date", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
         Friend ReadOnly Property armips() As Byte()

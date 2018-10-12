@@ -1,7 +1,9 @@
 ﻿Public Class Form1
 #Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath
-    Dim res As String = System.IO.Path.GetFullPath(My.Resources.ResourceManager.BaseName)
+    'Dim res As String = My.Resources.ResourceManager.BaseName
+    Dim res As String = System.IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\")
+    Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp"
     Dim comp(4) As Integer
     Dim dt As Boolean = False
     Dim t As Date
@@ -200,18 +202,24 @@ Make sure you put the new lines(ENTER key)"
         Size = New Size(850, 490)
         System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
         If My.Computer.Network.IsAvailable Then
-            Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp"
             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
             System.IO.File.Delete(TempPath & "\vsn.txt")
             If Application.ProductVersion <> v Then
-                System.IO.File.WriteAllText(res & "/date.txt", System.DateTime.Today)
+                System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
             End If
         End If
 #Else
         Size = New Size(452, 490)
+        'If My.Computer.Network.IsAvailable Then
+        '    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
+        '    Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
+        '    Dim v As String = Reader.ReadToEnd
+        '    Reader.Close()
+        '    System.IO.File.Delete(TempPath & "\vsn.txt")
+        'End If
 #End If
         Button4.Location = New Point(296, 296)
         initial()

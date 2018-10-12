@@ -180,6 +180,7 @@
     <Content Include="favicon.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\date.txt" />
     <None Include="Resources\options.asm" />
     <None Include="Resources\ndstool.exe" />
     <None Include="Resources\armips.exe" />
