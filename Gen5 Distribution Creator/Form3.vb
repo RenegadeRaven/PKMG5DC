@@ -49,27 +49,34 @@
         Return s2
     End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        OpenFileDialog1.Filter = "Gen 5 PKM Files (*.pk5)|*.pk5|All files (*.*)|*.*"
-        OpenFileDialog1.ShowDialog()
-        Dim myFile As String = OpenFileDialog1.FileName
-        Dim Fn() As String = myFile.Split("\")
-        Dim fn2 As String = Fn(UBound(Fn))
-        Label2.Text = fn2
-        Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
-        Dim txtTemp As New System.Text.StringBuilder()
-        For Each myByte As Byte In myBytes
-            txtTemp.Append(myByte.ToString("X2"))
-        Next
-        RichTextBox1.Text = txtTemp.ToString()
-        store()
-        RichTextBox1.Text = Nothing
-        construct()
-        GroupBox1.Enabled = True
-        TextBox1.Enabled = True
-        NumericUpDown1.Enabled = True
-        Label1.Enabled = True
-        Label3.Enabled = True
-        checks()
+        'OpenFileDialog1.Filter = "Gen 5 PKM Files (*.pk5)|*.pk5|All files (*.*)|*.*"
+        'OpenFileDialog1.ShowDialog()
+        Dim b As New OpenFileDialog
+        b.Filter = "Gen 5 PKM Files (*.pk5)|*.pk5|All files (*.*)|*.*"
+        Dim res As DialogResult = b.ShowDialog()
+        If res = Windows.Forms.DialogResult.Cancel Then
+
+        Else
+            Dim myFile As String = b.FileName
+            Dim Fn() As String = myFile.Split("\")
+            Dim fn2 As String = Fn(UBound(Fn))
+            Label2.Text = fn2
+            Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
+            Dim txtTemp As New System.Text.StringBuilder()
+            For Each myByte As Byte In myBytes
+                txtTemp.Append(myByte.ToString("X2"))
+            Next
+            RichTextBox1.Text = txtTemp.ToString()
+            store()
+            RichTextBox1.Text = Nothing
+            construct()
+            GroupBox1.Enabled = True
+            TextBox1.Enabled = True
+            NumericUpDown1.Enabled = True
+            Label1.Enabled = True
+            Label3.Enabled = True
+            checks()
+        End If
     End Sub
     Private Function tgh(ByVal int As Integer, ByVal suplen As Integer)
         Dim gh As String = Hex(int)

@@ -137,22 +137,29 @@ Make sure you put the new lines(ENTER key)"
                 Dim a = MsgB(msl, 2, Yes, No, "", tl)
                 If a = 6 Then
                     MsgBox("Can you select it for me?", 0)
-                    OpenFileDialog1.Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"
-                    OpenFileDialog1.ShowDialog()
-                    Dim myFile As String = OpenFileDialog1.FileName
-                    Dim l = System.IO.File.ReadAllText(myFile)
-                    If l.Contains("POKWBLIBERTYY8KP01") Then
-                        If System.IO.File.Exists(apppath & "/ticket.nds") Then
-                            System.IO.File.Delete(apppath & "/ticket.nds")
-                        End If
-                        System.IO.File.Copy(myFile, apppath & "/ticket.nds")
-                        My.Settings.ticket = apppath & "/ticket.nds"
-                    Else
-                        MsgBox("Error: Invaild File", 0)
+                    'OpenFileDialog1.Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"
+                    Dim b As New OpenFileDialog '1.ShowDialog()
+                    b.Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"
+                    Dim res As DialogResult = b.ShowDialog()
+                    If res = Windows.Forms.DialogResult.Cancel Then
                         Close()
+                    Else
+                        Dim myFile As String = b.FileName 'OpenFileDialog1.FileName
+                        Dim l = System.IO.File.ReadAllText(myFile)
+                        If l.Contains("POKWBLIBERTYY8KP01") Then
+                            If System.IO.File.Exists(apppath & "/ticket.nds") Then
+                                System.IO.File.Delete(apppath & "/ticket.nds")
+                            End If
+                            System.IO.File.Copy(myFile, apppath & "/ticket.nds")
+                            My.Settings.ticket = apppath & "/ticket.nds"
+                        Else
+                            MsgBox("Error: Invaild File", 0)
+                            Close()
+                        End If
                     End If
                 ElseIf a = 7 Then
                     MsgBox("Google is your friend.", 0)
+                    Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                     Close()
                 End If
             End If
@@ -347,21 +354,28 @@ Make sure you put the new lines(ENTER key)"
 #End Region
 #Region "Settings"
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        OpenFileDialog1.Filter = "Gen 5 Event Files (*.pgf)|*.pgf|All files (*.*)|*.*"
-        OpenFileDialog1.ShowDialog()
-        Dim myFile As String = OpenFileDialog1.FileName
-        Dim Fn() As String = myFile.Split("\")
-        Dim fn2 As String = Fn(UBound(Fn))
-        Label2.Text = fn2
-        RichTextBox1.Text = RichTextBox1.Text.Remove(8, 408)
-        Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
-        Dim txtTemp As New System.Text.StringBuilder()
-        For Each myByte As Byte In myBytes
-            txtTemp.Append(myByte.ToString("X2"))
-        Next
-        RichTextBox1.Text = RichTextBox1.Text.Insert(8, txtTemp.ToString())
-        RichTextBox1.Text = RichTextBox1.Text.Remove(352, 8)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(352, "00000000")
+        Dim b As New OpenFileDialog
+        b.Filter = "Gen 5 Event Files (*.pgf)|*.pgf|All files (*.*)|*.*"
+        Dim res As DialogResult = b.ShowDialog()
+        If res = Windows.Forms.DialogResult.Cancel Then
+
+        Else
+            Dim myFile As String = b.FileName
+            Dim Fn() As String = myFile.Split("\")
+            Dim fn2 As String = Fn(UBound(Fn))
+            Label2.Text = fn2
+            RichTextBox1.Text = RichTextBox1.Text.Remove(8, 408)
+            Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
+            Dim txtTemp As New System.Text.StringBuilder()
+            For Each myByte As Byte In myBytes
+                txtTemp.Append(myByte.ToString("X2"))
+            Next
+            RichTextBox1.Text = RichTextBox1.Text.Insert(8, txtTemp.ToString())
+            RichTextBox1.Text = RichTextBox1.Text.Remove(352, 8)
+            RichTextBox1.Text = RichTextBox1.Text.Insert(352, "00000000")
+        End If
+        'OpenFileDialog1.Filter = "Gen 5 Event Files (*.pgf)|*.pgf|All files (*.*)|*.*"
+        'OpenFileDialog1.ShowDialog()
     End Sub
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then
