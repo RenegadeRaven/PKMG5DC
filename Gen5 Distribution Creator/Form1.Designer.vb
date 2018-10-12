@@ -78,7 +78,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(475, 6)
+        Me.Label1.Location = New System.Drawing.Point(475, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 17)
         Me.Label1.TabIndex = 1
@@ -209,7 +209,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(7, 32)
+        Me.Label3.Location = New System.Drawing.Point(7, 33)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 2
@@ -229,7 +229,7 @@ Partial Class Form1
         '
         Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 45)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 46)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(213, 20)
         Me.DateTimePicker1.TabIndex = 0
@@ -369,7 +369,7 @@ Partial Class Form1
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(35, 396)
+        Me.TextBox1.Location = New System.Drawing.Point(35, 397)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(185, 21)
         Me.TextBox1.TabIndex = 12
@@ -378,7 +378,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(34, 383)
+        Me.Label6.Location = New System.Drawing.Point(34, 384)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(66, 13)
         Me.Label6.TabIndex = 13
@@ -415,7 +415,7 @@ Partial Class Form1
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(13, 6)
+        Me.LinkLabel1.Location = New System.Drawing.Point(10, 4)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(59, 13)
         Me.LinkLabel1.TabIndex = 17
@@ -448,7 +448,7 @@ Partial Class Form1
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Menu = Me.MainMenu1
         Me.Name = "Form1"
-        Me.Text = "Gen 5 Pokémon Distribution ROM Creator"
+        Me.Text = "Gen 5 Distribution Creator"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)

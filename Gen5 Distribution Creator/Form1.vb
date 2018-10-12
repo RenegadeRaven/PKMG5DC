@@ -211,15 +211,28 @@ Make sure you put the new lines(ENTER key)"
                 System.IO.File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
             End If
         End If
+        LinkLabel1.Hide()
 #Else
         Size = New Size(452, 490)
-        'If My.Computer.Network.IsAvailable Then
-        '    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
-        '    Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
-        '    Dim v As String = Reader.ReadToEnd
-        '    Reader.Close()
-        '    System.IO.File.Delete(TempPath & "\vsn.txt")
-        'End If
+        System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
+        Dim dat As String = System.IO.File.ReadAllText(TempPath & "\date.txt")
+        Me.Text = "Gen 5 Distribution Creator (" & dat & ")"
+        If My.Computer.Network.IsAvailable Then
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/Resources/date.txt", TempPath & "\dt.txt")
+            Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
+            Dim dt As String = Reader.ReadToEnd
+            Reader.Close()
+            System.IO.File.Delete(TempPath & "\dt.txt")
+            If dat <> dt Then
+                LinkLabel1.Text = "New Update Available! " & dt
+                LinkLabel1.Show()
+            Else
+                LinkLabel1.Hide()
+            End If
+        Else
+            LinkLabel1.Hide()
+        End If
+        System.IO.File.Delete(TempPath & "\date.txt")
 #End If
         Button4.Location = New Point(296, 296)
         initial()
@@ -230,7 +243,7 @@ Make sure you put the new lines(ENTER key)"
         CheckBox2.Checked = True
         CheckBox3.Checked = True
         CheckBox4.Checked = True
-        LinkLabel1.Hide()
+        'LinkLabel1.Hide()
     End Sub
     Private Sub initial()
         Dim st As String = Nothing
@@ -557,6 +570,10 @@ Make sure you put the new lines(ENTER key)"
     End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Form3.ShowDialog()
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start("https://projectpokemon.org/home/files/file/2990-gen-5-pok%C3%A9mon-distribution-rom-creator/")
     End Sub
 #End Region
 End Class
