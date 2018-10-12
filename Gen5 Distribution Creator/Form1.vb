@@ -158,10 +158,26 @@ Make sure you put the new lines(ENTER key)"
                         End If
                     End If
                 ElseIf a = 7 Then
-                    MsgBox("Google is your friend.", 0)
-                    Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
+                    chkDeS()
                     Close()
                 End If
+            End If
+        End If
+    End Sub
+    Private Sub chkDeS()
+        Dim Everest_Registry As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME.exe")
+        Dim Everest_Registry2 As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME_0.9.11_x64.exe")
+        If Everest_Registry Is Nothing And Everest_Registry2 Is Nothing Then
+        Else
+            Dim gen As New Random
+            Dim n = gen.Next(1, 26)
+            Dim f = gen.Next(0, 2)
+            If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
+                If My.Computer.Network.IsAvailable Then
+                    Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
+                End If
+            Else
+                    MsgBox("Google is your friend.", 0)
             End If
         End If
     End Sub
