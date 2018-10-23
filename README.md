@@ -1,8 +1,8 @@
-# Gen 5 Pokémon Distribution ROM Creator
+# Gen 5 Pokémon Distribution ROM Creator ![Language](https://img.shields.io/badge/Language-Visual%20Basic-blue.svg) ![DLs](https://img.shields.io/github/downloads/atom/atom/total.svg) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/PlasticJustice/PKMG5DC/releases/latest)
 
 This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event file and a clean copy of the Liberty Ticket distribution ROM (both not included).
 
-Currently(v1.1.1) you can:
+ With this program you can:
  - Change the .pgf event file
  - Create your own .pgf file
  - Change the date limit
