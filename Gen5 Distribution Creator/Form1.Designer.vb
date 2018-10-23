@@ -49,7 +49,6 @@ Partial Class Form1
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -115,9 +114,9 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.CheckBox3)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
         Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 62)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 55)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(175, 114)
+        Me.GroupBox1.Size = New System.Drawing.Size(175, 97)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Game Compatability"
@@ -125,7 +124,7 @@ Partial Class Form1
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(98, 73)
+        Me.CheckBox4.Location = New System.Drawing.Point(98, 59)
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.Size = New System.Drawing.Size(63, 17)
         Me.CheckBox4.TabIndex = 3
@@ -135,7 +134,7 @@ Partial Class Form1
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(21, 73)
+        Me.CheckBox3.Location = New System.Drawing.Point(21, 59)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(62, 17)
         Me.CheckBox3.TabIndex = 2
@@ -145,7 +144,7 @@ Partial Class Form1
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(98, 34)
+        Me.CheckBox2.Location = New System.Drawing.Point(98, 28)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(54, 17)
         Me.CheckBox2.TabIndex = 1
@@ -155,7 +154,7 @@ Partial Class Form1
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(21, 34)
+        Me.CheckBox1.Location = New System.Drawing.Point(21, 28)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(53, 17)
         Me.CheckBox1.TabIndex = 0
@@ -164,7 +163,7 @@ Partial Class Form1
         '
         'RichTextBox2
         '
-        Me.RichTextBox2.Location = New System.Drawing.Point(67, 260)
+        Me.RichTextBox2.Location = New System.Drawing.Point(13, 207)
         Me.RichTextBox2.MaxLength = 252
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
@@ -180,9 +179,9 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.DateTimePicker2)
         Me.GroupBox2.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox2.Location = New System.Drawing.Point(195, 62)
+        Me.GroupBox2.Location = New System.Drawing.Point(195, 55)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(225, 114)
+        Me.GroupBox2.Size = New System.Drawing.Size(225, 97)
         Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Date Limit"
@@ -190,7 +189,7 @@ Partial Class Form1
         'CheckBox5
         '
         Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(123, 13)
+        Me.CheckBox5.Location = New System.Drawing.Point(123, 11)
         Me.CheckBox5.Name = "CheckBox5"
         Me.CheckBox5.Size = New System.Drawing.Size(95, 17)
         Me.CheckBox5.TabIndex = 4
@@ -200,7 +199,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 68)
+        Me.Label4.Location = New System.Drawing.Point(7, 54)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(29, 13)
         Me.Label4.TabIndex = 3
@@ -209,7 +208,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(7, 33)
+        Me.Label3.Location = New System.Drawing.Point(7, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 13)
         Me.Label3.TabIndex = 2
@@ -219,7 +218,7 @@ Partial Class Form1
         '
         Me.DateTimePicker2.CustomFormat = "yyyy/MM/dd"
         Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker2.Location = New System.Drawing.Point(6, 81)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(6, 67)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(213, 20)
         Me.DateTimePicker2.TabIndex = 1
@@ -229,7 +228,7 @@ Partial Class Form1
         '
         Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 46)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 32)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(213, 20)
         Me.DateTimePicker1.TabIndex = 0
@@ -244,9 +243,9 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.RadioButton3)
         Me.GroupBox3.Controls.Add(Me.RadioButton2)
         Me.GroupBox3.Controls.Add(Me.RadioButton1)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 183)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 151)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(407, 52)
+        Me.GroupBox3.Size = New System.Drawing.Size(407, 41)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Region"
@@ -254,7 +253,7 @@ Partial Class Form1
         'RadioButton7
         '
         Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.Location = New System.Drawing.Point(336, 20)
+        Me.RadioButton7.Location = New System.Drawing.Point(336, 16)
         Me.RadioButton7.Name = "RadioButton7"
         Me.RadioButton7.Size = New System.Drawing.Size(48, 17)
         Me.RadioButton7.TabIndex = 6
@@ -265,7 +264,7 @@ Partial Class Form1
         'RadioButton6
         '
         Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(285, 20)
+        Me.RadioButton6.Location = New System.Drawing.Point(285, 16)
         Me.RadioButton6.Name = "RadioButton6"
         Me.RadioButton6.Size = New System.Drawing.Size(45, 17)
         Me.RadioButton6.TabIndex = 5
@@ -276,7 +275,7 @@ Partial Class Form1
         'RadioButton5
         '
         Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(233, 20)
+        Me.RadioButton5.Location = New System.Drawing.Point(233, 16)
         Me.RadioButton5.Name = "RadioButton5"
         Me.RadioButton5.Size = New System.Drawing.Size(46, 17)
         Me.RadioButton5.TabIndex = 4
@@ -287,7 +286,7 @@ Partial Class Form1
         'RadioButton4
         '
         Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(179, 20)
+        Me.RadioButton4.Location = New System.Drawing.Point(179, 16)
         Me.RadioButton4.Name = "RadioButton4"
         Me.RadioButton4.Size = New System.Drawing.Size(48, 17)
         Me.RadioButton4.TabIndex = 3
@@ -298,7 +297,7 @@ Partial Class Form1
         'RadioButton3
         '
         Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(131, 20)
+        Me.RadioButton3.Location = New System.Drawing.Point(131, 16)
         Me.RadioButton3.Name = "RadioButton3"
         Me.RadioButton3.Size = New System.Drawing.Size(42, 17)
         Me.RadioButton3.TabIndex = 2
@@ -309,7 +308,7 @@ Partial Class Form1
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(79, 20)
+        Me.RadioButton2.Location = New System.Drawing.Point(79, 16)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(46, 17)
         Me.RadioButton2.TabIndex = 1
@@ -320,7 +319,7 @@ Partial Class Form1
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(25, 20)
+        Me.RadioButton1.Location = New System.Drawing.Point(25, 16)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(48, 17)
         Me.RadioButton1.TabIndex = 0
@@ -328,20 +327,10 @@ Partial Class Form1
         Me.RadioButton1.Text = "ENG"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(296, 289)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 68)
-        Me.Button2.TabIndex = 8
-        Me.Button2.Text = "Save Text"
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
-        '
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(271, 382)
+        Me.Button3.Location = New System.Drawing.Point(59, 358)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(128, 46)
         Me.Button3.TabIndex = 9
@@ -351,17 +340,18 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(67, 247)
+        Me.Label5.Location = New System.Drawing.Point(13, 194)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(31, 13)
+        Me.Label5.Size = New System.Drawing.Size(62, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Text:"
+        Me.Label5.Text = "Event Text:"
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(296, 260)
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(169, 305)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.Size = New System.Drawing.Size(67, 21)
         Me.Button4.TabIndex = 11
         Me.Button4.Text = "Reset Text"
         Me.Button4.UseVisualStyleBackColor = True
@@ -369,16 +359,16 @@ Partial Class Form1
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(35, 397)
+        Me.TextBox1.Location = New System.Drawing.Point(243, 208)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(185, 21)
+        Me.TextBox1.Size = New System.Drawing.Size(148, 21)
         Me.TextBox1.TabIndex = 12
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(34, 384)
+        Me.Label6.Location = New System.Drawing.Point(242, 195)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(66, 13)
         Me.Label6.TabIndex = 13
@@ -388,7 +378,7 @@ Partial Class Form1
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(220, 399)
+        Me.Label7.Location = New System.Drawing.Point(391, 210)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(30, 15)
         Me.Label7.TabIndex = 14
@@ -436,7 +426,6 @@ Partial Class Form1
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.RichTextBox2)
@@ -485,7 +474,6 @@ Partial Class Form1
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Button4 As Button

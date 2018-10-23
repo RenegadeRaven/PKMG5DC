@@ -260,7 +260,7 @@ Make sure you put the new lines(ENTER key)"
         End If
         System.IO.File.Delete(TempPath & "\date.txt")
 #End If
-        Button4.Location = New Point(296, 296)
+        'Button4.Location = New Point(296, 296)
         initial()
         dt = True
         lang()
@@ -520,7 +520,7 @@ Make sure you put the new lines(ENTER key)"
             r = Nothing
         End If
     End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub evnttxt()
         If RichTextBox2.Text <> "" Then
             Dim ch As Char() = RichTextBox2.Text.ToCharArray
             Dim ft As String = Nothing
@@ -576,7 +576,7 @@ Make sure you put the new lines(ENTER key)"
     End Sub
     Private Sub rt2ch(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.TextChanged
         RichTextBox2.ForeColor = Color.Black
-        Button2_Click(sender, e)
+        evnttxt()
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         RichTextBox2.Text = Nothing
