@@ -224,6 +224,9 @@ Make sure you put the new lines(ENTER key)"
 #If DEBUG Then
         Size = New Size(850, 490)
         System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
+        System.IO.File.WriteAllText(apppath & "/version.json", "{
+" & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
+}")
         If My.Computer.Network.IsAvailable Then
             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
