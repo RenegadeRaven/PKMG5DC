@@ -1,4 +1,5 @@
-﻿Public Class Form1
+﻿
+Public Class Form1
 #Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath
     'Dim res As String = My.Resources.ResourceManager.BaseName
@@ -181,7 +182,7 @@ Be sure to put the new lines again."
                     Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                 End If
             Else
-                    MsgBox("Google is your friend.", 0)
+                MsgBox("Google is your friend.", 0)
             End If
         End If
     End Sub
@@ -245,6 +246,7 @@ Be sure to put the new lines again."
 #Else
         Size = New Size(452, 490)
         Label13.Hide()
+        Label1.Hide()
         System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
         Dim dat As String = System.IO.File.ReadAllText(TempPath & "\date.txt")
         Me.Text = "Gen 5 Distribution Creator (" & dat & ")"
@@ -274,7 +276,25 @@ Be sure to put the new lines again."
         CheckBox2.Checked = True
         CheckBox3.Checked = True
         CheckBox4.Checked = True
+
+        Dim Pth As New System.Drawing.Drawing2D.GraphicsPath
+        Pth.AddEllipse(New Rectangle(5, 3, 17, 17))
+        Dim Regb As New Region(Pth)
+        Button7.Region = Regb
+        Pth.Dispose()
+        Regb.Dispose()
+
         'LinkLabel1.Hide()
+    End Sub
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If Me.Size.Height <> 490 Then
+            Size = New Size(Me.Size.Width, 490)
+        End If
+        If Me.Size.Width < 452 Then
+            Size = New Size(452, Me.Size.Height)
+        ElseIf Me.Size.Width > 850 Then
+            Size = New Size(850, Me.Size.Height)
+        End If
     End Sub
     Private Sub initial()
         Dim st As String = Nothing
@@ -639,6 +659,15 @@ Be sure to put the new lines again."
     End Sub
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Process.Start("https://paypal.me/PJMinesAndCrafts")
+    End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If Button7.Text = ">>" Then
+            Size = New Size(850, 490)
+            Button7.Text = "<<"
+        ElseIf Button7.Text = "<<" Then
+            Size = New Size(452, 490)
+            Button7.Text = ">>"
+        End If
     End Sub
 #End Region
 End Class
