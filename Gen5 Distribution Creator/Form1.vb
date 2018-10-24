@@ -589,13 +589,13 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         RichTextBox2.ForeColor = Color.Black
     End Sub
-    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Leave
+    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
         If TextBox1.Text = Nothing Then
             TextBox1.Text = "compiled"
             TextBox1.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Enter
+    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs)
         If TextBox1.Text = "compiled" Then
             TextBox1.Text = Nothing
             TextBox1.ForeColor = Color.Black

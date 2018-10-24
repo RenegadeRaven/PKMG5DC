@@ -14,3 +14,12 @@ C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Di
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbproj.CoreCompileInputs.cache
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen 5 Pokémon Distribution ROM Creator.exe
 C:\Users\Nick\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen 5 Pokémon Distribution ROM Creator.pdb
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.CustomMessageBox.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Form1.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Form2.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Form3.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Resources.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbproj.GenerateResource.cache
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbproj.CoreCompileInputs.cache
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\PKMG5DC.exe
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\PKMG5DC.pdb

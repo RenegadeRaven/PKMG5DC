@@ -1,7 +1,7 @@
 // Pokémon Duodecuple Distribution
 // by Prof. 9
 // Version 1.4.1 "Skinless"
-// 
+// With Edits by Regnum for PKMG5DC
 // Thanks to Yellow Wood Goblin for the slot-1 read fix.
 
 .include options.asm
@@ -316,39 +316,54 @@ languagepool:
 	dcw 8B9Fh
 
 .org 240h
-	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 0E3h,83h,9Dh,0E3h,82h,0B1h,0E3h,83h,83h,0E3h,83h,88h
+	dcw 0E3h,83h,0A2h,0E3h,83h,0B3h,0E3h,82h,0B9h,0E3h,82h,0BFh
+	dcw 0E3h,83h,0BCh,0Ah,0E7h,0ACh,0ACh,35h,0E4h,0B8h,96h,0E4h
+	dcw 0BBh,0A3h,0Ah,0E3h,82h,0ABh,0E3h,82h,0B9h,0E3h,82h,0BFh
+	dcw 0E3h,83h,0A0h,0E3h,83h,0A1h,0E3h,82h,0A4h,0E3h,83h,89h
+	dcw 0E6h,0B5h,81h,0E9h,80h,9Ah,0Ah,50h,4Bh,4Dh,47h,35h
+	dcw 44h,43h,0h
 
 .org 340h
 	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,43h,75h,73h 
+	dcw 74h,6Fh,6Dh,20h,4Dh,61h,64h,65h,20h,44h,69h,73h
+	dcw 74h,72h,69h,62h,75h,74h,69h,6Fh,6Eh,0Ah,50h,4Bh
+	dcw 4Dh,47h,35h,44h,43h,0h
 
 .org 440h
-	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 50h,6fh,6bh,0e9h,6dh,6fh,6eh,0ah,47h,0e9h,6eh,0e9h
+	dcw 72h,61h,74h,69h,6fh,6eh,20h,35h,0ah,44h,69h,73h
+	dcw 74h,72h,69h,62h,75h,74h,69h,6fh,6eh,20h,50h,65h
+	dcw 72h,73h,6fh,6eh,6eh,61h,6ch,69h,73h,0e9h,65h,0ah
+	dcw 50h,4bh,4dh,47h,35h,44h,43h,0h
 
 .org 540h
-	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 50h,6fh,6bh,0e9h,6dh,6fh,6eh,0ah,47h,65h,6eh,65h
+	dcw 72h,61h,74h,69h,6fh,6eh,20h,35h,0ah,42h,65h,6eh
+	dcw 75h,74h,7ah,65h,72h,64h,65h,66h,69h,6eh,69h,65h
+	dcw 72h,74h,65h,20h,56h,65h,72h,74h,65h,69h,6ch,75h
+	dcw 6eh,67h,0ah,50h,4bh,4dh,47h,35h,44h,43h,0h
 
 .org 640h
-	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 50h,6fh,6bh,0e9h,6dh,6fh,6eh,0ah,47h,65h,6eh,65h
+	dcw 72h,61h,7ah,69h,6fh,6eh,65h,20h,35h,0ah,44h,69h
+	dcw 73h,74h,72h,69h,62h,75h,7ah,69h,6fh,6eh,65h,20h
+	dcw 50h,65h,72h,73h,6fh,6eh,61h,6ch,69h,7ah,7ah,61h
+	dcw 74h,61h,0ah,50h,4bh,4dh,47h,35h,44h,43h,0h
 
 .org 740h
-	dcw 50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h
-	dcw 72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,44h,75h,6Fh
-	dcw 64h,65h,63h,75h,70h,6Ch,65h,20h,44h,69h,73h,74h
-	dcw 72h,69h,62h,75h,74h,69h,6Fh,6Eh,0h
+	dcw 50h,6fh,6bh,0e9h,6dh,6fh,6eh,0ah,47h,65h,6eh,65h
+	dcw 72h,61h,63h,69h,0f3h,6eh,20h,35h,0ah,44h,69h,73h
+	dcw 74h,72h,69h,62h,75h,63h,69h,0f3h,6eh,20h,50h,65h
+	dcw 72h,73h,6fh,6eh,61h,6ch,69h,7ah,61h,64h,61h,0ah
+	dcw 50h,4bh,4dh,47h,35h,44h,43h,0h
 
+.close
+.open header.bin,0h
+
+.org 0h
+	dcb 50h,4Bh,4Dh,43h,55h,53h,54h,4Fh,4Dh,52h,4Fh,4Dh
+	dcb 47h,35h,44h,43h
+	
 .close
