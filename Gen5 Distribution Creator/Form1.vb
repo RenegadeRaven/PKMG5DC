@@ -17,6 +17,10 @@ this box is all you can fit. A maximum of 7
 lines, max 36 characters per line, and a 
 maximum of 252 characters total.
 Make sure you put the new lines(ENTER key)"
+    Dim rdd As String = "Input Description Here.
+This textbox is also sized perfectly.
+4 lines, 24 chars/line, 96 chars.
+Be sure to put the new lines again."
     Dim Yes As String = "Yes"
     Dim No As String = "No"
     Dim tl As String = "Need Liberty Ticket ROM"
@@ -240,6 +244,7 @@ Make sure you put the new lines(ENTER key)"
         LinkLabel1.Hide()
 #Else
         Size = New Size(452, 490)
+        Label13.Hide()
         System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
         Dim dat As String = System.IO.File.ReadAllText(TempPath & "\date.txt")
         Me.Text = "Gen 5 Distribution Creator (" & dat & ")"
@@ -557,26 +562,43 @@ Make sure you put the new lines(ENTER key)"
         InitializeComponent()
         RichTextBox2.Text = rtd
         RichTextBox2.ForeColor = Color.Gray
+        RichTextBox3.Text = rdd
+        RichTextBox3.ForeColor = Color.Gray
         TextBox1.Text = "compiled"
         TextBox1.ForeColor = Color.Gray
         'RichTextBox2.Enter += New EventHandler(AddressOf richTextBox2_GotFocus)
         'RichTextBox2.LostFocus += New EventHandler(AddressOf richTextBox2_LostFocus)
     End Sub
-    Private Sub richTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Leave
+    Private Sub RichTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Leave
         If RichTextBox2.Text = Nothing Then
             RichTextBox2.Text = rtd
             RichTextBox2.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub richTextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Enter
+    Private Sub RichTextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Enter
         If RichTextBox2.Text = rtd Then
             RichTextBox2.Text = Nothing
             RichTextBox2.ForeColor = Color.Black
         End If
     End Sub
+    Private Sub RichTextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.Leave
+        If RichTextBox3.Text = Nothing Then
+            RichTextBox3.Text = rdd
+            RichTextBox3.ForeColor = Color.Gray
+        End If
+    End Sub
+    Private Sub RichTextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.Enter
+        If RichTextBox3.Text = rdd Then
+            RichTextBox3.Text = Nothing
+            RichTextBox3.ForeColor = Color.Black
+        End If
+    End Sub
     Private Sub rt2ch(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.TextChanged
         RichTextBox2.ForeColor = Color.Black
         evnttxt()
+    End Sub
+    Private Sub rt3ch(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.TextChanged
+        RichTextBox3.ForeColor = Color.Black
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         RichTextBox2.Text = Nothing
@@ -589,13 +611,13 @@ Make sure you put the new lines(ENTER key)"
         RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         RichTextBox2.ForeColor = Color.Black
     End Sub
-    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Leave
         If TextBox1.Text = Nothing Then
             TextBox1.Text = "compiled"
             TextBox1.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs)
+    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Enter
         If TextBox1.Text = "compiled" Then
             TextBox1.Text = Nothing
             TextBox1.ForeColor = Color.Black
@@ -607,6 +629,16 @@ Make sure you put the new lines(ENTER key)"
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Process.Start("https://projectpokemon.org/home/files/file/2990-gen-5-pok%C3%A9mon-distribution-rom-creator/")
+    End Sub
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        RichTextBox3.Text = Nothing
+        RichTextBox3.ForeColor = Color.Black
+    End Sub
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Process.Start("https://github.com/PlasticJustice")
+    End Sub
+    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Process.Start("https://paypal.me/PJMinesAndCrafts")
     End Sub
 #End Region
 End Class
