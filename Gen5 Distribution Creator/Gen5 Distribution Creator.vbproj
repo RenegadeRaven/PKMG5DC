@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Gen5_Distribution_Creator.My.MyApplication</StartupObject>
     <RootNamespace>Gen5_Distribution_Creator</RootNamespace>
-    <AssemblyName>Gen 5 Pokémon Distribution ROM Creator</AssemblyName>
+    <AssemblyName>PKMG5DC</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
