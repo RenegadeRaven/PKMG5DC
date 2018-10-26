@@ -1,5 +1,4 @@
-﻿
-Public Class Form1
+﻿Public Class Form1
 #Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath
     'Dim res As String = My.Resources.ResourceManager.BaseName
@@ -26,6 +25,33 @@ Be sure to put the new lines again."
     Dim No As String = "No"
     Dim tl As String = "Need Liberty Ticket ROM"
     Dim msl As String = "This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?"
+#End Region
+#Region "System Menu"
+    Public Const WM_SYSCOMMAND As Int32 = &H112
+    Public Const MF_BYPOSITION As Int32 = &H400
+    Public Const MYMENU1 As Int32 = 1000
+    Public Const MYMENU2 As Int32 = 1001
+    'Public Const MYMENU3 As Int32 = 1002
+
+    Dim hSysMenu As Integer
+
+    Private Declare Function GetSystemMenu Lib "user32" (ByVal hwnd As Integer, ByVal bRevert As Integer) As Integer
+    Public Declare Function InsertMenu Lib "user32" Alias "InsertMenuA" _
+       (ByVal hMenu As IntPtr, ByVal nPosition As Integer, ByVal wFlags As Integer, ByVal wIDNewItem As Integer, ByVal lpNewItem As String) As Boolean
+
+    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+        MyBase.WndProc(m)
+        If (m.Msg = WM_SYSCOMMAND) Then
+            Select Case m.WParam.ToInt32
+                Case MYMENU1
+                    Dim about As New Form2
+                    about.ShowDialog()
+                Case MYMENU2
+                    Dim options As New options
+                    options.ShowDialog()
+            End Select
+        End If
+    End Sub
 #End Region
 #Region "Syncs"
     Private Sub comp_ch()
@@ -68,6 +94,10 @@ Be sure to put the new lines again."
         build()
     End Sub
     Private Shared Sub Main(ByVal args As String())
+        If My.Settings.Delay = Nothing Or My.Settings.Delay = 0 Then
+            My.Settings.Delay = 300
+        End If
+        Dim del As Integer = My.Settings.Delay
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo()
         startInfo.UseShellExecute = False
         startInfo.RedirectStandardInput = True
@@ -77,9 +107,9 @@ Be sure to put the new lines again."
         process.StartInfo = startInfo
         process.Start()
         process.StandardInput.WriteLine("1")
-        System.Threading.Thread.Sleep(2000)
+        System.Threading.Thread.Sleep(del)
         process.StandardInput.WriteLine("3")
-        System.Threading.Thread.Sleep(2000)
+        System.Threading.Thread.Sleep(del)
         process.StandardInput.WriteLine("4")
         process.WaitForExit()
     End Sub
@@ -97,7 +127,10 @@ Be sure to put the new lines again."
         System.IO.File.WriteAllText(apppath & "\12distro.bat", My.Resources._12distro)
         Dim p As String() = {"3", "
 "}
+        Timer1.Interval = My.Settings.Delay + 2000
+        Timer1.Start()
         Main(p)
+        Timer1.Stop()
         System.IO.File.Delete(apppath & "\12distro.bat")
         System.IO.File.Delete(apppath & "\12distro.nds")
         System.IO.File.Delete(apppath & "\readme.txt")
@@ -227,7 +260,7 @@ Be sure to put the new lines again."
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tickchk()
 #If DEBUG Then
-        Size = New Size(850, 490)
+        Size = New Size(838, 490)
         System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
         System.IO.File.WriteAllText(apppath & "/version.json", "{
 " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
@@ -243,8 +276,10 @@ Be sure to put the new lines again."
             End If
         End If
         LinkLabel1.Hide()
+        Button7.Text = "<<"
 #Else
         Size = New Size(452, 490)
+        Me.CenterToScreen()
         Label13.Hide()
         Label1.Hide()
         System.IO.File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
@@ -285,6 +320,9 @@ Be sure to put the new lines again."
         Regb.Dispose()
 
         'LinkLabel1.Hide()
+        hSysMenu = GetSystemMenu(Me.Handle, False)
+        InsertMenu(hSysMenu, 5.5, MF_BYPOSITION, MYMENU1, "About...")
+        InsertMenu(hSysMenu, 6, MF_BYPOSITION, MYMENU2, "Options...")
     End Sub
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         If Me.Size.Height <> 490 Then
@@ -292,8 +330,8 @@ Be sure to put the new lines again."
         End If
         If Me.Size.Width < 452 Then
             Size = New Size(452, Me.Size.Height)
-        ElseIf Me.Size.Width > 850 Then
-            Size = New Size(850, Me.Size.Height)
+        ElseIf Me.Size.Width > 838 Then
+            Size = New Size(838, Me.Size.Height)
         End If
     End Sub
     Private Sub initial()
@@ -648,7 +686,7 @@ Be sure to put the new lines again."
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        Process.Start("https://projectpokemon.org/home/files/file/2990-gen-5-pok%C3%A9mon-distribution-rom-creator/")
+        Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         RichTextBox3.Text = Nothing
@@ -662,12 +700,17 @@ Be sure to put the new lines again."
     End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         If Button7.Text = ">>" Then
-            Size = New Size(850, 490)
+            Size = New Size(838, 490)
             Button7.Text = "<<"
         ElseIf Button7.Text = "<<" Then
             Size = New Size(452, 490)
             Button7.Text = ">>"
         End If
+    End Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        MsgBox("It seems your computer is a little slow. You'll have to increase the delay.", MsgBoxStyle.OkOnly, "Increase Delay")
+        Dim options As New options
+        options.ShowDialog()
     End Sub
 #End Region
 End Class

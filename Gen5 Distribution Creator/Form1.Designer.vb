@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -72,6 +73,8 @@ Partial Class Form1
         Me.Label14 = New System.Windows.Forms.Label()
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -80,18 +83,19 @@ Partial Class Form1
         '
         'RichTextBox1
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(466, 26)
+        Me.RichTextBox1.Location = New System.Drawing.Point(455, 26)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
         Me.RichTextBox1.Size = New System.Drawing.Size(357, 412)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = ""
+        Me.ToolTip1.SetToolTip(Me.RichTextBox1, "The output. See your changes here.")
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(475, 7)
+        Me.Label1.Location = New System.Drawing.Point(464, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 17)
         Me.Label1.TabIndex = 1
@@ -208,6 +212,7 @@ Partial Class Form1
         Me.CheckBox5.Size = New System.Drawing.Size(95, 17)
         Me.CheckBox5.TabIndex = 4
         Me.CheckBox5.Text = "Auto Max Limit"
+        Me.ToolTip1.SetToolTip(Me.CheckBox5, "Sets Start to January 1st 1753" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and End to December 31st 9998")
         Me.CheckBox5.UseVisualStyleBackColor = True
         '
         'Label4
@@ -377,6 +382,7 @@ Partial Class Form1
         Me.Button5.Size = New System.Drawing.Size(24, 23)
         Me.Button5.TabIndex = 15
         Me.Button5.Text = "?"
+        Me.ToolTip1.SetToolTip(Me.Button5, "About")
         Me.Button5.UseVisualStyleBackColor = True
         '
         'Button6
@@ -386,6 +392,7 @@ Partial Class Form1
         Me.Button6.Size = New System.Drawing.Size(51, 23)
         Me.Button6.TabIndex = 16
         Me.Button6.Text = "Custom"
+        Me.ToolTip1.SetToolTip(Me.Button6, "Make a custom Event pgf")
         Me.Button6.UseVisualStyleBackColor = True
         '
         'LinkLabel1
@@ -397,6 +404,7 @@ Partial Class Form1
         Me.LinkLabel1.TabIndex = 17
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "LinkLabel1"
+        Me.ToolTip1.SetToolTip(Me.LinkLabel1, "Update")
         '
         'GroupBox4
         '
@@ -420,6 +428,7 @@ Partial Class Form1
         '
         'Button2
         '
+        Me.Button2.Enabled = False
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Location = New System.Drawing.Point(4, 166)
         Me.Button2.Name = "Button2"
@@ -427,7 +436,6 @@ Partial Class Form1
         Me.Button2.TabIndex = 20
         Me.Button2.Text = "Reset Text"
         Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
         '
         'Label11
         '
@@ -439,69 +447,70 @@ Partial Class Form1
         Me.Label11.TabIndex = 22
         Me.Label11.Text = "The disabled items are new " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "features that aren't yet " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "completely coded."
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Label11.Visible = False
         '
         'Label10
         '
         Me.Label10.AutoSize = True
+        Me.Label10.Enabled = False
         Me.Label10.Location = New System.Drawing.Point(6, 94)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(63, 13)
         Me.Label10.TabIndex = 21
         Me.Label10.Text = "Description:"
-        Me.Label10.Visible = False
         '
         'RichTextBox3
         '
+        Me.RichTextBox3.Enabled = False
         Me.RichTextBox3.Location = New System.Drawing.Point(4, 107)
         Me.RichTextBox3.MaxLength = 96
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
         Me.RichTextBox3.Size = New System.Drawing.Size(172, 59)
         Me.RichTextBox3.TabIndex = 20
-        Me.RichTextBox3.Text = ""
-        Me.RichTextBox3.Visible = False
+        Me.RichTextBox3.Text = "Pokémon" & Global.Microsoft.VisualBasic.ChrW(10) & "Generation 5" & Global.Microsoft.VisualBasic.ChrW(10) & "Custom Made Distribution" & Global.Microsoft.VisualBasic.ChrW(10) & "PKMG5DC"
         Me.RichTextBox3.WordWrap = False
         '
         'Label9
         '
         Me.Label9.AutoSize = True
+        Me.Label9.Enabled = False
         Me.Label9.Location = New System.Drawing.Point(117, 55)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(35, 13)
         Me.Label9.TabIndex = 18
         Me.Label9.Text = "Code:"
-        Me.Label9.Visible = False
         '
         'TextBox3
         '
+        Me.TextBox3.Enabled = False
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBox3.Location = New System.Drawing.Point(118, 68)
         Me.TextBox3.MaxLength = 4
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(44, 20)
         Me.TextBox3.TabIndex = 17
-        Me.TextBox3.Visible = False
+        Me.TextBox3.Text = "G5DC"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
+        Me.Label8.Enabled = False
         Me.Label8.Location = New System.Drawing.Point(6, 55)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(45, 13)
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "Header:"
-        Me.Label8.Visible = False
         '
         'TextBox2
         '
+        Me.TextBox2.Enabled = False
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBox2.Location = New System.Drawing.Point(7, 68)
         Me.TextBox2.MaxLength = 12
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(103, 20)
         Me.TextBox2.TabIndex = 15
-        Me.TextBox2.Visible = False
+        Me.TextBox2.Text = "PKMCUSTOMROM"
         '
         'Label6
         '
@@ -525,7 +534,7 @@ Partial Class Form1
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(147, 31)
+        Me.Label7.Location = New System.Drawing.Point(147, 32)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(30, 15)
         Me.Label7.TabIndex = 14
@@ -560,6 +569,7 @@ Partial Class Form1
         Me.Label13.TabIndex = 22
         Me.Label13.Text = "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
     "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|"
+        Me.ToolTip1.SetToolTip(Me.Label13, "Divider, so I know what Release sees")
         '
         'Label14
         '
@@ -592,11 +602,14 @@ Partial Class Form1
         Me.Button7.Text = ">>"
         Me.Button7.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 2000
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(834, 451)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+        Me.ClientSize = New System.Drawing.Size(822, 451)
         Me.Controls.Add(Me.LinkLabel3)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
@@ -620,6 +633,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button7)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Gen 5 Distribution Creator"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -683,4 +697,6 @@ Partial Class Form1
     Friend WithEvents Label14 As Label
     Friend WithEvents LinkLabel3 As LinkLabel
     Friend WithEvents Button7 As Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Timer1 As Timer
 End Class

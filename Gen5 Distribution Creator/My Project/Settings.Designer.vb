@@ -89,6 +89,18 @@ Namespace My
                 Me("Region") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("300")>  _
+        Public Property Delay() As Decimal
+            Get
+                Return CType(Me("Delay"),Decimal)
+            End Get
+            Set
+                Me("Delay") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
