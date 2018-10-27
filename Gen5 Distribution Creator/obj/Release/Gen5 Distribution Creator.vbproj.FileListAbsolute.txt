@@ -19,9 +19,8 @@ C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Releas
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Form2.resources
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Form3.resources
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.Resources.resources
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.options.resources
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbproj.GenerateResource.cache
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbproj.CoreCompileInputs.cache
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\PKMG5DC.exe
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\PKMG5DC.pdb
-C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5 Distribution Creator.vbprojAssemblyReference.cache
-C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Release\Gen5_Distribution_Creator.options.resources

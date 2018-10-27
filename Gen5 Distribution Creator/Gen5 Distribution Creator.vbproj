@@ -54,7 +54,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>favicon1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -187,6 +187,7 @@
   <ItemGroup>
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
     <None Include="Resources\date.txt" />
