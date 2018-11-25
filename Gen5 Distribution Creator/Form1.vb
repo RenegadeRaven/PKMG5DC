@@ -9,6 +9,9 @@
     Dim t As Date
     Dim t2 As Date
     Dim r As String = My.Settings.Region
+    Dim des As String
+    Dim head As String
+    Dim code As String
 
     Dim rtd As String = "Input Event Text Here.
 
@@ -21,6 +24,9 @@ Make sure you put the new lines(ENTER key)"
 This textbox is also sized perfectly.
 4 lines, 24 chars/line, 96 chars.
 Be sure to put the new lines again."
+    Dim desd As String = "50h,6Fh,6Bh,0E9h,6Dh,6Fh,6Eh,0Ah,47h,65h,6Eh,65h,72h,61h,74h,69h,6Fh,6Eh,20h,35h,0Ah,43h,75h,73h,74h,6Fh,6Dh,20h,4Dh,61h,64h,65h,20h,44h,69h,73h,74h,72h,69h,62h,75h,74h,69h,6Fh,6Eh,0Ah,50h,4Bh,4Dh,47h,35h,44h,43h,0h"
+    Dim headd As String = "50h,4Bh,4Dh,43h,55h,53h,54h,4Fh,4Dh,52h,4Fh,4Dh"
+    Dim coded As String = "47h,35h,44h,43h"
     Dim Yes As String = "Yes"
     Dim No As String = "No"
     Dim tl As String = "Need Liberty Ticket ROM"
@@ -88,10 +94,37 @@ Be sure to put the new lines again."
             e.Handled = True
         End If
     End Sub
+    Private Sub TextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+        '97 - 122 = Ascii codes for simple letters
+        '65 - 90  = Ascii codes for capital letters
+        '48 - 57  = Ascii codes for numbers
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                If Asc(e.KeyChar) < 65 Or Asc(e.KeyChar) > 90 Then
+                    If Asc(e.KeyChar) < 97 Or Asc(e.KeyChar) > 122 Then
+                        e.Handled = True
+                    End If
+                End If
+            End If
+        End If
+
+    End Sub
 #End Region
 #Region "Builder"
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        build()
+        If Label2.Text = "Open .pgf ------->" Then
+            MsgB("No .pgf file.", 1, "OK", "", "", "Error")
+        ElseIf CheckBox1.Checked = False And CheckBox2.Checked = False And CheckBox3.Checked = False And CheckBox4.Checked = False Then
+            MsgB("No compatible game.", 1, "OK", "", "", "Error")
+        ElseIf TextBox2.Text.Length < 12 Then
+            MsgB("ROM Header is too short.", 1, "OK", "", "", "Error")
+        ElseIf TextBox3.Text.Length < 4 Then
+            MsgB("ROM Code is too short.", 1, "OK", "", "", "Error")
+        ElseIf RichTextBox3.Text = rdd Then
+            MsgB("ROM description is missing.", 1, "OK", "", "", "Error")
+        Else
+            build()
+        End If
     End Sub
     Private Shared Sub Main(ByVal args As String())
         If My.Settings.Delay = Nothing Or My.Settings.Delay = 0 Then
@@ -118,13 +151,53 @@ Be sure to put the new lines again."
         save(apppath & "\cards\01.bin")
         System.IO.Directory.CreateDirectory(apppath & "\tools\")
         System.IO.File.Copy(My.Settings.ticket, apppath & "\tools\ticket.nds")
-        System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", My.Resources._12distro1)
+        'System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", My.Resources._12distro1)
+        System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", My.Resources._12distro_)
+        Dim d12 As String = System.IO.File.ReadAllText(apppath & "\tools\12distro.asm")
+        d12 = d12 & "
+.open banner.bin,0h
+
+.org 2h
+	dcw 8B9Fh
+
+.org 240h
+	dcw " & des & "
+
+.org 340h
+	dcw " & des & "
+    
+.org 440h
+	dcw " & des & "
+    
+.org 540h
+	dcw " & des & "
+    
+.org 640h
+	dcw " & des & "
+    
+.org 740h
+	dcw " & des & "
+    
+.close
+.open header.bin,0h
+
+.org 0h
+    dcb " & head & "
+    
+.org 0Ch
+    dcb " & code & "
+    
+.close"
+        System.IO.File.Delete(apppath & "\tools\12distro.asm")
+        System.IO.File.WriteAllText(apppath & "\tools\12distro.asm", d12)
         System.IO.File.WriteAllText(apppath & "\tools\options.asm", My.Resources.options)
         System.IO.File.WriteAllText(apppath & "\tools\armips_readme.txt", My.Resources.armips_readme)
         System.IO.File.WriteAllBytes(apppath & "\tools\ndstool.exe", My.Resources.ndstool)
         System.IO.File.WriteAllBytes(apppath & "\tools\armips.exe", My.Resources.armips)
         System.IO.File.WriteAllText(apppath & "\readme.txt", My.Resources.readme)
         System.IO.File.WriteAllText(apppath & "\12distro.bat", My.Resources._12distro)
+
+        'System.Threading.Thread.Sleep(15000)
         Dim p As String() = {"3", "
 "}
         Timer1.Interval = My.Settings.Delay + 2000
@@ -138,6 +211,16 @@ Be sure to put the new lines again."
         System.IO.Directory.Delete(apppath & "\cards\", True)
         System.IO.File.Move(apppath & "\compiled.nds", apppath & "\" & TextBox1.Text & ".nds")
         MsgBox("Built as " & TextBox1.Text & ".nds", 0)
+        Shell("explorer /select, " & apppath & "\" & TextBox1.Text & ".nds", AppWinStyle.NormalFocus)
+
+        'dt = False
+        'Label2.Text = "Open .pgf ------->"
+        'CheckBox5.Checked = False
+        'RichTextBox1.Text = Nothing
+        'initial()
+        'dt = True
+        'News()
+
         Application.Restart()
     End Sub
 #End Region
@@ -212,6 +295,7 @@ Be sure to put the new lines again."
             Dim f = gen.Next(0, 2)
             If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
                 If My.Computer.Network.IsAvailable Then
+                    MsgBox("Google is your friend.", 0)
                     Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                 End If
             Else
@@ -259,6 +343,9 @@ Be sure to put the new lines again."
     End Function 'custom MsgBox
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tickchk()
+        If System.IO.File.Exists(TempPath & "\vsn.txt") Then
+            System.IO.File.Delete(TempPath & "\vsn.txt")
+        End If
 #If DEBUG Then
         Size = New Size(838, 490)
         System.IO.File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
@@ -288,11 +375,11 @@ Be sure to put the new lines again."
         If My.Computer.Network.IsAvailable Then
             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/Resources/date.txt", TempPath & "\dt.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
-            Dim dt As String = Reader.ReadToEnd
+            Dim dtt As String = Reader.ReadToEnd
             Reader.Close()
             System.IO.File.Delete(TempPath & "\dt.txt")
-            If dat <> dt Then
-                LinkLabel1.Text = "New Update Available! " & dt
+            If dat <> dtt Then
+                LinkLabel1.Text = "New Update Available! " & dtt
                 LinkLabel1.Show()
             Else
                 LinkLabel1.Hide()
@@ -616,7 +703,29 @@ Be sure to put the new lines again."
             RichTextBox1.Text = RichTextBox1.Text.Insert(424, ft)
         End If
     End Sub
-    Public Sub New()
+    Private Function asm(ByVal src As String)
+        Dim ft As String = Nothing
+        If src <> "" Then
+            Dim ch As Char() = src.ToCharArray
+            Dim n As Integer = 0
+            For n = 0 To UBound(ch) Step 1
+                Dim t As String = Hex(Asc(ch(n)))
+                t = t.ToUpper
+                If t.Length < 2 Then
+                    t = "0" & t
+                End If
+                If t = "E9" Then
+                    t = "0" & t
+                End If
+                ft = ft & t & "h,"
+            Next n
+            ft = ft & "0h"
+        Else
+            ft = "default"
+        End If
+        Return ft
+    End Function
+    Public Sub News()
         InitializeComponent()
         RichTextBox2.Text = rtd
         RichTextBox2.ForeColor = Color.Gray
@@ -624,8 +733,15 @@ Be sure to put the new lines again."
         RichTextBox3.ForeColor = Color.Gray
         TextBox1.Text = "compiled"
         TextBox1.ForeColor = Color.Gray
+        TextBox2.Text = "PKMCUSTOMROM"
+        TextBox2.ForeColor = Color.Gray
+        TextBox3.Text = "G5DC"
+        TextBox3.ForeColor = Color.Gray
         'RichTextBox2.Enter += New EventHandler(AddressOf richTextBox2_GotFocus)
         'RichTextBox2.LostFocus += New EventHandler(AddressOf richTextBox2_LostFocus)
+    End Sub
+    Public Sub New()
+        News()
     End Sub
     Private Sub RichTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Leave
         If RichTextBox2.Text = Nothing Then
@@ -657,6 +773,36 @@ Be sure to put the new lines again."
     End Sub
     Private Sub rt3ch(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.TextChanged
         RichTextBox3.ForeColor = Color.Black
+        Dim s As String = Nothing
+        If RichTextBox3.Text = rdd Then
+            s = ""
+        Else
+            s = RichTextBox3.Text
+        End If
+        des = asm(s)
+        If des = "default" Then
+            des = desd
+        End If
+    End Sub
+    Private Sub t2ch(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.TextChanged
+        TextBox2.ForeColor = Color.Black
+        TextBox2.Text = TextBox2.Text.ToUpper
+        TextBox2.SelectionStart = TextBox2.TextLength
+        TextBox2.ScrollToCaret()
+        head = asm(TextBox2.Text)
+        If head = "default" Then
+            head = headd
+        End If
+    End Sub
+    Private Sub t3ch(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.TextChanged
+        TextBox3.ForeColor = Color.Black
+        TextBox3.Text = TextBox3.Text.ToUpper
+        TextBox3.SelectionStart = TextBox3.TextLength
+        TextBox3.ScrollToCaret()
+        code = asm(TextBox3.Text)
+        If code = "default" Then
+            code = coded
+        End If
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         RichTextBox2.Text = Nothing
@@ -681,22 +827,61 @@ Be sure to put the new lines again."
             TextBox1.ForeColor = Color.Black
         End If
     End Sub
+    Private Sub TextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.Leave
+        If TextBox2.Text = Nothing Then
+            TextBox2.Text = "PKMCUSTOMROM"
+            TextBox2.ForeColor = Color.Gray
+        End If
+    End Sub
+    Private Sub TextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.Enter
+        If TextBox2.Text = "PKMCUSTOMROM" Then
+            TextBox2.Text = Nothing
+            TextBox2.ForeColor = Color.Black
+        End If
+    End Sub
+    Private Sub TextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.Leave
+        If TextBox3.Text = Nothing Then
+            TextBox3.Text = "G5DC"
+            TextBox3.ForeColor = Color.Gray
+        End If
+    End Sub
+    Private Sub TextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.Enter
+        If TextBox3.Text = "G5DC" Then
+            TextBox3.Text = Nothing
+            TextBox3.ForeColor = Color.Black
+        End If
+    End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Form3.ShowDialog()
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-        Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
+        Else
+            MsgB("No Internet connection!
+You can not update at the moment.", 1, "OK", "", "", "Error 404")
+        End If
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         RichTextBox3.Text = Nothing
         RichTextBox3.ForeColor = Color.Black
     End Sub
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Process.Start("https://github.com/PlasticJustice")
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://github.com/PlasticJustice")
+        Else
+            MsgB("No Internet connection!
+You can look me up later.", 1, "OK", "", "", "Error 404")
+        End If
     End Sub
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
-        Process.Start("https://paypal.me/PJMinesAndCrafts")
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://paypal.me/PJMinesAndCrafts")
+        Else
+            MsgB("No Internet connection!
+I appreciate the gesture.", 1, "OK", "", "", "Error 404")
+        End If
     End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         If Button7.Text = ">>" Then
@@ -711,6 +896,13 @@ Be sure to put the new lines again."
         MsgBox("It seems your computer is a little slow. You'll have to increase the delay.", MsgBoxStyle.OkOnly, "Increase Delay")
         Dim options As New options
         options.ShowDialog()
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        RichTextBox3.Text = "Pokémon
+Generation 5
+Custom Made Distribution
+PKMG5DC"
     End Sub
 #End Region
 End Class

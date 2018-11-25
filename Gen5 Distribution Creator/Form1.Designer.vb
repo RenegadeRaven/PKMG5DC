@@ -57,7 +57,6 @@ Partial Class Form1
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -75,6 +74,7 @@ Partial Class Form1
         Me.Button7 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -408,8 +408,8 @@ Partial Class Form1
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.Button8)
         Me.GroupBox4.Controls.Add(Me.Button2)
-        Me.GroupBox4.Controls.Add(Me.Label11)
         Me.GroupBox4.Controls.Add(Me.Label10)
         Me.GroupBox4.Controls.Add(Me.RichTextBox3)
         Me.GroupBox4.Controls.Add(Me.Label9)
@@ -421,37 +421,24 @@ Partial Class Form1
         Me.GroupBox4.Controls.Add(Me.Label7)
         Me.GroupBox4.Location = New System.Drawing.Point(13, 195)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(180, 230)
+        Me.GroupBox4.Size = New System.Drawing.Size(180, 194)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "ROM Details"
         '
         'Button2
         '
-        Me.Button2.Enabled = False
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Location = New System.Drawing.Point(4, 166)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(172, 21)
+        Me.Button2.Size = New System.Drawing.Size(85, 21)
         Me.Button2.TabIndex = 20
         Me.Button2.Text = "Reset Text"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 188)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(166, 39)
-        Me.Label11.TabIndex = 22
-        Me.Label11.Text = "The disabled items are new " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "features that aren't yet " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "completely coded."
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Enabled = False
         Me.Label10.Location = New System.Drawing.Point(6, 94)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(63, 13)
@@ -460,7 +447,6 @@ Partial Class Form1
         '
         'RichTextBox3
         '
-        Me.RichTextBox3.Enabled = False
         Me.RichTextBox3.Location = New System.Drawing.Point(4, 107)
         Me.RichTextBox3.MaxLength = 96
         Me.RichTextBox3.Name = "RichTextBox3"
@@ -473,7 +459,6 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Enabled = False
         Me.Label9.Location = New System.Drawing.Point(117, 55)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(35, 13)
@@ -482,7 +467,6 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.Enabled = False
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBox3.Location = New System.Drawing.Point(118, 68)
         Me.TextBox3.MaxLength = 4
@@ -494,7 +478,6 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Enabled = False
         Me.Label8.Location = New System.Drawing.Point(6, 55)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(45, 13)
@@ -503,7 +486,6 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.Enabled = False
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.TextBox2.Location = New System.Drawing.Point(7, 68)
         Me.TextBox2.MaxLength = 12
@@ -543,7 +525,7 @@ Partial Class Form1
         'LinkLabel2
         '
         Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(390, 435)
+        Me.LinkLabel2.Location = New System.Drawing.Point(392, 436)
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.Size = New System.Drawing.Size(47, 13)
         Me.LinkLabel2.TabIndex = 20
@@ -553,7 +535,7 @@ Partial Class Form1
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(376, 435)
+        Me.Label12.Location = New System.Drawing.Point(378, 436)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(18, 13)
         Me.Label12.TabIndex = 21
@@ -575,17 +557,17 @@ Partial Class Form1
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(39, 436)
+        Me.Label14.Location = New System.Drawing.Point(22, 437)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(327, 12)
+        Me.Label14.Size = New System.Drawing.Size(359, 12)
         Me.Label14.TabIndex = 23
-        Me.Label14.Text = "If you like my work, please send a dollar or two through             ."
+        Me.Label14.Text = "If you like my work, feel free to donate a dollar or two through             ."
         '
         'LinkLabel3
         '
         Me.LinkLabel3.AutoSize = True
         Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-        Me.LinkLabel3.Location = New System.Drawing.Point(321, 436)
+        Me.LinkLabel3.Location = New System.Drawing.Point(336, 437)
         Me.LinkLabel3.Name = "LinkLabel3"
         Me.LinkLabel3.Size = New System.Drawing.Size(40, 12)
         Me.LinkLabel3.TabIndex = 24
@@ -606,19 +588,29 @@ Partial Class Form1
         '
         Me.Timer1.Interval = 2000
         '
+        'Button8
+        '
+        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(90, 166)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(85, 21)
+        Me.Button8.TabIndex = 23
+        Me.Button8.Text = "Default Text"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(822, 451)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.LinkLabel3)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
@@ -689,7 +681,6 @@ Partial Class Form1
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Label11 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents LinkLabel2 As LinkLabel
     Friend WithEvents Label12 As Label
@@ -699,4 +690,5 @@ Partial Class Form1
     Friend WithEvents Button7 As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Button8 As Button
 End Class

@@ -9,3 +9,9 @@ This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event
  - Change which games can receive the event
  - Change which games region can receive the event (partially tested | only tested with English and French copies)
  - Change the event text that appears upon receiving
+
+
+ ## Credits
+ * [Prof. 9](https://github.com/Prof9) for [Pokémon Duodecuple Distribution hack](https://gbatemp.net/threads/pokemon-duodecuple-distribution-hack.285080/)
+ * [Kingcom](https://github.com/Kingcom) for [ARMIPS](http://aerie.wingdreams.net/?page_id=6)
+ * [DarkFader](https://github.com/darkfader) for [NDSTool](https://gbatemp.net/download/nintendo-ds-rom-tool-ndstool.29352/)

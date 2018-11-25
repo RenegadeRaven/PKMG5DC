@@ -93,7 +93,7 @@ Namespace My.Resources
         '''  Looks up a localized string similar to // Pokémon Duodecuple Distribution
         '''// by Prof. 9
         '''// Version 1.4.1 &quot;Skinless&quot;
-        '''// 
+        '''// With Edits by Regnum for PKMG5DC
         '''// Thanks to Yellow Wood Goblin for the slot-1 read fix.
         '''
         '''.include options.asm
@@ -119,9 +119,45 @@ Namespace My.Resources
         '''	mov	r2,2D0h
         '''	mul	r2,r5
         '''	ldr	r1,=201162Ch
-        '''	add	r1,r1,r2
-        '''	ldr	r2,=2CEh
-        '''	ldr	r0,=27E3 [rest of string was truncated]&quot;;.
+        '''	add	r1,r1, [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property _12distro_() As String
+            Get
+                Return ResourceManager.GetString("_12distro_", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to // Pokémon Duodecuple Distribution
+        '''// by Prof. 9
+        '''// Version 1.4.1 &quot;Skinless&quot;
+        '''// With Edits by Regnum for PKMG5DC
+        '''// Thanks to Yellow Wood Goblin for the slot-1 read fix.
+        '''
+        '''.include options.asm
+        '''
+        '''.nds
+        '''.open arm7.bin,2380000h
+        '''
+        '''.org	23A6370h
+        '''loadhijack:
+        '''	push	r5,r14
+        '''	bl	2007F98h
+        '''	ldr	r0,=2013900h
+        '''	ldr	r1,=2030000h
+        '''	ldrb	r1,[r1]
+        '''	mov	r1,r1,lsl 3h
+        '''	ldr	r2,[r0,r1]
+        '''	ldr	r1,=2011628h
+        '''	ldr	r3,=16D0h
+        '''	bl	2003874h
+        '''
+        '''	mov	r5,0h
+        '''fixchecksum:
+        '''	mov	r2,2D0h
+        '''	mul	r2,r5
+        '''	ldr	r1,=201162Ch
+        '''	add	r1,r1, [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property _12distro1() As String
             Get
