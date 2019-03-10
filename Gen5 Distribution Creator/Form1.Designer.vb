@@ -56,6 +56,7 @@ Partial Class Form1
         Me.Button6 = New System.Windows.Forms.Button()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
@@ -74,11 +75,12 @@ Partial Class Form1
         Me.Button7 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RichTextBox1
@@ -103,7 +105,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(287, 24)
+        Me.Button1.Location = New System.Drawing.Point(287, 50)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 2
@@ -114,7 +116,7 @@ Partial Class Form1
         '
         Me.Label2.AutoEllipsis = True
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label2.Location = New System.Drawing.Point(13, 28)
+        Me.Label2.Location = New System.Drawing.Point(13, 54)
         Me.Label2.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(268, 17)
@@ -132,7 +134,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.CheckBox3)
         Me.GroupBox1.Controls.Add(Me.CheckBox2)
         Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 55)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 81)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(175, 97)
         Me.GroupBox1.TabIndex = 4
@@ -181,7 +183,7 @@ Partial Class Form1
         '
         'RichTextBox2
         '
-        Me.RichTextBox2.Location = New System.Drawing.Point(197, 205)
+        Me.RichTextBox2.Location = New System.Drawing.Point(197, 231)
         Me.RichTextBox2.MaxLength = 252
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
@@ -197,7 +199,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.DateTimePicker2)
         Me.GroupBox2.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox2.Location = New System.Drawing.Point(195, 55)
+        Me.GroupBox2.Location = New System.Drawing.Point(195, 81)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(225, 97)
         Me.GroupBox2.TabIndex = 6
@@ -262,7 +264,7 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.RadioButton3)
         Me.GroupBox3.Controls.Add(Me.RadioButton2)
         Me.GroupBox3.Controls.Add(Me.RadioButton1)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 151)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 177)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(407, 41)
         Me.GroupBox3.TabIndex = 7
@@ -272,84 +274,92 @@ Partial Class Form1
         'RadioButton7
         '
         Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.Location = New System.Drawing.Point(336, 16)
+        Me.RadioButton7.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton7.Location = New System.Drawing.Point(352, 16)
         Me.RadioButton7.Name = "RadioButton7"
-        Me.RadioButton7.Size = New System.Drawing.Size(48, 17)
+        Me.RadioButton7.Size = New System.Drawing.Size(64, 18)
         Me.RadioButton7.TabIndex = 6
         Me.RadioButton7.TabStop = True
-        Me.RadioButton7.Text = "KOR"
+        Me.RadioButton7.Text = "한국어"
         Me.RadioButton7.UseVisualStyleBackColor = True
         '
         'RadioButton6
         '
         Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Location = New System.Drawing.Point(285, 16)
+        Me.RadioButton6.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton6.Location = New System.Drawing.Point(297, 16)
         Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(45, 17)
+        Me.RadioButton6.Size = New System.Drawing.Size(67, 18)
         Me.RadioButton6.TabIndex = 5
         Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "JPN"
+        Me.RadioButton6.Text = "日本語"
         Me.RadioButton6.UseVisualStyleBackColor = True
         '
         'RadioButton5
         '
         Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(233, 16)
+        Me.RadioButton5.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton5.Location = New System.Drawing.Point(239, 16)
         Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(46, 17)
+        Me.RadioButton5.Size = New System.Drawing.Size(69, 18)
         Me.RadioButton5.TabIndex = 4
         Me.RadioButton5.TabStop = True
-        Me.RadioButton5.Text = "SPA"
+        Me.RadioButton5.Text = "Español"
         Me.RadioButton5.UseVisualStyleBackColor = True
         '
         'RadioButton4
         '
         Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(179, 16)
+        Me.RadioButton4.Cursor = System.Windows.Forms.Cursors.Default
+        Me.RadioButton4.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton4.Location = New System.Drawing.Point(173, 16)
         Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(48, 17)
+        Me.RadioButton4.Size = New System.Drawing.Size(77, 18)
         Me.RadioButton4.TabIndex = 3
         Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "GER"
+        Me.RadioButton4.Text = "Deutsche"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'RadioButton3
         '
         Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(131, 16)
+        Me.RadioButton3.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton3.Location = New System.Drawing.Point(120, 16)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(42, 17)
+        Me.RadioButton3.Size = New System.Drawing.Size(65, 18)
         Me.RadioButton3.TabIndex = 2
         Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "ITA"
+        Me.RadioButton3.Text = "Italiano"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(79, 16)
+        Me.RadioButton2.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton2.Location = New System.Drawing.Point(60, 16)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(46, 17)
+        Me.RadioButton2.Size = New System.Drawing.Size(71, 18)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "FRE"
+        Me.RadioButton2.Text = "Français"
         Me.RadioButton2.UseVisualStyleBackColor = True
         '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(25, 16)
+        Me.RadioButton1.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.RadioButton1.Location = New System.Drawing.Point(5, 16)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(48, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(65, 18)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "ENG"
+        Me.RadioButton1.Text = "English"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(244, 357)
+        Me.Button3.Location = New System.Drawing.Point(244, 383)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(128, 46)
         Me.Button3.TabIndex = 9
@@ -359,7 +369,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(197, 192)
+        Me.Label5.Location = New System.Drawing.Point(197, 218)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 13)
         Me.Label5.TabIndex = 10
@@ -368,7 +378,7 @@ Partial Class Form1
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(197, 303)
+        Me.Button4.Location = New System.Drawing.Point(197, 329)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(223, 21)
         Me.Button4.TabIndex = 11
@@ -387,7 +397,7 @@ Partial Class Form1
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(368, 24)
+        Me.Button6.Location = New System.Drawing.Point(368, 50)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(51, 23)
         Me.Button6.TabIndex = 16
@@ -400,10 +410,10 @@ Partial Class Form1
         Me.LinkLabel1.AutoSize = True
         Me.LinkLabel1.Location = New System.Drawing.Point(10, 4)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(59, 13)
+        Me.LinkLabel1.Size = New System.Drawing.Size(48, 13)
         Me.LinkLabel1.TabIndex = 17
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "LinkLabel1"
+        Me.LinkLabel1.Text = "Update?"
         Me.ToolTip1.SetToolTip(Me.LinkLabel1, "Update")
         '
         'GroupBox4
@@ -419,12 +429,22 @@ Partial Class Form1
         Me.GroupBox4.Controls.Add(Me.Label6)
         Me.GroupBox4.Controls.Add(Me.TextBox1)
         Me.GroupBox4.Controls.Add(Me.Label7)
-        Me.GroupBox4.Location = New System.Drawing.Point(13, 195)
+        Me.GroupBox4.Location = New System.Drawing.Point(13, 221)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(180, 194)
         Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "ROM Details"
+        '
+        'Button8
+        '
+        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(90, 166)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(85, 21)
+        Me.Button8.TabIndex = 23
+        Me.Button8.Text = "Default Text"
+        Me.Button8.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -588,20 +608,23 @@ Partial Class Form1
         '
         Me.Timer1.Interval = 2000
         '
-        'Button8
+        'PictureBox1
         '
-        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(90, 166)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(85, 21)
-        Me.Button8.TabIndex = 23
-        Me.Button8.Text = "Default Text"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.BackgroundImage = Global.Gen5_Distribution_Creator.My.Resources.Resources.ppdb
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Location = New System.Drawing.Point(328, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(80, 22)
+        Me.PictureBox1.TabIndex = 26
+        Me.PictureBox1.TabStop = False
         '
         'Form1
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(822, 451)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.LinkLabel2)
         Me.Controls.Add(Me.LinkLabel3)
@@ -635,6 +658,7 @@ Partial Class Form1
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -691,4 +715,5 @@ Partial Class Form1
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button8 As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

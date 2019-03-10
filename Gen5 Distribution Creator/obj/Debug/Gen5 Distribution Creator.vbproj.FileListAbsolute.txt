@@ -24,3 +24,4 @@ C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen5 Distribution Creator.vbproj.CoreCompileInputs.cache
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.exe
 C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.pdb
+C:\Users\Kochen Family\source\repos\PKMG5DC\Gen5 Distribution Creator\obj\Debug\Gen5 Distribution Creator.vbprojAssemblyReference.cache

@@ -166,7 +166,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 2018/10/11.
+        '''  Looks up a localized string similar to 2018/11/25.
         '''</summary>
         Friend ReadOnly Property _date() As String
             Get
@@ -258,6 +258,26 @@ Namespace My.Resources
         Friend ReadOnly Property options() As String
             Get
                 Return ResourceManager.GetString("options", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ppdb() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ppdb", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property ppdbs() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ppdbs", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

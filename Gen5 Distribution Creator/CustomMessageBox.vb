@@ -1,5 +1,5 @@
 ﻿Public Class CustomMessageBox
-    Public Sub New(ByVal message As String, ByVal numB As Integer, ByVal button1Name As String, ByVal button2name As String, ByVal button3name As String, ByVal header As String)
+    Public Sub New(ByVal message As String, Optional ByVal numB As Integer = 1, Optional ByVal button1Name As String = "OK", Optional ByVal button2name As String = "Cancel", Optional ByVal button3name As String = "", Optional ByVal header As String = "")
         InitializeComponent()
         Label1.Text = message
         If numB = 0 Then

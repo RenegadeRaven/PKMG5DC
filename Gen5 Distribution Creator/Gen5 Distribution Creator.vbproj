@@ -190,6 +190,8 @@
     <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="Resources\ppdbs.png" />
+    <None Include="Resources\ppdb.png" />
     <None Include="Resources\12distro_.asm" />
     <None Include="Resources\date.txt" />
     <None Include="Resources\options.asm" />
