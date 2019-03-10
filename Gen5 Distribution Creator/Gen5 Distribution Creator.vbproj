@@ -72,6 +72,9 @@
     <Reference Include="MSBuild.AutoILMerge.Task, Version=1.0.0.0, Culture=en-US, processorArchitecture=MSIL">
       <HintPath>..\packages\MSBuild.AutoILMerge.Task.1.1.1\lib\net40\MSBuild.AutoILMerge.Task.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -159,9 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="options.resx">
       <DependentUpon>options.vb</DependentUpon>
@@ -182,7 +185,8 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Regnum.pfx" />
-    <None Include="Resources\12distro.bat" />
+    <None Include="Resources\Languages\en.json" />
+    <None Include="Resources\Languages\fr.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\ILMergeOrder.txt" />
@@ -190,16 +194,17 @@
     <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
-    <None Include="Resources\ppdbs.png" />
-    <None Include="Resources\ppdb.png" />
-    <None Include="Resources\12distro_.asm" />
+    <None Include="Resources\12distro\readme.txt" />
+    <None Include="Resources\12distro\options.asm" />
+    <None Include="Resources\12distro\ndstool.exe" />
+    <None Include="Resources\12distro\armips.exe" />
+    <None Include="Resources\12distro\armips readme.txt" />
+    <None Include="Resources\12distro\12distro_.asm" />
+    <None Include="Resources\12distro\12distro.asm" />
+    <None Include="Resources\12distro\12distro.bat" />
+    <None Include="Resources\DonateButton\ppdbs.png" />
+    <None Include="Resources\DonateButton\ppdb.png" />
     <None Include="Resources\date.txt" />
-    <None Include="Resources\options.asm" />
-    <None Include="Resources\ndstool.exe" />
-    <None Include="Resources\armips.exe" />
-    <None Include="Resources\armips readme.txt" />
-    <None Include="Resources\12distro.asm" />
-    <None Include="Resources\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

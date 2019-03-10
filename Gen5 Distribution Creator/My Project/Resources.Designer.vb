@@ -61,27 +61,36 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to :menu
-        '''@echo off
-        '''cls
-        '''echo Pokemon Duodecuple Distribution v1.4.1 &quot;Skinless&quot;
-        '''echo -------------------------------------------------
-        '''echo 1. Create a 12-distro ROM
-        '''echo 2. Extract Wonder Cards from a ROM
-        '''echo 3. Compile Wonder Cards into a ROM
-        '''echo 4. Exit
-        '''echo -------------------------------------------------
-        '''set choice=
-        '''set /p choice=?
-        '''if &quot;%choice%&quot;==&quot;1&quot; goto patch
-        '''if &quot;%choice%&quot;==&quot;2&quot; goto extract
-        '''if &quot;%choice%&quot;==&quot;3&quot; goto compile
-        '''if &quot;%choice%&quot;==&quot;4&quot; exit
-        '''goto menu
+        '''  Looks up a localized string similar to // Pokémon Duodecuple Distribution
+        '''// by Prof. 9
+        '''// Version 1.4.1 &quot;Skinless&quot;
+        '''// With Edits by Regnum for PKMG5DC
+        '''// Thanks to Yellow Wood Goblin for the slot-1 read fix.
         '''
-        ''':patch
-        '''@echo off
-        '''if not ex [rest of string was truncated]&quot;;.
+        '''.include options.asm
+        '''
+        '''.nds
+        '''.open arm7.bin,2380000h
+        '''
+        '''.org	23A6370h
+        '''loadhijack:
+        '''	push	r5,r14
+        '''	bl	2007F98h
+        '''	ldr	r0,=2013900h
+        '''	ldr	r1,=2030000h
+        '''	ldrb	r1,[r1]
+        '''	mov	r1,r1,lsl 3h
+        '''	ldr	r2,[r0,r1]
+        '''	ldr	r1,=2011628h
+        '''	ldr	r3,=16D0h
+        '''	bl	2003874h
+        '''
+        '''	mov	r5,0h
+        '''fixchecksum:
+        '''	mov	r2,2D0h
+        '''	mul	r2,r5
+        '''	ldr	r1,=201162Ch
+        '''	add	r1,r1, [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property _12distro() As String
             Get
@@ -128,36 +137,27 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to // Pokémon Duodecuple Distribution
-        '''// by Prof. 9
-        '''// Version 1.4.1 &quot;Skinless&quot;
-        '''// With Edits by Regnum for PKMG5DC
-        '''// Thanks to Yellow Wood Goblin for the slot-1 read fix.
+        '''  Looks up a localized string similar to :menu
+        '''@echo off
+        '''cls
+        '''echo Pokemon Duodecuple Distribution v1.4.1 &quot;Skinless&quot;
+        '''echo -------------------------------------------------
+        '''echo 1. Create a 12-distro ROM
+        '''echo 2. Extract Wonder Cards from a ROM
+        '''echo 3. Compile Wonder Cards into a ROM
+        '''echo 4. Exit
+        '''echo -------------------------------------------------
+        '''set choice=
+        '''set /p choice=?
+        '''if &quot;%choice%&quot;==&quot;1&quot; goto patch
+        '''if &quot;%choice%&quot;==&quot;2&quot; goto extract
+        '''if &quot;%choice%&quot;==&quot;3&quot; goto compile
+        '''if &quot;%choice%&quot;==&quot;4&quot; exit
+        '''goto menu
         '''
-        '''.include options.asm
-        '''
-        '''.nds
-        '''.open arm7.bin,2380000h
-        '''
-        '''.org	23A6370h
-        '''loadhijack:
-        '''	push	r5,r14
-        '''	bl	2007F98h
-        '''	ldr	r0,=2013900h
-        '''	ldr	r1,=2030000h
-        '''	ldrb	r1,[r1]
-        '''	mov	r1,r1,lsl 3h
-        '''	ldr	r2,[r0,r1]
-        '''	ldr	r1,=2011628h
-        '''	ldr	r3,=16D0h
-        '''	bl	2003874h
-        '''
-        '''	mov	r5,0h
-        '''fixchecksum:
-        '''	mov	r2,2D0h
-        '''	mul	r2,r5
-        '''	ldr	r1,=201162Ch
-        '''	add	r1,r1, [rest of string was truncated]&quot;;.
+        ''':patch
+        '''@echo off
+        '''if not ex [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property _12distro1() As String
             Get
@@ -214,6 +214,59 @@ Namespace My.Resources
         Friend ReadOnly Property armips_readme() As String
             Get
                 Return ResourceManager.GetString("armips_readme", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;New Update Available! &quot;: &quot;New Update Available! &quot;,
+        '''  &quot;Open .pgf&quot;: &quot;Open .pgf&quot;,
+        '''  &quot;Custom&quot;: &quot;Custom&quot;,
+        '''  &quot;Game Compatibility&quot;: &quot;Game Compatibility&quot;,
+        '''  &quot;Black&quot;: &quot;Black&quot;,
+        '''  &quot;White&quot;: &quot;White&quot;,
+        '''  &quot;Date Limit&quot;: &quot;Date Limit&quot;,
+        '''  &quot;Start&quot;: &quot;Start&quot;,
+        '''  &quot;End&quot;: &quot;End&quot;,
+        '''  &quot;Auto Max Limit&quot;: &quot;Auto Max Limit&quot;,
+        '''  &quot;Region&quot;: &quot;Region&quot;,
+        '''  &quot;ROM Details&quot;: &quot;ROM Details&quot;,
+        '''  &quot;File Name&quot;: &quot;File Name&quot;,
+        '''  &quot;Header&quot;: &quot;Header&quot;,
+        '''  &quot;Code&quot;: &quot;Code&quot;,
+        '''  &quot;Description&quot;: &quot;Description&quot;,
+        '''  &quot;Clear Text&quot;: &quot;Clear Text&quot;,
+        '''  &quot;Default Tex [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property en() As String
+            Get
+                Return ResourceManager.GetString("en", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to {
+        '''  &quot;New Update Available! &quot;: &quot;Nouvelle Mise à Jour Disponible! &quot;,
+        '''  &quot;Open .pgf&quot;: &quot;Ouvrir .pgf&quot;,
+        '''  &quot;Custom&quot;: &quot;Personnaliser&quot;,
+        '''  &quot;Game Compatibility&quot;: &quot;Compatibilité du Jeu&quot;,
+        '''  &quot;Black&quot;: &quot;Noir&quot;,
+        '''  &quot;White&quot;: &quot;Blanc&quot;,
+        '''  &quot;Date Limit&quot;: &quot;Date Limite&quot;,
+        '''  &quot;Start&quot;: &quot;Début&quot;,
+        '''  &quot;End&quot;: &quot;Fin&quot;,
+        '''  &quot;Auto Max Limit&quot;: &quot;Auto Max Limite&quot;,
+        '''  &quot;Region&quot;: &quot;Région&quot;,
+        '''  &quot;ROM Details&quot;: &quot;Détails du ROM&quot;,
+        '''  &quot;File Name&quot;: &quot;Nom du Fichier&quot;,
+        '''  &quot;Header&quot;: &quot;En-Tête&quot;,
+        '''  &quot;Code&quot;: &quot;Code&quot;,
+        '''  &quot;Description&quot;: &quot;Description&quot;,
+        '''  &quot;Clear Text [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property fr() As String
+            Get
+                Return ResourceManager.GetString("fr", resourceCulture)
             End Get
         End Property
         

@@ -70,8 +70,6 @@ Partial Class Form1
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
@@ -139,7 +137,7 @@ Partial Class Form1
         Me.GroupBox1.Size = New System.Drawing.Size(175, 97)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Game Compatability"
+        Me.GroupBox1.Text = "Game Compatibility"
         '
         'CheckBox4
         '
@@ -371,9 +369,9 @@ Partial Class Form1
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(197, 218)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 13)
+        Me.Label5.Size = New System.Drawing.Size(84, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Event Text:"
+        Me.Label5.Text = "Event Message:"
         '
         'Button4
         '
@@ -382,7 +380,7 @@ Partial Class Form1
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(223, 21)
         Me.Button4.TabIndex = 11
-        Me.Button4.Text = "Reset Text"
+        Me.Button4.Text = "Clear Text"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5
@@ -453,7 +451,7 @@ Partial Class Form1
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(85, 21)
         Me.Button2.TabIndex = 20
-        Me.Button2.Text = "Reset Text"
+        Me.Button2.Text = "Clear Text"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Label10
@@ -573,27 +571,6 @@ Partial Class Form1
     "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "|"
         Me.ToolTip1.SetToolTip(Me.Label13, "Divider, so I know what Release sees")
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(22, 437)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(359, 12)
-        Me.Label14.TabIndex = 23
-        Me.Label14.Text = "If you like my work, feel free to donate a dollar or two through             ."
-        '
-        'LinkLabel3
-        '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
-        Me.LinkLabel3.Location = New System.Drawing.Point(336, 437)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(40, 12)
-        Me.LinkLabel3.TabIndex = 24
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "PayPal"
-        '
         'Button7
         '
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -611,7 +588,7 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BackgroundImage = Global.Gen5_Distribution_Creator.My.Resources.Resources.ppdb
+        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.PictureBox1.Location = New System.Drawing.Point(328, 0)
@@ -627,8 +604,6 @@ Partial Class Form1
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.LinkLabel2)
-        Me.Controls.Add(Me.LinkLabel3)
-        Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.GroupBox4)
@@ -709,8 +684,6 @@ Partial Class Form1
     Friend WithEvents LinkLabel2 As LinkLabel
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents LinkLabel3 As LinkLabel
     Friend WithEvents Button7 As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer

@@ -1,4 +1,10 @@
 ﻿Imports System.Threading
+Imports System.Xml
+Imports System.Text
+Imports System.IO
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+
 Public Class Form1
 #Region "Variables"
     Dim appPath As String = My.Application.Info.DirectoryPath
@@ -14,6 +20,7 @@ Public Class Form1
     Dim header As String
     Dim code As String
 
+    Dim LangData As JObject
     Dim rtd As String = "Input Event Text Here.
 
 This textbox is sized perfectly, so what fits in
@@ -70,7 +77,7 @@ Be sure to put the new lines again."
             If l.Contains("POKWBLIBERTYY8KP01") Then
                 My.Settings.ticket = appPath & "/ticket.nds"
             Else
-                MsgB("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
+                MsgB(LangData("Error: Invaild File").ToString(), 1, LangData("OK").ToString(),,, LangData("ERROR FOUND").ToString())
                 Close()
             End If
         Else
@@ -79,7 +86,7 @@ Be sure to put the new lines again."
                 Dim l = System.IO.File.ReadAllText(myFile)
                 If l.Contains("POKWBLIBERTYY8KP01") Then
                 Else
-                    MsgB("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
+                    MsgB(LangData("Error: Invaild File").ToString(), 1, LangData("OK").ToString(),,, LangData("ERROR FOUND").ToString())
                     Close()
                 End If
             ElseIf My.Settings.ticket <> appPath & "/ticket.nds" And My.Settings.ticket <> Nothing And System.IO.File.Exists(My.Settings.ticket) Then
@@ -114,7 +121,7 @@ Be sure to put the new lines again."
                                         System.IO.File.Copy(myFile, appPath & "/ticket.nds")
                                         My.Settings.ticket = appPath & "/ticket.nds"
                                     Else
-                                        MsgB("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
+                                        MsgB(LangData("Error: Invaild File").ToString(), 1, LangData("OK").ToString(),,, LangData("ERROR FOUND").ToString())
                                         Close()
                                     End If
                                 End If
@@ -140,13 +147,13 @@ Be sure to put the new lines again."
             Dim f = gen.Next(0, 2)
             If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
                 If My.Computer.Network.IsAvailable Then
-                    Dim ans = MsgB("Google is your friend.", 2, "I know", "How so?")
+                    Dim ans = MsgB(LangData("Google is your friend.").ToString(), 2, LangData("I know").ToString(), LangData("How so?").ToString())
                     If ans = 7 Then
                         Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                     End If
                 End If
             Else
-                MsgB("Google is your friend.", 1, "OK")
+                MsgB(LangData("Google is your friend.").ToString(), 1, LangData("OK").ToString())
             End If
         End If
     End Sub
@@ -156,19 +163,31 @@ Be sure to put the new lines again."
         Select Case My.Settings.Language
             Case "E"
                 RadioButton1.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
             Case "F"
                 RadioButton2.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.fr)
             Case "I"
                 RadioButton3.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
             Case "G"
                 RadioButton4.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
             Case "S"
                 RadioButton5.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
             Case "J"
                 RadioButton6.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
             Case "K"
                 RadioButton7.PerformClick()
+                File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
         End Select
+
+        Dim lang As String = File.ReadAllText(TempPath & "/PKMG5DC-lang.json")
+        LangData = JObject.Parse(lang)
+
+
     End Sub
 
     'Checks for, well what do you know, Updates
@@ -181,7 +200,7 @@ Be sure to put the new lines again."
             System.IO.File.Delete(TempPath & "\PKMG5DC-dt.txt")
             Dim dat As String = System.IO.File.ReadAllText(TempPath & "\PKMG5DC-date.txt")
             If dat <> dtt Then
-                LinkLabel1.Text = "New Update Available! " & dtt
+                LinkLabel1.Text = LangData("New Update Available! ").ToString() & dtt
                 LinkLabel1.Show()
             Else
                 LinkLabel1.Hide()
@@ -350,7 +369,7 @@ Be sure to put the new lines again."
 #End Region
 #Region "Syncs"
     'Changes compatable game(s)
-    Private Sub Game_compatability()
+    Private Sub Game_Compatibility()
         Games(4) = (Games(0) Xor Games(1) Xor Games(2) Xor Games(3))
         Dim hexStr As String = Hex_Zeros(Hex(Games(4)), 2)
         RichTextBox1.Text = RichTextBox1.Text.Remove(420, 2)
@@ -594,44 +613,44 @@ Be sure to put the new lines again."
         End If
     End Sub
 
-    'Adds Black Compatability
+    'Adds Black Compatibility
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
         If CheckBox1.Checked = True Then
             Games(0) = 32
         Else
             Games(0) = 0
         End If
-        Game_compatability()
+        Game_Compatibility()
     End Sub
 
-    'Adds White Compatability
+    'Adds White Compatibility
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
         If CheckBox2.Checked = True Then
             Games(1) = 16
         Else
             Games(1) = 0
         End If
-        Game_compatability()
+        Game_Compatibility()
     End Sub
 
-    'Adds Black 2 Compatability
+    'Adds Black 2 Compatibility
     Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
         If CheckBox3.Checked = True Then
             Games(2) = 128
         Else
             Games(2) = 0
         End If
-        Game_compatability()
+        Game_Compatibility()
     End Sub
 
-    'Adds White 2 Compatability
+    'Adds White 2 Compatibility
     Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
         If CheckBox4.Checked = True Then
             Games(3) = 64
         Else
             Games(3) = 0
         End If
-        Game_compatability()
+        Game_Compatibility()
     End Sub
 
     'Maxes Date Limit
@@ -954,8 +973,8 @@ PKMG5DC"
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
-            MsgB("No Internet connection!
-You can not update at the moment.", 1, "OK",,, "Error 404")
+            MsgB(LangData("No Internet connection!").ToString() & "
+" & LangData("You can not update at the moment.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
         End If
     End Sub
 
@@ -964,8 +983,8 @@ You can not update at the moment.", 1, "OK",,, "Error 404")
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
         Else
-            MsgB("No Internet connection!
-You can look me up later.", 1, "OK",,, "Error 404")
+            MsgB(LangData("No Internet connection!").ToString() & "
+" & LangData("You can look me up later.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
         End If
     End Sub
 
@@ -975,8 +994,8 @@ You can look me up later.", 1, "OK",,, "Error 404")
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
-            MsgB("No Internet connection!
-I appreciate the gesture.", 1, "OK",,, "Error 404")
+            MsgB(LangData("No Internet connection!").ToString() & "
+" & LangData("I appreciate the gesture.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
         End If
     End Sub
     Private Sub PictureBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseDown
