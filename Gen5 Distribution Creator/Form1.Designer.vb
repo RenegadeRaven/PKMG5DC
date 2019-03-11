@@ -24,72 +24,72 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.rtb_Editor = New System.Windows.Forms.RichTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.bt_PGF = New System.Windows.Forms.Button()
+        Me.lb_PGF = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.gb_GameComp = New System.Windows.Forms.GroupBox()
+        Me.cb_White2 = New System.Windows.Forms.CheckBox()
+        Me.cb_Black2 = New System.Windows.Forms.CheckBox()
+        Me.cb_White = New System.Windows.Forms.CheckBox()
+        Me.cb_Black = New System.Windows.Forms.CheckBox()
+        Me.rtb_EventMsg = New System.Windows.Forms.RichTextBox()
+        Me.gb_DateLimit = New System.Windows.Forms.GroupBox()
+        Me.cb_MaxLimit = New System.Windows.Forms.CheckBox()
+        Me.lb_End = New System.Windows.Forms.Label()
+        Me.lb_Start = New System.Windows.Forms.Label()
+        Me.EndDatePicker = New System.Windows.Forms.DateTimePicker()
+        Me.StartDatePicker = New System.Windows.Forms.DateTimePicker()
+        Me.gb_Region = New System.Windows.Forms.GroupBox()
+        Me.rb_Kor = New System.Windows.Forms.RadioButton()
+        Me.rb_Jap = New System.Windows.Forms.RadioButton()
+        Me.rb_Spa = New System.Windows.Forms.RadioButton()
+        Me.rb_Ger = New System.Windows.Forms.RadioButton()
+        Me.rb_Ita = New System.Windows.Forms.RadioButton()
+        Me.rb_Fr = New System.Windows.Forms.RadioButton()
+        Me.rb_Eng = New System.Windows.Forms.RadioButton()
+        Me.bt_Build = New System.Windows.Forms.Button()
+        Me.lb_EventMsg = New System.Windows.Forms.Label()
+        Me.bt_ClearEM = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.bt_Custom = New System.Windows.Forms.Button()
+        Me.lklb_Update = New System.Windows.Forms.LinkLabel()
+        Me.gb_ROM = New System.Windows.Forms.GroupBox()
+        Me.bt_DefaultDes = New System.Windows.Forms.Button()
+        Me.bt_ClearDes = New System.Windows.Forms.Button()
+        Me.lb_Descript = New System.Windows.Forms.Label()
+        Me.rtb_ROMDes = New System.Windows.Forms.RichTextBox()
+        Me.lb_Code = New System.Windows.Forms.Label()
+        Me.tb_Code = New System.Windows.Forms.TextBox()
+        Me.lb_Header = New System.Windows.Forms.Label()
+        Me.tb_Header = New System.Windows.Forms.TextBox()
+        Me.lb_FileName = New System.Windows.Forms.Label()
+        Me.tb_FileName = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.lklb_Author = New System.Windows.Forms.LinkLabel()
+        Me.lb_By = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.gb_GameComp.SuspendLayout()
+        Me.gb_DateLimit.SuspendLayout()
+        Me.gb_Region.SuspendLayout()
+        Me.gb_ROM.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'RichTextBox1
+        'rtb_Editor
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(455, 26)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(357, 412)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = ""
-        Me.ToolTip1.SetToolTip(Me.RichTextBox1, "The output. See your changes here.")
+        Me.rtb_Editor.Location = New System.Drawing.Point(455, 26)
+        Me.rtb_Editor.Name = "rtb_Editor"
+        Me.rtb_Editor.ReadOnly = True
+        Me.rtb_Editor.Size = New System.Drawing.Size(357, 412)
+        Me.rtb_Editor.TabIndex = 0
+        Me.rtb_Editor.Text = ""
+        Me.ToolTip1.SetToolTip(Me.rtb_Editor, "The output. See your changes here.")
         '
         'Label1
         '
@@ -101,287 +101,287 @@ Partial Class Form1
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Label1"
         '
-        'Button1
+        'bt_PGF
         '
-        Me.Button1.Location = New System.Drawing.Point(287, 50)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Open .pgf"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.bt_PGF.Location = New System.Drawing.Point(283, 50)
+        Me.bt_PGF.Name = "bt_PGF"
+        Me.bt_PGF.Size = New System.Drawing.Size(68, 23)
+        Me.bt_PGF.TabIndex = 2
+        Me.bt_PGF.Text = "Open .pgf"
+        Me.bt_PGF.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lb_PGF
         '
-        Me.Label2.AutoEllipsis = True
-        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label2.Location = New System.Drawing.Point(13, 54)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(268, 17)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Open .pgf ------->"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lb_PGF.AutoEllipsis = True
+        Me.lb_PGF.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lb_PGF.Location = New System.Drawing.Point(13, 54)
+        Me.lb_PGF.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
+        Me.lb_PGF.Name = "lb_PGF"
+        Me.lb_PGF.Size = New System.Drawing.Size(268, 17)
+        Me.lb_PGF.TabIndex = 3
+        Me.lb_PGF.Text = "Open .pgf ------->"
+        Me.lb_PGF.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'GroupBox1
+        'gb_GameComp
         '
-        Me.GroupBox1.Controls.Add(Me.CheckBox4)
-        Me.GroupBox1.Controls.Add(Me.CheckBox3)
-        Me.GroupBox1.Controls.Add(Me.CheckBox2)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 81)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(175, 97)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Game Compatibility"
+        Me.gb_GameComp.Controls.Add(Me.cb_White2)
+        Me.gb_GameComp.Controls.Add(Me.cb_Black2)
+        Me.gb_GameComp.Controls.Add(Me.cb_White)
+        Me.gb_GameComp.Controls.Add(Me.cb_Black)
+        Me.gb_GameComp.Location = New System.Drawing.Point(13, 81)
+        Me.gb_GameComp.Name = "gb_GameComp"
+        Me.gb_GameComp.Size = New System.Drawing.Size(175, 97)
+        Me.gb_GameComp.TabIndex = 4
+        Me.gb_GameComp.TabStop = False
+        Me.gb_GameComp.Text = "Game Compatibility"
         '
-        'CheckBox4
+        'cb_White2
         '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(98, 59)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(63, 17)
-        Me.CheckBox4.TabIndex = 3
-        Me.CheckBox4.Text = "White 2"
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.cb_White2.AutoSize = True
+        Me.cb_White2.Location = New System.Drawing.Point(98, 59)
+        Me.cb_White2.Name = "cb_White2"
+        Me.cb_White2.Size = New System.Drawing.Size(63, 17)
+        Me.cb_White2.TabIndex = 3
+        Me.cb_White2.Text = "White 2"
+        Me.cb_White2.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'cb_Black2
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Location = New System.Drawing.Point(21, 59)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(62, 17)
-        Me.CheckBox3.TabIndex = 2
-        Me.CheckBox3.Text = "Black 2"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.cb_Black2.AutoSize = True
+        Me.cb_Black2.Location = New System.Drawing.Point(21, 59)
+        Me.cb_Black2.Name = "cb_Black2"
+        Me.cb_Black2.Size = New System.Drawing.Size(62, 17)
+        Me.cb_Black2.TabIndex = 2
+        Me.cb_Black2.Text = "Black 2"
+        Me.cb_Black2.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'cb_White
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(98, 28)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(54, 17)
-        Me.CheckBox2.TabIndex = 1
-        Me.CheckBox2.Text = "White"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.cb_White.AutoSize = True
+        Me.cb_White.Location = New System.Drawing.Point(98, 28)
+        Me.cb_White.Name = "cb_White"
+        Me.cb_White.Size = New System.Drawing.Size(54, 17)
+        Me.cb_White.TabIndex = 1
+        Me.cb_White.Text = "White"
+        Me.cb_White.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'cb_Black
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(21, 28)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(53, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Black"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.cb_Black.AutoSize = True
+        Me.cb_Black.Location = New System.Drawing.Point(21, 28)
+        Me.cb_Black.Name = "cb_Black"
+        Me.cb_Black.Size = New System.Drawing.Size(53, 17)
+        Me.cb_Black.TabIndex = 0
+        Me.cb_Black.Text = "Black"
+        Me.cb_Black.UseVisualStyleBackColor = True
         '
-        'RichTextBox2
+        'rtb_EventMsg
         '
-        Me.RichTextBox2.Location = New System.Drawing.Point(197, 231)
-        Me.RichTextBox2.MaxLength = 252
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.RichTextBox2.Size = New System.Drawing.Size(223, 97)
-        Me.RichTextBox2.TabIndex = 5
-        Me.RichTextBox2.Text = ""
-        Me.RichTextBox2.WordWrap = False
+        Me.rtb_EventMsg.Location = New System.Drawing.Point(197, 231)
+        Me.rtb_EventMsg.MaxLength = 252
+        Me.rtb_EventMsg.Name = "rtb_EventMsg"
+        Me.rtb_EventMsg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.rtb_EventMsg.Size = New System.Drawing.Size(223, 97)
+        Me.rtb_EventMsg.TabIndex = 5
+        Me.rtb_EventMsg.Text = ""
+        Me.rtb_EventMsg.WordWrap = False
         '
-        'GroupBox2
+        'gb_DateLimit
         '
-        Me.GroupBox2.Controls.Add(Me.CheckBox5)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.DateTimePicker2)
-        Me.GroupBox2.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox2.Location = New System.Drawing.Point(195, 81)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(225, 97)
-        Me.GroupBox2.TabIndex = 6
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Date Limit"
+        Me.gb_DateLimit.Controls.Add(Me.cb_MaxLimit)
+        Me.gb_DateLimit.Controls.Add(Me.lb_End)
+        Me.gb_DateLimit.Controls.Add(Me.lb_Start)
+        Me.gb_DateLimit.Controls.Add(Me.EndDatePicker)
+        Me.gb_DateLimit.Controls.Add(Me.StartDatePicker)
+        Me.gb_DateLimit.Location = New System.Drawing.Point(195, 81)
+        Me.gb_DateLimit.Name = "gb_DateLimit"
+        Me.gb_DateLimit.Size = New System.Drawing.Size(225, 97)
+        Me.gb_DateLimit.TabIndex = 6
+        Me.gb_DateLimit.TabStop = False
+        Me.gb_DateLimit.Text = "Date Limit"
         '
-        'CheckBox5
+        'cb_MaxLimit
         '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Location = New System.Drawing.Point(123, 11)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(95, 17)
-        Me.CheckBox5.TabIndex = 4
-        Me.CheckBox5.Text = "Auto Max Limit"
-        Me.ToolTip1.SetToolTip(Me.CheckBox5, "Sets Start to January 1st 1753" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and End to December 31st 9998")
-        Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.cb_MaxLimit.AutoSize = True
+        Me.cb_MaxLimit.Location = New System.Drawing.Point(123, 11)
+        Me.cb_MaxLimit.Name = "cb_MaxLimit"
+        Me.cb_MaxLimit.Size = New System.Drawing.Size(95, 17)
+        Me.cb_MaxLimit.TabIndex = 4
+        Me.cb_MaxLimit.Text = "Auto Max Limit"
+        Me.ToolTip1.SetToolTip(Me.cb_MaxLimit, "Sets Start to January 1st 1753" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and End to December 31st 9998")
+        Me.cb_MaxLimit.UseVisualStyleBackColor = True
         '
-        'Label4
+        'lb_End
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 54)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "End:"
+        Me.lb_End.AutoSize = True
+        Me.lb_End.Location = New System.Drawing.Point(7, 54)
+        Me.lb_End.Name = "lb_End"
+        Me.lb_End.Size = New System.Drawing.Size(29, 13)
+        Me.lb_End.TabIndex = 3
+        Me.lb_End.Text = "End:"
         '
-        'Label3
+        'lb_Start
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(7, 19)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(32, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Start:"
+        Me.lb_Start.AutoSize = True
+        Me.lb_Start.Location = New System.Drawing.Point(7, 19)
+        Me.lb_Start.Name = "lb_Start"
+        Me.lb_Start.Size = New System.Drawing.Size(32, 13)
+        Me.lb_Start.TabIndex = 2
+        Me.lb_Start.Text = "Start:"
         '
-        'DateTimePicker2
+        'EndDatePicker
         '
-        Me.DateTimePicker2.CustomFormat = "yyyy/MM/dd"
-        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker2.Location = New System.Drawing.Point(6, 67)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(213, 20)
-        Me.DateTimePicker2.TabIndex = 1
-        Me.DateTimePicker2.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
+        Me.EndDatePicker.CustomFormat = "yyyy/MM/dd"
+        Me.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.EndDatePicker.Location = New System.Drawing.Point(6, 67)
+        Me.EndDatePicker.Name = "EndDatePicker"
+        Me.EndDatePicker.Size = New System.Drawing.Size(213, 20)
+        Me.EndDatePicker.TabIndex = 1
+        Me.EndDatePicker.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
         '
-        'DateTimePicker1
+        'StartDatePicker
         '
-        Me.DateTimePicker1.CustomFormat = "yyyy/MM/dd"
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 32)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(213, 20)
-        Me.DateTimePicker1.TabIndex = 0
-        Me.DateTimePicker1.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
+        Me.StartDatePicker.CustomFormat = "yyyy/MM/dd"
+        Me.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.StartDatePicker.Location = New System.Drawing.Point(6, 32)
+        Me.StartDatePicker.Name = "StartDatePicker"
+        Me.StartDatePicker.Size = New System.Drawing.Size(213, 20)
+        Me.StartDatePicker.TabIndex = 0
+        Me.StartDatePicker.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
         '
-        'GroupBox3
+        'gb_Region
         '
-        Me.GroupBox3.Controls.Add(Me.RadioButton7)
-        Me.GroupBox3.Controls.Add(Me.RadioButton6)
-        Me.GroupBox3.Controls.Add(Me.RadioButton5)
-        Me.GroupBox3.Controls.Add(Me.RadioButton4)
-        Me.GroupBox3.Controls.Add(Me.RadioButton3)
-        Me.GroupBox3.Controls.Add(Me.RadioButton2)
-        Me.GroupBox3.Controls.Add(Me.RadioButton1)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 177)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(407, 41)
-        Me.GroupBox3.TabIndex = 7
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Region"
+        Me.gb_Region.Controls.Add(Me.rb_Kor)
+        Me.gb_Region.Controls.Add(Me.rb_Jap)
+        Me.gb_Region.Controls.Add(Me.rb_Spa)
+        Me.gb_Region.Controls.Add(Me.rb_Ger)
+        Me.gb_Region.Controls.Add(Me.rb_Ita)
+        Me.gb_Region.Controls.Add(Me.rb_Fr)
+        Me.gb_Region.Controls.Add(Me.rb_Eng)
+        Me.gb_Region.Location = New System.Drawing.Point(13, 177)
+        Me.gb_Region.Name = "gb_Region"
+        Me.gb_Region.Size = New System.Drawing.Size(407, 41)
+        Me.gb_Region.TabIndex = 7
+        Me.gb_Region.TabStop = False
+        Me.gb_Region.Text = "Region"
         '
-        'RadioButton7
+        'rb_Kor
         '
-        Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton7.Location = New System.Drawing.Point(352, 16)
-        Me.RadioButton7.Name = "RadioButton7"
-        Me.RadioButton7.Size = New System.Drawing.Size(64, 18)
-        Me.RadioButton7.TabIndex = 6
-        Me.RadioButton7.TabStop = True
-        Me.RadioButton7.Text = "한국어"
-        Me.RadioButton7.UseVisualStyleBackColor = True
+        Me.rb_Kor.AutoSize = True
+        Me.rb_Kor.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Kor.Location = New System.Drawing.Point(352, 16)
+        Me.rb_Kor.Name = "rb_Kor"
+        Me.rb_Kor.Size = New System.Drawing.Size(64, 18)
+        Me.rb_Kor.TabIndex = 6
+        Me.rb_Kor.TabStop = True
+        Me.rb_Kor.Text = "한국어"
+        Me.rb_Kor.UseVisualStyleBackColor = True
         '
-        'RadioButton6
+        'rb_Jap
         '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton6.Location = New System.Drawing.Point(297, 16)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(67, 18)
-        Me.RadioButton6.TabIndex = 5
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "日本語"
-        Me.RadioButton6.UseVisualStyleBackColor = True
+        Me.rb_Jap.AutoSize = True
+        Me.rb_Jap.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Jap.Location = New System.Drawing.Point(297, 16)
+        Me.rb_Jap.Name = "rb_Jap"
+        Me.rb_Jap.Size = New System.Drawing.Size(67, 18)
+        Me.rb_Jap.TabIndex = 5
+        Me.rb_Jap.TabStop = True
+        Me.rb_Jap.Text = "日本語"
+        Me.rb_Jap.UseVisualStyleBackColor = True
         '
-        'RadioButton5
+        'rb_Spa
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton5.Location = New System.Drawing.Point(239, 16)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(69, 18)
-        Me.RadioButton5.TabIndex = 4
-        Me.RadioButton5.TabStop = True
-        Me.RadioButton5.Text = "Español"
-        Me.RadioButton5.UseVisualStyleBackColor = True
+        Me.rb_Spa.AutoSize = True
+        Me.rb_Spa.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Spa.Location = New System.Drawing.Point(239, 16)
+        Me.rb_Spa.Name = "rb_Spa"
+        Me.rb_Spa.Size = New System.Drawing.Size(69, 18)
+        Me.rb_Spa.TabIndex = 4
+        Me.rb_Spa.TabStop = True
+        Me.rb_Spa.Text = "Español"
+        Me.rb_Spa.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'rb_Ger
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RadioButton4.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton4.Location = New System.Drawing.Point(173, 16)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(77, 18)
-        Me.RadioButton4.TabIndex = 3
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Deutsche"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.rb_Ger.AutoSize = True
+        Me.rb_Ger.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rb_Ger.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Ger.Location = New System.Drawing.Point(173, 16)
+        Me.rb_Ger.Name = "rb_Ger"
+        Me.rb_Ger.Size = New System.Drawing.Size(77, 18)
+        Me.rb_Ger.TabIndex = 3
+        Me.rb_Ger.TabStop = True
+        Me.rb_Ger.Text = "Deutsche"
+        Me.rb_Ger.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'rb_Ita
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton3.Location = New System.Drawing.Point(120, 16)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(65, 18)
-        Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Italiano"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.rb_Ita.AutoSize = True
+        Me.rb_Ita.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Ita.Location = New System.Drawing.Point(120, 16)
+        Me.rb_Ita.Name = "rb_Ita"
+        Me.rb_Ita.Size = New System.Drawing.Size(65, 18)
+        Me.rb_Ita.TabIndex = 2
+        Me.rb_Ita.TabStop = True
+        Me.rb_Ita.Text = "Italiano"
+        Me.rb_Ita.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'rb_Fr
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton2.Location = New System.Drawing.Point(60, 16)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(71, 18)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Français"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rb_Fr.AutoSize = True
+        Me.rb_Fr.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Fr.Location = New System.Drawing.Point(60, 16)
+        Me.rb_Fr.Name = "rb_Fr"
+        Me.rb_Fr.Size = New System.Drawing.Size(71, 18)
+        Me.rb_Fr.TabIndex = 1
+        Me.rb_Fr.TabStop = True
+        Me.rb_Fr.Text = "Français"
+        Me.rb_Fr.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rb_Eng
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.RadioButton1.Location = New System.Drawing.Point(5, 16)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(65, 18)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "English"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rb_Eng.AutoSize = True
+        Me.rb_Eng.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rb_Eng.Location = New System.Drawing.Point(5, 16)
+        Me.rb_Eng.Name = "rb_Eng"
+        Me.rb_Eng.Size = New System.Drawing.Size(65, 18)
+        Me.rb_Eng.TabIndex = 0
+        Me.rb_Eng.TabStop = True
+        Me.rb_Eng.Text = "English"
+        Me.rb_Eng.UseVisualStyleBackColor = True
         '
-        'Button3
+        'bt_Build
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(244, 383)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(128, 46)
-        Me.Button3.TabIndex = 9
-        Me.Button3.Text = "Build Event ROM"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.bt_Build.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_Build.Location = New System.Drawing.Point(246, 374)
+        Me.bt_Build.Name = "bt_Build"
+        Me.bt_Build.Size = New System.Drawing.Size(128, 46)
+        Me.bt_Build.TabIndex = 9
+        Me.bt_Build.Text = "Build Event ROM"
+        Me.bt_Build.UseVisualStyleBackColor = True
         '
-        'Label5
+        'lb_EventMsg
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(197, 218)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(84, 13)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Event Message:"
+        Me.lb_EventMsg.AutoSize = True
+        Me.lb_EventMsg.Location = New System.Drawing.Point(197, 218)
+        Me.lb_EventMsg.Name = "lb_EventMsg"
+        Me.lb_EventMsg.Size = New System.Drawing.Size(84, 13)
+        Me.lb_EventMsg.TabIndex = 10
+        Me.lb_EventMsg.Text = "Event Message:"
         '
-        'Button4
+        'bt_ClearEM
         '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(197, 329)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(223, 21)
-        Me.Button4.TabIndex = 11
-        Me.Button4.Text = "Clear Text"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.bt_ClearEM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_ClearEM.Location = New System.Drawing.Point(197, 329)
+        Me.bt_ClearEM.Name = "bt_ClearEM"
+        Me.bt_ClearEM.Size = New System.Drawing.Size(223, 21)
+        Me.bt_ClearEM.TabIndex = 11
+        Me.bt_ClearEM.Text = "Clear Text"
+        Me.bt_ClearEM.UseVisualStyleBackColor = True
         '
         'Button5
         '
@@ -393,142 +393,144 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.Button5, "About")
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'Button6
+        'bt_Custom
         '
-        Me.Button6.Location = New System.Drawing.Point(368, 50)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(51, 23)
-        Me.Button6.TabIndex = 16
-        Me.Button6.Text = "Custom"
-        Me.ToolTip1.SetToolTip(Me.Button6, "Make a custom Event pgf")
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.bt_Custom.Font = New System.Drawing.Font("Microsoft Sans Serif", 32.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Document, CType(0, Byte))
+        Me.bt_Custom.Location = New System.Drawing.Point(353, 50)
+        Me.bt_Custom.Name = "bt_Custom"
+        Me.bt_Custom.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.bt_Custom.Size = New System.Drawing.Size(68, 23)
+        Me.bt_Custom.TabIndex = 16
+        Me.bt_Custom.Text = "Custom"
+        Me.ToolTip1.SetToolTip(Me.bt_Custom, "Make a custom Event pgf")
+        Me.bt_Custom.UseVisualStyleBackColor = True
         '
-        'LinkLabel1
+        'lklb_Update
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(10, 4)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(48, 13)
-        Me.LinkLabel1.TabIndex = 17
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Update?"
-        Me.ToolTip1.SetToolTip(Me.LinkLabel1, "Update")
+        Me.lklb_Update.AutoSize = True
+        Me.lklb_Update.Location = New System.Drawing.Point(10, 4)
+        Me.lklb_Update.Name = "lklb_Update"
+        Me.lklb_Update.Size = New System.Drawing.Size(48, 13)
+        Me.lklb_Update.TabIndex = 17
+        Me.lklb_Update.TabStop = True
+        Me.lklb_Update.Text = "Update?"
+        Me.ToolTip1.SetToolTip(Me.lklb_Update, "Update")
         '
-        'GroupBox4
+        'gb_ROM
         '
-        Me.GroupBox4.Controls.Add(Me.Button8)
-        Me.GroupBox4.Controls.Add(Me.Button2)
-        Me.GroupBox4.Controls.Add(Me.Label10)
-        Me.GroupBox4.Controls.Add(Me.RichTextBox3)
-        Me.GroupBox4.Controls.Add(Me.Label9)
-        Me.GroupBox4.Controls.Add(Me.TextBox3)
-        Me.GroupBox4.Controls.Add(Me.Label8)
-        Me.GroupBox4.Controls.Add(Me.TextBox2)
-        Me.GroupBox4.Controls.Add(Me.Label6)
-        Me.GroupBox4.Controls.Add(Me.TextBox1)
-        Me.GroupBox4.Controls.Add(Me.Label7)
-        Me.GroupBox4.Location = New System.Drawing.Point(13, 221)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(180, 194)
-        Me.GroupBox4.TabIndex = 19
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "ROM Details"
+        Me.gb_ROM.Controls.Add(Me.bt_DefaultDes)
+        Me.gb_ROM.Controls.Add(Me.bt_ClearDes)
+        Me.gb_ROM.Controls.Add(Me.lb_Descript)
+        Me.gb_ROM.Controls.Add(Me.rtb_ROMDes)
+        Me.gb_ROM.Controls.Add(Me.lb_Code)
+        Me.gb_ROM.Controls.Add(Me.tb_Code)
+        Me.gb_ROM.Controls.Add(Me.lb_Header)
+        Me.gb_ROM.Controls.Add(Me.tb_Header)
+        Me.gb_ROM.Controls.Add(Me.lb_FileName)
+        Me.gb_ROM.Controls.Add(Me.tb_FileName)
+        Me.gb_ROM.Controls.Add(Me.Label7)
+        Me.gb_ROM.Location = New System.Drawing.Point(13, 221)
+        Me.gb_ROM.Name = "gb_ROM"
+        Me.gb_ROM.Size = New System.Drawing.Size(180, 194)
+        Me.gb_ROM.TabIndex = 19
+        Me.gb_ROM.TabStop = False
+        Me.gb_ROM.Text = "ROM Details"
         '
-        'Button8
+        'bt_DefaultDes
         '
-        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(90, 166)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(85, 21)
-        Me.Button8.TabIndex = 23
-        Me.Button8.Text = "Default Text"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.bt_DefaultDes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_DefaultDes.Location = New System.Drawing.Point(90, 166)
+        Me.bt_DefaultDes.Name = "bt_DefaultDes"
+        Me.bt_DefaultDes.Size = New System.Drawing.Size(85, 21)
+        Me.bt_DefaultDes.TabIndex = 23
+        Me.bt_DefaultDes.Text = "Default Text"
+        Me.bt_DefaultDes.UseVisualStyleBackColor = True
         '
-        'Button2
+        'bt_ClearDes
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(4, 166)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(85, 21)
-        Me.Button2.TabIndex = 20
-        Me.Button2.Text = "Clear Text"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.bt_ClearDes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_ClearDes.Location = New System.Drawing.Point(4, 166)
+        Me.bt_ClearDes.Name = "bt_ClearDes"
+        Me.bt_ClearDes.Size = New System.Drawing.Size(85, 21)
+        Me.bt_ClearDes.TabIndex = 20
+        Me.bt_ClearDes.Text = "Clear Text"
+        Me.bt_ClearDes.UseVisualStyleBackColor = True
         '
-        'Label10
+        'lb_Descript
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 94)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(63, 13)
-        Me.Label10.TabIndex = 21
-        Me.Label10.Text = "Description:"
+        Me.lb_Descript.AutoSize = True
+        Me.lb_Descript.Location = New System.Drawing.Point(4, 94)
+        Me.lb_Descript.Name = "lb_Descript"
+        Me.lb_Descript.Size = New System.Drawing.Size(63, 13)
+        Me.lb_Descript.TabIndex = 21
+        Me.lb_Descript.Text = "Description:"
         '
-        'RichTextBox3
+        'rtb_ROMDes
         '
-        Me.RichTextBox3.Location = New System.Drawing.Point(4, 107)
-        Me.RichTextBox3.MaxLength = 96
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.RichTextBox3.Size = New System.Drawing.Size(172, 59)
-        Me.RichTextBox3.TabIndex = 20
-        Me.RichTextBox3.Text = "Pokémon" & Global.Microsoft.VisualBasic.ChrW(10) & "Generation 5" & Global.Microsoft.VisualBasic.ChrW(10) & "Custom Made Distribution" & Global.Microsoft.VisualBasic.ChrW(10) & "PKMG5DC"
-        Me.RichTextBox3.WordWrap = False
+        Me.rtb_ROMDes.Location = New System.Drawing.Point(4, 107)
+        Me.rtb_ROMDes.MaxLength = 96
+        Me.rtb_ROMDes.Name = "rtb_ROMDes"
+        Me.rtb_ROMDes.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
+        Me.rtb_ROMDes.Size = New System.Drawing.Size(172, 59)
+        Me.rtb_ROMDes.TabIndex = 20
+        Me.rtb_ROMDes.Text = "Pokémon" & Global.Microsoft.VisualBasic.ChrW(10) & "Generation 5" & Global.Microsoft.VisualBasic.ChrW(10) & "Custom Made Distribution" & Global.Microsoft.VisualBasic.ChrW(10) & "PKMG5DC"
+        Me.rtb_ROMDes.WordWrap = False
         '
-        'Label9
+        'lb_Code
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(117, 55)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(35, 13)
-        Me.Label9.TabIndex = 18
-        Me.Label9.Text = "Code:"
+        Me.lb_Code.AutoSize = True
+        Me.lb_Code.Location = New System.Drawing.Point(117, 55)
+        Me.lb_Code.Name = "lb_Code"
+        Me.lb_Code.Size = New System.Drawing.Size(35, 13)
+        Me.lb_Code.TabIndex = 18
+        Me.lb_Code.Text = "Code:"
         '
-        'TextBox3
+        'tb_Code
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox3.Location = New System.Drawing.Point(118, 68)
-        Me.TextBox3.MaxLength = 4
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(44, 20)
-        Me.TextBox3.TabIndex = 17
-        Me.TextBox3.Text = "G5DC"
+        Me.tb_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.tb_Code.Location = New System.Drawing.Point(118, 68)
+        Me.tb_Code.MaxLength = 4
+        Me.tb_Code.Name = "tb_Code"
+        Me.tb_Code.Size = New System.Drawing.Size(44, 20)
+        Me.tb_Code.TabIndex = 17
+        Me.tb_Code.Text = "G5DC"
         '
-        'Label8
+        'lb_Header
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 55)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(45, 13)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Header:"
+        Me.lb_Header.AutoSize = True
+        Me.lb_Header.Location = New System.Drawing.Point(6, 55)
+        Me.lb_Header.Name = "lb_Header"
+        Me.lb_Header.Size = New System.Drawing.Size(45, 13)
+        Me.lb_Header.TabIndex = 16
+        Me.lb_Header.Text = "Header:"
         '
-        'TextBox2
+        'tb_Header
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.TextBox2.Location = New System.Drawing.Point(7, 68)
-        Me.TextBox2.MaxLength = 12
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(103, 20)
-        Me.TextBox2.TabIndex = 15
-        Me.TextBox2.Text = "PKMCUSTOMROM"
+        Me.tb_Header.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.tb_Header.Location = New System.Drawing.Point(7, 68)
+        Me.tb_Header.MaxLength = 12
+        Me.tb_Header.Name = "tb_Header"
+        Me.tb_Header.Size = New System.Drawing.Size(103, 20)
+        Me.tb_Header.TabIndex = 15
+        Me.tb_Header.Text = "PKMCUSTOMROM"
         '
-        'Label6
+        'lb_FileName
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 16)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 13)
-        Me.Label6.TabIndex = 13
-        Me.Label6.Text = "File Name:"
+        Me.lb_FileName.AutoSize = True
+        Me.lb_FileName.Location = New System.Drawing.Point(6, 16)
+        Me.lb_FileName.Name = "lb_FileName"
+        Me.lb_FileName.Size = New System.Drawing.Size(57, 13)
+        Me.lb_FileName.TabIndex = 13
+        Me.lb_FileName.Text = "File Name:"
         '
-        'TextBox1
+        'tb_FileName
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(7, 29)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(142, 21)
-        Me.TextBox1.TabIndex = 12
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tb_FileName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tb_FileName.Location = New System.Drawing.Point(7, 29)
+        Me.tb_FileName.Name = "tb_FileName"
+        Me.tb_FileName.Size = New System.Drawing.Size(142, 21)
+        Me.tb_FileName.TabIndex = 12
+        Me.tb_FileName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
@@ -540,24 +542,24 @@ Partial Class Form1
         Me.Label7.TabIndex = 14
         Me.Label7.Text = ".nds"
         '
-        'LinkLabel2
+        'lklb_Author
         '
-        Me.LinkLabel2.AutoSize = True
-        Me.LinkLabel2.Location = New System.Drawing.Point(392, 436)
-        Me.LinkLabel2.Name = "LinkLabel2"
-        Me.LinkLabel2.Size = New System.Drawing.Size(47, 13)
-        Me.LinkLabel2.TabIndex = 20
-        Me.LinkLabel2.TabStop = True
-        Me.LinkLabel2.Text = "Regnum"
+        Me.lklb_Author.AutoSize = True
+        Me.lklb_Author.Location = New System.Drawing.Point(392, 436)
+        Me.lklb_Author.Name = "lklb_Author"
+        Me.lklb_Author.Size = New System.Drawing.Size(47, 13)
+        Me.lklb_Author.TabIndex = 20
+        Me.lklb_Author.TabStop = True
+        Me.lklb_Author.Text = "Regnum"
         '
-        'Label12
+        'lb_By
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(378, 436)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(18, 13)
-        Me.Label12.TabIndex = 21
-        Me.Label12.Text = "by"
+        Me.lb_By.AutoSize = True
+        Me.lb_By.Location = New System.Drawing.Point(378, 436)
+        Me.lb_By.Name = "lb_By"
+        Me.lb_By.Size = New System.Drawing.Size(18, 13)
+        Me.lb_By.TabIndex = 21
+        Me.lb_By.Text = "by"
         '
         'Label13
         '
@@ -603,90 +605,90 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(822, 451)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.LinkLabel2)
+        Me.Controls.Add(Me.lklb_Author)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.LinkLabel1)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.RichTextBox2)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.lb_By)
+        Me.Controls.Add(Me.gb_ROM)
+        Me.Controls.Add(Me.lklb_Update)
+        Me.Controls.Add(Me.bt_Custom)
+        Me.Controls.Add(Me.bt_ClearEM)
+        Me.Controls.Add(Me.lb_EventMsg)
+        Me.Controls.Add(Me.bt_Build)
+        Me.Controls.Add(Me.gb_Region)
+        Me.Controls.Add(Me.gb_DateLimit)
+        Me.Controls.Add(Me.rtb_EventMsg)
+        Me.Controls.Add(Me.gb_GameComp)
+        Me.Controls.Add(Me.lb_PGF)
+        Me.Controls.Add(Me.bt_PGF)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.RichTextBox1)
+        Me.Controls.Add(Me.rtb_Editor)
         Me.Controls.Add(Me.Button7)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Gen 5 Distribution Creator"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
+        Me.Text = "PKMG5DC"
+        Me.gb_GameComp.ResumeLayout(False)
+        Me.gb_GameComp.PerformLayout()
+        Me.gb_DateLimit.ResumeLayout(False)
+        Me.gb_DateLimit.PerformLayout()
+        Me.gb_Region.ResumeLayout(False)
+        Me.gb_Region.PerformLayout()
+        Me.gb_ROM.ResumeLayout(False)
+        Me.gb_ROM.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents rtb_Editor As RichTextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents bt_PGF As Button
+    Friend WithEvents lb_PGF As Label
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents RichTextBox2 As RichTextBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents CheckBox5 As CheckBox
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents RadioButton7 As RadioButton
-    Friend WithEvents RadioButton6 As RadioButton
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Button4 As Button
+    Friend WithEvents gb_GameComp As GroupBox
+    Friend WithEvents cb_White2 As CheckBox
+    Friend WithEvents cb_Black2 As CheckBox
+    Friend WithEvents cb_White As CheckBox
+    Friend WithEvents cb_Black As CheckBox
+    Friend WithEvents rtb_EventMsg As RichTextBox
+    Friend WithEvents gb_DateLimit As GroupBox
+    Friend WithEvents lb_End As Label
+    Friend WithEvents lb_Start As Label
+    Friend WithEvents EndDatePicker As DateTimePicker
+    Friend WithEvents StartDatePicker As DateTimePicker
+    Friend WithEvents cb_MaxLimit As CheckBox
+    Friend WithEvents gb_Region As GroupBox
+    Friend WithEvents rb_Kor As RadioButton
+    Friend WithEvents rb_Jap As RadioButton
+    Friend WithEvents rb_Spa As RadioButton
+    Friend WithEvents rb_Ger As RadioButton
+    Friend WithEvents rb_Ita As RadioButton
+    Friend WithEvents rb_Fr As RadioButton
+    Friend WithEvents rb_Eng As RadioButton
+    Friend WithEvents bt_Build As Button
+    Friend WithEvents lb_EventMsg As Label
+    Friend WithEvents bt_ClearEM As Button
     Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
-    Friend WithEvents LinkLabel1 As LinkLabel
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents bt_Custom As Button
+    Friend WithEvents lklb_Update As LinkLabel
+    Friend WithEvents gb_ROM As GroupBox
+    Friend WithEvents lb_FileName As Label
+    Friend WithEvents tb_FileName As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label10 As Label
-    Friend WithEvents RichTextBox3 As RichTextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents LinkLabel2 As LinkLabel
-    Friend WithEvents Label12 As Label
+    Friend WithEvents lb_Descript As Label
+    Friend WithEvents rtb_ROMDes As RichTextBox
+    Friend WithEvents lb_Code As Label
+    Friend WithEvents tb_Code As TextBox
+    Friend WithEvents lb_Header As Label
+    Friend WithEvents tb_Header As TextBox
+    Friend WithEvents bt_ClearDes As Button
+    Friend WithEvents lklb_Author As LinkLabel
+    Friend WithEvents lb_By As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Button7 As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Button8 As Button
+    Friend WithEvents bt_DefaultDes As Button
     Friend WithEvents PictureBox1 As PictureBox
 End Class

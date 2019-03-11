@@ -413,11 +413,11 @@
         End If
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Form1.RichTextBox1.Text = Form1.RichTextBox1.Text.Remove(8, 408)
-        Form1.RichTextBox1.Text = Form1.RichTextBox1.Text.Insert(8, RichTextBox1.Text)
-        Form1.RichTextBox1.Text = Form1.RichTextBox1.Text.Remove(352, 8)
-        Form1.RichTextBox1.Text = Form1.RichTextBox1.Text.Insert(352, "00000000")
-        Form1.Label2.Text = NumericUpDown1.Value & " - " & TextBox1.Text & " (Custom)"
+        Form1.rtb_Editor.Text = Form1.rtb_Editor.Text.Remove(8, 408)
+        Form1.rtb_Editor.Text = Form1.rtb_Editor.Text.Insert(8, RichTextBox1.Text)
+        Form1.rtb_Editor.Text = Form1.rtb_Editor.Text.Remove(352, 8)
+        Form1.rtb_Editor.Text = Form1.rtb_Editor.Text.Insert(352, "00000000")
+        Form1.lb_PGF.Text = NumericUpDown1.Value & " - " & TextBox1.Text & " (Custom)"
         Close()
     End Sub
 End Class

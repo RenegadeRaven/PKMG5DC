@@ -36,13 +36,22 @@
   "About...": "About...",
   "Options...": "Options...",
 
-  "Error 404": "Error 404",
+  "No .pgf file.": "No .pgf file.",
+  "No compatible game.": "No compatible game.",
+  "ROM Header is too short.": "ROM Header is too short.",
+  "ROM Code is too short.": "ROM Code is too short.",
+  "ROM description is missing.": "ROM description is missing.",
+  "Built as ": "Built as ",
+  "compiled": "compiled",
+
+  "Error": "Error",
   "No Internet connection!": "No Internet connection!",
   "You can not update at the moment.": "You can not update at the moment.",
   "I appreciate the gesture.": "I appreciate the gesture.",
   "You can look me up later.": "You can look me up later.",
+  "by": "by",
 
-  "Pokémon\nGeneration 5\nCustom Made Distribution\nPKMG5DC": "Pokémon\nGeneration 5\nCustom Made Distribution\nPKMG5DC",
-  "Input Event Message Here.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)": "Input Event Message Here.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)",
+  "Default ROM Description": "Pokémon\nGeneration 5\nCustom Made Distribution\nPKMG5DC",
+  "Default Event Message": "Input Event Message Here.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)",
   "Input Description Here.\nThis textbox is also sized perfectly.\n4 lines, 24 chars/line, 96 chars.\nBe sure to put the new lines again.": "Input Description Here.\nThis textbox is also sized perfectly.\n4 lines, 24 chars/line, 96 chars.\nBe sure to put the new lines again."
 }

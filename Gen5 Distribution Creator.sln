@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Gen5 Distribution Creator", "Gen5 Distribution Creator\Gen5 Distribution Creator.vbproj", "{82FE1063-3E51-4717-BA32-AEB77F873E0A}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PKMG5DC", "Gen5 Distribution Creator\PKMG5DC.vbproj", "{82FE1063-3E51-4717-BA32-AEB77F873E0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

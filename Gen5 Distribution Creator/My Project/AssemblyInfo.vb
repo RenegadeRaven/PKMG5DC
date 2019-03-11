@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Gen 5 Pokémon Distribution ROM Creator")>
+<Assembly: AssemblyTitle("PKMG5DC")>
 <Assembly: AssemblyDescription("Creates Pokémon Distribution ROMs for Gen 5")>
 <Assembly: AssemblyCompany("Regnum")>
 <Assembly: AssemblyProduct("Gen 5 Pokémon Distribution ROM Creator")>

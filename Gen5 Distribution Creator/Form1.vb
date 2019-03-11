@@ -11,6 +11,7 @@ Public Class Form1
     'Dim res As String = My.Resources.ResourceManager.BaseName
     Dim res As String = System.IO.Path.GetFullPath(Application.StartupPath & "\..\..\Resources\")
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp"
+    Dim LocalPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\PKMG5DC"
     Dim Games(4) As Integer
     Dim dt As Boolean = False
     Dim temp_startDate As Date
@@ -21,6 +22,7 @@ Public Class Form1
     Dim code As String
 
     Dim LangData As JObject
+    Dim CustomPaint As Boolean = False
     Dim rtd As String = "Input Event Text Here.
 
 This textbox is sized perfectly, so what fits in
@@ -103,7 +105,7 @@ Be sure to put the new lines again."
                 Dim ans = MsgB(msl, 2, Yes, No,, tl)
                 Select Case ans
                     Case 6
-                        ans = MsgB("Can you select it for me?", 2, "Yeah, it's right here", "Umm, I don't know where I put it",, tl)
+                        ans = MsgB(LangData("Can you select it for me?").ToString(), 2, LangData("Yeah, it's right here").ToString(), LangData("Umm, I don't know where I put it").ToString(),, tl)
                         Select Case ans
                             Case 6
                                 Dim FileSelect As New OpenFileDialog With {
@@ -158,36 +160,86 @@ Be sure to put the new lines again."
         End If
     End Sub
 
+    Private Sub ResetLangFormat()
+        bt_ClearDes.Font = New Font(bt_ClearDes.Font.Name, 8.25, FontStyle.Regular)
+        bt_DefaultDes.Font = New Font(bt_DefaultDes.Font.Name, 8.25, FontStyle.Regular)
+        CustomPaint = False
+        bt_Custom.Font = New Font(bt_Custom.Font.Name, 32, FontStyle.Regular, GraphicsUnit.Document)
+        lb_By.Location = New Point(378, 436)
+    End Sub
+
     'Set Language
     Private Sub Lang()
+        If File.Exists(TempPath & "/PKMG5DC-lang.json") Then
+            File.Delete(TempPath & "/PKMG5DC-lang.json")
+        End If
         Select Case My.Settings.Language
             Case "E"
-                RadioButton1.PerformClick()
+                rb_Eng.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
             Case "F"
-                RadioButton2.PerformClick()
+                rb_Fr.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.fr)
+                bt_ClearDes.Font = New Font(bt_ClearDes.Font.Name, 6.5, FontStyle.Regular)
+                bt_DefaultDes.Font = New Font(bt_DefaultDes.Font.Name, 6.5, FontStyle.Regular)
+                CustomPaint = True
+                bt_Custom.Font = New Font(bt_Custom.Font.Name, 26, FontStyle.Regular, GraphicsUnit.Document)
+                lb_By.Location = New Point(374, 436)
             Case "I"
-                RadioButton3.PerformClick()
+                rb_Ita.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
             Case "G"
-                RadioButton4.PerformClick()
+                rb_Ger.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
             Case "S"
-                RadioButton5.PerformClick()
+                rb_Spa.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
             Case "J"
-                RadioButton6.PerformClick()
+                rb_Jap.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
             Case "K"
-                RadioButton7.PerformClick()
+                rb_Kor.PerformClick()
                 File.WriteAllText(TempPath & "/PKMG5DC-lang.json", My.Resources.en)
+                ResetLangFormat()
         End Select
 
         Dim lang As String = File.ReadAllText(TempPath & "/PKMG5DC-lang.json")
         LangData = JObject.Parse(lang)
 
+        lklb_Update.Text = LangData("New Update Available! ").ToString()
+        lb_PGF.Text = LangData("Open .pgf").ToString() & " ------->"
+        bt_PGF.Text = LangData("Open .pgf").ToString()
+        bt_Custom.Text = LangData("Custom").ToString()
+        gb_GameComp.Text = LangData("Game Compatibility").ToString()
+        gb_DateLimit.Text = LangData("Date Limit").ToString()
+        cb_Black.Text = LangData("Black").ToString()
+        cb_White.Text = LangData("White").ToString()
+        cb_Black2.Text = LangData("Black").ToString() & " 2"
+        cb_White2.Text = LangData("White").ToString() & " 2"
+        lb_Start.Text = LangData("Start").ToString() & ":"
+        lb_End.Text = LangData("End").ToString() & ":"
+        cb_MaxLimit.Text = LangData("Auto Max Limit").ToString()
+        gb_Region.Text = LangData("Region").ToString()
+        gb_ROM.Text = LangData("ROM Details").ToString()
+        lb_FileName.Text = LangData("File Name").ToString() & ":"
+        lb_Header.Text = LangData("Header").ToString() & ":"
+        lb_Code.Text = LangData("Code").ToString() & ":"
+        lb_Descript.Text = LangData("Description").ToString() & ":"
+        bt_ClearDes.Text = LangData("Clear Text").ToString()
+        bt_ClearEM.Text = LangData("Clear Text").ToString()
+        bt_DefaultDes.Text = LangData("Default Text").ToString()
+        lb_EventMsg.Text = LangData("Event Message").ToString() & ":"
+        bt_Build.Text = LangData("Build Event ROM").ToString()
+        tb_FileName.Text = LangData("compiled").ToString()
+        lb_By.Text = LangData("by").ToString()
 
+        Me.Refresh()
+        File.Delete(TempPath & "/PKMG5DC-lang.json")
     End Sub
 
     'Checks for, well what do you know, Updates
@@ -200,13 +252,13 @@ Be sure to put the new lines again."
             System.IO.File.Delete(TempPath & "\PKMG5DC-dt.txt")
             Dim dat As String = System.IO.File.ReadAllText(TempPath & "\PKMG5DC-date.txt")
             If dat <> dtt Then
-                LinkLabel1.Text = LangData("New Update Available! ").ToString() & dtt
-                LinkLabel1.Show()
+                lklb_Update.Text = LangData("New Update Available! ").ToString() & dtt
+                lklb_Update.Show()
             Else
-                LinkLabel1.Hide()
+                lklb_Update.Hide()
             End If
         Else
-            LinkLabel1.Hide()
+            lklb_Update.Hide()
         End If
     End Sub
 
@@ -238,7 +290,7 @@ Be sure to put the new lines again."
                 System.IO.File.WriteAllText(res & "/PKMG5DC-date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
             End If
         End If
-        LinkLabel1.Hide()
+        lklb_Update.Hide()
         Button7.Text = "<<"
 #Else
         Size = New Size(452, 490)
@@ -247,7 +299,7 @@ Be sure to put the new lines again."
         Label1.Hide()
         System.IO.File.WriteAllText(TempPath & "\PKMG5DC-date.txt", My.Resources._date)
         Dim dat As String = System.IO.File.ReadAllText(TempPath & "\PKMG5DC-date.txt")
-        Me.Text = "Gen 5 Distribution Creator (" & dat & ")"
+        Me.Text = "PKMG5DC (" & dat & ")"
         Check_Updates()
         System.IO.File.Delete(TempPath & "\PKMG5DC-date.txt")
 #End If
@@ -256,10 +308,10 @@ Be sure to put the new lines again."
         dt = True
         Lang()
         SetRegion()
-        CheckBox1.Checked = True
-        CheckBox2.Checked = True
-        CheckBox3.Checked = True
-        CheckBox4.Checked = True
+        cb_Black.Checked = True
+        cb_White.Checked = True
+        cb_Black2.Checked = True
+        cb_White2.Checked = True
 
         Dim Pth As New System.Drawing.Drawing2D.GraphicsPath
         Pth.AddEllipse(New Rectangle(5, 3, 17, 17))
@@ -270,8 +322,8 @@ Be sure to put the new lines again."
 
         'LinkLabel1.Hide()
         hSysMenu = GetSystemMenu(Me.Handle, False)
-        InsertMenu(hSysMenu, 5.5, MF_BYPOSITION, MYMENU1, "About...")
-        InsertMenu(hSysMenu, 6, MF_BYPOSITION, MYMENU2, "Options...")
+        InsertMenu(hSysMenu, 5.5, MF_BYPOSITION, MYMENU1, LangData("About...").ToString())
+        InsertMenu(hSysMenu, 6, MF_BYPOSITION, MYMENU2, LangData("Options...").ToString())
     End Sub
 
     'Snaps to to preset sizes when being resize
@@ -293,34 +345,34 @@ Be sure to put the new lines again."
         For n = 0 To 17503 Step 1
             Str = Str & "0"
         Next n
-        RichTextBox1.Text = Str
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1, 1)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1, "1")
-        RichTextBox1.Text = RichTextBox1.Text.Remove((RichTextBox1.Text.Length - 16), 2)
-        RichTextBox1.Text = RichTextBox1.Text.Insert((RichTextBox1.Text.Length - 16), "14")
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 2)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1438, "02")
-        DateTimePicker1.Value = System.DateTime.Today
-        DateTimePicker2.Value = System.DateTime.Today
+        rtb_Editor.Text = Str
+        rtb_Editor.Text = rtb_Editor.Text.Remove(1, 1)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(1, "1")
+        rtb_Editor.Text = rtb_Editor.Text.Remove((rtb_Editor.Text.Length - 16), 2)
+        rtb_Editor.Text = rtb_Editor.Text.Insert((rtb_Editor.Text.Length - 16), "14")
+        rtb_Editor.Text = rtb_Editor.Text.Remove(1438, 2)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(1438, "02")
+        StartDatePicker.Value = System.DateTime.Today
+        EndDatePicker.Value = System.DateTime.Today
         DateLimit()
         Dim tempStr As String = ""
         For i = 0 To 1011 Step 1
             tempStr = tempStr & "F"
         Next i
-        RichTextBox1.Text = RichTextBox1.Text.Remove(424, 1012)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(424, tempStr)
+        rtb_Editor.Text = rtb_Editor.Text.Remove(424, 1012)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(424, tempStr)
     End Sub
 
     'Sets the, if it wasn't clear enough, Date Limit
     Private Sub DateLimit()
-        Dim startDay As String = Hex_Zeros(Hex(DateTimePicker1.Value.Date.Day), 2)
-        Dim startMonth As String = Hex_Zeros(Hex(DateTimePicker1.Value.Date.Month), 2)
-        Dim startYear As String = Little_Endian(Hex(DateTimePicker1.Value.Date.Year), 4)
-        Dim endDay As String = Hex_Zeros(Hex(DateTimePicker2.Value.Date.Day), 2)
-        Dim endMonth As String = Hex_Zeros(Hex(DateTimePicker2.Value.Date.Month), 2)
-        Dim endYear As String = Little_Endian(Hex(DateTimePicker2.Value.Date.Year), 4)
-        RichTextBox1.Text = RichTextBox1.Text.Remove(17288, 16)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(17288, (startYear & startMonth & startDay & endYear & endMonth & endDay))
+        Dim startDay As String = Hex_Zeros(Hex(StartDatePicker.Value.Date.Day), 2)
+        Dim startMonth As String = Hex_Zeros(Hex(StartDatePicker.Value.Date.Month), 2)
+        Dim startYear As String = Little_Endian(Hex(StartDatePicker.Value.Date.Year), 4)
+        Dim endDay As String = Hex_Zeros(Hex(EndDatePicker.Value.Date.Day), 2)
+        Dim endMonth As String = Hex_Zeros(Hex(EndDatePicker.Value.Date.Month), 2)
+        Dim endYear As String = Little_Endian(Hex(EndDatePicker.Value.Date.Year), 4)
+        rtb_Editor.Text = rtb_Editor.Text.Remove(17288, 16)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(17288, (startYear & startMonth & startDay & endYear & endMonth & endDay))
     End Sub
 #End Region
 #Region "Functions"
@@ -372,33 +424,33 @@ Be sure to put the new lines again."
     Private Sub Game_Compatibility()
         Games(4) = (Games(0) Xor Games(1) Xor Games(2) Xor Games(3))
         Dim hexStr As String = Hex_Zeros(Hex(Games(4)), 2)
-        RichTextBox1.Text = RichTextBox1.Text.Remove(420, 2)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(420, hexStr)
+        rtb_Editor.Text = rtb_Editor.Text.Remove(420, 2)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(420, hexStr)
     End Sub
 
     'Sets Region
     Private Sub SetRegion()
-        RichTextBox1.Text = RichTextBox1.Text.Remove(1438, 10)
-        RichTextBox1.Text = RichTextBox1.Text.Insert(1438, hexRegion)
+        rtb_Editor.Text = rtb_Editor.Text.Remove(1438, 10)
+        rtb_Editor.Text = rtb_Editor.Text.Insert(1438, hexRegion)
     End Sub
 
     'Check length of the editor(RichTextBox) and makes sure it's the correct length
-    Private Sub Edit_check(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
-        Label1.Text = RichTextBox1.Text.Length & " / 17504"
-        If RichTextBox1.Text.Length > 17504 Then
+    Private Sub Edit_check(sender As Object, e As EventArgs) Handles rtb_Editor.TextChanged
+        Label1.Text = rtb_Editor.Text.Length & " / 17504"
+        If rtb_Editor.Text.Length > 17504 Then
             Label1.ForeColor = Color.Red
             Label1.Font = New Font(Label1.Font, FontStyle.Bold)
-        ElseIf RichTextBox1.Text.Length < 17504 Then
+        ElseIf rtb_Editor.Text.Length < 17504 Then
             Label1.ForeColor = Color.Indigo
             Label1.Font = New Font(Label1.Font, FontStyle.Bold)
-        ElseIf RichTextBox1.Text.Length = 17504 Then
+        ElseIf rtb_Editor.Text.Length = 17504 Then
             Label1.ForeColor = Color.Green
             Label1.Font = New Font(Label1.Font, FontStyle.Regular)
         End If
     End Sub
 
     'Restricts Header input to valid characters
-    Private Sub TextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+    Private Sub TextBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles tb_Header.KeyPress
         '97 - 122 = Ascii codes for simple letters
         '65 - 90  = Ascii codes for capital letters
         '48 - 57  = Ascii codes for numbers
@@ -412,20 +464,27 @@ Be sure to put the new lines again."
             End If
         End If
     End Sub
+
+    Private Sub Button6_Paint(sender As Object, e As PaintEventArgs) Handles bt_Custom.Paint
+        If CustomPaint = True Then
+            TextRenderer.DrawText(e.Graphics, LangData("Custom").ToString(), bt_Custom.Font, New Point(4, 5), bt_Custom.ForeColor)
+            bt_Custom.Text = Nothing
+        End If
+    End Sub
 #End Region
 #Region "Builder"
     'Build Button
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If Label2.Text = "Open .pgf ------->" Then
-            MsgB("No .pgf file.", 1, "OK",,, "Error")
-        ElseIf CheckBox1.Checked = False And CheckBox2.Checked = False And CheckBox3.Checked = False And CheckBox4.Checked = False Then
-            MsgB("No compatible game.", 1, "OK",,, "Error")
-        ElseIf TextBox2.Text.Length < 12 Then
-            MsgB("ROM Header is too short.", 1, "OK",,, "Error")
-        ElseIf TextBox3.Text.Length < 4 Then
-            MsgB("ROM Code is too short.", 1, "OK",,, "Error")
-        ElseIf RichTextBox3.Text = rdd Then
-            MsgB("ROM description is missing.", 1, "OK",,, "Error")
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
+        If lb_PGF.Text = (LangData("Open .pgf").ToString() & " ------->") Then
+            MsgB(LangData("No .pgf file.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString())
+        ElseIf cb_Black.Checked = False And cb_White.Checked = False And cb_Black2.Checked = False And cb_White2.Checked = False Then
+            MsgB(LangData("No compatible game.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString())
+        ElseIf tb_Header.Text.Length < 12 Then
+            MsgB(LangData("ROM Header is too short.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString())
+        ElseIf tb_Code.Text.Length < 4 Then
+            MsgB(LangData("ROM Code is too short.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString())
+        ElseIf rtb_ROMDes.Text = LangData("Default ROM Description").ToString() Then
+            MsgB(LangData("ROM description is missing.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString())
         Else
             Build()
         End If
@@ -517,9 +576,9 @@ Be sure to put the new lines again."
         System.IO.File.Delete(appPath & "\readme.txt")
         System.IO.Directory.Delete(appPath & "\tools\", True)
         System.IO.Directory.Delete(appPath & "\cards\", True)
-        System.IO.File.Move(appPath & "\compiled.nds", appPath & "\" & TextBox1.Text & ".nds")
-        MsgBox("Built as " & TextBox1.Text & ".nds", 0)
-        Shell("explorer /select, " & appPath & "\" & TextBox1.Text & ".nds", AppWinStyle.NormalFocus)
+        System.IO.File.Move(appPath & "\compiled.nds", appPath & "\" & tb_FileName.Text & ".nds")
+        MsgBox(LangData("Built as ").ToString() & tb_FileName.Text & ".nds", 0)
+        Shell("explorer /select, " & appPath & "\" & tb_FileName.Text & ".nds", AppWinStyle.NormalFocus)
 
         'dt = False
         'Label2.Text = "Open .pgf ------->"
@@ -535,7 +594,7 @@ Be sure to put the new lines again."
     'Timer to make sure build is working
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         MsgBox("It seems your computer is a little slow. You'll have to increase the delay.", MsgBoxStyle.OkOnly, "Increase Delay")
-        Dim options As New options
+        Dim options As New Options
         options.ShowDialog()
     End Sub
 #End Region
@@ -584,38 +643,38 @@ Be sure to put the new lines again."
         For Each myByte As Byte In myBytes
             txtTemp.Append(myByte.ToString("X2"))
         Next
-        RichTextBox1.Text = txtTemp.ToString()
+        rtb_Editor.Text = txtTemp.ToString()
     End Sub
     Private Sub Save(myFile)
-        Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
+        Dim myBytes As Byte() = HexStringToByteArray(rtb_Editor.Text)
         My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
     End Sub
 #End Region 'Open, put into the editor, and save work
 #Region "Settings"
     'Adds PGF event
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bt_PGF.Click
         Dim FileSelect As New OpenFileDialog With {
         .Filter = "Gen 5 Event Files (*.pgf)|*.pgf|All files (*.*)|*.*"}
         Dim res As DialogResult = FileSelect.ShowDialog()
         If res = Windows.Forms.DialogResult.Cancel Then
         Else
             Dim myFile As String = FileSelect.FileName
-            Label2.Text = myFile.Substring(myFile.LastIndexOf("\") + 1)
-            RichTextBox1.Text = RichTextBox1.Text.Remove(8, 408)
+            lb_PGF.Text = myFile.Substring(myFile.LastIndexOf("\") + 1)
+            rtb_Editor.Text = rtb_Editor.Text.Remove(8, 408)
             Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
             Dim txtTemp As New System.Text.StringBuilder()
             For Each myByte As Byte In myBytes
                 txtTemp.Append(myByte.ToString("X2"))
             Next
-            RichTextBox1.Text = RichTextBox1.Text.Insert(8, txtTemp.ToString())
-            RichTextBox1.Text = RichTextBox1.Text.Remove(352, 8)
-            RichTextBox1.Text = RichTextBox1.Text.Insert(352, "00000000")
+            rtb_Editor.Text = rtb_Editor.Text.Insert(8, txtTemp.ToString())
+            rtb_Editor.Text = rtb_Editor.Text.Remove(352, 8)
+            rtb_Editor.Text = rtb_Editor.Text.Insert(352, "00000000")
         End If
     End Sub
 
     'Adds Black Compatibility
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black.CheckedChanged
+        If cb_Black.Checked = True Then
             Games(0) = 32
         Else
             Games(0) = 0
@@ -624,8 +683,8 @@ Be sure to put the new lines again."
     End Sub
 
     'Adds White Compatibility
-    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
-        If CheckBox2.Checked = True Then
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White.CheckedChanged
+        If cb_White.Checked = True Then
             Games(1) = 16
         Else
             Games(1) = 0
@@ -634,8 +693,8 @@ Be sure to put the new lines again."
     End Sub
 
     'Adds Black 2 Compatibility
-    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
-        If CheckBox3.Checked = True Then
+    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black2.CheckedChanged
+        If cb_Black2.Checked = True Then
             Games(2) = 128
         Else
             Games(2) = 0
@@ -644,8 +703,8 @@ Be sure to put the new lines again."
     End Sub
 
     'Adds White 2 Compatibility
-    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
-        If CheckBox4.Checked = True Then
+    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White2.CheckedChanged
+        If cb_White2.Checked = True Then
             Games(3) = 64
         Else
             Games(3) = 0
@@ -654,112 +713,119 @@ Be sure to put the new lines again."
     End Sub
 
     'Maxes Date Limit
-    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox5.CheckedChanged
-        If CheckBox5.Checked = True Then
-            Label3.Enabled = False
-            Label4.Enabled = False
-            temp_startDate = DateTimePicker1.Value
-            temp_endDate = DateTimePicker2.Value
-            DateTimePicker1.Value = New DateTime(1753, 1, 1)
-            DateTimePicker2.Value = New DateTime(9998, 12, 31)
-            DateTimePicker1.Enabled = False
-            DateTimePicker2.Enabled = False
-        ElseIf CheckBox5.Checked = False Then
-            Label3.Enabled = True
-            Label4.Enabled = True
-            DateTimePicker1.Value = temp_startDate
-            DateTimePicker2.Value = temp_endDate
-            DateTimePicker1.Enabled = True
-            DateTimePicker2.Enabled = True
+    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles cb_MaxLimit.CheckedChanged
+        If cb_MaxLimit.Checked = True Then
+            lb_Start.Enabled = False
+            lb_End.Enabled = False
+            temp_startDate = StartDatePicker.Value
+            temp_endDate = EndDatePicker.Value
+            StartDatePicker.Value = New DateTime(1753, 1, 1)
+            EndDatePicker.Value = New DateTime(9998, 12, 31)
+            StartDatePicker.Enabled = False
+            EndDatePicker.Enabled = False
+        ElseIf cb_MaxLimit.Checked = False Then
+            lb_Start.Enabled = True
+            lb_End.Enabled = True
+            StartDatePicker.Value = temp_startDate
+            EndDatePicker.Value = temp_endDate
+            StartDatePicker.Enabled = True
+            EndDatePicker.Enabled = True
         End If
     End Sub
 
     'Updates Start Date when changed
-    Private Sub StartDate_Changed(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+    Private Sub StartDate_Changed(sender As Object, e As EventArgs) Handles StartDatePicker.ValueChanged
         If dt = True Then
             DateLimit()
         End If
     End Sub
 
     'Updates End Date when changed
-    Private Sub EndDate_Changed(sender As Object, e As EventArgs) Handles DateTimePicker2.ValueChanged
+    Private Sub EndDate_Changed(sender As Object, e As EventArgs) Handles EndDatePicker.ValueChanged
         If dt = True Then
             DateLimit()
         End If
     End Sub
 
     'Sets Region to English
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
-        If RadioButton1.Checked = True Then
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Eng.CheckedChanged
+        If rb_Eng.Checked = True Then
             hexRegion = "020000BC83"
             SetRegion()
             My.Settings.Language = "E"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to French
-    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
-        If RadioButton2.Checked = True Then
+    Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Fr.CheckedChanged
+        If rb_Fr.Checked = True Then
             hexRegion = "030000369D"
             SetRegion()
             My.Settings.Language = "F"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to Italian
-    Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton3.CheckedChanged
-        If RadioButton3.Checked = True Then
+    Private Sub RadioButton3_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Ita.CheckedChanged
+        If rb_Ita.Checked = True Then
             hexRegion = "040000AA39"
             SetRegion()
             My.Settings.Language = "I"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to German
-    Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton4.CheckedChanged
-        If RadioButton4.Checked = True Then
+    Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Ger.CheckedChanged
+        If rb_Ger.Checked = True Then
             hexRegion = "0500001844"
             SetRegion()
             My.Settings.Language = "G"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to Spanish
-    Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton5.CheckedChanged
-        If RadioButton5.Checked = True Then
+    Private Sub RadioButton5_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Spa.CheckedChanged
+        If rb_Spa.Checked = True Then
             hexRegion = "06000061E0"
             SetRegion()
             My.Settings.Language = "S"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to Japanese
-    Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton6.CheckedChanged
-        If RadioButton6.Checked = True Then
+    Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Jap.CheckedChanged
+        If rb_Jap.Checked = True Then
             hexRegion = "0200007AF5"
             SetRegion()
             My.Settings.Language = "J"
+            Lang()
         Else
             hexRegion = Nothing
         End If
     End Sub
 
     'Sets Region to Korean
-    Private Sub RadioButton7_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton7.CheckedChanged
-        If RadioButton7.Checked = True Then
+    Private Sub RadioButton7_CheckedChanged(sender As Object, e As EventArgs) Handles rb_Kor.CheckedChanged
+        If rb_Kor.Checked = True Then
             hexRegion = "0200007AF5"
             SetRegion()
             My.Settings.Language = "K"
+            Lang()
         Else
             hexRegion = Nothing
         End If
@@ -767,8 +833,8 @@ Be sure to put the new lines again."
 
     'Sets Event Message
     Private Sub EventText()
-        If RichTextBox2.Text <> "" Then
-            Dim StrToChars As Char() = RichTextBox2.Text.ToCharArray
+        If rtb_EventMsg.Text <> "" Then
+            Dim StrToChars As Char() = rtb_EventMsg.Text.ToCharArray
             Dim tempText As String = Nothing
             For n = 0 To UBound(StrToChars) Step 1
                 Dim tempStr As String = Hex_Zeros(Hex(Asc(StrToChars(n))), 2)
@@ -782,15 +848,15 @@ Be sure to put the new lines again."
             For n = 0 To req - 1 Step 1
                 tempText = tempText & "F"
             Next n
-            RichTextBox1.Text = RichTextBox1.Text.Remove(424, 1012)
-            RichTextBox1.Text = RichTextBox1.Text.Insert(424, tempText)
+            rtb_Editor.Text = rtb_Editor.Text.Remove(424, 1012)
+            rtb_Editor.Text = rtb_Editor.Text.Insert(424, tempText)
         Else
             Dim tempText As String = ""
             For i = 0 To 1011 Step 1
                 tempText = tempText & "F"
             Next i
-            RichTextBox1.Text = RichTextBox1.Text.Remove(424, 1012)
-            RichTextBox1.Text = RichTextBox1.Text.Insert(424, tempText)
+            rtb_Editor.Text = rtb_Editor.Text.Remove(424, 1012)
+            rtb_Editor.Text = rtb_Editor.Text.Insert(424, tempText)
         End If
     End Sub
 
@@ -816,16 +882,20 @@ Be sure to put the new lines again."
     'Sets Default texts
     Public Sub News()
         InitializeComponent()
-        RichTextBox2.Text = rtd
-        RichTextBox2.ForeColor = Color.Gray
-        RichTextBox3.Text = rdd
-        RichTextBox3.ForeColor = Color.Gray
-        TextBox1.Text = "compiled"
-        TextBox1.ForeColor = Color.Gray
-        TextBox2.Text = "PKMCUSTOMROM"
-        TextBox2.ForeColor = Color.Gray
-        TextBox3.Text = "G5DC"
-        TextBox3.ForeColor = Color.Gray
+        rtb_EventMsg.Text = rtd
+        rtb_EventMsg.ForeColor = Color.Gray
+        rtb_ROMDes.Text = rdd
+        rtb_ROMDes.ForeColor = Color.Gray
+        If dt = True Then
+            tb_FileName.Text = LangData("compiled").ToString()
+        Else
+            tb_FileName.Text = "compiled"
+        End If
+        tb_FileName.ForeColor = Color.Gray
+        tb_Header.Text = "PKMCUSTOMROM"
+        tb_Header.ForeColor = Color.Gray
+        tb_Code.Text = "G5DC"
+        tb_Code.ForeColor = Color.Gray
         'RichTextBox2.Enter += New EventHandler(AddressOf richTextBox2_GotFocus)
         'RichTextBox2.LostFocus += New EventHandler(AddressOf richTextBox2_LostFocus)
     End Sub
@@ -835,45 +905,45 @@ Be sure to put the new lines again."
         News()
     End Sub
 
-    Private Sub RichTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Leave
-        If RichTextBox2.Text = Nothing Then
-            RichTextBox2.Text = rtd
-            RichTextBox2.ForeColor = Color.Gray
+    Private Sub RichTextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_EventMsg.Leave
+        If rtb_EventMsg.Text = Nothing Then
+            rtb_EventMsg.Text = LangData("Default Event Message").ToString()
+            rtb_EventMsg.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub RichTextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.Enter
-        If RichTextBox2.Text = rtd Then
-            RichTextBox2.Text = Nothing
-            RichTextBox2.ForeColor = Color.Black
+    Private Sub RichTextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_EventMsg.Enter
+        If rtb_EventMsg.Text = LangData("Default Event Message").ToString() Then
+            rtb_EventMsg.Text = Nothing
+            rtb_EventMsg.ForeColor = Color.Black
         End If
     End Sub
-    Private Sub RichTextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.Leave
-        If RichTextBox3.Text = Nothing Then
-            RichTextBox3.Text = rdd
-            RichTextBox3.ForeColor = Color.Gray
+    Private Sub RichTextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_ROMDes.Leave
+        If rtb_ROMDes.Text = Nothing Then
+            rtb_ROMDes.Text = LangData("Default ROM Description").ToString()
+            rtb_ROMDes.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub RichTextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.Enter
-        If RichTextBox3.Text = rdd Then
-            RichTextBox3.Text = Nothing
-            RichTextBox3.ForeColor = Color.Black
+    Private Sub RichTextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_ROMDes.Enter
+        If rtb_ROMDes.Text = LangData("Default ROM Description").ToString() Then
+            rtb_ROMDes.Text = Nothing
+            rtb_ROMDes.ForeColor = Color.Black
         End If
     End Sub
 
     'Checks if Event Message changed
-    Private Sub RichTextBox2_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox2.TextChanged
-        RichTextBox2.ForeColor = Color.Black
+    Private Sub RichTextBox2_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_EventMsg.TextChanged
+        rtb_EventMsg.ForeColor = Color.Black
         EventText()
     End Sub
 
     'Checks if ROM description changed
-    Private Sub RichTextBox3_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles RichTextBox3.TextChanged
-        RichTextBox3.ForeColor = Color.Black
+    Private Sub RichTextBox3_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles rtb_ROMDes.TextChanged
+        rtb_ROMDes.ForeColor = Color.Black
         Dim tempStr As String = Nothing
-        If RichTextBox3.Text = rdd Then
+        If rtb_ROMDes.Text = LangData("Default ROM Description").ToString() Then
             tempStr = ""
         Else
-            tempStr = RichTextBox3.Text
+            tempStr = rtb_ROMDes.Text
         End If
         description = TextToAssembly(tempStr)
         If description = "default" Then
@@ -882,109 +952,106 @@ Be sure to put the new lines again."
     End Sub
 
     'Checks if ROM header changed
-    Private Sub TextBox2_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.TextChanged
-        TextBox2.ForeColor = Color.Black
-        TextBox2.Text = TextBox2.Text.ToUpper
-        TextBox2.SelectionStart = TextBox2.TextLength
-        TextBox2.ScrollToCaret()
-        header = TextToAssembly(TextBox2.Text)
+    Private Sub TextBox2_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Header.TextChanged
+        tb_Header.ForeColor = Color.Black
+        tb_Header.Text = tb_Header.Text.ToUpper
+        tb_Header.SelectionStart = tb_Header.TextLength
+        tb_Header.ScrollToCaret()
+        header = TextToAssembly(tb_Header.Text)
         If header = "default" Then
             header = headd
         End If
     End Sub
 
     'Checks if ROM code changed
-    Private Sub TextBox3_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.TextChanged
-        TextBox3.ForeColor = Color.Black
-        TextBox3.Text = TextBox3.Text.ToUpper
-        TextBox3.SelectionStart = TextBox3.TextLength
-        TextBox3.ScrollToCaret()
-        code = TextToAssembly(TextBox3.Text)
+    Private Sub TextBox3_Changed(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Code.TextChanged
+        tb_Code.ForeColor = Color.Black
+        tb_Code.Text = tb_Code.Text.ToUpper
+        tb_Code.SelectionStart = tb_Code.TextLength
+        tb_Code.ScrollToCaret()
+        code = TextToAssembly(tb_Code.Text)
         If code = "default" Then
             code = coded
         End If
     End Sub
 
     'Clears Event Message
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        RichTextBox2.Text = Nothing
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles bt_ClearEM.Click
+        rtb_EventMsg.Text = Nothing
         EventText()
-        RichTextBox2.ForeColor = Color.Black
+        rtb_EventMsg.ForeColor = Color.Black
     End Sub
 
     'Clears ROM description
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        RichTextBox3.Text = Nothing
-        RichTextBox3.ForeColor = Color.Black
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles bt_ClearDes.Click
+        rtb_ROMDes.Text = Nothing
+        rtb_ROMDes.ForeColor = Color.Black
     End Sub
 
     'Set ROM description to default text
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        RichTextBox3.Text = "Pokémon
-Generation 5
-Custom Made Distribution
-PKMG5DC"
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles bt_DefaultDes.Click
+        rtb_ROMDes.Text = LangData("Default ROM Description").ToString()
     End Sub
 
-    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Leave
-        If TextBox1.Text = Nothing Then
-            TextBox1.Text = "compiled"
-            TextBox1.ForeColor = Color.Gray
+    Private Sub TextBox1_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_FileName.Leave
+        If tb_FileName.Text = Nothing Then
+            tb_FileName.Text = LangData("compiled").ToString()
+            tb_FileName.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox1.Enter
-        If TextBox1.Text = "compiled" Then
-            TextBox1.Text = Nothing
-            TextBox1.ForeColor = Color.Black
+    Private Sub TextBox1_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_FileName.Enter
+        If tb_FileName.Text = LangData("compiled").ToString() Then
+            tb_FileName.Text = Nothing
+            tb_FileName.ForeColor = Color.Black
         End If
     End Sub
-    Private Sub TextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.Leave
-        If TextBox2.Text = Nothing Then
-            TextBox2.Text = "PKMCUSTOMROM"
-            TextBox2.ForeColor = Color.Gray
+    Private Sub TextBox2_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Header.Leave
+        If tb_Header.Text = Nothing Then
+            tb_Header.Text = "PKMCUSTOMROM"
+            tb_Header.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub TextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox2.Enter
-        If TextBox2.Text = "PKMCUSTOMROM" Then
-            TextBox2.Text = Nothing
-            TextBox2.ForeColor = Color.Black
+    Private Sub TextBox2_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Header.Enter
+        If tb_Header.Text = "PKMCUSTOMROM" Then
+            tb_Header.Text = Nothing
+            tb_Header.ForeColor = Color.Black
         End If
     End Sub
-    Private Sub TextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.Leave
-        If TextBox3.Text = Nothing Then
-            TextBox3.Text = "G5DC"
-            TextBox3.ForeColor = Color.Gray
+    Private Sub TextBox3_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Code.Leave
+        If tb_Code.Text = Nothing Then
+            tb_Code.Text = "G5DC"
+            tb_Code.ForeColor = Color.Gray
         End If
     End Sub
-    Private Sub TextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles TextBox3.Enter
-        If TextBox3.Text = "G5DC" Then
-            TextBox3.Text = Nothing
-            TextBox3.ForeColor = Color.Black
+    Private Sub TextBox3_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles tb_Code.Enter
+        If tb_Code.Text = "G5DC" Then
+            tb_Code.Text = Nothing
+            tb_Code.ForeColor = Color.Black
         End If
     End Sub
 
     'Opens PGF Creator
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles bt_Custom.Click
         Form3.ShowDialog()
     End Sub
 
     'Link to Update version
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
             MsgB(LangData("No Internet connection!").ToString() & "
-" & LangData("You can not update at the moment.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
+" & LangData("You can not update at the moment.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString() & " 404")
         End If
     End Sub
 
     'Link the Author's, yours truly, Github Page
-    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
         Else
             MsgB(LangData("No Internet connection!").ToString() & "
-" & LangData("You can look me up later.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
+" & LangData("You can look me up later.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString() & " 404")
         End If
     End Sub
 
@@ -995,7 +1062,7 @@ PKMG5DC"
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
             MsgB(LangData("No Internet connection!").ToString() & "
-" & LangData("I appreciate the gesture.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error 404").ToString())
+" & LangData("I appreciate the gesture.").ToString(), 1, LangData("OK").ToString(),,, LangData("Error").ToString() & " 404")
         End If
     End Sub
     Private Sub PictureBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles PictureBox1.MouseDown

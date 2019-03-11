@@ -36,13 +36,22 @@
   "About...": "À Propos...",
   "Options...": "Options...",
 
-  "Error 404": "Erreur 404",
+  "No .pgf file.": "Aucun fichier .pgf.",
+  "No compatible game.": "Aucun jeu compatible.",
+  "ROM Header is too short.": "En Tête du ROM est trop court.",
+  "ROM Code is too short.": "Code du ROM est trop court.",
+  "ROM description is missing.": "Manque la description du ROM.",
+  "Built as ": "Compilé et nommé ",
+  "compiled": "compilé",
+
+  "Error": "Erreur",
   "No Internet connection!": "Pas de Connexion Internet!",
   "You can not update at the moment.": "Vous ne pouvez pas mettre à jour en ce moment.",
   "I appreciate the gesture.": "J'apprécie le geste.",
   "You can look me up later.": "Vous pouvez rechercher moi plus tard.",
+  "by": "par",
 
-  "Pokémon\nGeneration 5\nCustom Made Distribution\nPKMG5DC": "Pokémon\nGénération 5\nDistribution Personnalisé\nPKMG5DC",
-  "Input Event Message Here.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)": "Entrée Message d'Événement Ici.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)",
+  "Default ROM Description": "Pokémon\nGénération 5\nDistribution Personnalisé\nPKMG5DC",
+  "Default Event Message": "Entrée Message d'Événement Ici.\n\nThis textbox is sized perfectly, so what fits in\nthis box is all you can fit. A maximum of 7 \nlines, max 36 characters per line, and a \nmaximum of 252 characters total.\nMake sure you put the new lines(ENTER key)",
   "Input Description Here.\nThis textbox is also sized perfectly.\n4 lines, 24 chars/line, 96 chars.\nBe sure to put the new lines again.": "Entrée Description Ici.\nThis textbox is also sized perfectly.\n4 lines, 24 chars/line, 96 chars.\nBe sure to put the new lines again."
 }
