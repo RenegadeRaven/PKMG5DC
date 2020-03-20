@@ -6,7 +6,8 @@ Public Class Form4
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
-    Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC"
+    Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
+    Dim card1 As New Card
 #End Region
 
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,7 +15,22 @@ Public Class Form4
         CheckTicket()
         UpdateChk()
 
+        ''''
+        With card1
+            .numberOfCards = &H1
+            .wonderCard = "3E0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000470065007400200074006800650020004C00690062006500720074007900200050006100730073002100FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000403DB07FE074402010000000000000000000000000000000000000000000000"
+            .gameCompatability = &HF0
 
+            .language = &H2
+            .langChecksum = &H83BC
+            .startYear = &H7E4
+            .startMonth = &H3
+            .startDay = &H14
+            .endYear = .startYear
+            .endMonth = .startMonth
+            .endDay = .startDay
+        End With
+        Output()
     End Sub
     Private Sub Form4_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Dim myIniFile As New IniFile
@@ -32,7 +48,7 @@ Public Class Form4
         End With
     End Sub
 
-
+#Region "Esentials"
     'Checks For Update
     Private Sub UpdateChk()
         If File.Exists(TempPath & "\vsn.txt") Then
@@ -117,7 +133,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         Return Ans
     End Function
 
-    'Checks for Ticket
+    'Checks Local Folders
     Private Sub CheckLocal()
         Try
             Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local}
@@ -145,6 +161,59 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             End If
         End With
     End Sub
+#End Region
+#Region "Functions"
+
+    'Adds needed zeros to hex string
+    Private Function Hex_Zeros(ByVal hex_value As String, ByVal length As Integer)
+        Dim Str As String = hex_value.ToUpper
+        Do While Str.Length < length
+            Str = "0" & Str
+        Loop
+        Return Str
+    End Function
+
+    'Encrypts hex string with, you guessed it, Little Endian
+    Private Function Little_Endian(ByVal hex_value As String, ByVal length As Integer)
+        Dim startStr As String = Hex_Zeros(hex_value, length)
+        Dim endStr As String = Nothing
+        If length = 8 Then
+            endStr = startStr.Skip(6).ToArray() & startStr.Remove(6, 2).ToArray().Skip(4).ToArray() & startStr.Remove(4, 4).ToArray().Skip(2).ToArray() & startStr.Remove(2, 6).ToArray()
+        ElseIf length = 4 Then
+            endStr = startStr.Skip(2).ToArray() & startStr.Remove(2, 2).ToArray()
+        End If
+        Return endStr
+    End Function
+
+    'Card Class
+    Public Class Card
+        Public numberOfCards As Byte
+        '00 00 00
+        Public wonderCard As String '0xCC
+        '00 00
+        Public gameCompatability As Byte
+        '00
+        Public eventText As String '0x1F8
+        'FF FF
+        '00
+        Public language As Byte
+        '00 00
+        Public langChecksum As UShort
+        '00 for 0x1EF0
+        Public startYear As UShort
+        Public startMonth As Byte
+        Public startDay As Byte
+        Public endYear As UShort
+        Public endMonth As Byte
+        Public endDay As Byte
+        '00 for 0x5C
+        '14 ????
+        '00 00 00 00 00 00 00
+    End Class
+#End Region
+
+#Region "Startup"
+    'Checks for Ticket
     Private Sub CheckTicket()
         If My.Settings.ticket <> Nothing Then
             If File.Exists(My.Settings.ticket) Then
@@ -215,4 +284,24 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             End If
         End If
     End Sub
+#End Region
+
+    Private Sub Output()
+        Dim cc As String = Hex_Zeros(Hex(card1.numberOfCards), 2) & "000000" & card1.wonderCard & "0000" & Hex(card1.gameCompatability) & "00"
+        For i = 0 To &H1F7 Step 1
+            cc &= "FF"
+        Next i
+        cc &= "FFFF00" & Hex_Zeros(card1.language, 2) & "0000" & Little_Endian(Hex(card1.langChecksum), 4)
+        For i = 0 To &H1EEF Step 1
+            cc &= "00"
+        Next i
+        cc &= Little_Endian(Hex(card1.startYear), 4) & Hex_Zeros(Hex(card1.startMonth), 2) & Hex_Zeros(Hex(card1.startDay), 2) &
+        Little_Endian(Hex(card1.endYear), 4) & Hex_Zeros(Hex(card1.endMonth), 2) & Hex_Zeros(Hex(card1.endDay), 2)
+        For i = 0 To &H5B Step 1
+            cc &= "00"
+        Next i
+        cc &= "1400000000000000"
+        RichTextBox1.Text = cc
+    End Sub
+
 End Class
