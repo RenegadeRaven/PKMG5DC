@@ -8,6 +8,8 @@ Public Class Form4
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
     Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
     Dim card1 As New Card
+    Dim langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A}
+    Dim langs As Byte() = {&H2, &H3, &H4, &H5, &H6}
 #End Region
 
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -19,17 +21,18 @@ Public Class Form4
         With card1
             .numberOfCards = &H8
             .wonderCard = {pgf, pgf, pgf, pgf, pgf, pgf, pgf, pgf}
-            .gameCompatability = &HF0
+            .gameCompatability = {&HF0, &HC0, &H30, &H20, &H10, &HA0, &H50, &HD0}
 
-            .language = {&H2, &H3, &H4, &H5, &H6, &H2, &H2, &H8}
-            .langChecksum = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A, &HF57A, &HA986}
+            .language = {langs(0), langs(1), langs(2), langs(3), langs(4), langs(0), langs(0), &H8}
+            .langChecksum = {langCksm(0), langCksm(1), langCksm(2), langCksm(3), langCksm(4), langCksm(5), langCksm(5), &HA986}
             .startYear = &H7E4
             .startMonth = &H3
             .startDay = &H14
-            .endYear = .startYear
+            .endYear = .startYear + 1
             .endMonth = .startMonth
             .endDay = .startDay
         End With
+        card1.endMonth = 4
         Output()
     End Sub
     Private Sub Form4_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -133,20 +136,52 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         Return Ans
     End Function
 
-    'Checks Local Folders
-    Private Sub CheckLocal()
+    Private Sub CreateFolders(ByVal dirs As String())
         Try
-            Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local}
-            For i = 0 To 1 Step 1
-                Do While Not Directory.Exists(locals(i))
-                    If Not Directory.Exists(locals(i)) Then
-                        Directory.CreateDirectory(locals(i))
+            For i = 0 To UBound(dirs) Step 1
+                If dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
+                Else
+                    dirs(i) = Local & dirs(i)
+                End If
+                Do While Not Directory.Exists(dirs(i))
+                    If Not Directory.Exists(dirs(i)) Then
+                        Directory.CreateDirectory(dirs(i))
                     End If
                 Loop
             Next i
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+    Private Sub CreateFiles(ByVal files(,))
+        Try
+            For i = 0 To UBound(files) Step 1
+                If files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
+                Else
+                    files(i, 0) = Local & files(i, 0)
+                End If
+                Do While Not File.Exists(files(i, 0))
+                    If Not File.Exists(files(i, 0)) Then
+                        If TypeOf files(i, 1) Is String Then
+                            File.WriteAllText(files(i, 0), files(i, 1))
+                        Else
+                            File.WriteAllBytes(files(i, 0), files(i, 1))
+                        End If
+                    End If
+                Loop
+            Next i
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    'Checks Local Folders
+    Private Sub CheckLocal()
+        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"}
+        CreateFolders(locals)
+        If Not File.Exists(Local & "\settings.ini") Then
+            File.Create(Local & "\settings.ini")
+        End If
         Dim myIniFile As New IniFile
         With myIniFile
             .Filename = Local & "\settings.ini"
@@ -189,16 +224,16 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Public Class Card
         Public numberOfCards As Byte
         '00 00 00
-        Public wonderCard As String() '0xCC
+        Public wonderCard(7) As String '0xCC
         '00 00
-        Public gameCompatability As Byte
+        Public gameCompatability(7) As Byte
         '00
         Public eventText As String '0x1F8
         'FF FF
         '00
-        Public language As Byte()
+        Public language(7) As Byte
         '00 00
-        Public langChecksum As UShort()
+        Public langChecksum(7) As UShort
         '00 for 0x1EF0
         Public startYear As UShort
         Public startMonth As Byte
@@ -210,6 +245,31 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         '14 ????
         '00 00 00 00 00 00 00
     End Class
+    Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
+        Dim length As Integer
+        Dim bOutput As Byte()
+        Dim c(1) As Integer
+        length = strInput.Length / 2
+        ReDim bOutput(length - 1)
+        For i As Integer = 0 To (length - 1)
+            For j As Integer = 0 To 1
+                c(j) = Asc(strInput.Chars(i * 2 + j))
+                If ((c(j) >= Asc("0")) And (c(j) <= Asc("9"))) Then
+                    c(j) = c(j) - Asc("0")
+                ElseIf ((c(j) >= Asc("A")) And (c(j) <= Asc("F"))) Then
+                    c(j) = c(j) - Asc("A") + &HA
+                ElseIf ((c(j) >= Asc("a")) And (c(j) <= Asc("f"))) Then
+                    c(j) = c(j) - Asc("a") + &HA
+                End If
+            Next j
+            bOutput(i) = (c(0) * &H10 + c(1))
+        Next i
+        Return (bOutput)
+    End Function
+    Private Sub Save(myFile)
+        Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
+        My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
+    End Sub
 #End Region
 
 #Region "Startup"
@@ -289,7 +349,7 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub Output()
         Dim cc As String = Hex_Zeros(Hex(card1.numberOfCards), 2) & "000000"
         For n = 0 To card1.numberOfCards - 1 Step 1
-            cc &= card1.wonderCard(n) & "0000" & Hex(card1.gameCompatability) & "00"
+            cc &= card1.wonderCard(n) & "0000" & Hex(card1.gameCompatability(n)) & "00"
             For i = 0 To &H1F7 Step 1
                 cc &= "FF"
             Next i
@@ -310,38 +370,30 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        File.WriteAllBytes(Local & "\ndstool.exe", My.Resources.ndstool)
-        File.WriteAllText(Local & "\run.bat", "ndstool.exe -x ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
-        File.WriteAllText(Local & "\run2.bat", "ndstool.exe -c ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
-        Process.Start(Local & "\run.bat")
-        System.Threading.Thread.Sleep(500)
-        'File.Delete(Local & "\data\data.bin")
-        Save(Local & "\data\data.bin")
-        Process.Start(Local & "\run2.bat")
+        Try
+            Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "cd " & Local & "\tools
+ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "cd " & Local & "\tools
+ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "cd " & Local & "\tools
+rd /S/Q data
+del arm9.bin arm7.bin banner.bin header.bin"}}
+            CreateFiles(tools)
+
+            '            File.WriteAllBytes(Local & "\tools\ndstool.exe", My.Resources.ndstool)
+            '            File.WriteAllText(Local & "\tools\extract.bat", "cd " & Local & "\tools
+            'ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
+            '            File.WriteAllText(Local & "\tools\compile.bat", "cd " & Local & "\tools
+            'ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
+            '            File.WriteAllText(Local & "\tools\clean.bat", "cd " & Local & "\tools
+            'rd /S/Q data
+            'del arm9.bin arm7.bin banner.bin header.bin")
+            Process.Start(Local & "\tools\extract.bat").WaitForExit()
+            File.Delete(Local & "\tools\data\data.bin")
+            Save(Local & "\tools\data\data.bin")
+            Process.Start(Local & "\tools\compile.bat").WaitForExit()
+            Process.Start(Local & "\tools\clean.bat").WaitForExit()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
-    Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
-        Dim length As Integer
-        Dim bOutput As Byte()
-        Dim c(1) As Integer
-        length = strInput.Length / 2
-        ReDim bOutput(length - 1)
-        For i As Integer = 0 To (length - 1)
-            For j As Integer = 0 To 1
-                c(j) = Asc(strInput.Chars(i * 2 + j))
-                If ((c(j) >= Asc("0")) And (c(j) <= Asc("9"))) Then
-                    c(j) = c(j) - Asc("0")
-                ElseIf ((c(j) >= Asc("A")) And (c(j) <= Asc("F"))) Then
-                    c(j) = c(j) - Asc("A") + &HA
-                ElseIf ((c(j) >= Asc("a")) And (c(j) <= Asc("f"))) Then
-                    c(j) = c(j) - Asc("a") + &HA
-                End If
-            Next j
-            bOutput(i) = (c(0) * &H10 + c(1))
-        Next i
-        Return (bOutput)
-    End Function
-    Private Sub Save(myFile)
-        Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
-        My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
-    End Sub
+
 End Class
