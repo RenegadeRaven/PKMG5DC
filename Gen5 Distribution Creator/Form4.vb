@@ -14,15 +14,15 @@ Public Class Form4
         CheckLocal()
         CheckTicket()
         UpdateChk()
-
+        Dim pgf As String = "3E0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000470065007400200074006800650020004C00690062006500720074007900200050006100730073002100FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000403DB07FE074402010000000000000000000000000000000000000000000000"
         ''''
         With card1
-            .numberOfCards = &H1
-            .wonderCard = "3E0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000470065007400200074006800650020004C00690062006500720074007900200050006100730073002100FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000403DB07FE074402010000000000000000000000000000000000000000000000"
+            .numberOfCards = &H8
+            .wonderCard = {pgf, pgf, pgf, pgf, pgf, pgf, pgf, pgf}
             .gameCompatability = &HF0
 
-            .language = &H2
-            .langChecksum = &H83BC
+            .language = {&H2, &H3, &H4, &H5, &H6, &H2, &H2, &H8}
+            .langChecksum = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A, &HF57A, &HA986}
             .startYear = &H7E4
             .startMonth = &H3
             .startDay = &H14
@@ -189,16 +189,16 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Public Class Card
         Public numberOfCards As Byte
         '00 00 00
-        Public wonderCard As String '0xCC
+        Public wonderCard As String() '0xCC
         '00 00
         Public gameCompatability As Byte
         '00
         Public eventText As String '0x1F8
         'FF FF
         '00
-        Public language As Byte
+        Public language As Byte()
         '00 00
-        Public langChecksum As UShort
+        Public langChecksum As UShort()
         '00 for 0x1EF0
         Public startYear As UShort
         Public startMonth As Byte
@@ -287,21 +287,61 @@ You can not update at the moment.", vbOKOnly, "Error 404")
 #End Region
 
     Private Sub Output()
-        Dim cc As String = Hex_Zeros(Hex(card1.numberOfCards), 2) & "000000" & card1.wonderCard & "0000" & Hex(card1.gameCompatability) & "00"
-        For i = 0 To &H1F7 Step 1
-            cc &= "FF"
-        Next i
-        cc &= "FFFF00" & Hex_Zeros(card1.language, 2) & "0000" & Little_Endian(Hex(card1.langChecksum), 4)
-        For i = 0 To &H1EEF Step 1
+        Dim cc As String = Hex_Zeros(Hex(card1.numberOfCards), 2) & "000000"
+        For n = 0 To card1.numberOfCards - 1 Step 1
+            cc &= card1.wonderCard(n) & "0000" & Hex(card1.gameCompatability) & "00"
+            For i = 0 To &H1F7 Step 1
+                cc &= "FF"
+            Next i
+            cc &= "FFFF00" & Hex_Zeros(card1.language(n), 2) & "0000" & Little_Endian(Hex(card1.langChecksum(n)), 4)
+        Next n
+        For i = 0 To (&H13AF - ((card1.numberOfCards - 1) * &H2D0)) Step 1 '0x1eef
             cc &= "00"
         Next i
-        cc &= Little_Endian(Hex(card1.startYear), 4) & Hex_Zeros(Hex(card1.startMonth), 2) & Hex_Zeros(Hex(card1.startDay), 2) &
+        For i = 0 To card1.numberOfCards - 1 Step 1
+            cc &= Little_Endian(Hex(card1.startYear), 4) & Hex_Zeros(Hex(card1.startMonth), 2) & Hex_Zeros(Hex(card1.startDay), 2) &
         Little_Endian(Hex(card1.endYear), 4) & Hex_Zeros(Hex(card1.endMonth), 2) & Hex_Zeros(Hex(card1.endDay), 2)
-        For i = 0 To &H5B Step 1
+        Next i
+        For i = 0 To (&H3B - ((card1.numberOfCards - 1) * &H8)) Step 1 '0x5b
             cc &= "00"
         Next i
         cc &= "1400000000000000"
         RichTextBox1.Text = cc
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        File.WriteAllBytes(Local & "\ndstool.exe", My.Resources.ndstool)
+        File.WriteAllText(Local & "\run.bat", "ndstool.exe -x ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
+        File.WriteAllText(Local & "\run2.bat", "ndstool.exe -c ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
+        Process.Start(Local & "\run.bat")
+        System.Threading.Thread.Sleep(500)
+        'File.Delete(Local & "\data\data.bin")
+        Save(Local & "\data\data.bin")
+        Process.Start(Local & "\run2.bat")
+    End Sub
+    Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
+        Dim length As Integer
+        Dim bOutput As Byte()
+        Dim c(1) As Integer
+        length = strInput.Length / 2
+        ReDim bOutput(length - 1)
+        For i As Integer = 0 To (length - 1)
+            For j As Integer = 0 To 1
+                c(j) = Asc(strInput.Chars(i * 2 + j))
+                If ((c(j) >= Asc("0")) And (c(j) <= Asc("9"))) Then
+                    c(j) = c(j) - Asc("0")
+                ElseIf ((c(j) >= Asc("A")) And (c(j) <= Asc("F"))) Then
+                    c(j) = c(j) - Asc("A") + &HA
+                ElseIf ((c(j) >= Asc("a")) And (c(j) <= Asc("f"))) Then
+                    c(j) = c(j) - Asc("a") + &HA
+                End If
+            Next j
+            bOutput(i) = (c(0) * &H10 + c(1))
+        Next i
+        Return (bOutput)
+    End Function
+    Private Sub Save(myFile)
+        Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
+        My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
+    End Sub
 End Class
