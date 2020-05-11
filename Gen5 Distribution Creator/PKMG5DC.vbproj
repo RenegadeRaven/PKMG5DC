@@ -158,6 +158,12 @@
     </Compile>
     <Compile Include="PCD.vb" />
     <Compile Include="PGF.vb" />
+    <Compile Include="PGFCreator.Designer.vb">
+      <DependentUpon>PGFCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PGFCreator.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomMessageBox.resx">
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="options.resx">
       <DependentUpon>options.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGFCreator.resx">
+      <DependentUpon>PGFCreator.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
