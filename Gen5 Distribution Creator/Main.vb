@@ -1,18 +1,20 @@
 ﻿Imports System.IO
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
-Public Class Form4
+Public Class Main
 #Region "Variables"
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
     Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
-    Dim card1 As New Card
+    Dim Gen As Byte = 5
+    Dim card1 As New Card5
     Dim langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A}
     Dim langs As Byte() = {&H2, &H3, &H4, &H5, &H6}
 #End Region
 
     Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'CheckGen()
         CheckLocal()
         CheckTicket()
         UpdateChk()
@@ -51,6 +53,14 @@ Public Class Form4
         End With
     End Sub
 
+    'Private Sub CheckGen()
+    '    Dim n As String = Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName)
+    '    If n.Contains("G4") Then
+    '        Gen = 4
+    '    Else
+    '        Gen = 5
+    '    End If
+    'End Sub
 #Region "Esentials"
     'Checks For Update
     Private Sub UpdateChk()
@@ -114,27 +124,6 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
 
-    'Custom MsgBox
-    Private Function MsgB(ByVal mes As String, Optional ByVal numB As Integer = 1, Optional ByVal but1 As String = "OK", Optional ByVal but2 As String = "Cancel", Optional ByVal but3 As String = "", Optional ByVal head As String = "")
-        Dim msg As New CustomMessageBox(mes, numB, but1, but2, but3, head)
-        Dim result = msg.ShowDialog()
-        Dim Ans As Integer
-        If result = Windows.Forms.DialogResult.Yes Then
-            'user clicked "B1"
-            Ans = 6
-        ElseIf result = Windows.Forms.DialogResult.No Then
-            'user clicked "B2"
-            Ans = 7
-        ElseIf result = Windows.Forms.DialogResult.Cancel Then
-            'user clicked "B3"
-            Ans = 8
-        Else
-            'user closed the window without clicking a button
-            Ans = -1
-            Close()
-        End If
-        Return Ans
-    End Function
 
     Private Sub CreateFolders(ByVal dirs As String())
         Try
@@ -197,81 +186,6 @@ You can not update at the moment.", vbOKOnly, "Error 404")
         End With
     End Sub
 #End Region
-#Region "Functions"
-
-    'Adds needed zeros to hex string
-    Private Function Hex_Zeros(ByVal hex_value As String, ByVal length As Integer)
-        Dim Str As String = hex_value.ToUpper
-        Do While Str.Length < length
-            Str = "0" & Str
-        Loop
-        Return Str
-    End Function
-
-    'Encrypts hex string with, you guessed it, Little Endian
-    Private Function Little_Endian(ByVal hex_value As String, ByVal length As Integer)
-        Dim startStr As String = Hex_Zeros(hex_value, length)
-        Dim endStr As String = Nothing
-        If length = 8 Then
-            endStr = startStr.Skip(6).ToArray() & startStr.Remove(6, 2).ToArray().Skip(4).ToArray() & startStr.Remove(4, 4).ToArray().Skip(2).ToArray() & startStr.Remove(2, 6).ToArray()
-        ElseIf length = 4 Then
-            endStr = startStr.Skip(2).ToArray() & startStr.Remove(2, 2).ToArray()
-        End If
-        Return endStr
-    End Function
-
-    'Card Class
-    Public Class Card
-        Public numberOfCards As Byte
-        '00 00 00
-        Public wonderCard(7) As String '0xCC
-        '00 00
-        Public gameCompatability(7) As Byte
-        '00
-        Public eventText As String '0x1F8
-        'FF FF
-        '00
-        Public language(7) As Byte
-        '00 00
-        Public langChecksum(7) As UShort
-        '00 for 0x1EF0
-        Public startYear As UShort
-        Public startMonth As Byte
-        Public startDay As Byte
-        Public endYear As UShort
-        Public endMonth As Byte
-        Public endDay As Byte
-        '00 for 0x5C
-        '14 ????
-        '00 00 00 00 00 00 00
-    End Class
-    Private Shared Function HexStringToByteArray(ByRef strInput As String) As Byte()
-        Dim length As Integer
-        Dim bOutput As Byte()
-        Dim c(1) As Integer
-        length = strInput.Length / 2
-        ReDim bOutput(length - 1)
-        For i As Integer = 0 To (length - 1)
-            For j As Integer = 0 To 1
-                c(j) = Asc(strInput.Chars(i * 2 + j))
-                If ((c(j) >= Asc("0")) And (c(j) <= Asc("9"))) Then
-                    c(j) = c(j) - Asc("0")
-                ElseIf ((c(j) >= Asc("A")) And (c(j) <= Asc("F"))) Then
-                    c(j) = c(j) - Asc("A") + &HA
-                ElseIf ((c(j) >= Asc("a")) And (c(j) <= Asc("f"))) Then
-                    c(j) = c(j) - Asc("a") + &HA
-                End If
-            Next j
-            bOutput(i) = (c(0) * &H10 + c(1))
-        Next i
-        Return (bOutput)
-    End Function
-    Private Sub Save(myFile)
-        Dim myBytes As Byte() = HexStringToByteArray(RichTextBox1.Text)
-        My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
-    End Sub
-#End Region
-
 #Region "Startup"
     'Checks for Ticket
     Private Sub CheckTicket()
@@ -388,7 +302,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             'del arm9.bin arm7.bin banner.bin header.bin")
             Process.Start(Local & "\tools\extract.bat").WaitForExit()
             File.Delete(Local & "\tools\data\data.bin")
-            Save(Local & "\tools\data\data.bin")
+            Save(Local & "\tools\data\data.bin", RichTextBox1.Text)
             Process.Start(Local & "\tools\compile.bat").WaitForExit()
             Process.Start(Local & "\tools\clean.bat").WaitForExit()
         Catch ex As Exception

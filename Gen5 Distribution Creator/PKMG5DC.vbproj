@@ -100,6 +100,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card5.vb" />
+    <Compile Include="Common.vb" />
     <Compile Include="CustomMessageBox.designer.vb">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </Compile>
@@ -125,10 +127,10 @@
     <Compile Include="Form3.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.vb">
-      <DependentUpon>Form4.vb</DependentUpon>
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form4.vb">
+    <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IniFile.vb" />
@@ -154,6 +156,8 @@
     <Compile Include="options.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PCD.vb" />
+    <Compile Include="PGF.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CustomMessageBox.resx">
@@ -168,8 +172,8 @@
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.vb</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
