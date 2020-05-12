@@ -1,13 +1,12 @@
-C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.vbprojAssemblyReference.cache
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.CustomMessageBox.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Form1.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Form2.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Form3.resources
+C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Main.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Resources.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Options.resources
+C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.PGFCreator.resources
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.vbproj.GenerateResource.cache
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.vbproj.CoreCompileInputs.cache
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.exe
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.pdb
-C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.Main.resources
-C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.PGFCreator.resources

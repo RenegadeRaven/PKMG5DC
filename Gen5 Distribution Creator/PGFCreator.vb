@@ -1,10 +1,14 @@
 ﻿Imports System.IO
+Imports Newtonsoft.Json.Converters
+
 Public Class PGFCreator
     Dim WC As New PGF
     Dim InputPK5 As String
 
     Private Sub PGFCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'TODO: This line of code loads data into the 'DatabaseDataSet.Items' table. You can move, or remove it, as needed.
+        Me.ItemsTableAdapter.Fill(Me.DatabaseDataSet.Items)
+        'ItemsBindingSource.Filter = "Ball = 'True'"
     End Sub
 
     Private Sub OpenPK5_Click(sender As Object, e As EventArgs) Handles OpenPK5.Click
@@ -52,7 +56,16 @@ Public Class PGFCreator
                 .Gender = Convert.ToUInt16(Hex_Zeros(Convert.ToString(Convert.ToUInt16(InputPK5.Remove(130).ToArray().Skip(128).ToArray(), 16), 2), 8).ToString.Remove(7).ToArray().Skip(6).ToArray(), 2)
 
             End With
+            convertValues()
         Catch ex As Exception
         End Try
+    End Sub
+    Private Sub ConvertValues()
+        'Ribbons
+        Dim hr As Char() = Hex_Zeros(Convert.ToString(Convert.ToUInt16(InputPK5.Remove(128).ToArray().Skip(126).ToArray(), 16), 2), 8).ToString.ToCharArray()
+        Dim bits As Char() = Hex_Zeros(Convert.ToString(WC.Ribbons(0), 2), 8).ToString.ToCharArray
+        Dim bits2 As Char() = Hex_Zeros(Convert.ToString(WC.Ribbons(1), 2), 8).ToString.ToCharArray
+        WC.Ribbons(0) = Convert.ToUInt16(bits(1) & bits(4) & bits2(4) & bits2(5) & hr(0) & hr(1) & hr(2) & hr(3), 2)
+        WC.Ribbons(1) = Convert.ToUInt16("0" & bits(2) & hr(4) & hr(5) & hr(6) & bits2(6) & bits2(7) & bits(0), 2)
     End Sub
 End Class
