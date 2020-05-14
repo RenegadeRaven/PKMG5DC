@@ -1,14 +1,12 @@
 ﻿Imports System.IO
-Imports Newtonsoft.Json.Converters
 
 Public Class PGFCreator
     Dim WC As New PGF
     Dim InputPK5 As String
+    Dim a As New List(Of Items)
 
     Private Sub PGFCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'DatabaseDataSet.Items' table. You can move, or remove it, as needed.
-        Me.ItemsTableAdapter.Fill(Me.DatabaseDataSet.Items)
-        'ItemsBindingSource.Filter = "Ball = 'True'"
+        PopulateMoves(ComboBox2)
     End Sub
 
     Private Sub OpenPK5_Click(sender As Object, e As EventArgs) Handles OpenPK5.Click
@@ -56,7 +54,8 @@ Public Class PGFCreator
                 .Gender = Convert.ToUInt16(Hex_Zeros(Convert.ToString(Convert.ToUInt16(InputPK5.Remove(130).ToArray().Skip(128).ToArray(), 16), 2), 8).ToString.Remove(7).ToArray().Skip(6).ToArray(), 2)
 
             End With
-            convertValues()
+            ConvertValues()
+            Desc()
         Catch ex As Exception
         End Try
     End Sub
@@ -68,4 +67,32 @@ Public Class PGFCreator
         WC.Ribbons(0) = Convert.ToUInt16(bits(1) & bits(4) & bits2(4) & bits2(5) & hr(0) & hr(1) & hr(2) & hr(3), 2)
         WC.Ribbons(1) = Convert.ToUInt16("0" & bits(2) & hr(4) & hr(5) & hr(6) & bits2(6) & bits2(7) & bits(0), 2)
     End Sub
+    Private Sub Desc()
+        With WC
+            lbl_Species.Text = GetPokeName(.Dex) & " @ " & GetItemName(.Item)
+            lbl_IVs.Text = "IVs: " & .IVs(0) & "/" & .IVs(1) & "/" & .IVs(2) & "/" & .IVs(4) & "/" & .IVs(5) & "/" & .IVs(3)
+            Dim abl As UShort = Convert.ToUInt16(InputPK5.Remove(44).ToArray().Skip(42).ToArray(), 16)
+            lbl_Ability.Text = "Ability: " & GetAbilityName(abl)
+            lbl_Nature.Text = "Nature: " & GetNature(.Nature)
+            lbl_Move1.Text = GetMoveName(.Moves(0))
+            lbl_Move2.Text = GetMoveName(.Moves(1))
+            lbl_Move3.Text = GetMoveName(.Moves(2))
+            lbl_Move4.Text = GetMoveName(.Moves(3))
+            TypeMove(lbl_Move1, lbl_Move1.Text)
+            TypeMove(lbl_Move2, lbl_Move2.Text)
+            TypeMove(lbl_Move3, lbl_Move3.Text)
+            TypeMove(lbl_Move4, lbl_Move4.Text)
+            Me.Refresh()
+        End With
+    End Sub
+    Private Function GetNature(Num As Byte)
+        Dim Natures() As String = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest",
+        "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"}
+        Return Natures(Num)
+    End Function
+
+    'Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+    '    Debug.Print(GetMoveID(ComboBox2.SelectedItem.ToString))
+    '    TypeMove(lbl_Species, ComboBox2.SelectedItem.ToString)
+    'End Sub
 End Class

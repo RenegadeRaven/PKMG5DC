@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports Microsoft.VisualBasic.CompilerServices
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
@@ -8,7 +7,7 @@ Public Class Main
     Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
-    Public Shared Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
+    Dim Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
     Dim Gen As Byte = 5
     Dim card1 As New Card5
     Dim langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A}
@@ -170,7 +169,6 @@ You can not update at the moment.", vbOKOnly, "Error 404")
     Private Sub CheckLocal()
         Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"}
         CreateFolders(locals)
-        File.WriteAllBytes(Local & "\Database.accdb", My.Resources.Database)
         If Not File.Exists(Local & "\settings.ini") Then
             File.Create(Local & "\settings.ini")
         End If

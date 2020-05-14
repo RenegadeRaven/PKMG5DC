@@ -218,16 +218,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property Database() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Database", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to {
         '''  &quot;New Update Available! &quot;: &quot;New Update Available! &quot;,
         '''  &quot;Open .pgf&quot;: &quot;Open .pgf&quot;,

@@ -124,14 +124,9 @@
     <Compile Include="CustomMessageBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DatabaseDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
+    <None Include="Form1.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
@@ -139,15 +134,15 @@
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form2.vb">
+    <None Include="Form2.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="Form3.Designer.vb">
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form3.vb">
+    <None Include="Form3.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="Main.Designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
@@ -185,6 +180,7 @@
     <Compile Include="PGFCreator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Database.vb" />
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -217,17 +213,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DatabaseDataSet.xsc">
-      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DatabaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DatabaseDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DatabaseDataSet.xss">
-      <DependentUpon>DatabaseDataSet.xsd</DependentUpon>
-    </None>
     <None Include="ILMerge.props" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
@@ -247,8 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\ILMergeOrder.txt" />
-    <Content Include="Database.accdb" />
-    <Content Include="favicon.ico" />
     <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
