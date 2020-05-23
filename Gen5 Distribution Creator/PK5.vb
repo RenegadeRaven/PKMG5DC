@@ -1,221 +1,221 @@
 ﻿Public Class PK5
-    Public InputPK5 As Byte()
+    Public Data As Byte()
     'Private Shared ReadOnly Unused As UShort() = {&H87, &H42, &H43, &H44, &H45, &H46, &H47, &H5E, &H63, &H64, &H65, &H66, &H67, &H86}
     Public Property PID As UInteger
         Get
-            Return BitConverter.ToUInt32(InputPK5, &H0)
+            Return BitConverter.ToUInt32(Data, &H0)
         End Get
         Set(ByVal value As UInteger)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H0)
+            BitConverter.GetBytes(value).CopyTo(Data, &H0)
         End Set
     End Property
     '00 00
     Public Property Checksum As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H6)
+            Return BitConverter.ToUInt16(Data, &H6)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H6)
+            BitConverter.GetBytes(value).CopyTo(Data, &H6)
         End Set
     End Property
     Public Property Dex As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H8)
+            Return BitConverter.ToUInt16(Data, &H8)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H8)
+            BitConverter.GetBytes(value).CopyTo(Data, &H8)
         End Set
     End Property
     Public Property Item As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &HA)
+            Return BitConverter.ToUInt16(Data, &HA)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &HA)
+            BitConverter.GetBytes(value).CopyTo(Data, &HA)
         End Set
     End Property
     Public Property TID As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &HC)
+            Return BitConverter.ToUInt16(Data, &HC)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &HC)
+            BitConverter.GetBytes(value).CopyTo(Data, &HC)
         End Set
     End Property
     Public Property SID As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &HE)
+            Return BitConverter.ToUInt16(Data, &HE)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &HE)
+            BitConverter.GetBytes(value).CopyTo(Data, &HE)
         End Set
     End Property
     Public Property Exp As UInteger
         Get
-            Return BitConverter.ToUInt32(InputPK5, &H10)
+            Return BitConverter.ToUInt32(Data, &H10)
         End Get
         Set(ByVal value As UInteger)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H10)
+            BitConverter.GetBytes(value).CopyTo(Data, &H10)
         End Set
     End Property
     Public Property Friendship As Byte 'Egg Steps
         Get
-            Return InputPK5(&H14)
+            Return Data(&H14)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H14) = value
+            Data(&H14) = value
         End Set
     End Property
     Public Property Ability As Byte
         Get
-            Return InputPK5(&H15)
+            Return Data(&H15)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H15) = value
+            Data(&H15) = value
         End Set
     End Property
     Public Property Markings As Byte
         Get
-            Return InputPK5(&H16)
+            Return Data(&H16)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H16) = value
+            Data(&H16) = value
         End Set
     End Property
     Public Property Language As Byte
         Get
-            Return InputPK5(&H17)
+            Return Data(&H17)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H17) = value
+            Data(&H17) = value
         End Set
     End Property
     Public Property EV_HP As Byte
         Get
-            Return InputPK5(&H18)
+            Return Data(&H18)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H18) = value
+            Data(&H18) = value
         End Set
     End Property
     Public Property EV_ATK As Byte
         Get
-            Return InputPK5(&H19)
+            Return Data(&H19)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H19) = value
+            Data(&H19) = value
         End Set
     End Property
     Public Property EV_DEF As Byte
         Get
-            Return InputPK5(&H1A)
+            Return Data(&H1A)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H1A) = value
+            Data(&H1A) = value
         End Set
     End Property
     Public Property EV_SPE As Byte
         Get
-            Return InputPK5(&H1B)
+            Return Data(&H1B)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H1B) = value
+            Data(&H1B) = value
         End Set
     End Property
     Public Property EV_SPA As Byte
         Get
-            Return InputPK5(&H1C)
+            Return Data(&H1C)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H1C) = value
+            Data(&H1C) = value
         End Set
     End Property
     Public Property EV_SPD As Byte
         Get
-            Return InputPK5(&H1D)
+            Return Data(&H1D)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H1D) = value
+            Data(&H1D) = value
         End Set
     End Property
     Public Property CV_Cool As Byte
         Get
-            Return InputPK5(&H1E)
+            Return Data(&H1E)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H18) = value
+            Data(&H18) = value
         End Set
     End Property
     Public Property CV_Beauty As Byte
         Get
-            Return InputPK5(&H1F)
+            Return Data(&H1F)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H19) = value
+            Data(&H19) = value
         End Set
     End Property
     Public Property CV_Cute As Byte
         Get
-            Return InputPK5(&H20)
+            Return Data(&H20)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H20) = value
+            Data(&H20) = value
         End Set
     End Property
     Public Property CV_Smart As Byte
         Get
-            Return InputPK5(&H21)
+            Return Data(&H21)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H21) = value
+            Data(&H21) = value
         End Set
     End Property
     Public Property CV_Tough As Byte
         Get
-            Return InputPK5(&H22)
+            Return Data(&H22)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H22) = value
+            Data(&H22) = value
         End Set
     End Property
     Public Property CV_Sheen As Byte
         Get
-            Return InputPK5(&H23)
+            Return Data(&H23)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H23) = value
+            Data(&H23) = value
         End Set
     End Property
     Public Property Sinnoh1_Ribbons1 As Byte
         Get
-            Return InputPK5(&H24)
+            Return Data(&H24)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H24) = value
+            Data(&H24) = value
         End Set
     End Property
     Public Property Sinnoh1_Ribbons2 As Byte
         Get
-            Return InputPK5(&H25)
+            Return Data(&H25)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H25) = value
+            Data(&H25) = value
         End Set
     End Property
     Public Property Unova_Ribbons1 As Byte
         Get
-            Return InputPK5(&H26)
+            Return Data(&H26)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H26) = value
+            Data(&H26) = value
         End Set
     End Property
     Public Property Unova_Ribbons2 As Byte
         Get
-            Return InputPK5(&H27)
+            Return Data(&H27)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H27) = value
+            Data(&H27) = value
         End Set
     End Property
 #Region "Ribbons"
@@ -446,106 +446,106 @@
 #End Region
     Public Property Move1 As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H28)
+            Return BitConverter.ToUInt16(Data, &H28)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H28)
+            BitConverter.GetBytes(value).CopyTo(Data, &H28)
         End Set
     End Property
     Public Property Move2 As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H2A)
+            Return BitConverter.ToUInt16(Data, &H2A)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H2A)
+            BitConverter.GetBytes(value).CopyTo(Data, &H2A)
         End Set
     End Property
     Public Property Move3 As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H2C)
+            Return BitConverter.ToUInt16(Data, &H2C)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H2C)
+            BitConverter.GetBytes(value).CopyTo(Data, &H2C)
         End Set
     End Property
     Public Property Move4 As UShort
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H2E)
+            Return BitConverter.ToUInt16(Data, &H2E)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H2E)
+            BitConverter.GetBytes(value).CopyTo(Data, &H2E)
         End Set
     End Property
     Public Property Move1_PP As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H30)
+            Return BitConverter.ToUInt16(Data, &H30)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H30)
+            BitConverter.GetBytes(value).CopyTo(Data, &H30)
         End Set
     End Property
     Public Property Move2_PP As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H31)
+            Return BitConverter.ToUInt16(Data, &H31)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H31)
+            BitConverter.GetBytes(value).CopyTo(Data, &H31)
         End Set
     End Property
     Public Property Move3_PP As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H32)
+            Return BitConverter.ToUInt16(Data, &H32)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H32)
+            BitConverter.GetBytes(value).CopyTo(Data, &H32)
         End Set
     End Property
     Public Property Move4_PP As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H33)
+            Return BitConverter.ToUInt16(Data, &H33)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H33)
+            BitConverter.GetBytes(value).CopyTo(Data, &H33)
         End Set
     End Property
     Public Property Move1_PPUps As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H34)
+            Return BitConverter.ToUInt16(Data, &H34)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H34)
+            BitConverter.GetBytes(value).CopyTo(Data, &H34)
         End Set
     End Property
     Public Property Move2_PPUps As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H35)
+            Return BitConverter.ToUInt16(Data, &H35)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H35)
+            BitConverter.GetBytes(value).CopyTo(Data, &H35)
         End Set
     End Property
     Public Property Move3_PPUps As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H36)
+            Return BitConverter.ToUInt16(Data, &H36)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H36)
+            BitConverter.GetBytes(value).CopyTo(Data, &H36)
         End Set
     End Property
     Public Property Move4_PPUps As Byte
         Get
-            Return BitConverter.ToUInt16(InputPK5, &H37)
+            Return BitConverter.ToUInt16(Data, &H37)
         End Get
         Set(ByVal value As Byte)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H37)
+            BitConverter.GetBytes(value).CopyTo(Data, &H37)
         End Set
     End Property
     Public Property BlocIV As UInteger
         Get
-            Return BitConverter.ToUInt32(InputPK5, &H38)
+            Return BitConverter.ToUInt32(Data, &H38)
         End Get
         Set(ByVal value As UInteger)
-            BitConverter.GetBytes(value).CopyTo(InputPK5, &H38)
+            BitConverter.GetBytes(value).CopyTo(Data, &H38)
         End Set
     End Property
     Public Property IV_HP As Byte
@@ -614,34 +614,34 @@
     End Property
     Public Property Hoenn1_Ribbons1 As Byte
         Get
-            Return InputPK5(&H3C)
+            Return Data(&H3C)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H3C) = value
+            Data(&H3C) = value
         End Set
     End Property
     Public Property Hoenn1_Ribbons2 As Byte
         Get
-            Return InputPK5(&H3D)
+            Return Data(&H3D)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H3D) = value
+            Data(&H3D) = value
         End Set
     End Property
     Public Property Hoenn2_Ribbons1 As Byte
         Get
-            Return InputPK5(&H3E)
+            Return Data(&H3E)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H3E) = value
+            Data(&H3E) = value
         End Set
     End Property
     Public Property Hoenn2_Ribbons2 As Byte
         Get
-            Return InputPK5(&H3F)
+            Return Data(&H3F)
         End Get
         Set(ByVal value As Byte)
-            InputPK5(&H3F) = value
+            Data(&H3F) = value
         End Set
     End Property
 #Region "Hoenn Ribbons"
@@ -904,82 +904,411 @@
 #End Region
     Public Property FatefulEncounter As Boolean
         Get
-            Return (InputPK5(&H40) And 1) = 1
+            Return (Data(&H40) And 1) = 1
         End Get
         Set(value As Boolean)
-            InputPK5(&H40) = CByte((InputPK5(&H40) And Not (&H1)) Or If(value, 1, 0))
+            Data(&H40) = CByte((Data(&H40) And Not (&H1)) Or If(value, 1, 0))
         End Set
     End Property
     Public Property Gender As Byte
         Get
-            Return (InputPK5(&H40) >> 1) And &H3
+            Return (Data(&H40) >> 1) And &H3
         End Get
         Set(value As Byte)
-            InputPK5(&H40) = CByte((InputPK5(&H40) And Not (&H6)) Or (value << 1))
+            Data(&H40) = CByte((Data(&H40) And Not (&H6)) Or (value << 1))
         End Set
     End Property
     Public Property Forms As Byte '{  set => Data[0x40] = (byte)((Data[0x40] & 0x07) | (value << 3)); }
         Get
-            Return (InputPK5(&H40) >> 3)
+            Return (Data(&H40) >> 3)
         End Get
         Set(value As Byte)
-            InputPK5(&H40) = CByte((InputPK5(&H40) And (&H7)) Or (value << 3))
+            Data(&H40) = CByte((Data(&H40) And (&H7)) Or (value << 3))
         End Set
     End Property
     Public Property Nature As Byte
         Get
-            Return InputPK5(&H41)
+            Return Data(&H41)
         End Get
         Set(value As Byte)
-            InputPK5(&H41) = CByte(value)
+            Data(&H41) = CByte(value)
         End Set
     End Property
     Public Property HA As Boolean
         Get
-            Return (InputPK5(&H42) And 1) = 1
+            Return (Data(&H42) And 1) = 1
         End Get
         Set(value As Boolean)
-            InputPK5(&H42) = CByte((InputPK5(&H40) And Not (&H1)) Or If(value, 1, 0))
+            Data(&H42) = CByte((Data(&H40) And Not (&H1)) Or If(value, 1, 0))
         End Set
     End Property
     Public Property N As Boolean
         Get
-            Return (InputPK5(&H42) And 2) = 2
+            Return (Data(&H42) And 2) = 2
         End Get
         Set(value As Boolean)
-            InputPK5(&H42) = CByte((InputPK5(&H40) And Not (&H2)) Or If(value, 2, 0))
+            Data(&H42) = CByte((Data(&H40) And Not (&H2)) Or If(value, 2, 0))
         End Set
     End Property
     '00
     '00 00 00 00
     Public Property Nickname As String '0x14
+        Get
+            Return GetString(Data, &H48, 20)
+        End Get
+        Set(ByVal value As String)
+            SetString(value, 10).CopyTo(Data, &H48)
+        End Set
+    End Property
     'FF FF
     '00
     Public Property Origin As Byte
-    Public Property SinnohRibbons3(1) As Byte
-    Public Property SinnohRibbons4(1) As Byte
+        Get
+            Return Data(&H5F)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H5F) = CByte(value)
+        End Set
+    End Property
+    Public Property Sinnoh3_Ribbons1 As Byte
+        Get
+            Return Data(&H60)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H60) = value
+        End Set
+    End Property
+    Public Property Sinnoh3_Ribbons2 As Byte
+        Get
+            Return Data(&H61)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H61) = value
+        End Set
+    End Property
+    Public Property Sinnoh4_Ribbons1 As Byte
+        Get
+            Return Data(&H62)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H62) = value
+        End Set
+    End Property
+    Public Property Sinnoh4_Ribbons2 As Byte
+        Get
+            Return Data(&H63)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H63) = value
+        End Set
+    End Property
+#Region "Sinnoh Ribbons"
+    Public Property RibbonG4Cool As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 0)) = (1 << 0)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 0)) Or If(value, 1 << 0, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CoolGreat As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 1)) = (1 << 1)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 1)) Or If(value, 1 << 1, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CoolUltra As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 2)) = (1 << 2)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 2)) Or If(value, 1 << 2, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CoolMaster As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 3)) = (1 << 3)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 3)) Or If(value, 1 << 3, 0))
+        End Set
+    End Property
+    Public Property RibbonG4Beauty As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 4)) = (1 << 4)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 4)) Or If(value, 1 << 4, 0))
+        End Set
+    End Property
+    Public Property RibbonG4BeautyGreat As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 5)) = (1 << 5)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 5)) Or If(value, 1 << 5, 0))
+        End Set
+    End Property
+    Public Property RibbonG4BeautyUltra As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 6)) = (1 << 6)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 6)) Or If(value, 1 << 6, 0))
+        End Set
+    End Property
+    Public Property RibbonG4BeautyMaster As Boolean
+        Get
+            Return (Sinnoh3_Ribbons1 And (1 << 7)) = (1 << 7)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons1 = CByte((Sinnoh3_Ribbons1 And Not (1 << 7)) Or If(value, 1 << 7, 0))
+        End Set
+    End Property
+    Public Property RibbonG4Cute As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 0)) = (1 << 0)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 0)) Or If(value, 1 << 0, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CuteGreat As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 1)) = (1 << 1)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 1)) Or If(value, 1 << 1, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CuteUltra As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 2)) = (1 << 2)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 2)) Or If(value, 1 << 2, 0))
+        End Set
+    End Property
+    Public Property RibbonG4CuteMaster As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 3)) = (1 << 3)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 3)) Or If(value, 1 << 3, 0))
+        End Set
+    End Property
+    Public Property RibbonG4Smart As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 4)) = (1 << 4)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 4)) Or If(value, 1 << 4, 0))
+        End Set
+    End Property
+    Public Property RibbonG4SmartGreat As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 5)) = (1 << 5)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 5)) Or If(value, 1 << 5, 0))
+        End Set
+    End Property
+    Public Property RibbonG4SmartUltra As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 6)) = (1 << 6)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 6)) Or If(value, 1 << 6, 0))
+        End Set
+    End Property
+    Public Property RibbonG4SmartMaster As Boolean
+        Get
+            Return (Sinnoh3_Ribbons2 And (1 << 7)) = (1 << 7)
+        End Get
+        Set(value As Boolean)
+            Sinnoh3_Ribbons2 = CByte((Sinnoh3_Ribbons2 And Not (1 << 7)) Or If(value, 1 << 7, 0))
+        End Set
+    End Property
+    Public Property RibbonG4Tough As Boolean
+        Get
+            Return (Sinnoh4_Ribbons1 And (1 << 0)) = (1 << 0)
+        End Get
+        Set(value As Boolean)
+            Sinnoh4_Ribbons1 = CByte((Sinnoh4_Ribbons1 And Not (1 << 0)) Or If(value, 1 << 0, 0))
+        End Set
+    End Property
+    Public Property RibbonG4ToughGreat As Boolean
+        Get
+            Return (Sinnoh4_Ribbons1 And (1 << 1)) = (1 << 1)
+        End Get
+        Set(value As Boolean)
+            Sinnoh4_Ribbons1 = CByte((Sinnoh4_Ribbons1 And Not (1 << 1)) Or If(value, 1 << 1, 0))
+        End Set
+    End Property
+    Public Property RibbonG4ToughUltra As Boolean
+        Get
+            Return (Sinnoh4_Ribbons1 And (1 << 2)) = (1 << 2)
+        End Get
+        Set(value As Boolean)
+            Sinnoh4_Ribbons1 = CByte((Sinnoh4_Ribbons1 And Not (1 << 2)) Or If(value, 1 << 2, 0))
+        End Set
+    End Property
+    Public Property RibbonG4ToughMaster As Boolean
+        Get
+            Return (Sinnoh4_Ribbons1 And (1 << 3)) = (1 << 3)
+        End Get
+        Set(value As Boolean)
+            Sinnoh4_Ribbons1 = CByte((Sinnoh4_Ribbons1 And Not (1 << 3)) Or If(value, 1 << 3, 0))
+        End Set
+    End Property
+#End Region
     '00 00 00 00
     Public Property OT_Name As String '0xE
+        Get
+            Return GetString(Data, &H68, &HE)
+        End Get
+        Set(ByVal value As String)
+            SetString(value, 7).CopyTo(Data, &H68)
+        End Set
+    End Property
     'FF FF
     Public Property EggYear As Byte
+        Get
+            Return Data(&H78)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H78) = CByte(value)
+        End Set
+    End Property
     Public Property EggMonth As Byte
+        Get
+            Return Data(&H79)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H79) = CByte(value)
+        End Set
+    End Property
     Public Property EggDay As Byte
+        Get
+            Return Data(&H7A)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H7A) = CByte(value)
+        End Set
+    End Property
     Public Property MetYear As Byte
+        Get
+            Return Data(&H7B)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H7B) = CByte(value)
+        End Set
+    End Property
     Public Property MetMonth As Byte
+        Get
+            Return Data(&H7C)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H7C) = CByte(value)
+        End Set
+    End Property
     Public Property MetDay As Byte
+        Get
+            Return Data(&H7D)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H7D) = CByte(value)
+        End Set
+    End Property
     Public Property EggMet As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H7E)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H7E)
+        End Set
+    End Property
     Public Property Met As UShort
-    Public Property Pokerus As Boolean
+        Get
+            Return BitConverter.ToUInt16(Data, &H80)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H80)
+        End Set
+    End Property
+    Public Property Pokerus As Byte
+        Get
+            Return Data(&H82)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H82) = CByte(value)
+        End Set
+    End Property
+    Public Property Pokerus_Strain As Byte
+        Get
+            Return Pokerus >> 4
+        End Get
+        Set(ByVal value As Byte)
+            Pokerus = CByte((Pokerus And &HF) Or (value << 4))
+        End Set
+    End Property
+    Public Property Pokerus_Days As Byte
+        Get
+            Return (Pokerus And &HF)
+        End Get
+        Set(ByVal value As Byte)
+            Pokerus = CByte((Pokerus And Not (&HF)) And value)
+        End Set
+    End Property
+
     Public Property Ball As Byte
-    Public Property BlocOTG As Byte
+        Get
+            Return Data(&H83)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H83) = CByte(value)
+        End Set
+    End Property
+    Public Property OT_Gender As Byte
+        Get
+            Return Data(&H84) >> 7
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H84) = CByte((Data(&H84) And Not &H80) Or (value << 7))
+        End Set
+    End Property
+    Public Property Met_Level As Byte
+        Get
+            Return Data(&H84) And Not (&H80)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H84) = CByte((Data(&H84) And &H80) Or value)
+        End Set
+    End Property
     Public Property EncounterType As Byte
+        Get
+            Return Data(&H85)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H85) = CByte(value)
+        End Set
+    End Property
     '00 00
-    Public Property Status As Byte
-    '00
-    '00 00
+    'Public Property Status As Byte
+    ''00
+    ''00 00
     Public Property Level As Byte
-    Public Property Seals As Byte
-    Public Property CurrentStats(5) As UShort '{Current HP, Max HP, Atk, Def, Spe, SpA, SpD}
-    Public Property Mail As String '0x2A + OT_Name
-    '00 00 00 00 00 00 00 00
+        Get
+            Return Data(&H8C)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H8C) = CByte(value)
+        End Set
+    End Property
+    'Public Property Seals As Byte
+    'Public Property CurrentStats(5) As UShort '{Current HP, Max HP, Atk, Def, Spe, SpA, SpD}
+    'Public Property Mail As String '0x2A + OT_Name
+    ''00 00 00 00 00 00 00 00
 End Class

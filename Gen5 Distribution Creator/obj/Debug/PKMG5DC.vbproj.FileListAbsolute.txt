@@ -10,3 +10,4 @@ C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.vbproj.CoreCompileInputs.cache
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.exe
 C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.pdb
+C:\Users\Kochen Family\source\repos\New folder\PKMG5DC\Gen5 Distribution Creator\obj\Debug\PKMG5DC.vbprojAssemblyReference.cache
