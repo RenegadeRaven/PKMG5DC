@@ -4,41 +4,26 @@ Imports Newtonsoft.Json.Linq
 
 Public Class Main
 #Region "Variables"
-    Dim apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
-    Dim res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
-    Dim TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
+    ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
+    ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
+    ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
     Public Shared Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
-    Dim Gen As Byte = 5
-    Dim card1 As New Card5
-    Dim langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A}
-    Dim langs As Byte() = {&H2, &H3, &H4, &H5, &H6}
+    ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
+    ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H6} 'List of Language values
 #End Region
 
-    Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'CheckGen()
+    Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         CheckTicket()
         UpdateChk()
-        Dim pgf As String = "3E0200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000470065007400200074006800650020004C00690062006500720074007900200050006100730073002100FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000403DB07FE074402010000000000000000000000000000000000000000000000"
-        ''''
-        With card1
-            .numberOfCards = &H8
-            .wonderCard = {pgf, pgf, pgf, pgf, pgf, pgf, pgf, pgf}
-            .gameCompatability = {&HF0, &HC0, &H30, &H20, &H10, &HA0, &H50, &HD0}
-
-            .language = {langs(0), langs(1), langs(2), langs(3), langs(4), langs(0), langs(0), &H8}
-            .langChecksum = {langCksm(0), langCksm(1), langCksm(2), langCksm(3), langCksm(4), langCksm(5), langCksm(5), &HA986}
-            .startYear = &H7E4
-            .startMonth = &H3
-            .startDay = &H14
-            .endYear = .startYear + 1
-            .endMonth = .startMonth
-            .endDay = .startDay
-        End With
-        card1.endMonth = 4
-        Output()
+        Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "cd " & Local & "\tools
+    ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "cd " & Local & "\tools
+    ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "cd " & Local & "\tools
+    rd /S/Q data
+    del arm9.bin arm7.bin banner.bin header.bin"}}
+        CreateFiles(tools)
     End Sub
-    Private Sub Form4_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Dim myIniFile As New IniFile
         With myIniFile
             .Filename = Local & "\settings.ini"
@@ -53,15 +38,6 @@ Public Class Main
             End If
         End With
     End Sub
-
-    'Private Sub CheckGen()
-    '    Dim n As String = Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName)
-    '    If n.Contains("G4") Then
-    '        Gen = 4
-    '    Else
-    '        Gen = 5
-    '    End If
-    'End Sub
 #Region "Esentials"
     'Checks For Update
     Private Sub UpdateChk()
@@ -74,8 +50,8 @@ Public Class Main
 #If DEBUG Then
         File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
         File.WriteAllText(apppath & "/version.json", "{
-" & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
-}")
+    " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
+    }")
         If My.Computer.Network.IsAvailable Then
             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
@@ -89,31 +65,31 @@ Public Class Main
         lklb_Update.Hide()
         MenuStrip1.Location = New Point(0, 0)
 #Else
-        File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
-        Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
-        Me.Text = "PKMG5DC (" & dat & ")"
-        If My.Computer.Network.IsAvailable Then
-            Try
-                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/Resources/date.txt", TempPath & "\dt.txt")
-            Catch
-                File.WriteAllText(TempPath & "\dt.txt", " ")
-            End Try
-            Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
-            Dim dtt As String = Reader.ReadToEnd
-            Reader.Close()
-            File.Delete(TempPath & "\dt.txt")
-            If dat <> dtt Then
-                lklb_Update.Text = "New Update Available! " & dtt
-                MenuStrip1.Location = New Point(170, 0)
-                lklb_Update.Show()
+            File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
+            Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
+            Me.Text = "PKMG5DC (" & dat & ")"
+            If My.Computer.Network.IsAvailable Then
+                Try
+                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/Resources/date.txt", TempPath & "\dt.txt")
+                Catch
+                    File.WriteAllText(TempPath & "\dt.txt", " ")
+                End Try
+                Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
+                Dim dtt As String = Reader.ReadToEnd
+                Reader.Close()
+                File.Delete(TempPath & "\dt.txt")
+                If dat <> dtt Then
+                    lklb_Update.Text = "New Update Available! " & dtt
+                    MenuStrip1.Location = New Point(170, 0)
+                    lklb_Update.Show()
+                Else
+                    lklb_Update.Hide()
+                    MenuStrip1.Location = New Point(0, 0)
+                End If
             Else
                 lklb_Update.Hide()
-                MenuStrip1.Location = New Point(0, 0)
             End If
-        Else
-            lklb_Update.Hide()
-        End If
-        File.Delete(TempPath & "\date.txt")
+            File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
@@ -121,10 +97,12 @@ Public Class Main
             Process.Start("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
             MsgBox("No Internet connection!
-You can not update at the moment.", vbOKOnly, "Error 404")
+    You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
 
+#End Region
+#Region "Startup"
 
     Private Sub CreateFolders(ByVal dirs As String())
         Try
@@ -186,8 +164,6 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             End If
         End With
     End Sub
-#End Region
-#Region "Startup"
     'Checks for Ticket
     Private Sub CheckTicket()
         If My.Settings.ticket <> Nothing Then
@@ -259,56 +235,14 @@ You can not update at the moment.", vbOKOnly, "Error 404")
             End If
         End If
     End Sub
+
+    'Private Sub CheckGen()
+    '    Dim n As String = Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName)
+    '    If n.Contains("G4") Then
+    '        Gen = 4
+    '    Else
+    '        Gen = 5
+    '    End If
+    'End Sub
 #End Region
-
-    Private Sub Output()
-        Dim cc As String = Hex_Zeros(Hex(card1.numberOfCards), 2) & "000000"
-        For n = 0 To card1.numberOfCards - 1 Step 1
-            cc &= card1.wonderCard(n) & "0000" & Hex(card1.gameCompatability(n)) & "00"
-            For i = 0 To &H1F7 Step 1
-                cc &= "FF"
-            Next i
-            cc &= "FFFF00" & Hex_Zeros(card1.language(n), 2) & "0000" & Little_Endian(Hex(card1.langChecksum(n)), 4)
-        Next n
-        For i = 0 To (&H13AF - ((card1.numberOfCards - 1) * &H2D0)) Step 1 '0x1eef
-            cc &= "00"
-        Next i
-        For i = 0 To card1.numberOfCards - 1 Step 1
-            cc &= Little_Endian(Hex(card1.startYear), 4) & Hex_Zeros(Hex(card1.startMonth), 2) & Hex_Zeros(Hex(card1.startDay), 2) &
-        Little_Endian(Hex(card1.endYear), 4) & Hex_Zeros(Hex(card1.endMonth), 2) & Hex_Zeros(Hex(card1.endDay), 2)
-        Next i
-        For i = 0 To (&H3B - ((card1.numberOfCards - 1) * &H8)) Step 1 '0x5b
-            cc &= "00"
-        Next i
-        cc &= "1400000000000000"
-        RichTextBox1.Text = cc
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Try
-            Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "cd " & Local & "\tools
-ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "cd " & Local & "\tools
-ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "cd " & Local & "\tools
-rd /S/Q data
-del arm9.bin arm7.bin banner.bin header.bin"}}
-            CreateFiles(tools)
-
-            '            File.WriteAllBytes(Local & "\tools\ndstool.exe", My.Resources.ndstool)
-            '            File.WriteAllText(Local & "\tools\extract.bat", "cd " & Local & "\tools
-            'ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
-            '            File.WriteAllText(Local & "\tools\compile.bat", "cd " & Local & "\tools
-            'ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin")
-            '            File.WriteAllText(Local & "\tools\clean.bat", "cd " & Local & "\tools
-            'rd /S/Q data
-            'del arm9.bin arm7.bin banner.bin header.bin")
-            Process.Start(Local & "\tools\extract.bat").WaitForExit()
-            File.Delete(Local & "\tools\data\data.bin")
-            Save(Local & "\tools\data\data.bin", RichTextBox1.Text)
-            Process.Start(Local & "\tools\compile.bat").WaitForExit()
-            Process.Start(Local & "\tools\clean.bat").WaitForExit()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
 End Class

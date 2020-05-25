@@ -21,7 +21,7 @@
             Return Data(&H4)
         End Get
         Set(ByVal value As Byte)
-            Data(&H4) = CByte(value)
+            Data(&H4) = value
         End Set
     End Property
     '00 00 00
@@ -176,7 +176,7 @@
             Return Data(&HE)
         End Get
         Set(ByVal value As Byte)
-            Data(&HE) = CByte(value)
+            Data(&HE) = value
         End Set
     End Property
     '00
@@ -251,7 +251,7 @@
             Return Data(&H34)
         End Get
         Set(value As Byte)
-            Data(&H34) = CByte(value)
+            Data(&H34) = value
         End Set
     End Property
     Public Property Gender As Byte
@@ -259,7 +259,7 @@
             Return Data(&H35)
         End Get
         Set(value As Byte)
-            Data(&H35) = CByte(value)
+            Data(&H35) = value
         End Set
     End Property
     Public Property Ability As Byte
@@ -283,7 +283,7 @@
             Return BitConverter.ToUInt16(Data, &H38)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H38)
+            BitConverter.GetBytes(value).CopyTo(Data, &H38)
         End Set
     End Property
     Public Property Met As UShort
@@ -291,7 +291,7 @@
             Return BitConverter.ToUInt16(Data, &H3A)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H3A)
+            BitConverter.GetBytes(value).CopyTo(Data, &H3A)
         End Set
     End Property
     Public Property Level As Byte
@@ -299,12 +299,58 @@
             Return Data(&H5B)
         End Get
         Set(ByVal value As Byte)
-            Data(&H3C) = CByte(value)
-            Data(&H5B) = CByte(value)
+            Data(&H3C) = value
+            Data(&H5B) = value
         End Set
     End Property
-    Public Property ContestStats As String '0x5
-    Public Property Sheen As Byte
+    Public Property CV_Cool As Byte
+        Get
+            Return Data(&H3D)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H3D) = value
+        End Set
+    End Property
+    Public Property CV_Beauty As Byte
+        Get
+            Return Data(&H3E)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H3E) = value
+        End Set
+    End Property
+    Public Property CV_Cute As Byte
+        Get
+            Return Data(&H3F)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H3F) = value
+        End Set
+    End Property
+    Public Property CV_Smart As Byte
+        Get
+            Return Data(&H40)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H40) = value
+        End Set
+    End Property
+    Public Property CV_Tough As Byte
+        Get
+            Return Data(&H41)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H41) = value
+        End Set
+    End Property
+    Public Property CV_Sheen As Byte
+        Get
+            Return Data(&H42)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H42) = value
+        End Set
+    End Property
     Public Property IV_HP As Byte
         Get
             Return Data(&H43)
@@ -391,9 +437,30 @@
     End Property
     'FF FF
     '00 00
-    Public Property RecieveDay As Byte = 0
-    Public Property RecieveMonth As Byte = 0
-    Public Property RecieveYear As UShort = 0
+    Public Property RecieveDay As Byte
+        Get
+            Return Data(&HAC)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&HAC) = value
+        End Set
+    End Property
+    Public Property RecieveMonth As Byte
+        Get
+            Return Data(&HAD)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&HAD) = value
+        End Set
+    End Property
+    Public Property RecieveYear As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &HAE)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &HAE)
+        End Set
+    End Property
     Public Property CardID As UShort
         Get
             Return BitConverter.ToUInt16(Data, &HB0)

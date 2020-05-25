@@ -550,7 +550,7 @@
     End Property
     Public Property IV_HP As Byte
         Get
-            Return CByte((BlocIV >> 0) And &H1F)
+            Return (BlocIV >> 0) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 0)) Or (If(value > 31, 31UI, value) << 0))
@@ -558,7 +558,7 @@
     End Property
     Public Property IV_ATK As Byte
         Get
-            Return CByte((BlocIV >> 5) And &H1F)
+            Return (BlocIV >> 5) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 5)) Or (If(value > 31, 31UI, value) << 5))
@@ -566,7 +566,7 @@
     End Property
     Public Property IV_DEF As Byte
         Get
-            Return CByte((BlocIV >> 10) And &H1F)
+            Return (BlocIV >> 10) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 10)) Or (If(value > 31, 31UI, value) << 10))
@@ -574,7 +574,7 @@
     End Property
     Public Property IV_SPE As Byte
         Get
-            Return CByte((BlocIV >> 15) And &H1F)
+            Return (BlocIV >> 15) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 15)) Or (If(value > 31, 31UI, value) << 15))
@@ -582,7 +582,7 @@
     End Property
     Public Property IV_SPA As Byte
         Get
-            Return CByte((BlocIV >> 20) And &H1F)
+            Return (BlocIV >> 20) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 20)) Or (If(value > 31, 31UI, value) << 20))
@@ -590,7 +590,7 @@
     End Property
     Public Property IV_SPD As Byte
         Get
-            Return CByte((BlocIV >> 25) And &H1F)
+            Return (BlocIV >> 25) And &H1F
         End Get
         Set(value As Byte)
             BlocIV = ((BlocIV And Not (&H1FUI << 25)) Or (If(value > 31, 31UI, value) << 25))
@@ -931,7 +931,7 @@
             Return Data(&H41)
         End Get
         Set(value As Byte)
-            Data(&H41) = CByte(value)
+            Data(&H41) = value
         End Set
     End Property
     Public Property HA As Boolean
@@ -967,7 +967,7 @@
             Return Data(&H5F)
         End Get
         Set(ByVal value As Byte)
-            Data(&H5F) = CByte(value)
+            Data(&H5F) = value
         End Set
     End Property
     Public Property Sinnoh3_Ribbons1 As Byte
@@ -1179,7 +1179,7 @@
             Return Data(&H78)
         End Get
         Set(ByVal value As Byte)
-            Data(&H78) = CByte(value)
+            Data(&H78) = value
         End Set
     End Property
     Public Property EggMonth As Byte
@@ -1187,7 +1187,7 @@
             Return Data(&H79)
         End Get
         Set(ByVal value As Byte)
-            Data(&H79) = CByte(value)
+            Data(&H79) = value
         End Set
     End Property
     Public Property EggDay As Byte
@@ -1195,7 +1195,7 @@
             Return Data(&H7A)
         End Get
         Set(ByVal value As Byte)
-            Data(&H7A) = CByte(value)
+            Data(&H7A) = value
         End Set
     End Property
     Public Property MetYear As Byte
@@ -1203,7 +1203,7 @@
             Return Data(&H7B)
         End Get
         Set(ByVal value As Byte)
-            Data(&H7B) = CByte(value)
+            Data(&H7B) = value
         End Set
     End Property
     Public Property MetMonth As Byte
@@ -1211,7 +1211,7 @@
             Return Data(&H7C)
         End Get
         Set(ByVal value As Byte)
-            Data(&H7C) = CByte(value)
+            Data(&H7C) = value
         End Set
     End Property
     Public Property MetDay As Byte
@@ -1219,7 +1219,7 @@
             Return Data(&H7D)
         End Get
         Set(ByVal value As Byte)
-            Data(&H7D) = CByte(value)
+            Data(&H7D) = value
         End Set
     End Property
     Public Property EggMet As UShort
@@ -1227,7 +1227,7 @@
             Return BitConverter.ToUInt16(Data, &H7E)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H7E)
+            BitConverter.GetBytes(value).CopyTo(Data, &H7E)
         End Set
     End Property
     Public Property Met As UShort
@@ -1235,7 +1235,7 @@
             Return BitConverter.ToUInt16(Data, &H80)
         End Get
         Set(ByVal value As UShort)
-            BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H80)
+            BitConverter.GetBytes(value).CopyTo(Data, &H80)
         End Set
     End Property
     Public Property Pokerus As Byte
@@ -1243,7 +1243,7 @@
             Return Data(&H82)
         End Get
         Set(ByVal value As Byte)
-            Data(&H82) = CByte(value)
+            Data(&H82) = value
         End Set
     End Property
     Public Property Pokerus_Strain As Byte
@@ -1268,7 +1268,7 @@
             Return Data(&H83)
         End Get
         Set(ByVal value As Byte)
-            Data(&H83) = CByte(value)
+            Data(&H83) = value
         End Set
     End Property
     Public Property OT_Gender As Byte
@@ -1292,23 +1292,99 @@
             Return Data(&H85)
         End Get
         Set(ByVal value As Byte)
-            Data(&H85) = CByte(value)
+            Data(&H85) = value
         End Set
     End Property
     '00 00
-    'Public Property Status As Byte
-    ''00
-    ''00 00
+    Public Property Status As Byte
+        Get
+            Return Data(&H88)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H88) = value
+        End Set
+    End Property
+    '00
+    '00 00
     Public Property Level As Byte
         Get
             Return Data(&H8C)
         End Get
         Set(ByVal value As Byte)
-            Data(&H8C) = CByte(value)
+            Data(&H8C) = value
         End Set
     End Property
-    'Public Property Seals As Byte
-    'Public Property CurrentStats(5) As UShort '{Current HP, Max HP, Atk, Def, Spe, SpA, SpD}
-    'Public Property Mail As String '0x2A + OT_Name
-    ''00 00 00 00 00 00 00 00
+    Public Property Seals As Byte
+        Get
+            Return Data(&H8D)
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H8D) = value
+        End Set
+    End Property
+    Public Property Stat_CurrentHP As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H8E)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H8E)
+        End Set
+    End Property
+    Public Property Stat_MaxHP As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H90)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H90)
+        End Set
+    End Property
+    Public Property Stat_ATK As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H92)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H92)
+        End Set
+    End Property
+    Public Property Stat_DEF As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H94)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H94)
+        End Set
+    End Property
+    Public Property Stat_SPE As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H96)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H96)
+        End Set
+    End Property
+    Public Property Stat_SPA As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H98)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H98)
+        End Set
+    End Property
+    Public Property Stat_SPD As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H9A)
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H9A)
+        End Set
+    End Property
+    Public Property Mail As Byte() '0x2A + OT_Name
+        Get
+            Return Data.Skip(&H9C).Take(&H38).ToArray()
+        End Get
+        Set(ByVal value As Byte())
+            value.CopyTo(Data, &H9C)
+        End Set
+    End Property
+    '00 00 00 00 00 00 00 00
 End Class

@@ -79,7 +79,7 @@ Module Common
         Next
         Return txtTemp.ToString()
     End Function
-    Public Function GetString(data As Byte(), offset As Byte, count As Byte)
+    Public Function GetString(data As Byte(), offset As Byte, count As UShort)
         Return Encoding.Unicode.GetString(data, offset, count).Replace(ChrW(&HFFFF), "").Replace(ChrW(&H0), "")
     End Function
     Public Function SetString(ByVal value As String, ByVal maxLength As Integer)
