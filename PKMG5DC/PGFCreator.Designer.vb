@@ -35,7 +35,7 @@ Partial Class PGFCreator
         Me.lbl_Ability = New System.Windows.Forms.Label()
         Me.lbl_Species = New System.Windows.Forms.Label()
         Me.cb_CardType = New System.Windows.Forms.ComboBox()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.HoverInfo = New System.Windows.Forms.ToolTip(Me.components)
         Me.gb_Pokemon = New System.Windows.Forms.GroupBox()
         Me.cx_Origin = New System.Windows.Forms.CheckBox()
         Me.cx_Lang = New System.Windows.Forms.CheckBox()
@@ -64,7 +64,7 @@ Partial Class PGFCreator
         Me.tb_CardTitle = New System.Windows.Forms.TextBox()
         Me.gb_Power = New System.Windows.Forms.GroupBox()
         Me.nud_Power = New System.Windows.Forms.NumericUpDown()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbl_Simple1 = New System.Windows.Forms.Label()
         Me.gb_PKDetails.SuspendLayout()
         Me.gb_Pokemon.SuspendLayout()
         CType(Me.nud_Level, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,14 +81,14 @@ Partial Class PGFCreator
         Me.lbl_PK5Name.Location = New System.Drawing.Point(13, 22)
         Me.lbl_PK5Name.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.lbl_PK5Name.Name = "lbl_PK5Name"
-        Me.lbl_PK5Name.Size = New System.Drawing.Size(330, 17)
+        Me.lbl_PK5Name.Size = New System.Drawing.Size(282, 17)
         Me.lbl_PK5Name.TabIndex = 10
         Me.lbl_PK5Name.Text = "Open .pk5 ------->"
         Me.lbl_PK5Name.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btn_OpenPK5
         '
-        Me.btn_OpenPK5.Location = New System.Drawing.Point(345, 18)
+        Me.btn_OpenPK5.Location = New System.Drawing.Point(301, 19)
         Me.btn_OpenPK5.Name = "btn_OpenPK5"
         Me.btn_OpenPK5.Size = New System.Drawing.Size(75, 23)
         Me.btn_OpenPK5.TabIndex = 9
@@ -111,6 +111,7 @@ Partial Class PGFCreator
         Me.gb_PKDetails.TabIndex = 12
         Me.gb_PKDetails.TabStop = False
         Me.gb_PKDetails.Text = "Pokémon Info"
+        Me.gb_PKDetails.Visible = False
         '
         'lbl_Move4
         '
@@ -156,7 +157,7 @@ Partial Class PGFCreator
         Me.lbl_IVs.Size = New System.Drawing.Size(28, 13)
         Me.lbl_IVs.TabIndex = 3
         Me.lbl_IVs.Text = "IVs: "
-        Me.ToolTip1.SetToolTip(Me.lbl_IVs, "HP/Atk/Def/SpA/SpD/Spe")
+        Me.HoverInfo.SetToolTip(Me.lbl_IVs, "HP/Atk/Def/SpA/SpD/Spe")
         '
         'lbl_Natures
         '
@@ -218,7 +219,7 @@ Partial Class PGFCreator
         Me.gb_Pokemon.Controls.Add(Me.btn_OpenPK5)
         Me.gb_Pokemon.Location = New System.Drawing.Point(16, 59)
         Me.gb_Pokemon.Name = "gb_Pokemon"
-        Me.gb_Pokemon.Size = New System.Drawing.Size(435, 430)
+        Me.gb_Pokemon.Size = New System.Drawing.Size(402, 430)
         Me.gb_Pokemon.TabIndex = 14
         Me.gb_Pokemon.TabStop = False
         Me.gb_Pokemon.Text = "Pokémon"
@@ -226,7 +227,7 @@ Partial Class PGFCreator
         'cx_Origin
         '
         Me.cx_Origin.AutoSize = True
-        Me.cx_Origin.Location = New System.Drawing.Point(244, 158)
+        Me.cx_Origin.Location = New System.Drawing.Point(226, 158)
         Me.cx_Origin.Name = "cx_Origin"
         Me.cx_Origin.Size = New System.Drawing.Size(132, 17)
         Me.cx_Origin.TabIndex = 35
@@ -246,7 +247,7 @@ Partial Class PGFCreator
         'cx_IV
         '
         Me.cx_IV.AutoSize = True
-        Me.cx_IV.Location = New System.Drawing.Point(345, 119)
+        Me.cx_IV.Location = New System.Drawing.Point(307, 121)
         Me.cx_IV.Name = "cx_IV"
         Me.cx_IV.Size = New System.Drawing.Size(84, 17)
         Me.cx_IV.TabIndex = 33
@@ -256,7 +257,7 @@ Partial Class PGFCreator
         'cx_PID
         '
         Me.cx_PID.AutoSize = True
-        Me.cx_PID.Location = New System.Drawing.Point(244, 119)
+        Me.cx_PID.Location = New System.Drawing.Point(214, 121)
         Me.cx_PID.Name = "cx_PID"
         Me.cx_PID.Size = New System.Drawing.Size(87, 17)
         Me.cx_PID.TabIndex = 32
@@ -266,7 +267,7 @@ Partial Class PGFCreator
         'lbl_Nature
         '
         Me.lbl_Nature.AutoSize = True
-        Me.lbl_Nature.Location = New System.Drawing.Point(126, 105)
+        Me.lbl_Nature.Location = New System.Drawing.Point(110, 105)
         Me.lbl_Nature.Name = "lbl_Nature"
         Me.lbl_Nature.Size = New System.Drawing.Size(42, 13)
         Me.lbl_Nature.TabIndex = 31
@@ -277,7 +278,7 @@ Partial Class PGFCreator
         Me.cb_Nature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_Nature.FormattingEnabled = True
         Me.cb_Nature.Items.AddRange(New Object() {"Random", "Adamant", "Bashful", "Bold", "Brave", "Calm", "Careful", "Docile", "Gentle", "Hardy", "Hasty", "Impish", "Jolly", "Lax", "Lonely", "Mild", "Modest", "Naive", "Naughty", "Quiet", "Quirky", "Rash", "Relaxed", "Sassy", "Serious", "Timid"})
-        Me.cb_Nature.Location = New System.Drawing.Point(129, 119)
+        Me.cb_Nature.Location = New System.Drawing.Point(113, 119)
         Me.cb_Nature.Name = "cb_Nature"
         Me.cb_Nature.Size = New System.Drawing.Size(94, 21)
         Me.cb_Nature.TabIndex = 30
@@ -304,7 +305,7 @@ Partial Class PGFCreator
         'lbl_Level
         '
         Me.lbl_Level.AutoSize = True
-        Me.lbl_Level.Location = New System.Drawing.Point(356, 58)
+        Me.lbl_Level.Location = New System.Drawing.Point(311, 59)
         Me.lbl_Level.Name = "lbl_Level"
         Me.lbl_Level.Size = New System.Drawing.Size(36, 13)
         Me.lbl_Level.TabIndex = 23
@@ -312,7 +313,7 @@ Partial Class PGFCreator
         '
         'nud_Level
         '
-        Me.nud_Level.Location = New System.Drawing.Point(359, 72)
+        Me.nud_Level.Location = New System.Drawing.Point(314, 73)
         Me.nud_Level.Name = "nud_Level"
         Me.nud_Level.Size = New System.Drawing.Size(60, 20)
         Me.nud_Level.TabIndex = 22
@@ -320,7 +321,7 @@ Partial Class PGFCreator
         'lbl_OTGender
         '
         Me.lbl_OTGender.AutoSize = True
-        Me.lbl_OTGender.Location = New System.Drawing.Point(126, 58)
+        Me.lbl_OTGender.Location = New System.Drawing.Point(111, 58)
         Me.lbl_OTGender.Name = "lbl_OTGender"
         Me.lbl_OTGender.Size = New System.Drawing.Size(63, 13)
         Me.lbl_OTGender.TabIndex = 27
@@ -331,7 +332,7 @@ Partial Class PGFCreator
         Me.cb_OTGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_OTGender.FormattingEnabled = True
         Me.cb_OTGender.Items.AddRange(New Object() {"Male", "Female", "Recipient"})
-        Me.cb_OTGender.Location = New System.Drawing.Point(129, 72)
+        Me.cb_OTGender.Location = New System.Drawing.Point(114, 72)
         Me.cb_OTGender.Name = "cb_OTGender"
         Me.cb_OTGender.Size = New System.Drawing.Size(94, 21)
         Me.cb_OTGender.TabIndex = 26
@@ -358,7 +359,7 @@ Partial Class PGFCreator
         'lbl_AbilitySlot
         '
         Me.lbl_AbilitySlot.AutoSize = True
-        Me.lbl_AbilitySlot.Location = New System.Drawing.Point(241, 58)
+        Me.lbl_AbilitySlot.Location = New System.Drawing.Point(211, 58)
         Me.lbl_AbilitySlot.Name = "lbl_AbilitySlot"
         Me.lbl_AbilitySlot.Size = New System.Drawing.Size(37, 13)
         Me.lbl_AbilitySlot.TabIndex = 23
@@ -369,7 +370,7 @@ Partial Class PGFCreator
         Me.cb_AbilitySlot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_AbilitySlot.FormattingEnabled = True
         Me.cb_AbilitySlot.Items.AddRange(New Object() {"Ability 1", "Ability 2", "Hidden Ability", "Random (w/o HA)", "Random (w/ HA)"})
-        Me.cb_AbilitySlot.Location = New System.Drawing.Point(244, 72)
+        Me.cb_AbilitySlot.Location = New System.Drawing.Point(214, 72)
         Me.cb_AbilitySlot.Name = "cb_AbilitySlot"
         Me.cb_AbilitySlot.Size = New System.Drawing.Size(94, 21)
         Me.cb_AbilitySlot.TabIndex = 22
@@ -378,7 +379,7 @@ Partial Class PGFCreator
         '
         Me.gb_Item.Controls.Add(Me.lbl_Simple)
         Me.gb_Item.Controls.Add(Me.cb_Item)
-        Me.gb_Item.Location = New System.Drawing.Point(471, 59)
+        Me.gb_Item.Location = New System.Drawing.Point(440, 59)
         Me.gb_Item.Name = "gb_Item"
         Me.gb_Item.Size = New System.Drawing.Size(435, 430)
         Me.gb_Item.TabIndex = 15
@@ -398,6 +399,7 @@ Partial Class PGFCreator
         '
         'cb_Item
         '
+        Me.cb_Item.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cb_Item.FormattingEnabled = True
         Me.cb_Item.Location = New System.Drawing.Point(24, 18)
         Me.cb_Item.Name = "cb_Item"
@@ -407,7 +409,7 @@ Partial Class PGFCreator
         'lbl_CardID
         '
         Me.lbl_CardID.AutoSize = True
-        Me.lbl_CardID.Location = New System.Drawing.Point(387, 18)
+        Me.lbl_CardID.Location = New System.Drawing.Point(355, 18)
         Me.lbl_CardID.Name = "lbl_CardID"
         Me.lbl_CardID.Size = New System.Drawing.Size(46, 13)
         Me.lbl_CardID.TabIndex = 17
@@ -415,7 +417,7 @@ Partial Class PGFCreator
         '
         'nud_CardID
         '
-        Me.nud_CardID.Location = New System.Drawing.Point(390, 32)
+        Me.nud_CardID.Location = New System.Drawing.Point(358, 32)
         Me.nud_CardID.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.nud_CardID.Name = "nud_CardID"
         Me.nud_CardID.Size = New System.Drawing.Size(60, 20)
@@ -434,7 +436,7 @@ Partial Class PGFCreator
         '
         Me.btn_Done.Location = New System.Drawing.Point(16, 505)
         Me.btn_Done.Name = "btn_Done"
-        Me.btn_Done.Size = New System.Drawing.Size(435, 23)
+        Me.btn_Done.Size = New System.Drawing.Size(402, 23)
         Me.btn_Done.TabIndex = 19
         Me.btn_Done.Text = "Done"
         Me.btn_Done.UseVisualStyleBackColor = True
@@ -442,7 +444,7 @@ Partial Class PGFCreator
         'lbl_CardTitle
         '
         Me.lbl_CardTitle.AutoSize = True
-        Me.lbl_CardTitle.Location = New System.Drawing.Point(136, 18)
+        Me.lbl_CardTitle.Location = New System.Drawing.Point(121, 18)
         Me.lbl_CardTitle.Name = "lbl_CardTitle"
         Me.lbl_CardTitle.Size = New System.Drawing.Size(55, 13)
         Me.lbl_CardTitle.TabIndex = 21
@@ -450,7 +452,7 @@ Partial Class PGFCreator
         '
         'tb_CardTitle
         '
-        Me.tb_CardTitle.Location = New System.Drawing.Point(137, 32)
+        Me.tb_CardTitle.Location = New System.Drawing.Point(122, 32)
         Me.tb_CardTitle.MaxLength = 36
         Me.tb_CardTitle.Name = "tb_CardTitle"
         Me.tb_CardTitle.Size = New System.Drawing.Size(224, 20)
@@ -459,8 +461,8 @@ Partial Class PGFCreator
         'gb_Power
         '
         Me.gb_Power.Controls.Add(Me.nud_Power)
-        Me.gb_Power.Controls.Add(Me.Label1)
-        Me.gb_Power.Location = New System.Drawing.Point(922, 59)
+        Me.gb_Power.Controls.Add(Me.lbl_Simple1)
+        Me.gb_Power.Location = New System.Drawing.Point(881, 59)
         Me.gb_Power.Name = "gb_Power"
         Me.gb_Power.Size = New System.Drawing.Size(435, 430)
         Me.gb_Power.TabIndex = 16
@@ -475,22 +477,22 @@ Partial Class PGFCreator
         Me.nud_Power.Size = New System.Drawing.Size(60, 20)
         Me.nud_Power.TabIndex = 17
         '
-        'Label1
+        'lbl_Simple1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.SystemColors.AppWorkspace
-        Me.Label1.Location = New System.Drawing.Point(161, 200)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(98, 26)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "That's all" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pretty simple isn't it."
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Simple1.AutoSize = True
+        Me.lbl_Simple1.ForeColor = System.Drawing.SystemColors.AppWorkspace
+        Me.lbl_Simple1.Location = New System.Drawing.Point(161, 200)
+        Me.lbl_Simple1.Name = "lbl_Simple1"
+        Me.lbl_Simple1.Size = New System.Drawing.Size(98, 26)
+        Me.lbl_Simple1.TabIndex = 1
+        Me.lbl_Simple1.Text = "That's all" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pretty simple isn't it."
+        Me.lbl_Simple1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PGFCreator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1371, 540)
+        Me.ClientSize = New System.Drawing.Size(1328, 540)
         Me.Controls.Add(Me.gb_Power)
         Me.Controls.Add(Me.lbl_CardTitle)
         Me.Controls.Add(Me.tb_CardTitle)
@@ -531,7 +533,7 @@ Partial Class PGFCreator
     Friend WithEvents lbl_IVs As Label
     Friend WithEvents lbl_Natures As Label
     Friend WithEvents lbl_Ability As Label
-    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents HoverInfo As ToolTip
     Friend WithEvents gb_Pokemon As GroupBox
     Friend WithEvents gb_Item As GroupBox
     Friend WithEvents cb_Item As ComboBox
@@ -560,5 +562,5 @@ Partial Class PGFCreator
     Friend WithEvents lbl_Simple As Label
     Friend WithEvents gb_Power As GroupBox
     Friend WithEvents nud_Power As NumericUpDown
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lbl_Simple1 As Label
 End Class

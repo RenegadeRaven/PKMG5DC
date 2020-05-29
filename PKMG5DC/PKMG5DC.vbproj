@@ -128,10 +128,10 @@
     <None Include="Form3.vb">
       <SubType>Form</SubType>
     </None>
-    <Compile Include="Main.Designer.vb">
-      <DependentUpon>Main.vb</DependentUpon>
+    <Compile Include="Main5.Designer.vb">
+      <DependentUpon>Main5.vb</DependentUpon>
     </Compile>
-    <Compile Include="Main.vb">
+    <Compile Include="Main5.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IniFile.vb" />
@@ -154,10 +154,10 @@
     <Compile Include="options.Designer.vb">
       <DependentUpon>options.vb</DependentUpon>
     </Compile>
-    <Compile Include="options.vb">
+    <None Include="options.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PCD.vb" />
+    </None>
+    <None Include="PCD.vb" />
     <Compile Include="PGF.vb" />
     <Compile Include="PGFCreator.Designer.vb">
       <DependentUpon>PGFCreator.vb</DependentUpon>
@@ -182,8 +182,8 @@
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.vb</DependentUpon>
+    <EmbeddedResource Include="Main5.resx">
+      <DependentUpon>Main5.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

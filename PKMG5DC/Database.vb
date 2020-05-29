@@ -2088,12 +2088,14 @@ New Ability With {.ID = 164, .Name = “Teravolt”}
     Public Sub PopulateItems(Control As Object, Optional Ball As Boolean = False)
         Dim list As List(Of Items) = ItemList()
         For Each i As Items In list
-            If Ball = True Then
-                If i.IsBall = True Then
+            If i.Name <> "unknown" Then
+                If Ball = True Then
+                    If i.IsBall = True Then
+                        Control.Items.Add(i.Name)
+                    End If
+                Else
                     Control.Items.Add(i.Name)
                 End If
-            Else
-                Control.Items.Add(i.Name)
             End If
         Next
     End Sub

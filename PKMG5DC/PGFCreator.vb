@@ -7,9 +7,9 @@ Public Class PGFCreator
         "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"} 'List of Natures
     Private Sub PGFCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If DEBUG Then
-        Me.Size = New Size(1387, 579)
+        Me.Size = New Size(1344, 579)
 #Else
-            Me.Size = New Size(483, 579)
+            Me.Size = New Size(452, 579)
             cb_CardType.Items.Remove("Pass Power")
 #End If
         PopulateItems(cb_Item)
@@ -27,6 +27,28 @@ Public Class PGFCreator
         cx_Lang.Checked = True
         cx_Origin.Checked = True
         cb_Item.SelectedIndex = 0
+        WC.EventTitle = ""
+        EnDisAblePKM(False)
+    End Sub
+
+    'Enables/Disables controls until a .pk5 is given
+    Private Sub EnDisAblePKM(Enable As Boolean)
+        cb_AbilitySlot.Enabled = Enable
+        cb_Gender.Enabled = Enable
+        cb_Nature.Enabled = Enable
+        cb_OTGender.Enabled = Enable
+        cb_Shiny.Enabled = Enable
+        cx_IV.Enabled = Enable
+        cx_Lang.Enabled = Enable
+        cx_Origin.Enabled = Enable
+        cx_PID.Enabled = Enable
+        nud_Level.Enabled = Enable
+        lbl_AbilitySlot.Enabled = Enable
+        lbl_Gender.Enabled = Enable
+        lbl_Level.Enabled = Enable
+        lbl_Nature.Enabled = Enable
+        lbl_OTGender.Enabled = Enable
+        lbl_Shiny.Enabled = Enable
     End Sub
 
     'Updates the WC with selected settings
@@ -40,15 +62,16 @@ Public Class PGFCreator
         cx_PID_CheckedChanged(sender, e)
         cx_IV_CheckedChanged(sender, e)
         cx_Lang_CheckedChanged(sender, e)
-        cx_Origin_CheckedChanged(sender, e)
+        Cx_Origin_CheckedChanged(sender, e)
     End Sub
 
     'Grabs values from PK5
     Private Sub GrabValues()
-        Try
-            With WC
+        'Try
+        With WC
                 Select Case WC.CardType
-                    Case 1
+                Case 1
+                    If lbl_PK5Name.Text <> "Open .pk5 ------->" Then
                         .TID = InputPK5.TID
                         .SID = InputPK5.SID
                         If cx_Origin.Checked = False Then .Origin = InputPK5.Origin
@@ -78,15 +101,14 @@ Public Class PGFCreator
                         .Level = InputPK5.Level
                         ConvertValues()
                         Desc()
-                    Case 2
-                        .TID = GetItemID(cb_Item.Text)
-                    Case 3
+                    End If
+                Case Else
                 End Select
-                .CardFrom = &H44
-                .Status = 1
+                WC.CardFrom = &H44
+                WC.Status = 1
             End With
-        Catch ex As Exception
-        End Try
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     'Converts value format
@@ -127,9 +149,68 @@ Public Class PGFCreator
             TypeMove(lbl_Move2, lbl_Move2.Text)
             TypeMove(lbl_Move3, lbl_Move3.Text)
             TypeMove(lbl_Move4, lbl_Move4.Text)
-            Me.Refresh()
+            gb_PKDetails.Visible = True
         End With
     End Sub
+
+    'Figures out Language
+    Private Function Language(id As Byte)
+        Select Case id
+            Case &H1
+                Return "日本語 (Japan)"
+            Case &H2
+                Return "English (US/UK/AU)"
+            Case &H3
+                Return "Français (France/Québec)"
+            Case &H4
+                Return "Italiano (Italy)"
+            Case &H5
+                Return "Deutsch (Germany)"
+            Case &H7
+                Return "Español (Spain/Latin Americas)"
+            Case &H8
+                Return "한국어 (South Korea)"
+            Case Else
+                Return ""
+        End Select
+    End Function
+    'Figures out Origin
+    Private Function Origin(id As Byte)
+        Select Case id
+            Case &H1
+                Return "Sapphire"
+            Case &H2
+                Return "Ruby"
+            Case &H3
+                Return "Emerald"
+            Case &H4
+                Return "FireRed"
+            Case &H5
+                Return "LeafGreen"
+            Case &HF
+                Return "Colosseum/XD"
+            Case &HA
+                Return "Diamond"
+            Case &HB
+                Return "Pearl"
+            Case &HC
+                Return "Platinum"
+            Case &H7
+                Return "HeartGold"
+            Case &H8
+                Return "SoulSilver"
+            Case &H14
+                Return "White"
+            Case &H15
+                Return "Black"
+            Case &H16
+                Return "White 2"
+            Case &H17
+                Return "Black 2"
+            Case Else
+                Return ""
+        End Select
+    End Function
 #Region "Controls"
     'Change Card Type
     Private Sub Cb_CardType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_CardType.SelectedIndexChanged
@@ -183,6 +264,7 @@ Public Class PGFCreator
             lbl_PK5Name.Text = myFile
             InputPK5.Data = File.ReadAllBytes(OpenFile.FileName)
         End If
+        EnDisAblePKM(True)
         GrabValues()
         UpdateValues(sender, e)
     End Sub
@@ -233,9 +315,12 @@ Public Class PGFCreator
             Case True
                 WC.PID = InputPK5.PID
                 cx_PID.Text = "Set PID"
+                HoverInfo.SetToolTip(cx_PID, "PID will be fixed To the PID from the .pk5
+PID: " & Hex(InputPK5.PID))
             Case False
                 WC.PID = &H0
                 cx_PID.Text = "Random PID"
+                HoverInfo.SetToolTip(cx_PID, "PID will be randomized upon recieval in-game")
         End Select
     End Sub
 
@@ -250,6 +335,8 @@ Public Class PGFCreator
                 WC.IV_SPA = InputPK5.IV_SPA
                 WC.IV_SPD = InputPK5.IV_SPD
                 cx_IV.Text = "Set IVs"
+                HoverInfo.SetToolTip(cx_IV, "IVs will be fixed to the IVs from the .pk5
+" & lbl_IVs.Text)
             Case False
                 WC.IV_HP = &HFF
                 WC.IV_ATK = &HFF
@@ -258,6 +345,7 @@ Public Class PGFCreator
                 WC.IV_SPA = &HFF
                 WC.IV_SPD = &HFF
                 cx_IV.Text = "Random IVs"
+                HoverInfo.SetToolTip(cx_IV, "IVs will be randomized upon recieval in-game")
         End Select
     End Sub
 
@@ -267,9 +355,12 @@ Public Class PGFCreator
             Case True
                 WC.Language = &H0
                 cx_Lang.Text = "Recipient Language"
+                HoverInfo.SetToolTip(cx_Lang, "Language will be the recieving game's language")
             Case False
                 WC.Language = InputPK5.Language
                 cx_Lang.Text = "Set Language"
+                HoverInfo.SetToolTip(cx_Lang, "Language will be fixed to the language from the .pk5
+Language: " & Language(InputPK5.Language))
         End Select
     End Sub
 
@@ -278,27 +369,32 @@ Public Class PGFCreator
         Select Case cx_Origin.Checked
             Case True
                 WC.Origin = &H0
-                cx_Lang.Text = "Recipient Origin Game"
+                cx_Origin.Text = "Recipient Origin Game"
+                HoverInfo.SetToolTip(cx_Origin, "Origin will be the recieving game's origin")
             Case False
                 WC.Origin = InputPK5.Origin
-                cx_Lang.Text = "Set Origin Game"
+                cx_Origin.Text = "Set Origin Game"
+                HoverInfo.SetToolTip(cx_Origin, "Origin will be fixed to the origin from the .pk5
+Game: " & Origin(InputPK5.Origin))
         End Select
     End Sub
 
     'Choose Item
     Private Sub Cb_Item_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Item.SelectedIndexChanged
         WC.TID = GetItemID(cb_Item.Text)
+        GrabValues()
     End Sub
 
     'Choose Pass Power ID
     'No Known Info on this
     Private Sub Nud_Power_ValueChanged(sender As Object, e As EventArgs) Handles nud_Power.ValueChanged
         WC.TID = nud_Power.Value
+        GrabValues()
     End Sub
 
     'Output Button
     Private Sub Btn_Done_Click(sender As Object, e As EventArgs) Handles btn_Done.Click
-        My.Computer.FileSystem.WriteAllBytes(Main.Local & "\output.pgf", WC.Data, False)
+        My.Computer.FileSystem.WriteAllBytes(Main5.Local & "\output.pgf", WC.Data, False)
     End Sub
 #End Region
 End Class

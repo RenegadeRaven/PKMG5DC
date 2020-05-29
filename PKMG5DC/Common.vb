@@ -66,10 +66,10 @@ Module Common
         Next i
         Return (bOutput)
     End Function
-    Public Sub Save(myFile, data)
-        Dim myBytes As Byte() = HexStringToByteArray(Main.RichTextBox1.Text)
-        My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
-    End Sub
+    'Public Sub Save(myFile, data)
+    '    Dim myBytes As Byte() = HexStringToByteArray(Main5.RichTextBox1.Text)
+    '    My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
+    'End Sub
 
     Public Function ByteArrayToHexString(ByVal myFile As String)
         Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)

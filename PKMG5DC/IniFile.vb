@@ -16,8 +16,6 @@ Public Class IniFile
     Private TmpStringInhaltKomplett As New StringBuilder
     Private StringIniFile As String
 
-
-
     Public Property Filename() As String
         Get
             Return _strFileName
@@ -69,11 +67,10 @@ Public Class IniFile
                     Try
                         tmpStringArguments = tmpStringLine.Split("=")
                         _dr = _ds.Tables(0).NewRow
-                        _dr("Key") = tmpStringArguments(0)
-                        _dr("Value") = tmpStringArguments(1)
-                        _ds.Tables(0).Rows.Add(_dr)
+                        _dr("Key") = tmpStringArguments(LBound(tmpStringArguments))
+                        _dr("Value") = tmpStringArguments(UBound(tmpStringArguments))
+                        If _dr("Key") <> "" Then _ds.Tables(0).Rows.Add(_dr)
                     Catch ex As Exception
-
                     End Try
                 End If
                 If tmpStringLine.StartsWith(_strIniArgumentsBegins) Then

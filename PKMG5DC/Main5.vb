@@ -2,14 +2,17 @@
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 
-Public Class Main
+Public Class Main5
 #Region "Variables"
-    ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
-    ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
-    ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
-    Public Shared Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
+    Public Shared ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
+    Public Shared ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
+    Public Shared ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
+    Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
     ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
     ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H6} 'List of Language values
+    Dim mySettings As New IniFile
+    Dim pn_Settings As New pnl_Settings
+    Dim doneLoad As Boolean = False
 #End Region
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -22,10 +25,16 @@ Public Class Main
     rd /S/Q data
     del arm9.bin arm7.bin banner.bin header.bin"}}
         CreateFiles(tools)
+        'Process.Start(Local & "\tools\extract.bat").WaitForExit()
+        'File.Delete(Local & "\tools\data\data.bin")
+        'Save(Local & "\tools\data\data.bin", RichTextBox1.Text)
+        'Process.Start(Local & "\tools\compile.bat").WaitForExit()
+        'Process.Start(Local & "\tools\clean.bat").WaitForExit()
+        tp_Add_Enter(sender, e)
+        doneLoad = True
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Dim myIniFile As New IniFile
-        With myIniFile
+        With mySettings
             .Filename = Local & "\settings.ini"
             If .OpenIniFile() Then
                 'Dim MyValue As String = .GetValue("MyKey")
@@ -103,7 +112,6 @@ Public Class Main
 
 #End Region
 #Region "Startup"
-
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
@@ -150,17 +158,16 @@ Public Class Main
         If Not File.Exists(Local & "\settings.ini") Then
             File.Create(Local & "\settings.ini")
         End If
-        Dim myIniFile As New IniFile
-        With myIniFile
+        With mySettings
             .Filename = Local & "\settings.ini"
             If .OpenIniFile() Then
                 My.Settings.ticket = .GetValue("Ticket")
                 '.SetValue("Ticket", My.Settings.ticket)
                 If Not .SaveIni Then
-                    MessageBox.Show("Trouble by writing Ini-File")
+                    MsgB("Trouble writing Ini-File")
                 End If
             Else
-                MessageBox.Show("No Ini-File found")
+                MsgB("No Ini-File found")
             End If
         End With
     End Sub
@@ -245,4 +252,67 @@ Public Class Main
     '    End If
     'End Sub
 #End Region
+
+
+    Private Sub tp_Add_Enter(sender As Object, e As EventArgs) Handles tp_Add.Enter
+        Dim DelTab As TabPage = tc_Cards.SelectedTab
+        Dim NewTab As New TabPage()
+        Dim NewAddTab As New TabPage()
+        With NewAddTab
+            .Location = New System.Drawing.Point(4, 22)
+            .Text = "    +"
+            .Name = "tp_Add"
+            .Padding = New System.Windows.Forms.Padding(0)
+            .Size = New System.Drawing.Size(278, 378)
+            .TabIndex = tc_Cards.TabPages.Count - 1
+            .UseVisualStyleBackColor = True
+        End With
+        With NewTab
+            .Location = New System.Drawing.Point(4, 22)
+            .Name = "tp_Card" & (NewAddTab.TabIndex + 1)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New Size(278, 378)
+            .TabIndex = NewAddTab.TabIndex
+            .Text = "Card " & (NewAddTab.TabIndex + 1)
+            .UseVisualStyleBackColor = True
+        End With
+        tc_Cards.TabPages.Add(NewTab)
+        AddHandler NewTab.Leave, AddressOf Me.SavePanel
+        AddHandler NewTab.Enter, AddressOf Me.MovePanel
+        tc_Cards.TabPages.Remove(DelTab)
+
+        If tc_Cards.TabCount < 8 Then
+            tc_Cards.TabPages.Add(NewAddTab)
+            AddHandler NewAddTab.Enter, AddressOf Me.tp_Add_Enter
+        End If
+    End Sub
+
+    Private Sub MovePanel()
+        tc_Cards.SelectedTab.Controls.Add(Me.pnl_EditCard)
+        With pn_Settings
+            lb_PGF.Text = .pnl_Strings(tc_Cards.SelectedIndex)
+            rtb_EventMsg.Text = .pnl_Strings(tc_Cards.SelectedIndex + 8)
+            cb_MaxLimit.Checked = .maxLimit(tc_Cards.SelectedIndex)
+            cb_Region.SelectedIndex = .region(tc_Cards.SelectedIndex)
+            If .dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = .dates(tc_Cards.SelectedIndex)
+            If .dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = .dates(tc_Cards.SelectedIndex + 8)
+        End With
+    End Sub
+    Private Sub SavePanel()
+        With pn_Settings
+            .pnl_Strings(tc_Cards.SelectedIndex) = lb_PGF.Text
+            .pnl_Strings(tc_Cards.SelectedIndex + 8) = rtb_EventMsg.Text
+            .maxLimit(tc_Cards.SelectedIndex) = cb_MaxLimit.Checked
+            .region(tc_Cards.SelectedIndex) = cb_Region.SelectedIndex
+            If doneLoad Then .dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
+            If doneLoad Then .dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
+        End With
+    End Sub
+    Private Class pnl_Settings
+        Public pnl_Strings(15) As String
+        Public maxLimit(7) As Boolean
+        Public region(7) As Byte
+        Public dates(15) As Date
+    End Class
+
 End Class
