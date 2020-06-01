@@ -28,7 +28,6 @@ Partial Class Main5
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.tsmi_Options = New System.Windows.Forms.ToolStripMenuItem()
         Me.HoverInfo = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.pb_Donate = New System.Windows.Forms.PictureBox()
         Me.gb_GameComp = New System.Windows.Forms.GroupBox()
         Me.cb_White2 = New System.Windows.Forms.CheckBox()
@@ -43,10 +42,8 @@ Partial Class Main5
         Me.lb_Start = New System.Windows.Forms.Label()
         Me.EndDatePicker = New System.Windows.Forms.DateTimePicker()
         Me.StartDatePicker = New System.Windows.Forms.DateTimePicker()
-        Me.bt_ClearEM = New System.Windows.Forms.Button()
         Me.lb_EventMsg = New System.Windows.Forms.Label()
         Me.rtb_EventMsg = New System.Windows.Forms.RichTextBox()
-        Me.bt_Build = New System.Windows.Forms.Button()
         Me.lklb_Author = New System.Windows.Forms.LinkLabel()
         Me.lb_By = New System.Windows.Forms.Label()
         Me.bt_Custom = New System.Windows.Forms.Button()
@@ -55,6 +52,7 @@ Partial Class Main5
         Me.tc_Cards = New System.Windows.Forms.TabControl()
         Me.tp_Add = New System.Windows.Forms.TabPage()
         Me.pnl_EditCard = New System.Windows.Forms.Panel()
+        Me.bt_Build = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pb_Donate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gb_GameComp.SuspendLayout()
@@ -93,22 +91,13 @@ Partial Class Main5
         Me.tsmi_Options.Size = New System.Drawing.Size(61, 20)
         Me.tsmi_Options.Text = "Options"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(30, 335)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 31
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'pb_Donate
         '
         Me.pb_Donate.BackColor = System.Drawing.SystemColors.Control
         Me.pb_Donate.BackgroundImage = CType(resources.GetObject("pb_Donate.BackgroundImage"), System.Drawing.Image)
         Me.pb_Donate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pb_Donate.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.pb_Donate.Location = New System.Drawing.Point(214, 4)
+        Me.pb_Donate.Location = New System.Drawing.Point(218, 3)
         Me.pb_Donate.Name = "pb_Donate"
         Me.pb_Donate.Size = New System.Drawing.Size(80, 22)
         Me.pb_Donate.TabIndex = 32
@@ -249,16 +238,6 @@ Partial Class Main5
         Me.StartDatePicker.TabIndex = 0
         Me.StartDatePicker.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
         '
-        'bt_ClearEM
-        '
-        Me.bt_ClearEM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bt_ClearEM.Location = New System.Drawing.Point(30, 294)
-        Me.bt_ClearEM.Name = "bt_ClearEM"
-        Me.bt_ClearEM.Size = New System.Drawing.Size(223, 21)
-        Me.bt_ClearEM.TabIndex = 38
-        Me.bt_ClearEM.Text = "Clear Text"
-        Me.bt_ClearEM.UseVisualStyleBackColor = True
-        '
         'lb_EventMsg
         '
         Me.lb_EventMsg.AutoSize = True
@@ -278,16 +257,6 @@ Partial Class Main5
         Me.rtb_EventMsg.TabIndex = 36
         Me.rtb_EventMsg.Text = ""
         Me.rtb_EventMsg.WordWrap = False
-        '
-        'bt_Build
-        '
-        Me.bt_Build.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bt_Build.Location = New System.Drawing.Point(125, 326)
-        Me.bt_Build.Name = "bt_Build"
-        Me.bt_Build.Size = New System.Drawing.Size(128, 46)
-        Me.bt_Build.TabIndex = 39
-        Me.bt_Build.Text = "Build Event ROM"
-        Me.bt_Build.UseVisualStyleBackColor = True
         '
         'lklb_Author
         '
@@ -328,7 +297,7 @@ Partial Class Main5
         Me.lb_PGF.Name = "lb_PGF"
         Me.lb_PGF.Size = New System.Drawing.Size(266, 17)
         Me.lb_PGF.TabIndex = 43
-        Me.lb_PGF.Text = "Open .pgf ------->"
+        Me.lb_PGF.Text = "▲▲▲ Open .pgf"
         Me.lb_PGF.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'bt_PGF
@@ -349,7 +318,7 @@ Partial Class Main5
         Me.tc_Cards.Name = "tc_Cards"
         Me.tc_Cards.Padding = New System.Drawing.Point(2, 3)
         Me.tc_Cards.SelectedIndex = 0
-        Me.tc_Cards.Size = New System.Drawing.Size(286, 404)
+        Me.tc_Cards.Size = New System.Drawing.Size(286, 341)
         Me.tc_Cards.TabIndex = 45
         '
         'tp_Add
@@ -358,7 +327,7 @@ Partial Class Main5
         Me.tp_Add.Location = New System.Drawing.Point(4, 22)
         Me.tp_Add.Name = "tp_Add"
         Me.tp_Add.Padding = New System.Windows.Forms.Padding(3)
-        Me.tp_Add.Size = New System.Drawing.Size(278, 378)
+        Me.tp_Add.Size = New System.Drawing.Size(278, 315)
         Me.tp_Add.TabIndex = 1
         Me.tp_Add.Text = "    +"
         Me.tp_Add.UseVisualStyleBackColor = True
@@ -370,22 +339,30 @@ Partial Class Main5
         Me.pnl_EditCard.Controls.Add(Me.bt_Custom)
         Me.pnl_EditCard.Controls.Add(Me.gb_Region)
         Me.pnl_EditCard.Controls.Add(Me.rtb_EventMsg)
-        Me.pnl_EditCard.Controls.Add(Me.bt_ClearEM)
         Me.pnl_EditCard.Controls.Add(Me.lb_PGF)
         Me.pnl_EditCard.Controls.Add(Me.gb_DateLimit)
         Me.pnl_EditCard.Controls.Add(Me.bt_PGF)
-        Me.pnl_EditCard.Controls.Add(Me.Button1)
-        Me.pnl_EditCard.Controls.Add(Me.bt_Build)
         Me.pnl_EditCard.Location = New System.Drawing.Point(0, 0)
         Me.pnl_EditCard.Name = "pnl_EditCard"
-        Me.pnl_EditCard.Size = New System.Drawing.Size(278, 378)
+        Me.pnl_EditCard.Size = New System.Drawing.Size(278, 315)
         Me.pnl_EditCard.TabIndex = 45
+        '
+        'bt_Build
+        '
+        Me.bt_Build.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_Build.Location = New System.Drawing.Point(95, 380)
+        Me.bt_Build.Name = "bt_Build"
+        Me.bt_Build.Size = New System.Drawing.Size(128, 46)
+        Me.bt_Build.TabIndex = 46
+        Me.bt_Build.Text = "Build Event ROM"
+        Me.bt_Build.UseVisualStyleBackColor = True
         '
         'Main5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(302, 450)
+        Me.Controls.Add(Me.bt_Build)
         Me.Controls.Add(Me.tc_Cards)
         Me.Controls.Add(Me.lklb_Author)
         Me.Controls.Add(Me.lb_By)
@@ -418,7 +395,6 @@ Partial Class Main5
     Friend WithEvents HoverInfo As ToolTip
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents tsmi_Options As ToolStripMenuItem
-    Friend WithEvents Button1 As Button
     Friend WithEvents pb_Donate As PictureBox
     Friend WithEvents gb_GameComp As GroupBox
     Friend WithEvents cb_White2 As CheckBox
@@ -433,10 +409,8 @@ Partial Class Main5
     Friend WithEvents lb_Start As Label
     Friend WithEvents EndDatePicker As DateTimePicker
     Friend WithEvents StartDatePicker As DateTimePicker
-    Friend WithEvents bt_ClearEM As Button
     Friend WithEvents lb_EventMsg As Label
     Friend WithEvents rtb_EventMsg As RichTextBox
-    Friend WithEvents bt_Build As Button
     Friend WithEvents lklb_Author As LinkLabel
     Friend WithEvents lb_By As Label
     Friend WithEvents bt_Custom As Button
@@ -445,4 +419,5 @@ Partial Class Main5
     Friend WithEvents tc_Cards As TabControl
     Friend WithEvents tp_Add As TabPage
     Friend WithEvents pnl_EditCard As Panel
+    Friend WithEvents bt_Build As Button
 End Class

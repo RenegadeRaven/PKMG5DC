@@ -18,6 +18,38 @@ Public Class Card5P
             data(&HCE) = value
         End Set
     End Property
+    Public Property White As Boolean
+        Get
+            Return (GameCompatibility And (1 << 4)) = (1 << 4)
+        End Get
+        Set(value As Boolean)
+            GameCompatibility = CByte((GameCompatibility And Not (1 << 4)) Or If(value, 1 << 4, 0))
+        End Set
+    End Property
+    Public Property Black As Boolean
+        Get
+            Return (GameCompatibility And (1 << 5)) = (1 << 5)
+        End Get
+        Set(value As Boolean)
+            GameCompatibility = CByte((GameCompatibility And Not (1 << 5)) Or If(value, 1 << 5, 0))
+        End Set
+    End Property
+    Public Property White2 As Boolean
+        Get
+            Return (GameCompatibility And (1 << 6)) = (1 << 6)
+        End Get
+        Set(value As Boolean)
+            GameCompatibility = CByte((GameCompatibility And Not (1 << 6)) Or If(value, 1 << 6, 0))
+        End Set
+    End Property
+    Public Property Black2 As Boolean
+        Get
+            Return (GameCompatibility And (1 << 7)) = (1 << 7)
+        End Get
+        Set(value As Boolean)
+            GameCompatibility = CByte((GameCompatibility And Not (1 << 7)) Or If(value, 1 << 7, 0))
+        End Set
+    End Property
     '00
     Public Property EventText As String '0x1F8
         Get
@@ -108,6 +140,14 @@ Public Class Card5
         End Set
     End Property
     '00 00 00
+    Public Property Cards(n As Byte) As Byte()
+        Get
+            Return Data.Skip(&H4 + (n * &H2D0)).Take(&H2D0)
+        End Get
+        Set(value As Byte())
+            value.CopyTo(Data, &H4 + (n * &H2D0))
+        End Set
+    End Property
     Public Property Card_1 As Byte()
         Get
             Return Data.Skip(&H4).Take(&H2D0)
@@ -170,6 +210,54 @@ Public Class Card5
         End Get
         Set(value As Byte())
             value.CopyTo(Data, &H13B4)
+        End Set
+    End Property
+    Public Property StartYears(n As Byte) As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H1684 + (n * &H8))
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H1684 + (n * &H8))
+        End Set
+    End Property
+    Public Property StartMonths(n As Byte) As Byte
+        Get
+            Return Data(&H1686 + (n * &H8))
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H1686 + (n * &H8)) = value
+        End Set
+    End Property
+    Public Property StartDays(n As Byte) As Byte
+        Get
+            Return Data(&H1687 + (n * &H8))
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H1687 + (n * &H8)) = value
+        End Set
+    End Property
+    Public Property EndYears(n As Byte) As UShort
+        Get
+            Return BitConverter.ToUInt16(Data, &H1688 + (n * &H8))
+        End Get
+        Set(ByVal value As UShort)
+            BitConverter.GetBytes(value).CopyTo(Data, &H1688 + (n * &H8))
+        End Set
+    End Property
+    Public Property EndMonths(n As Byte) As Byte
+        Get
+            Return Data(&H168A + (n * &H8))
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H168A + (n * &H8)) = value
+        End Set
+    End Property
+    Public Property EndDays(n As Byte) As Byte
+        Get
+            Return Data(&H168B + (n * &H8))
+        End Get
+        Set(ByVal value As Byte)
+            Data(&H168B + (n * &H8)) = value
         End Set
     End Property
 
