@@ -71,8 +71,8 @@ Module Common
     '    My.Computer.FileSystem.WriteAllBytes(myFile, myBytes, False)
     'End Sub
 
-    Public Function ByteArrayToHexString(ByVal myFile As String)
-        Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
+    Public Function ByteArrayToHexString(ByVal myBytes As Byte())
+        'Dim myBytes As Byte() = My.Computer.FileSystem.ReadAllBytes(myFile)
         Dim txtTemp As New System.Text.StringBuilder()
         For Each myByte As Byte In myBytes
             txtTemp.Append(myByte.ToString("X2"))

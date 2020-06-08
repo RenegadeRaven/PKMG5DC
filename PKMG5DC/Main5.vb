@@ -16,7 +16,7 @@ Public Class Main5
     Dim doneLoad As Boolean = False
     Dim WC As New PGF
     Dim CardPiece As New Card5P
-    Dim cardPieces(7)() As Byte
+    'Dim cardPieces(7) As String
     Dim Card As New Card5
     Dim tempDate(15) As Date
 #End Region
@@ -31,12 +31,15 @@ Public Class Main5
     rd /S/Q data
     del arm9.bin arm7.bin banner.bin header.bin"}}
         CreateFiles(tools)
+        For i = 0 To 7
+            File.WriteAllBytes(Local & "\cards\Card " & (i + 1) & ".bin", CardPiece.data)
+        Next
         'Process.Start(Local & "\tools\extract.bat").WaitForExit()
         'File.Delete(Local & "\tools\data\data.bin")
         'Save(Local & "\tools\data\data.bin", RichTextBox1.Text)
         'Process.Start(Local & "\tools\compile.bat").WaitForExit()
         'Process.Start(Local & "\tools\clean.bat").WaitForExit()
-        cardPieces = {CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data}
+        'cardPieces = {CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data}
         Tp_Add_Enter(sender, e)
         doneLoad = True
     End Sub
@@ -160,7 +163,7 @@ Public Class Main5
 
     'Checks Local Folders
     Private Sub CheckLocal()
-        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"}
+        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools", Local & "\cards"}
         CreateFolders(locals)
         If Not File.Exists(Local & "\settings.ini") Then
             File.Create(Local & "\settings.ini")
@@ -265,6 +268,19 @@ Public Class Main5
     Private Sub Tp_Add_Enter(sender As Object, e As EventArgs) Handles tp_Add.Enter
         Dim DelTab As TabPage = tc_Cards.SelectedTab
         Dim NewTab As New TabPage()
+        With NewTab
+            .Location = New System.Drawing.Point(4, 22)
+            .Name = "tp_Card" & (DelTab.TabIndex + 1)
+            .Padding = New System.Windows.Forms.Padding(3)
+            .Size = New Size(278, 315)
+            .TabIndex = DelTab.TabIndex
+            .Text = "Card " & (DelTab.TabIndex + If(doneLoad = False, 0, 1))
+            .UseVisualStyleBackColor = True
+        End With
+        tc_Cards.TabPages.Add(NewTab)
+        AddHandler NewTab.Leave, AddressOf Me.SavePanel
+        AddHandler NewTab.Enter, AddressOf Me.MovePanel
+        Card.NumberOfCards += 1
         Dim NewAddTab As New TabPage()
         With NewAddTab
             .Location = New System.Drawing.Point(4, 22)
@@ -275,18 +291,6 @@ Public Class Main5
             .TabIndex = tc_Cards.TabPages.Count - 1
             .UseVisualStyleBackColor = True
         End With
-        With NewTab
-            .Location = New System.Drawing.Point(4, 22)
-            .Name = "tp_Card" & (NewAddTab.TabIndex + 1)
-            .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New Size(278, 315)
-            .TabIndex = NewAddTab.TabIndex
-            .Text = "Card " & (NewAddTab.TabIndex + 1)
-            .UseVisualStyleBackColor = True
-        End With
-        tc_Cards.TabPages.Add(NewTab)
-        AddHandler NewTab.Leave, AddressOf Me.SavePanel
-        AddHandler NewTab.Enter, AddressOf Me.MovePanel
         tc_Cards.TabPages.Remove(DelTab)
         If tc_Cards.TabCount < 8 Then
             tc_Cards.TabPages.Add(NewAddTab)
@@ -296,6 +300,7 @@ Public Class Main5
 
     'Moves the panel and load the settings
     Private Sub MovePanel()
+        CardPiece.data = File.ReadAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin")
         tc_Cards.SelectedTab.Controls.Add(Me.pnl_EditCard)
         With pn_Settings
             lb_PGF.Text = .pnl_Strings(tc_Cards.SelectedIndex)
@@ -306,7 +311,7 @@ Public Class Main5
             If .dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = .dates(tc_Cards.SelectedIndex + 8)
         End With
         If doneLoad Then
-            If cardPieces(tc_Cards.SelectedIndex) IsNot Nothing Then CardPiece.data = cardPieces(tc_Cards.SelectedIndex)
+            'If cardPieces(tc_Cards.SelectedIndex) IsNot Nothing Then CardPiece.data = HexStringToByteArray(cardPieces(tc_Cards.SelectedIndex))
             cb_Black.Checked = CardPiece.Black
             cb_White.Checked = CardPiece.White
             cb_Black2.Checked = CardPiece.Black2
@@ -316,6 +321,7 @@ Public Class Main5
 
     'Saves Panel settings
     Private Sub SavePanel()
+        'File.WriteAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin", CardPiece.data)
         With pn_Settings
             .pnl_Strings(tc_Cards.SelectedIndex) = lb_PGF.Text
             .pnl_Strings(tc_Cards.SelectedIndex + 8) = rtb_EventMsg.Text
@@ -324,8 +330,11 @@ Public Class Main5
             If doneLoad Then .dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
             If doneLoad Then .dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
         End With
-        cardPieces(tc_Cards.SelectedIndex) = CardPiece.data
-        CardPiece = New Card5P
+        'Dim t(&H2D8) As Byte
+        'For i = 0 To &H2D8
+        't(i) = 0
+        'Next
+        'CardPiece.data = t
     End Sub
 
     'Panel Settings
@@ -344,6 +353,7 @@ Public Class Main5
             Dim myFile As String = Path.GetFileName(OpenFile.FileName)
             lb_PGF.Text = myFile
             CardPiece.Wondercard = File.ReadAllBytes(OpenFile.FileName)
+            File.WriteAllBytes(Local & "\testCP.bin", CardPiece.data)
         End If
         'Enable/Disable controls
     End Sub
@@ -356,7 +366,6 @@ Public Class Main5
                 CardPiece.Black = False
         End Select
     End Sub
-
     Private Sub Cb_White_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White.CheckedChanged
         Select Case cb_White.Checked
             Case True
@@ -373,7 +382,6 @@ Public Class Main5
                 CardPiece.Black2 = False
         End Select
     End Sub
-
     Private Sub Cb_White2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White2.CheckedChanged
         Select Case cb_White2.Checked
             Case True
@@ -438,11 +446,13 @@ Public Class Main5
 
     Private Sub Rtb_EventMsg_TextChanged(sender As Object, e As EventArgs) Handles rtb_EventMsg.TextChanged
         CardPiece.EventText = rtb_EventMsg.Text.Replace(ChrW(&HA00), ChrW(&HFEFF))
+        'File.WriteAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin", CardPiece.data)
+        SavePanel()
     End Sub
 
     Private Sub Bt_Build_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
-        File.WriteAllBytes(Local & "\testCP.bin", CardPiece.data)
         SavePanel()
+        'File.WriteAllBytes(Local & "\testCP.bin", HexStringToByteArray(cardPieces(0)))
         With Card
             'Dim listOfCards As New List(Of Byte())({ .Card_1, .Card_2, .Card_3, .Card_4, .Card_5, .Card_6, .Card_7, .Card_8})
             'Dim listOfDates As New List(Of UShort)({ .StartDay_1, .StartDay_2, .StartDay_3, .StartDay_4, .StartDay_5, .StartDay_6, .StartDay_7, .StartDay_8})
@@ -451,9 +461,27 @@ Public Class Main5
             '    i = cardPieces(n).Take(&H2D0)
             '    n += 1
             'Next i
-            For n = 0 To 7 Step 1
-                If cardPieces(n) IsNot Nothing Then
-                    CardPiece.data = cardPieces(n)
+            'For n = 0 To .NumberOfCards - 1 Step 1
+            '    If cardPieces(n) IsNot Nothing Then
+            '        CardPiece.data = HexStringToByteArray(cardPieces(n))
+            '        .Cards(n) = CardPiece.data.Take(&H2D0).ToArray()
+            '        .StartYears(n) = CardPiece.StartYear
+            '        .StartMonths(n) = CardPiece.StartMonth
+            '        .StartDays(n) = CardPiece.StartDay
+            '        .EndYears(n) = CardPiece.EndYear
+            '        .EndMonths(n) = CardPiece.EndMonth
+            '        .EndDays(n) = CardPiece.EndDay
+            '        .NumberOfCards += 1
+            '        CardPiece = New Card5P
+            '    End If
+            'Next n
+            'File.WriteAllBytes(Local & "\outputCard.bin", .Data)
+
+            Dim listOfCards As New List(Of String)({"Card 1.bin", "Card 2.bin", "Card 3.bin", "Card 4.bin", "Card 5.bin", "Card 6.bin", "Card 7.bin", "Card 8.bin"})
+            For Each i As String In listOfCards
+                If File.Exists(Local & "\cards\" & i) Then
+                    CardPiece.data = File.ReadAllBytes(Local & "\cards\" & i)
+                    Dim n = listOfCards.IndexOf(i)
                     .Cards(n) = CardPiece.data.Take(&H2D0).ToArray()
                     .StartYears(n) = CardPiece.StartYear
                     .StartMonths(n) = CardPiece.StartMonth
@@ -461,10 +489,9 @@ Public Class Main5
                     .EndYears(n) = CardPiece.EndYear
                     .EndMonths(n) = CardPiece.EndMonth
                     .EndDays(n) = CardPiece.EndDay
-                    .NumberOfCards += 1
                     CardPiece = New Card5P
                 End If
-            Next n
+            Next i
             File.WriteAllBytes(Local & "\outputCard.bin", .Data)
         End With
     End Sub

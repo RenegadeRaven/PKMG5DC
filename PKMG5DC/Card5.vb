@@ -7,6 +7,7 @@ Public Class Card5P
         End Get
         Set(value As Byte())
             value.CopyTo(data, &H0)
+            Output()
         End Set
     End Property
     '00 00
@@ -16,6 +17,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&HCE) = value
+            Output()
         End Set
     End Property
     Public Property White As Boolean
@@ -24,6 +26,7 @@ Public Class Card5P
         End Get
         Set(value As Boolean)
             GameCompatibility = CByte((GameCompatibility And Not (1 << 4)) Or If(value, 1 << 4, 0))
+            Output()
         End Set
     End Property
     Public Property Black As Boolean
@@ -32,6 +35,7 @@ Public Class Card5P
         End Get
         Set(value As Boolean)
             GameCompatibility = CByte((GameCompatibility And Not (1 << 5)) Or If(value, 1 << 5, 0))
+            Output()
         End Set
     End Property
     Public Property White2 As Boolean
@@ -40,6 +44,7 @@ Public Class Card5P
         End Get
         Set(value As Boolean)
             GameCompatibility = CByte((GameCompatibility And Not (1 << 6)) Or If(value, 1 << 6, 0))
+            Output()
         End Set
     End Property
     Public Property Black2 As Boolean
@@ -48,6 +53,7 @@ Public Class Card5P
         End Get
         Set(value As Boolean)
             GameCompatibility = CByte((GameCompatibility And Not (1 << 7)) Or If(value, 1 << 7, 0))
+            Output()
         End Set
     End Property
     '00
@@ -57,6 +63,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As String)
             SetString(value, 252).CopyTo(data, &HD0)
+            Output()
         End Set
     End Property
     'FF FF
@@ -67,6 +74,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&H2CB) = value
+            Output()
         End Set
     End Property
     '00 00
@@ -76,6 +84,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As UShort)
             BitConverter.GetBytes(value).CopyTo(data, &H2CE)
+            Output()
         End Set
     End Property
     '00 for 0x1EF0
@@ -85,6 +94,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As UShort)
             BitConverter.GetBytes(value).CopyTo(data, &H2D0)
+            Output()
         End Set
     End Property
     Public Property StartMonth As Byte
@@ -93,6 +103,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&H2D2) = value
+            Output()
         End Set
     End Property
     Public Property StartDay As Byte
@@ -101,6 +112,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&H2D3) = value
+            Output()
         End Set
     End Property
     Public Property EndYear As UShort
@@ -109,6 +121,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As UShort)
             BitConverter.GetBytes(value).CopyTo(data, &H2D4)
+            Output()
         End Set
     End Property
     Public Property EndMonth As Byte
@@ -117,6 +130,7 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&H2D6) = value
+            Output()
         End Set
     End Property
     Public Property EndDay As Byte
@@ -125,8 +139,13 @@ Public Class Card5P
         End Get
         Set(ByVal value As Byte)
             data(&H2D7) = value
+            Output()
         End Set
     End Property
+
+    Public Sub Output()
+        System.IO.File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" & "\cards\" & Main5.tc_Cards.SelectedTab.Text & ".bin", data)
+    End Sub
 End Class
 Public Class Card5
     Public Data(&H16CF) As Byte
