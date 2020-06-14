@@ -394,7 +394,10 @@ Game: " & Origin(InputPK5.Origin))
 
     'Output Button
     Private Sub Btn_Done_Click(sender As Object, e As EventArgs) Handles btn_Done.Click
-        My.Computer.FileSystem.WriteAllBytes(Main5.Local & "\output.pgf", WC.Data, False)
+        'My.Computer.FileSystem.WriteAllBytes(Main5.Local & "\output.pgf", WC.Data, False)
+        Main5.Card.Wondercards(Main5.tc_Cards.SelectedIndex) = WC.Data
+        Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
+        Close()
     End Sub
 #End Region
 End Class

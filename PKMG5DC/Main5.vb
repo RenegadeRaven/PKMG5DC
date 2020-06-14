@@ -10,15 +10,13 @@ Public Class Main5
     Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
     Dim OpenFile As New OpenFileDialog
     ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
-    ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H6} 'List of Language values
+    ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H7} 'List of Language values
     Dim mySettings As New IniFile 'Settings.ini File
     Dim pn_Settings As New Pnl_Settings 'Panel Settings
     Dim doneLoad As Boolean = False
     Dim WC As New PGF
-    Dim CardPiece As New Card5P
-    'Dim cardPieces(7) As String
-    Dim Card As New Card5
-    Dim tempDate(15) As Date
+    Public Shared Card As New Card5
+    'Dim tempDate(15) As Date
 #End Region
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,17 +29,12 @@ Public Class Main5
     rd /S/Q data
     del arm9.bin arm7.bin banner.bin header.bin"}}
         CreateFiles(tools)
-        For i = 0 To 7
-            File.WriteAllBytes(Local & "\cards\Card " & (i + 1) & ".bin", CardPiece.data)
-        Next
-        'Process.Start(Local & "\tools\extract.bat").WaitForExit()
-        'File.Delete(Local & "\tools\data\data.bin")
-        'Save(Local & "\tools\data\data.bin", RichTextBox1.Text)
-        'Process.Start(Local & "\tools\compile.bat").WaitForExit()
-        'Process.Start(Local & "\tools\clean.bat").WaitForExit()
-        'cardPieces = {CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data, CardPiece.data}
+        'For i = 0 To 7
+        '    File.WriteAllBytes(Local & "\cards\Card " & (i + 1) & ".bin", CardPiece.data)
+        'Next
         Tp_Add_Enter(sender, e)
         doneLoad = True
+        Cb_Region_SelectedIndexChanged(sender, e)
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         With mySettings
@@ -296,45 +289,40 @@ Public Class Main5
             tc_Cards.TabPages.Add(NewAddTab)
             AddHandler NewAddTab.Enter, AddressOf Me.Tp_Add_Enter
         End If
+        tc_Cards.SelectedTab = NewTab
     End Sub
 
     'Moves the panel and load the settings
     Private Sub MovePanel()
-        CardPiece.data = File.ReadAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin")
         tc_Cards.SelectedTab.Controls.Add(Me.pnl_EditCard)
         With pn_Settings
             lb_PGF.Text = .pnl_Strings(tc_Cards.SelectedIndex)
             rtb_EventMsg.Text = .pnl_Strings(tc_Cards.SelectedIndex + 8)
-            cb_MaxLimit.Checked = .maxLimit(tc_Cards.SelectedIndex)
+            'If Card.EventText(tc_Cards.SelectedIndex) <> Nothing Then rtb_EventMsg.Text = Card.EventText(tc_Cards.SelectedIndex)
             cb_Region.SelectedIndex = .region(tc_Cards.SelectedIndex)
             If .dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = .dates(tc_Cards.SelectedIndex)
             If .dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = .dates(tc_Cards.SelectedIndex + 8)
+            cb_MaxLimit.Checked = .maxLimit(tc_Cards.SelectedIndex)
         End With
         If doneLoad Then
-            'If cardPieces(tc_Cards.SelectedIndex) IsNot Nothing Then CardPiece.data = HexStringToByteArray(cardPieces(tc_Cards.SelectedIndex))
-            cb_Black.Checked = CardPiece.Black
-            cb_White.Checked = CardPiece.White
-            cb_Black2.Checked = CardPiece.Black2
-            cb_White2.Checked = CardPiece.White2
+            cb_Black.Checked = Card.Black(tc_Cards.SelectedIndex)
+            cb_White.Checked = Card.White(tc_Cards.SelectedIndex)
+            cb_Black2.Checked = Card.Black2(tc_Cards.SelectedIndex)
+            cb_White2.Checked = Card.White2(tc_Cards.SelectedIndex)
         End If
     End Sub
 
     'Saves Panel settings
     Private Sub SavePanel()
-        'File.WriteAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin", CardPiece.data)
         With pn_Settings
             .pnl_Strings(tc_Cards.SelectedIndex) = lb_PGF.Text
             .pnl_Strings(tc_Cards.SelectedIndex + 8) = rtb_EventMsg.Text
-            .maxLimit(tc_Cards.SelectedIndex) = cb_MaxLimit.Checked
+            'Card.EventText(tc_Cards.SelectedIndex) = rtb_EventMsg.Text
             .region(tc_Cards.SelectedIndex) = cb_Region.SelectedIndex
             If doneLoad Then .dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
             If doneLoad Then .dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
+            .maxLimit(tc_Cards.SelectedIndex) = cb_MaxLimit.Checked
         End With
-        'Dim t(&H2D8) As Byte
-        'For i = 0 To &H2D8
-        't(i) = 0
-        'Next
-        'CardPiece.data = t
     End Sub
 
     'Panel Settings
@@ -352,42 +340,51 @@ Public Class Main5
         If res <> Windows.Forms.DialogResult.Cancel Then
             Dim myFile As String = Path.GetFileName(OpenFile.FileName)
             lb_PGF.Text = myFile
-            CardPiece.Wondercard = File.ReadAllBytes(OpenFile.FileName)
-            File.WriteAllBytes(Local & "\testCP.bin", CardPiece.data)
+            WC.Data = File.ReadAllBytes(OpenFile.FileName)
+            With WC
+                .RecieveDay = 0
+                .RecieveMonth = 0
+                .RecieveYear = 0
+            End With
+            Card.Wondercards(tc_Cards.SelectedIndex) = WC.Data
+            WC = New PGF
         End If
         'Enable/Disable controls
+    End Sub
+    Private Sub Bt_Custom_Click(sender As Object, e As EventArgs) Handles bt_Custom.Click
+        PGFCreator.ShowDialog()
     End Sub
 
     Private Sub Cb_Black_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black.CheckedChanged
         Select Case cb_Black.Checked
             Case True
-                CardPiece.Black = True
+                Card.Black(tc_Cards.SelectedIndex) = True
             Case False
-                CardPiece.Black = False
+                Card.Black(tc_Cards.SelectedIndex) = False
         End Select
     End Sub
     Private Sub Cb_White_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White.CheckedChanged
         Select Case cb_White.Checked
             Case True
-                CardPiece.White = True
+                Card.White(tc_Cards.SelectedIndex) = True
             Case False
-                CardPiece.White = False
+                Card.White(tc_Cards.SelectedIndex) = False
         End Select
     End Sub
     Private Sub Cb_Black2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black2.CheckedChanged
         Select Case cb_Black2.Checked
             Case True
-                CardPiece.Black2 = True
+                Card.Black2(tc_Cards.SelectedIndex) = True
             Case False
-                CardPiece.Black2 = False
+                Card.Black2(tc_Cards.SelectedIndex) = False
         End Select
     End Sub
     Private Sub Cb_White2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White2.CheckedChanged
         Select Case cb_White2.Checked
             Case True
-                CardPiece.White2 = True
+                Card.White2(tc_Cards.SelectedIndex) = True
             Case False
-                CardPiece.White2 = False
+                Card.White2(tc_Cards.SelectedIndex) = False
         End Select
     End Sub
 
@@ -395,31 +392,31 @@ Public Class Main5
         If doneLoad Then
             Select Case cb_Region.SelectedIndex
                 Case < 5
-                    CardPiece.LangChecksum = langCksm(cb_Region.SelectedIndex)
-                    CardPiece.Language = langs(cb_Region.SelectedIndex)
+                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
+                    Card.Language(tc_Cards.SelectedIndex) = langs(cb_Region.SelectedIndex)
                 Case 5
-                    CardPiece.LangChecksum = langCksm(cb_Region.SelectedIndex)
-                    CardPiece.Language = langs(0)
+                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
+                    Card.Language(tc_Cards.SelectedIndex) = langs(0)
                 Case Else
-                    CardPiece.LangChecksum = langCksm(cb_Region.SelectedIndex - 1)
-                    CardPiece.Language = langs(0)
+                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex - 1)
+                    Card.Language(tc_Cards.SelectedIndex) = langs(0)
             End Select
         End If
     End Sub
 
-    Private Sub StartDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles StartDatePicker.ValueChanged
+    Private Sub StartDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles StartDatePicker.ValueChanged, cb_MaxLimit.CheckedChanged
         If doneLoad Then
-            CardPiece.StartDay = StartDatePicker.Value.Day
-            CardPiece.StartMonth = StartDatePicker.Value.Month
-            CardPiece.StartYear = StartDatePicker.Value.Year
+            Card.StartDays(tc_Cards.SelectedIndex) = StartDatePicker.Value.Day
+            Card.StartMonths(tc_Cards.SelectedIndex) = StartDatePicker.Value.Month
+            Card.StartYears(tc_Cards.SelectedIndex) = StartDatePicker.Value.Year
         End If
     End Sub
 
-    Private Sub EndDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles EndDatePicker.ValueChanged
+    Private Sub EndDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles EndDatePicker.ValueChanged, cb_MaxLimit.CheckedChanged
         If doneLoad Then
-            CardPiece.EndDay = EndDatePicker.Value.Day
-            CardPiece.EndMonth = EndDatePicker.Value.Month
-            CardPiece.EndYear = EndDatePicker.Value.Year
+            Card.EndDays(tc_Cards.SelectedIndex) = EndDatePicker.Value.Day
+            Card.EndMonths(tc_Cards.SelectedIndex) = EndDatePicker.Value.Month
+            Card.EndYears(tc_Cards.SelectedIndex) = EndDatePicker.Value.Year
         End If
     End Sub
 
@@ -428,8 +425,8 @@ Public Class Main5
             Case True
                 lb_Start.Enabled = False
                 lb_End.Enabled = False
-                tempDate(tc_Cards.SelectedIndex) = StartDatePicker.Value
-                tempDate(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
+                pn_Settings.dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
+                pn_Settings.dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
                 StartDatePicker.Value = New DateTime(1753, 1, 1)
                 EndDatePicker.Value = New DateTime(9998, 12, 31)
                 StartDatePicker.Enabled = False
@@ -437,62 +434,25 @@ Public Class Main5
             Case False
                 lb_Start.Enabled = True
                 lb_End.Enabled = True
-                StartDatePicker.Value = tempDate(tc_Cards.SelectedIndex)
-                EndDatePicker.Value = tempDate(tc_Cards.SelectedIndex + 8)
+                If pn_Settings.dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = pn_Settings.dates(tc_Cards.SelectedIndex)
+                If pn_Settings.dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = pn_Settings.dates(tc_Cards.SelectedIndex + 8)
                 StartDatePicker.Enabled = True
                 EndDatePicker.Enabled = True
         End Select
     End Sub
 
     Private Sub Rtb_EventMsg_TextChanged(sender As Object, e As EventArgs) Handles rtb_EventMsg.TextChanged
-        CardPiece.EventText = rtb_EventMsg.Text.Replace(ChrW(&HA00), ChrW(&HFEFF))
-        'File.WriteAllBytes(Local & "\cards\" & tc_Cards.SelectedTab.Text & ".bin", CardPiece.data)
-        SavePanel()
+        Card.EventText(tc_Cards.SelectedIndex) = rtb_EventMsg.Text.Replace(vbLf, ChrW(&HFFFE))
     End Sub
 
     Private Sub Bt_Build_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
-        SavePanel()
-        'File.WriteAllBytes(Local & "\testCP.bin", HexStringToByteArray(cardPieces(0)))
-        With Card
-            'Dim listOfCards As New List(Of Byte())({ .Card_1, .Card_2, .Card_3, .Card_4, .Card_5, .Card_6, .Card_7, .Card_8})
-            'Dim listOfDates As New List(Of UShort)({ .StartDay_1, .StartDay_2, .StartDay_3, .StartDay_4, .StartDay_5, .StartDay_6, .StartDay_7, .StartDay_8})
-            'Dim n = 0
-            'For Each i As Byte() In listOfCards
-            '    i = cardPieces(n).Take(&H2D0)
-            '    n += 1
-            'Next i
-            'For n = 0 To .NumberOfCards - 1 Step 1
-            '    If cardPieces(n) IsNot Nothing Then
-            '        CardPiece.data = HexStringToByteArray(cardPieces(n))
-            '        .Cards(n) = CardPiece.data.Take(&H2D0).ToArray()
-            '        .StartYears(n) = CardPiece.StartYear
-            '        .StartMonths(n) = CardPiece.StartMonth
-            '        .StartDays(n) = CardPiece.StartDay
-            '        .EndYears(n) = CardPiece.EndYear
-            '        .EndMonths(n) = CardPiece.EndMonth
-            '        .EndDays(n) = CardPiece.EndDay
-            '        .NumberOfCards += 1
-            '        CardPiece = New Card5P
-            '    End If
-            'Next n
-            'File.WriteAllBytes(Local & "\outputCard.bin", .Data)
+        Card.Unknown14 = &H14
+        File.WriteAllBytes(Local & "\outputCard.bin", Card.Data)
 
-            Dim listOfCards As New List(Of String)({"Card 1.bin", "Card 2.bin", "Card 3.bin", "Card 4.bin", "Card 5.bin", "Card 6.bin", "Card 7.bin", "Card 8.bin"})
-            For Each i As String In listOfCards
-                If File.Exists(Local & "\cards\" & i) Then
-                    CardPiece.data = File.ReadAllBytes(Local & "\cards\" & i)
-                    Dim n = listOfCards.IndexOf(i)
-                    .Cards(n) = CardPiece.data.Take(&H2D0).ToArray()
-                    .StartYears(n) = CardPiece.StartYear
-                    .StartMonths(n) = CardPiece.StartMonth
-                    .StartDays(n) = CardPiece.StartDay
-                    .EndYears(n) = CardPiece.EndYear
-                    .EndMonths(n) = CardPiece.EndMonth
-                    .EndDays(n) = CardPiece.EndDay
-                    CardPiece = New Card5P
-                End If
-            Next i
-            File.WriteAllBytes(Local & "\outputCard.bin", .Data)
-        End With
+        Process.Start(Local & "\tools\extract.bat").WaitForExit()
+        File.Delete(Local & "\tools\data\data.bin")
+        File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
+        Process.Start(Local & "\tools\compile.bat").WaitForExit()
+        Process.Start(Local & "\tools\clean.bat").WaitForExit()
     End Sub
 End Class
