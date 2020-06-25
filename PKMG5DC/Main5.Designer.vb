@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Main5
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,16 @@ Partial Class Main5
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main5))
         Me.lklb_Update = New System.Windows.Forms.LinkLabel()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.tsmi_Options = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tscb_Region = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsmi_About = New System.Windows.Forms.ToolStripMenuItem()
         Me.HoverInfo = New System.Windows.Forms.ToolTip(Me.components)
         Me.pb_Donate = New System.Windows.Forms.PictureBox()
         Me.gb_GameComp = New System.Windows.Forms.GroupBox()
@@ -76,6 +79,7 @@ Partial Class Main5
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
         Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.None
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_Options})
         Me.MenuStrip1.Location = New System.Drawing.Point(113, 0)
@@ -87,9 +91,31 @@ Partial Class Main5
         '
         'tsmi_Options
         '
+        Me.tsmi_Options.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Region, Me.ToolStripSeparator1, Me.tsmi_About})
         Me.tsmi_Options.Name = "tsmi_Options"
         Me.tsmi_Options.Size = New System.Drawing.Size(61, 20)
         Me.tsmi_Options.Text = "Options"
+        '
+        'tscb_Region
+        '
+        Me.tscb_Region.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscb_Region.DropDownWidth = 170
+        Me.tscb_Region.FlatStyle = System.Windows.Forms.FlatStyle.Standard
+        Me.tscb_Region.Items.AddRange(New Object() {"English (US/UK/AU)", "Français (France/Québec)", "Italiano (Italy)", "Deutsch (Germany)", "Español (Spain/Latin Americas)", "日本語 (Japan)", "한국어 (South Korea)"})
+        Me.tscb_Region.Name = "tscb_Region"
+        Me.tscb_Region.Size = New System.Drawing.Size(130, 23)
+        Me.tscb_Region.ToolTipText = "Default Region"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(187, 6)
+        '
+        'tsmi_About
+        '
+        Me.tsmi_About.Name = "tsmi_About"
+        Me.tsmi_About.Size = New System.Drawing.Size(190, 22)
+        Me.tsmi_About.Text = "About"
         '
         'pb_Donate
         '
@@ -420,4 +446,7 @@ Partial Class Main5
     Friend WithEvents tp_Add As TabPage
     Friend WithEvents pnl_EditCard As Panel
     Friend WithEvents bt_Build As Button
+    Friend WithEvents tsmi_About As ToolStripMenuItem
+    Friend WithEvents tscb_Region As ToolStripComboBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

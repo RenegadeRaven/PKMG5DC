@@ -68,37 +68,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("E")>  _
-        Public Property Language() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Region() As Byte
             Get
-                Return CType(Me("Language"),String)
-            End Get
-            Set
-                Me("Language") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("020000BC83")>  _
-        Public Property Region() As String
-            Get
-                Return CType(Me("Region"),String)
+                Return CType(Me("Region"),Byte)
             End Get
             Set
                 Me("Region") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("500")>  _
-        Public Property Delay() As Decimal
-            Get
-                Return CType(Me("Delay"),Decimal)
-            End Get
-            Set
-                Me("Delay") = value
             End Set
         End Property
     End Class

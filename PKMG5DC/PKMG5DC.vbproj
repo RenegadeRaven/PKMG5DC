@@ -72,9 +72,6 @@
     <Reference Include="MSBuild.AutoILMerge.Task, Version=1.0.0.0, Culture=en-US, processorArchitecture=MSIL">
       <HintPath>..\packages\MSBuild.AutoILMerge.Task.1.1.1\lib\net40\MSBuild.AutoILMerge.Task.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -109,25 +106,12 @@
     <Compile Include="CustomMessageBox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <None Include="Form1.vb">
-      <SubType>Form</SubType>
-    </None>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="About.Designer.vb">
+      <DependentUpon>About.vb</DependentUpon>
+    </Compile>
+    <Compile Include="About.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.vb">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </Compile>
-    <None Include="Form2.vb">
-      <SubType>Form</SubType>
-    </None>
-    <Compile Include="Form3.Designer.vb">
-      <DependentUpon>Form3.vb</DependentUpon>
-    </Compile>
-    <None Include="Form3.vb">
-      <SubType>Form</SubType>
-    </None>
     <Compile Include="Main5.Designer.vb">
       <DependentUpon>Main5.vb</DependentUpon>
     </Compile>
@@ -151,12 +135,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="options.Designer.vb">
-      <DependentUpon>options.vb</DependentUpon>
-    </Compile>
-    <None Include="options.vb">
-      <SubType>Form</SubType>
-    </None>
     <None Include="PCD.vb" />
     <Compile Include="PGF.vb" />
     <Compile Include="PGFCreator.Designer.vb">
@@ -173,14 +151,8 @@
     <EmbeddedResource Include="CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.vb</DependentUpon>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main5.resx">
       <DependentUpon>Main5.vb</DependentUpon>
@@ -190,9 +162,6 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="options.resx">
-      <DependentUpon>options.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PGFCreator.resx">
       <DependentUpon>PGFCreator.vb</DependentUpon>
@@ -213,22 +182,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Regnum.pfx" />
-    <None Include="Resources\Languages\en.json" />
-    <None Include="Resources\Languages\fr.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
-    <None Include="Resources\12distro\readme.txt" />
-    <None Include="Resources\12distro\options.asm" />
     <None Include="Resources\12distro\ndstool.exe" />
-    <None Include="Resources\12distro\armips.exe" />
-    <None Include="Resources\12distro\armips readme.txt" />
-    <None Include="Resources\12distro\12distro_.asm" />
-    <None Include="Resources\12distro\12distro.asm" />
-    <None Include="Resources\12distro\12distro.bat" />
     <None Include="Resources\DonateButton\ppdbs.png" />
     <None Include="Resources\DonateButton\ppdb.png" />
     <None Include="Resources\date.txt" />

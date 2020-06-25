@@ -677,7 +677,6 @@ New Pokemon With {.ID = 649, .Name = “Genesect”},
 New Pokemon With {.ID = 650, .Name = “Pokémon Egg”},
 New Pokemon With {.ID = 651, .Name = “Manaphy Egg”}
         }
-
     End Function
 #End Region
 #Region "Items"

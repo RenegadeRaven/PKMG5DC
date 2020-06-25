@@ -10,7 +10,8 @@ Public Class PGFCreator
         Me.Size = New Size(1344, 579)
 #Else
             Me.Size = New Size(452, 579)
-            cb_CardType.Items.Remove("Pass Power")
+        cb_CardType.Items.Remove("Pass Power")
+        CenterToScreen()
 #End If
         PopulateItems(cb_Item)
         Defaults()
@@ -67,48 +68,49 @@ Public Class PGFCreator
 
     'Grabs values from PK5
     Private Sub GrabValues()
-        'Try
-        With WC
+        Try
+            With WC
                 Select Case WC.CardType
-                Case 1
-                    If lbl_PK5Name.Text <> "Open .pk5 ------->" Then
-                        .TID = InputPK5.TID
-                        .SID = InputPK5.SID
-                        If cx_Origin.Checked = False Then .Origin = InputPK5.Origin
-                        If cx_PID.Checked = True Then .PID = InputPK5.PID
-                        .Ball = InputPK5.Ball
-                        .Item = InputPK5.Item
-                        .Move1 = InputPK5.Move1
-                        .Move2 = InputPK5.Move2
-                        .Move3 = InputPK5.Move3
-                        .Move4 = InputPK5.Move4
-                        .Dex = InputPK5.Dex
-                        If cx_Lang.Checked = False Then .Language = InputPK5.Language
-                        If InputPK5.IsNicknamed = True Then .Nickname = InputPK5.Nickname Else .Nickname = ""
-                        .Nature = InputPK5.Nature
-                        .EggMet = InputPK5.EggMet
-                        .Met = InputPK5.Met
-                        If cx_IV.Checked = True Then .IV_HP = InputPK5.IV_HP
-                        If cx_IV.Checked = True Then .IV_ATK = InputPK5.IV_ATK
-                        If cx_IV.Checked = True Then .IV_DEF = InputPK5.IV_DEF
-                        If cx_IV.Checked = True Then .IV_SPE = InputPK5.IV_SPE
-                        If cx_IV.Checked = True Then .IV_SPA = InputPK5.IV_SPA
-                        If cx_IV.Checked = True Then .IV_SPD = InputPK5.IV_SPD
-                        .Egg = InputPK5.IsEgg
-                        .OT_Name = InputPK5.OT_Name
-                        .OT_Gender = InputPK5.OT_Gender
-                        .Gender = InputPK5.Gender
-                        .Level = InputPK5.Level
-                        ConvertValues()
-                        Desc()
-                    End If
-                Case Else
+                    Case 1
+                        If lbl_PK5Name.Text <> "Open .pk5 ------->" Then
+                            .TID = InputPK5.TID
+                            .SID = InputPK5.SID
+                            If cx_Origin.Checked = False Then .Origin = InputPK5.Origin
+                            If cx_PID.Checked = True Then .PID = InputPK5.PID
+                            .Ball = InputPK5.Ball
+                            .Item = InputPK5.Item
+                            .Move1 = InputPK5.Move1
+                            .Move2 = InputPK5.Move2
+                            .Move3 = InputPK5.Move3
+                            .Move4 = InputPK5.Move4
+                            .Dex = InputPK5.Dex
+                            If cx_Lang.Checked = False Then .Language = InputPK5.Language
+                            If InputPK5.IsNicknamed = True Then .Nickname = InputPK5.Nickname Else .Nickname = ""
+                            .Nature = InputPK5.Nature
+                            .EggMet = InputPK5.EggMet
+                            .Met = InputPK5.Met
+                            If cx_IV.Checked = True Then .IV_HP = InputPK5.IV_HP
+                            If cx_IV.Checked = True Then .IV_ATK = InputPK5.IV_ATK
+                            If cx_IV.Checked = True Then .IV_DEF = InputPK5.IV_DEF
+                            If cx_IV.Checked = True Then .IV_SPE = InputPK5.IV_SPE
+                            If cx_IV.Checked = True Then .IV_SPA = InputPK5.IV_SPA
+                            If cx_IV.Checked = True Then .IV_SPD = InputPK5.IV_SPD
+                            .Egg = InputPK5.IsEgg
+                            .OT_Name = InputPK5.OT_Name
+                            .OT_Gender = InputPK5.OT_Gender
+                            .Gender = InputPK5.Gender
+                            .Level = InputPK5.Level
+                            nud_Level.Value = InputPK5.Level
+                            ConvertValues()
+                            Desc()
+                        End If
+                    Case Else
                 End Select
                 WC.CardFrom = &H44
                 WC.Status = 1
             End With
-        'Catch ex As Exception
-        'End Try
+        Catch ex As Exception
+        End Try
     End Sub
 
     'Converts value format
@@ -391,13 +393,40 @@ Game: " & Origin(InputPK5.Origin))
         WC.TID = nud_Power.Value
         GrabValues()
     End Sub
+    Private Function Checks(ctl As Control, lbl As Label)
+        Dim missing As Boolean
+        Select Case ctl.Text
+            Case "", Nothing
+                missing = True
+                lbl.ForeColor = Color.Red
+            Case Else
+                missing = False
+                lbl.ForeColor = DefaultForeColor
+        End Select
+        Return missing
+    End Function
 
     'Output Button
     Private Sub Btn_Done_Click(sender As Object, e As EventArgs) Handles btn_Done.Click
         'My.Computer.FileSystem.WriteAllBytes(Main5.Local & "\output.pgf", WC.Data, False)
-        Main5.Card.Wondercards(Main5.tc_Cards.SelectedIndex) = WC.Data
-        Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
-        Close()
+        Dim chk As Boolean = False
+        Dim ctrls As Control() = {tb_CardTitle, lbl_CardTitle}
+        For i = 0 To 1 Step 2
+            Select Case chk
+                Case False
+                    chk = Checks(ctrls(0), ctrls(1))
+                Case True
+                    Exit For
+            End Select
+        Next i
+        Select Case chk
+            Case True
+                MsgB("Missing Field",,,,, "Error")
+            Case Else
+                Main5.Card.Wondercards(Main5.tc_Cards.SelectedIndex) = WC.Data
+                Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
+                Close()
+        End Select
     End Sub
 #End Region
 End Class

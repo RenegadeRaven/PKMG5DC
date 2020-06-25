@@ -918,7 +918,7 @@
             Data(&H40) = CByte((Data(&H40) And Not (&H6)) Or (value << 1))
         End Set
     End Property
-    Public Property Forms As Byte '{  set => Data[0x40] = (byte)((Data[0x40] & 0x07) | (value << 3)); }
+    Public Property Forms As Byte
         Get
             Return (Data(&H40) >> 3)
         End Get

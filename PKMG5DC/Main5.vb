@@ -1,6 +1,4 @@
 ﻿Imports System.IO
-Imports Newtonsoft.Json
-Imports Newtonsoft.Json.Linq
 
 Public Class Main5
 #Region "Variables"
@@ -8,15 +6,15 @@ Public Class Main5
     Public Shared ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Public Shared ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
     Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
-    Dim OpenFile As New OpenFileDialog
+    Dim OpenFile As New OpenFileDialog 'Open File Window
+    Dim SaveFile As New SaveFileDialog 'Save File Window
     ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
     ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H7} 'List of Language values
-    Dim mySettings As New IniFile 'Settings.ini File
+    Public mySettings As New IniFile 'Settings.ini File
     Dim pn_Settings As New Pnl_Settings 'Panel Settings
-    Dim doneLoad As Boolean = False
-    Dim WC As New PGF
-    Public Shared Card As New Card5
-    'Dim tempDate(15) As Date
+    Dim doneLoad As Boolean = False 'Has Load finished?
+    Dim WC As New PGF 'Wondercard
+    Public Shared Card As New Card5 'Distro Card
 #End Region
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,22 +32,14 @@ Public Class Main5
         'Next
         Tp_Add_Enter(sender, e)
         doneLoad = True
-        Cb_Region_SelectedIndexChanged(sender, e)
+        cb_Region.SelectedIndex = My.Settings.Region
+        SyncRegion()
+        bt_Build.Enabled = False
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        With mySettings
-            .Filename = Local & "\settings.ini"
-            If .OpenIniFile() Then
-                'Dim MyValue As String = .GetValue("MyKey")
-                .SetValue("Ticket", My.Settings.ticket)
-                If Not .SaveIni Then
-                    MessageBox.Show("Trouble by writing Ini-File")
-                End If
-            Else
-                MessageBox.Show("No Ini-File found")
-            End If
-        End With
+        WriteIni()
     End Sub
+
 #Region "Esentials"
     'Checks For Update
     Private Sub UpdateChk()
@@ -92,8 +82,9 @@ Public Class Main5
                 File.Delete(TempPath & "\dt.txt")
                 If dat <> dtt Then
                     lklb_Update.Text = "New Update Available! " & dtt
-                    MenuStrip1.Location = New Point(170, 0)
-                    lklb_Update.Show()
+                MenuStrip1.Location = New Point(175, 0)
+                pb_Donate.Location = New Point(119, 427)
+                lklb_Update.Show()
                 Else
                     lklb_Update.Hide()
                     MenuStrip1.Location = New Point(0, 0)
@@ -104,15 +95,37 @@ Public Class Main5
             File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
+
+    'Link to Update version
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable Then
-            Process.Start("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/releases/latest")
+            Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
             MsgBox("No Internet connection!
     You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
 
+    'Link the Author's, yours truly, Github Page
+    Private Sub Lklb_Author_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://github.com/PlasticJustice")
+        Else
+            MsgB("No Internet connection!" & "
+" & "You can look me up later.", 1, "OK",,, "Error" & " 404")
+        End If
+    End Sub
+
+    'PayPal Donate Button
+    Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click
+        System.Threading.Thread.Sleep(200)
+        If My.Computer.Network.IsAvailable Then
+            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
+        Else
+            MsgB("No Internet connection!" & "
+" & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
+        End If
+    End Sub
 #End Region
 #Region "Startup"
     Private Sub CreateFolders(ByVal dirs As String())
@@ -156,23 +169,14 @@ Public Class Main5
 
     'Checks Local Folders
     Private Sub CheckLocal()
-        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools", Local & "\cards"}
+        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"} ', Local & "\cards"}
         CreateFolders(locals)
         If Not File.Exists(Local & "\settings.ini") Then
-            File.Create(Local & "\settings.ini")
+            File.WriteAllText(Local & "\settings.ini", "")
+            WriteIni()
         End If
-        With mySettings
-            .Filename = Local & "\settings.ini"
-            If .OpenIniFile() Then
-                My.Settings.ticket = .GetValue("Ticket")
-                '.SetValue("Ticket", My.Settings.ticket)
-                If Not .SaveIni Then
-                    MsgB("Trouble writing Ini-File")
-                End If
-            Else
-                MsgB("No Ini-File found")
-            End If
-        End With
+        ReadIni()
+        tscb_Region.SelectedIndex = My.Settings.Region
     End Sub
     'Checks for Ticket
     Private Sub CheckTicket()
@@ -255,7 +259,15 @@ Public Class Main5
     '    End If
     'End Sub
 #End Region
+#Region "Menu"
+    Private Sub Tscb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tscb_Region.SelectedIndexChanged
+        My.Settings.Region = tscb_Region.SelectedIndex
+    End Sub
 
+    Private Sub Tsmi_About_Click(sender As Object, e As EventArgs) Handles tsmi_About.Click
+        About.ShowDialog()
+    End Sub
+#End Region
 #Region "Tab and Panel"
     'Adds New Tab
     Private Sub Tp_Add_Enter(sender As Object, e As EventArgs) Handles tp_Add.Enter
@@ -290,6 +302,8 @@ Public Class Main5
             AddHandler NewAddTab.Enter, AddressOf Me.Tp_Add_Enter
         End If
         tc_Cards.SelectedTab = NewTab
+        cb_Region.SelectedIndex = My.Settings.Region
+        SyncRegion()
     End Sub
 
     'Moves the panel and load the settings
@@ -297,9 +311,15 @@ Public Class Main5
         tc_Cards.SelectedTab.Controls.Add(Me.pnl_EditCard)
         With pn_Settings
             lb_PGF.Text = .pnl_Strings(tc_Cards.SelectedIndex)
+            Select Case .pnl_Strings(tc_Cards.SelectedIndex)
+                Case ""
+                    EnDisAble(False)
+                Case Else
+                    EnDisAble(True)
+            End Select
             rtb_EventMsg.Text = .pnl_Strings(tc_Cards.SelectedIndex + 8)
-            'If Card.EventText(tc_Cards.SelectedIndex) <> Nothing Then rtb_EventMsg.Text = Card.EventText(tc_Cards.SelectedIndex)
             cb_Region.SelectedIndex = .region(tc_Cards.SelectedIndex)
+            SyncRegion()
             If .dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = .dates(tc_Cards.SelectedIndex)
             If .dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = .dates(tc_Cards.SelectedIndex + 8)
             cb_MaxLimit.Checked = .maxLimit(tc_Cards.SelectedIndex)
@@ -317,7 +337,6 @@ Public Class Main5
         With pn_Settings
             .pnl_Strings(tc_Cards.SelectedIndex) = lb_PGF.Text
             .pnl_Strings(tc_Cards.SelectedIndex + 8) = rtb_EventMsg.Text
-            'Card.EventText(tc_Cards.SelectedIndex) = rtb_EventMsg.Text
             .region(tc_Cards.SelectedIndex) = cb_Region.SelectedIndex
             If doneLoad Then .dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
             If doneLoad Then .dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
@@ -333,7 +352,7 @@ Public Class Main5
         Public dates(15) As Date
     End Class
 #End Region
-
+#Region "Controls"
     Private Sub Bt_PGF_Click(sender As Object, e As EventArgs) Handles bt_PGF.Click
         OpenFile.Filter = "Gen 5 Wondercard (*.pgf)|*.pgf;*.wc5|All files (*.*)|*.*"
         Dim res As DialogResult = OpenFile.ShowDialog()
@@ -349,10 +368,26 @@ Public Class Main5
             Card.Wondercards(tc_Cards.SelectedIndex) = WC.Data
             WC = New PGF
         End If
-        'Enable/Disable controls
+        EnDisAble(True)
+        bt_Build.Enabled = True
     End Sub
+
     Private Sub Bt_Custom_Click(sender As Object, e As EventArgs) Handles bt_Custom.Click
         PGFCreator.ShowDialog()
+        Select Case lb_PGF.Text
+            Case "", Nothing
+            Case Else
+                EnDisAble(True)
+                bt_Build.Enabled = True
+        End Select
+    End Sub
+
+    Private Sub EnDisAble(Enable As Boolean)
+        gb_GameComp.Enabled = Enable
+        gb_Region.Enabled = Enable
+        gb_DateLimit.Enabled = Enable
+        rtb_EventMsg.Enabled = Enable
+        lb_EventMsg.Enabled = Enable
     End Sub
 
     Private Sub Cb_Black_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black.CheckedChanged
@@ -390,20 +425,22 @@ Public Class Main5
 
     Private Sub Cb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Region.SelectedIndexChanged
         If doneLoad Then
-            Select Case cb_Region.SelectedIndex
-                Case < 5
-                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
-                    Card.Language(tc_Cards.SelectedIndex) = langs(cb_Region.SelectedIndex)
-                Case 5
-                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
-                    Card.Language(tc_Cards.SelectedIndex) = langs(0)
-                Case Else
-                    Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex - 1)
-                    Card.Language(tc_Cards.SelectedIndex) = langs(0)
-            End Select
+            SyncRegion()
         End If
     End Sub
-
+    Private Sub SyncRegion()
+        Select Case cb_Region.SelectedIndex
+            Case < 5
+                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
+                Card.Language(tc_Cards.SelectedIndex) = langs(cb_Region.SelectedIndex)
+            Case 5
+                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
+                Card.Language(tc_Cards.SelectedIndex) = langs(0)
+            Case Else
+                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex - 1)
+                Card.Language(tc_Cards.SelectedIndex) = langs(0)
+        End Select
+    End Sub
     Private Sub StartDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles StartDatePicker.ValueChanged, cb_MaxLimit.CheckedChanged
         If doneLoad Then
             Card.StartDays(tc_Cards.SelectedIndex) = StartDatePicker.Value.Day
@@ -454,5 +491,13 @@ Public Class Main5
         File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
         Process.Start(Local & "\tools\compile.bat").WaitForExit()
         Process.Start(Local & "\tools\clean.bat").WaitForExit()
+
+        SaveFile.Filter = "NDS ROM (*.nds)|*.nds|All files (*.*)|*.*"
+        Dim res As DialogResult = SaveFile.ShowDialog()
+        If res <> Windows.Forms.DialogResult.Cancel Then
+            If File.Exists(SaveFile.FileName) Then File.Delete(SaveFile.FileName)
+            File.Move(Local & "\ticket2.nds", SaveFile.FileName)
+        End If
     End Sub
+#End Region
 End Class
