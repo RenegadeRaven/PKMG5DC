@@ -50,12 +50,12 @@ Public Class Main5
             File.Delete(TempPath & "\dt.txt")
         End If
 #If DEBUG Then
-        File.WriteAllText(apppath & "/version.txt", My.Application.Info.Version.ToString)
-        File.WriteAllText(apppath & "/version.json", "{
+        File.WriteAllText(apppath & "..\..\..\version.txt", My.Application.Info.Version.ToString)
+        File.WriteAllText(apppath & "..\..\..\version.json", "{
     " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
     }")
         If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/bin/Debug/version.txt", TempPath & "\vsn.txt")
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/bin/Debug/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
@@ -72,7 +72,7 @@ Public Class Main5
             Me.Text = "PKMG5DC (" & dat & ")"
             If My.Computer.Network.IsAvailable Then
                 Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/Gen5%20Distribution%20Creator/Resources/date.txt", TempPath & "\dt.txt")
+                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/Resources/date.txt", TempPath & "\dt.txt")
                 Catch
                     File.WriteAllText(TempPath & "\dt.txt", " ")
                 End Try

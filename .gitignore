@@ -1,6 +1,8 @@
 \.vs
-\Gen5 Distribution Creator\obj
+\PKMG5DC\obj
+\PKMG5DC\bin
 \obj
+\bin
 *.pfx
 *.pk7
 *.pk6
