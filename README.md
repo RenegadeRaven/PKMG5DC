@@ -1,4 +1,4 @@
-# Gen 5 Pokémon Distribution ROM Creator ![Language](https://img.shields.io/badge/Language-Visual%20Basic-blue.svg) ![Version](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPlasticJustice%2FPKMG5DC%2Fmaster%2FPKMG5DC%2Fbin%2FDebug%2Fversion.json&query=%24.version&colorB=10ADED&prefix=v)
+# PKMG5DC ![Language](https://img.shields.io/badge/Language-Visual%20Basic-blue.svg) ![Version](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPlasticJustice%2FPKMG5DC%2Fmaster%2FPKMG5DC%2Fversion.json&query=%24.version&colorB=10ADED&prefix=v)
 
 This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event file and a clean copy of the Liberty Ticket distribution ROM (both not included).
 
