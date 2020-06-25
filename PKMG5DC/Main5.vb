@@ -55,7 +55,7 @@ Public Class Main5
     " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
     }")
         If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/bin/Debug/version.txt", TempPath & "\vsn.txt")
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
@@ -67,7 +67,7 @@ Public Class Main5
         lklb_Update.Hide()
         MenuStrip1.Location = New Point(0, 0)
 #Else
-            File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
+        File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
             Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
             Me.Text = "PKMG5DC (" & dat & ")"
             If My.Computer.Network.IsAvailable Then
