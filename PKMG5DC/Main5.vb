@@ -485,13 +485,17 @@ Public Class Main5
     Private Sub Bt_Build_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
         Card.Unknown14 = &H14
         File.WriteAllBytes(Local & "\outputCard.bin", Card.Data)
-
-        Process.Start(Local & "\tools\extract.bat").WaitForExit()
-        File.Delete(Local & "\tools\data\data.bin")
-        File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
-        Process.Start(Local & "\tools\compile.bat").WaitForExit()
-        Process.Start(Local & "\tools\clean.bat").WaitForExit()
-
+        Try
+            Do Until Directory.Exists(Local & "\tools\data")
+                Process.Start(Local & "\tools\extract.bat").WaitForExit()
+            Loop
+            If File.Exists(Local & "\tools\data\data.bin") Then File.Delete(Local & "\tools\data\data.bin")
+            File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
+            Process.Start(Local & "\tools\compile.bat").WaitForExit()
+            Process.Start(Local & "\tools\clean.bat").WaitForExit()
+        Catch ex As Exception
+            MsgB(ex.Message)
+        End Try
         SaveFile.Filter = "NDS ROM (*.nds)|*.nds|All files (*.*)|*.*"
         Dim res As DialogResult = SaveFile.ShowDialog()
         If res <> Windows.Forms.DialogResult.Cancel Then
