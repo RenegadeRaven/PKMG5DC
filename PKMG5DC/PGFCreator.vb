@@ -257,14 +257,30 @@ Public Class PGFCreator
         WC.EventTitle = tb_CardTitle.Text
     End Sub
 
-    'Loads the PK5 file
-    Private Sub Btn_OpenPK5_Click(sender As Object, e As EventArgs) Handles btn_OpenPK5.Click
-        OpenFile.Filter = "Gen 5 PKM (*.pk5)|*.pk5|All files (*.*)|*.*"
+    'To Encrypt, or to decrypt?
+    Private Function Crypto(filePath As String)
+        Dim b As Byte() = File.ReadAllBytes(filePath)
+        If filePath.EndsWith(".ek5") Then
+            Return DecryptIfEncrypted45(b)
+        ElseIf filePath.EndsWith(".pk5") Then
+            Return EncryptIfDecrypted45(b)
+        End If
+        Return b
+    End Function
+
+    'Loads the EK5/PK5 file
+    Private Sub Btn_OpenPKM_Click(sender As Object, e As EventArgs) Handles btn_OpenPKM.Click
+        OpenFile.Filter = "Gen 5 PKM (*.pk5; *.ek5)|*.pk5;*.ek5|All files (*.*)|*.*"
         Dim res As DialogResult = OpenFile.ShowDialog()
-        If res <> Windows.Forms.DialogResult.Cancel Then
-            Dim myFile As String = Path.GetFileName(OpenFile.FileName)
-            lbl_PK5Name.Text = myFile
-            InputPK5.Data = File.ReadAllBytes(OpenFile.FileName)
+        If res = Windows.Forms.DialogResult.Cancel Then
+            Exit Sub
+        Else
+            lbl_PK5Name.Text = OpenFile.SafeFileName
+            If OpenFile.FileName.EndsWith(".ek5") Then
+                InputPK5.Data = Crypto(OpenFile.FileName)
+            ElseIf OpenFile.FileName.EndsWith(".pk5") Then
+                InputPK5.Data = File.ReadAllBytes(OpenFile.FileName)
+            End If
         End If
         EnDisAblePKM(True)
         GrabValues()

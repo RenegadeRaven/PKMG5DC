@@ -139,10 +139,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
-                If dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
-                Else
-                    dirs(i) = Local & dirs(i)
-                End If
+                If Not dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then dirs(i) = Local & dirs(i)
                 Do While Not Directory.Exists(dirs(i))
                     If Not Directory.Exists(dirs(i)) Then Directory.CreateDirectory(dirs(i))
                 Loop
@@ -154,10 +151,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub CreateFiles(ByVal files(,))
         Try
             For i = 0 To UBound(files) Step 1
-                If files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
-                Else
-                    files(i, 0) = Local & files(i, 0)
-                End If
+                If Not files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then files(i, 0) = Local & files(i, 0)
                 Do While Not File.Exists(files(i, 0))
                     If Not File.Exists(files(i, 0)) Then
                         If TypeOf files(i, 1) Is String Then
@@ -210,9 +204,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
                             Close()
                         Else
                             Dim myFile As String = FileSelect.FileName
-                            If System.IO.File.Exists(Local & "\ticket.nds") Then
-                                System.IO.File.Delete(Local & "\ticket.nds")
-                            End If
+                            If System.IO.File.Exists(Local & "\ticket.nds") Then System.IO.File.Delete(Local & "\ticket.nds")
                             System.IO.File.Copy(myFile, Local & "\ticket.nds")
                             My.Settings.ticket = Local & "\ticket.nds"
                             VerifyTicket()
@@ -228,8 +220,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub VerifyTicket()
         Dim myFile As String = My.Settings.ticket
         Dim l = System.IO.File.ReadAllText(myFile)
-        If l.Contains("POKWBLIBERTYY8KP01") Then
-        Else
+        If Not l.Contains("POKWBLIBERTYY8KP01") Then
             MsgB("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
             File.Delete(My.Settings.ticket)
             Close()
@@ -238,17 +229,14 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub DeSmuME_Check()
         Dim Everest_Registry As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME.exe")
         Dim Everest_Registry2 As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME_0.9.11_x64.exe")
-        If Everest_Registry Is Nothing And Everest_Registry2 Is Nothing Then
-        Else
+        If Everest_Registry IsNot Nothing And Everest_Registry2 IsNot Nothing Then
             Dim gen As New Random
             Dim n = gen.Next(1, 26)
             Dim f = gen.Next(0, 2)
             If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
                 If My.Computer.Network.IsAvailable Then
                     Dim ans = MsgB("Google is your friend.", 2, "I know", "How so?")
-                    If ans = 7 Then
-                        Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
-                    End If
+                    If ans = 7 Then Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                 End If
             Else
                 MsgB("Google is your friend.", 1, "OK")
@@ -370,7 +358,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub Bt_PGF_Click(sender As Object, e As EventArgs) Handles bt_PGF.Click
         OpenFile.Filter = "Gen 5 Wondercard (*.pgf)|*.pgf;*.wc5|All files (*.*)|*.*"
         Dim res As DialogResult = OpenFile.ShowDialog()
-        If res <> Windows.Forms.DialogResult.Cancel Then
+        If res = Windows.Forms.DialogResult.Cancel Then
+            Exit Sub
+        Else
             Dim myFile As String = Path.GetFileName(OpenFile.FileName)
             lb_PGF.Text = myFile
             WC.Data = File.ReadAllBytes(OpenFile.FileName)
@@ -438,9 +428,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     End Sub
 
     Private Sub Cb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Region.SelectedIndexChanged
-        If doneLoad Then
-            SyncRegion()
-        End If
+        If doneLoad Then SyncRegion()
     End Sub
     Private Sub SyncRegion()
         Select Case cb_Region.SelectedIndex

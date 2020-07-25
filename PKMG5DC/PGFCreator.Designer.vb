@@ -24,7 +24,7 @@ Partial Class PGFCreator
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.lbl_PK5Name = New System.Windows.Forms.Label()
-        Me.btn_OpenPK5 = New System.Windows.Forms.Button()
+        Me.btn_OpenPKM = New System.Windows.Forms.Button()
         Me.gb_PKDetails = New System.Windows.Forms.GroupBox()
         Me.lbl_Move4 = New System.Windows.Forms.Label()
         Me.lbl_Move3 = New System.Windows.Forms.Label()
@@ -83,17 +83,17 @@ Partial Class PGFCreator
         Me.lbl_PK5Name.Name = "lbl_PK5Name"
         Me.lbl_PK5Name.Size = New System.Drawing.Size(282, 17)
         Me.lbl_PK5Name.TabIndex = 10
-        Me.lbl_PK5Name.Text = "Open .pk5 ------->"
+        Me.lbl_PK5Name.Text = "Open .pkm ------->"
         Me.lbl_PK5Name.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'btn_OpenPK5
+        'btn_OpenPKM
         '
-        Me.btn_OpenPK5.Location = New System.Drawing.Point(301, 19)
-        Me.btn_OpenPK5.Name = "btn_OpenPK5"
-        Me.btn_OpenPK5.Size = New System.Drawing.Size(75, 23)
-        Me.btn_OpenPK5.TabIndex = 9
-        Me.btn_OpenPK5.Text = "Open .pk5"
-        Me.btn_OpenPK5.UseVisualStyleBackColor = True
+        Me.btn_OpenPKM.Location = New System.Drawing.Point(301, 19)
+        Me.btn_OpenPKM.Name = "btn_OpenPKM"
+        Me.btn_OpenPKM.Size = New System.Drawing.Size(75, 23)
+        Me.btn_OpenPKM.TabIndex = 9
+        Me.btn_OpenPKM.Text = "Open .pkm"
+        Me.btn_OpenPKM.UseVisualStyleBackColor = True
         '
         'gb_PKDetails
         '
@@ -216,7 +216,7 @@ Partial Class PGFCreator
         Me.gb_Pokemon.Controls.Add(Me.lbl_AbilitySlot)
         Me.gb_Pokemon.Controls.Add(Me.cb_AbilitySlot)
         Me.gb_Pokemon.Controls.Add(Me.lbl_PK5Name)
-        Me.gb_Pokemon.Controls.Add(Me.btn_OpenPK5)
+        Me.gb_Pokemon.Controls.Add(Me.btn_OpenPKM)
         Me.gb_Pokemon.Location = New System.Drawing.Point(16, 59)
         Me.gb_Pokemon.Name = "gb_Pokemon"
         Me.gb_Pokemon.Size = New System.Drawing.Size(402, 430)
@@ -522,7 +522,7 @@ Partial Class PGFCreator
     End Sub
 
     Friend WithEvents lbl_PK5Name As Label
-    Friend WithEvents btn_OpenPK5 As Button
+    Friend WithEvents btn_OpenPKM As Button
     Friend WithEvents gb_PKDetails As GroupBox
     Friend WithEvents lbl_Species As Label
     Friend WithEvents cb_CardType As ComboBox
