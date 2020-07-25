@@ -15,18 +15,25 @@ Public Class Main5
     Dim doneLoad As Boolean = False 'Has Load finished?
     Dim WC As New PGF 'Wondercard
     Public Shared Card As New Card5 'Distro Card
+    Public ToolVer As String = Application.ProductVersion
 #End Region
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         CheckTicket()
         UpdateChk()
-        Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "cd " & Local & "\tools
-    ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "cd " & Local & "\tools
-    ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "cd " & Local & "\tools
-    rd /S/Q data
-    del arm9.bin arm7.bin banner.bin header.bin"}}
+        Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "C:
+cd " & Local & "\tools
+ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "C:
+cd " & Local & "\tools
+ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "C:
+cd " & Local & "\tools
+rd /S/Q data
+del arm9.bin arm7.bin banner.bin header.bin"}}
+        If ToolVer <> Application.ProductVersion Then Directory.Delete(Local & "\tools", True)
+        CheckLocal()
         CreateFiles(tools)
+        ToolVer = Application.ProductVersion
         'For i = 0 To 7
         '    File.WriteAllBytes(Local & "\cards\Card " & (i + 1) & ".bin", CardPiece.data)
         'Next
@@ -40,15 +47,11 @@ Public Class Main5
         WriteIni()
     End Sub
 
-#Region "Esentials"
+#Region "Essentials"
     'Checks For Update
     Private Sub UpdateChk()
-        If File.Exists(TempPath & "\vsn.txt") Then
-            File.Delete(TempPath & "\vsn.txt")
-        End If
-        If File.Exists(TempPath & "\dt.txt") Then
-            File.Delete(TempPath & "\dt.txt")
-        End If
+        If File.Exists(TempPath & "\vsn.txt") Then File.Delete(TempPath & "\vsn.txt")
+        If File.Exists(TempPath & "\dt.txt") Then File.Delete(TempPath & "\dt.txt")
 #If DEBUG Then
         File.WriteAllText(apppath & "..\..\..\version.txt", My.Application.Info.Version.ToString)
         File.WriteAllText(apppath & "..\..\..\version.json", "{
@@ -60,9 +63,7 @@ Public Class Main5
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
             File.Delete(TempPath & "\vsn.txt")
-            If Application.ProductVersion <> v Then
-                File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
-            End If
+            If Application.ProductVersion <> v Then File.WriteAllText(res & "/date.txt", (System.DateTime.Today.Year & "/" & System.DateTime.Today.Month & "/" & System.DateTime.Today.Day))
         End If
         lklb_Update.Hide()
         MenuStrip1.Location = New Point(0, 0)
@@ -126,8 +127,15 @@ Public Class Main5
 " & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
         End If
     End Sub
+    Private Sub Pb_Donate_MouseDown(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseDown
+        pb_Donate.Image = My.Resources.ppdbs
+    End Sub
+    Private Sub Pb_Donate_MouseUp(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseUp
+        pb_Donate.Image = Nothing
+    End Sub
 #End Region
 #Region "Startup"
+    'Creates Local Files and Folders
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
@@ -136,9 +144,7 @@ Public Class Main5
                     dirs(i) = Local & dirs(i)
                 End If
                 Do While Not Directory.Exists(dirs(i))
-                    If Not Directory.Exists(dirs(i)) Then
-                        Directory.CreateDirectory(dirs(i))
-                    End If
+                    If Not Directory.Exists(dirs(i)) Then Directory.CreateDirectory(dirs(i))
                 Loop
             Next i
         Catch ex As Exception
@@ -266,6 +272,14 @@ Public Class Main5
 
     Private Sub Tsmi_About_Click(sender As Object, e As EventArgs) Handles tsmi_About.Click
         About.ShowDialog()
+    End Sub
+
+    'Donate within the Options tab
+    Private Sub ToolStripMenuItem2_MouseHover(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseHover
+        ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+    End Sub
+    Private Sub ToolStripMenuItem2_MouseLeave(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseLeave
+        ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.Image
     End Sub
 #End Region
 #Region "Tab and Panel"
@@ -483,12 +497,9 @@ Public Class Main5
     End Sub
 
     Private Sub Bt_Build_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
-        Card.Unknown14 = &H14
         File.WriteAllBytes(Local & "\outputCard.bin", Card.Data)
         Try
-            Do Until Directory.Exists(Local & "\tools\data")
-                Process.Start(Local & "\tools\extract.bat").WaitForExit()
-            Loop
+            Process.Start(Local & "\tools\extract.bat").WaitForExit()
             If File.Exists(Local & "\tools\data\data.bin") Then File.Delete(Local & "\tools\data\data.bin")
             File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
             Process.Start(Local & "\tools\compile.bat").WaitForExit()

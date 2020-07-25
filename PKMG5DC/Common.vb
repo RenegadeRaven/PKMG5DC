@@ -1,5 +1,4 @@
 ﻿Imports System.Text
-
 Module Common
     'Custom MsgBox
     Public Function MsgB(ByVal mes As String, Optional ByVal numB As Integer = 1, Optional ByVal but1 As String = "OK", Optional ByVal but2 As String = "Cancel", Optional ByVal but3 As String = "", Optional ByVal head As String = "")
@@ -42,6 +41,7 @@ Module Common
             If .OpenIniFile() Then
                 My.Settings.ticket = .GetValue("Ticket")
                 My.Settings.Region = .GetValue("Region")
+                Main5.ToolVer = .GetValue("Tool Version")
                 '.SetValue("Ticket", My.Settings.ticket)
                 If Not .SaveIni Then
                     MsgB("Trouble writing Ini-File")
@@ -58,6 +58,7 @@ Module Common
                 'Dim MyValue As String = .GetValue("MyKey")
                 .SetValue("Ticket", My.Settings.ticket)
                 .SetValue("Region", My.Settings.Region)
+                .SetValue("Tool Version", Main5.ToolVer)
                 If Not .SaveIni Then
                     MsgB("Trouble by writing Ini-File")
                 End If

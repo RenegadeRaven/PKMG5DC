@@ -57,6 +57,7 @@ Partial Class Main5
         Me.pnl_EditCard = New System.Windows.Forms.Panel()
         Me.bt_Build = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.pb_Donate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gb_GameComp.SuspendLayout()
         Me.gb_Region.SuspendLayout()
@@ -91,7 +92,7 @@ Partial Class Main5
         '
         'tsmi_Options
         '
-        Me.tsmi_Options.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Region, Me.ToolStripSeparator1, Me.tsmi_About})
+        Me.tsmi_Options.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Region, Me.ToolStripSeparator1, Me.tsmi_About, Me.ToolStripMenuItem2})
         Me.tsmi_Options.Name = "tsmi_Options"
         Me.tsmi_Options.Size = New System.Drawing.Size(61, 20)
         Me.tsmi_Options.Text = "Options"
@@ -116,6 +117,17 @@ Partial Class Main5
         Me.tsmi_About.Name = "tsmi_About"
         Me.tsmi_About.Size = New System.Drawing.Size(190, 22)
         Me.tsmi_About.Text = "About"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.BackgroundImage = Global.PKMG5DC.My.Resources.Resources.ppdb
+        Me.ToolStripMenuItem2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
+        Me.ToolStripMenuItem2.Text = "                  Donate"
+        Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'pb_Donate
         '
@@ -449,4 +461,5 @@ Partial Class Main5
     Friend WithEvents tsmi_About As ToolStripMenuItem
     Friend WithEvents tscb_Region As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
 End Class

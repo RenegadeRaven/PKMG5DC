@@ -98,12 +98,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card5.vb" />
+    <Compile Include="Event\Card5.vb" />
     <Compile Include="Common.vb" />
-    <Compile Include="CustomMessageBox.designer.vb">
+    <Compile Include="PKM\Cryption.vb" />
+    <Compile Include="Essentials\CustomMessageBox.designer.vb">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="CustomMessageBox.vb">
+    <Compile Include="Essentials\CustomMessageBox.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="About.Designer.vb">
@@ -118,7 +119,7 @@
     <Compile Include="Main5.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IniFile.vb" />
+    <Compile Include="Essentials\IniFile.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -135,20 +136,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="PCD.vb" />
-    <Compile Include="PGF.vb" />
+    <None Include="Event\PCD.vb" />
+    <Compile Include="Event\PGF.vb" />
     <Compile Include="PGFCreator.Designer.vb">
       <DependentUpon>PGFCreator.vb</DependentUpon>
     </Compile>
     <Compile Include="PGFCreator.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Database.vb" />
-    <Compile Include="PK5.vb" />
+    <Compile Include="PKM\Database.vb" />
+    <Compile Include="PKM\PK5.vb" />
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomMessageBox.resx">
+    <EmbeddedResource Include="Essentials\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="About.resx">

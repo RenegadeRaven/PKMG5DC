@@ -2,6 +2,9 @@
 Public Class Card5
     Public Data(&H16CF) As Byte
 
+    Public Sub New()
+        Unknown14 = &H14
+    End Sub
     Public Property NumberOfCards As Byte
         Get
             Return Data(&H0)
