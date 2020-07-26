@@ -112,7 +112,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
         Else
-            MsgB("No Internet connection!" & "
+            MsgBox("No Internet connection!" & "
 " & "You can look me up later.", 1, "OK",,, "Error" & " 404")
         End If
     End Sub
@@ -123,7 +123,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
-            MsgB("No Internet connection!" & "
+            MsgBox("No Internet connection!" & "
 " & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
         End If
     End Sub
@@ -145,7 +145,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
                 Loop
             Next i
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
     Private Sub CreateFiles(ByVal files(,))
@@ -163,7 +163,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
                 Loop
             Next i
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MsgBox(ex.Message)
         End Try
     End Sub
 
@@ -191,10 +191,10 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         End If
     End Sub
     Private Sub GetTicket()
-        Dim ans = MsgB("This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?", 2, "Yes", "No",, "Need Liberty Ticket ROM")
+        Dim ans = MsgBox("This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?", 2, "Yes", "No",, "Need Liberty Ticket ROM")
         Select Case ans
             Case 6
-                ans = MsgB("Can you select it for me?", 2, "Sure", "Not sure",, "Need Liberty Ticket ROM")
+                ans = MsgBox("Can you select it for me?", 2, "Sure", "Not sure",, "Need Liberty Ticket ROM")
                 Select Case ans
                     Case 6
                         Dim FileSelect As New OpenFileDialog With {
@@ -221,7 +221,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         Dim myFile As String = My.Settings.ticket
         Dim l = System.IO.File.ReadAllText(myFile)
         If Not l.Contains("POKWBLIBERTYY8KP01") Then
-            MsgB("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
+            MsgBox("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
             File.Delete(My.Settings.ticket)
             Close()
         End If
@@ -235,11 +235,11 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             Dim f = gen.Next(0, 2)
             If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
                 If My.Computer.Network.IsAvailable Then
-                    Dim ans = MsgB("Google is your friend.", 2, "I know", "How so?")
+                    Dim ans = MsgBox("Google is your friend.", 2, "I know", "How so?")
                     If ans = 7 Then Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
                 End If
             Else
-                MsgB("Google is your friend.", 1, "OK")
+                MsgBox("Google is your friend.", 1, "OK")
             End If
         End If
     End Sub
@@ -493,7 +493,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             Process.Start(Local & "\tools\compile.bat").WaitForExit()
             Process.Start(Local & "\tools\clean.bat").WaitForExit()
         Catch ex As Exception
-            MsgB(ex.Message)
+            MsgBox(ex.Message)
         End Try
         SaveFile.Filter = "NDS ROM (*.nds)|*.nds|All files (*.*)|*.*"
         Dim res As DialogResult = SaveFile.ShowDialog()

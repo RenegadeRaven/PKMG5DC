@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="PKM\Database.vb" />
     <Compile Include="PKM\PK5.vb" />
+    <Compile Include="PKM\PKMStrings.vb" />
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>

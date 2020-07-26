@@ -1212,20 +1212,19 @@
             Return BitConverter.ToUInt16(Data, &H7E)
         End Get
         Set(ByVal value As UShort)
-            'If (value = 0) Then
-            '    BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H44)
-            '    BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H7E)
-            'ElseIf ((value < 2000 And value > 111) Or Locations.IsPtHGSSLocationEgg(value)) Then
-            '    ' Met location Not in DP, set to Faraway Place
-            '    BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H44)
-            '    BitConverter.GetBytes(CUShort(&HBBA)).CopyTo(Data, &H7E)
-            'Else
-            '    Dim pthgss As Integer = If(pthgss, value, 0) ' only set to PtHGSS loc if encountered in game
-            '    BitConverter.GetBytes(CUShort(pthgss)).CopyTo(Data, &H44)
-            '    BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H7E)
-            'End If
-
-            BitConverter.GetBytes(value).CopyTo(Data, &H7E)
+            If (value = 0) Then
+                BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H44)
+                BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H7E)
+            ElseIf ((value < 2000 AndAlso value > 111) Or (2010 < value AndAlso value < 3000)) Then
+                ' Met location Not in DP, set to Faraway Place
+                BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H44)
+                BitConverter.GetBytes(CUShort(&HBBA)).CopyTo(Data, &H7E)
+            Else
+                Dim pthgss As Integer = If(Origin = &HA OrElse &HB OrElse &HC, value, 0) ' only set to PtHGSS loc if encountered in game
+                BitConverter.GetBytes(CUShort(pthgss)).CopyTo(Data, &H44)
+                BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H7E)
+            End If
+            'BitConverter.GetBytes(value).CopyTo(Data, &H7E)
         End Set
     End Property
     Public Property Met As UShort
@@ -1234,20 +1233,19 @@
             Return BitConverter.ToUInt16(Data, &H80)
         End Get
         Set(ByVal value As UShort)
-            'If (value = 0) Then
-            '    BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H46)
-            '    BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H80)
-            'ElseIf (Locations.IsPtHGSSLocation(value) Or Locations.IsPtHGSSLocationEgg(value)) Then
-            '    ' Met location Not in DP, set to Faraway Place
-            '    BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H46)
-            '    BitConverter.GetBytes(CUShort(&HBBA)).CopyTo(Data, &H80)
-            'Else
-            '    Dim pthgss As Integer = If(pthgss, value, 0) ' only set to PtHGSS loc if encountered in game
-            '    BitConverter.GetBytes(CUShort(pthgss)).CopyTo(Data, &H46)
-            '    BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H80)
-            'End If
-
-            BitConverter.GetBytes(value).CopyTo(Data, &H80)
+            If (value = 0) Then
+                BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H46)
+                BitConverter.GetBytes(CUShort(0)).CopyTo(Data, &H80)
+            ElseIf ((111 < value AndAlso value < 2000) Or (2010 < value AndAlso value < 3000)) Then
+                ' Met location Not in DP, set to Faraway Place
+                BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H46)
+                BitConverter.GetBytes(CUShort(&HBBA)).CopyTo(Data, &H80)
+            Else
+                Dim pthgss As Integer = If(Origin = &HA OrElse &HB OrElse &HC, value, 0) ' only set to PtHGSS loc if encountered in game
+                BitConverter.GetBytes(CUShort(pthgss)).CopyTo(Data, &H46)
+                BitConverter.GetBytes(CUShort(value)).CopyTo(Data, &H80)
+            End If
+            'BitConverter.GetBytes(value).CopyTo(Data, &H80)
         End Set
     End Property
     Public Property Pokerus As Byte
@@ -1279,17 +1277,17 @@
             Return Math.Max(Data(&H86), Data(&H83))
         End Get
         Set(ByVal value As Byte)
-            '' Ball to display in DPPt
-            'Data(&H83) = CByte(If(value <= &H10, value, 4)) ' Cap at Cherish Ball
+            ' Ball to display in DPPt
+            Data(&H83) = CByte(If(value <= &H10, value, 4)) ' Cap at Cherish Ball
 
-            '' HGSS Exclusive Balls -- If the user wants to screw things up, let them. Any legality checking could catch hax.
-            'If (value > &H10 Or (HGSS And Not FatefulEncounter)) Then
-            '    Data(&H86) = CByte(If(value <= &H18, value, 4)) ' Cap at Comp Ball
-            'Else
-            '    Data(&H86) = 0 ' Unused
-            'End If
+            ' HGSS Exclusive Balls
+            If (value > &H10 Or (If(Origin = &HB OrElse &HC, True, False) And Not FatefulEncounter)) Then
+                Data(&H86) = CByte(If(value <= &H18, value, 4)) ' Cap at Comp Ball
+            Else
+                Data(&H86) = 0 ' Unused
+            End If
 
-            Data(&H83) = value
+            'Data(&H83) = value
         End Set
     End Property
     Public Property OT_Gender As Byte

@@ -7,7 +7,6 @@
     Friend Const SIZE_5STORED As Integer = 136
     Friend Const SIZE_5BLOCK As Integer = 32
 
-
     Private ReadOnly BlockPosition As Byte() =
         {
             0, 1, 2, 3,

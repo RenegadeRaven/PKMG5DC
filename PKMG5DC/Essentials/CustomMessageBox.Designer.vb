@@ -23,63 +23,63 @@ Partial Class CustomMessageBox
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CustomMessageBox))
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.bt_First = New System.Windows.Forms.Button()
+        Me.bt_Second = New System.Windows.Forms.Button()
+        Me.lb_Message = New System.Windows.Forms.Label()
+        Me.pb_ButtonArea = New System.Windows.Forms.PictureBox()
+        Me.bt_Third = New System.Windows.Forms.Button()
+        CType(Me.pb_ButtonArea, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button1
+        'bt_First
         '
-        Me.Button1.AutoSize = True
-        Me.Button1.Location = New System.Drawing.Point(10, 80)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.bt_First.AutoSize = True
+        Me.bt_First.Location = New System.Drawing.Point(10, 80)
+        Me.bt_First.Name = "bt_First"
+        Me.bt_First.Size = New System.Drawing.Size(75, 23)
+        Me.bt_First.TabIndex = 0
+        Me.bt_First.Text = "Button1"
+        Me.bt_First.UseVisualStyleBackColor = True
         '
-        'Button2
+        'bt_Second
         '
-        Me.Button2.AutoSize = True
-        Me.Button2.Location = New System.Drawing.Point(104, 80)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.bt_Second.AutoSize = True
+        Me.bt_Second.Location = New System.Drawing.Point(104, 80)
+        Me.bt_Second.Name = "bt_Second"
+        Me.bt_Second.Size = New System.Drawing.Size(75, 23)
+        Me.bt_Second.TabIndex = 1
+        Me.bt_Second.Text = "Button2"
+        Me.bt_Second.UseVisualStyleBackColor = True
         '
-        'Label1
+        'lb_Message
         '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(7, 6)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(270, 57)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Label1"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lb_Message.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lb_Message.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_Message.Location = New System.Drawing.Point(7, 6)
+        Me.lb_Message.Name = "lb_Message"
+        Me.lb_Message.Size = New System.Drawing.Size(270, 57)
+        Me.lb_Message.TabIndex = 2
+        Me.lb_Message.Text = "Label1"
+        Me.lb_Message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'PictureBox1
+        'pb_ButtonArea
         '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.PictureBox1.Location = New System.Drawing.Point(-4, 69)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(294, 70)
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
+        Me.pb_ButtonArea.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.pb_ButtonArea.Location = New System.Drawing.Point(-4, 69)
+        Me.pb_ButtonArea.Name = "pb_ButtonArea"
+        Me.pb_ButtonArea.Size = New System.Drawing.Size(294, 70)
+        Me.pb_ButtonArea.TabIndex = 3
+        Me.pb_ButtonArea.TabStop = False
         '
-        'Button3
+        'bt_Third
         '
-        Me.Button3.AutoSize = True
-        Me.Button3.Location = New System.Drawing.Point(197, 80)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.bt_Third.AutoSize = True
+        Me.bt_Third.Location = New System.Drawing.Point(197, 80)
+        Me.bt_Third.Name = "bt_Third"
+        Me.bt_Third.Size = New System.Drawing.Size(75, 23)
+        Me.bt_Third.TabIndex = 4
+        Me.bt_Third.Text = "Button3"
+        Me.bt_Third.UseVisualStyleBackColor = True
         '
         'CustomMessageBox
         '
@@ -88,25 +88,24 @@ Partial Class CustomMessageBox
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(284, 111)
         Me.ControlBox = False
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.bt_Third)
+        Me.Controls.Add(Me.lb_Message)
+        Me.Controls.Add(Me.bt_Second)
+        Me.Controls.Add(Me.bt_First)
+        Me.Controls.Add(Me.pb_ButtonArea)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "CustomMessageBox"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " "
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pb_ButtonArea, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Button3 As Button
+    Friend WithEvents bt_First As Button
+    Friend WithEvents bt_Second As Button
+    Friend WithEvents lb_Message As Label
+    Friend WithEvents pb_ButtonArea As PictureBox
+    Friend WithEvents bt_Third As Button
 End Class
