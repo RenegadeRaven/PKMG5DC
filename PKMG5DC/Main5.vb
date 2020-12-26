@@ -44,7 +44,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         bt_Build.Enabled = False
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        WriteIni()
+        WriteSettings()
     End Sub
 
 #Region "Essentials"
@@ -171,11 +171,15 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub CheckLocal()
         Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"} ', Local & "\cards"}
         CreateFolders(locals)
-        If Not File.Exists(Local & "\settings.ini") Then
-            File.WriteAllText(Local & "\settings.ini", "")
-            WriteIni()
+        '*
+        If File.Exists(Local & "\settings.ini") Then
+            ReadIni()
+            File.Delete(Local & "\settings.ini")
         End If
-        ReadIni()
+        If Not File.Exists(Local & "\settings.json") Then
+            WriteSettings()
+        End If
+        ReadSettings()
         tscb_Region.SelectedIndex = My.Settings.Region
     End Sub
     'Checks for Ticket
@@ -224,6 +228,8 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             MsgBox("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
             File.Delete(My.Settings.ticket)
             Close()
+        Else
+            WriteSettings()
         End If
     End Sub
     Private Sub DeSmuME_Check()
