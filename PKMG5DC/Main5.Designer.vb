@@ -64,10 +64,11 @@ Partial Class Main5
         Me.gb_Main = New System.Windows.Forms.GroupBox()
         Me.gb_Text = New System.Windows.Forms.GroupBox()
         Me.lb_CharCountNumber = New System.Windows.Forms.Label()
+        Me.lb_CharCount = New System.Windows.Forms.Label()
         Me.bt_ResetEventMsg = New System.Windows.Forms.Button()
         Me.bt_SetEventMsg = New System.Windows.Forms.Button()
         Me.gb_Cards = New System.Windows.Forms.GroupBox()
-        Me.lb_CharCount = New System.Windows.Forms.Label()
+        Me.bt_ClearForm = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.pb_Donate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gb_DateLimit.SuspendLayout()
@@ -81,7 +82,7 @@ Partial Class Main5
         'lklb_Update
         '
         Me.lklb_Update.AutoSize = True
-        Me.lklb_Update.Location = New System.Drawing.Point(1, 5)
+        Me.lklb_Update.Location = New System.Drawing.Point(8, 9)
         Me.lklb_Update.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lklb_Update.Name = "lklb_Update"
         Me.lklb_Update.Size = New System.Drawing.Size(145, 16)
@@ -114,7 +115,7 @@ Partial Class Main5
         'tsmi_About
         '
         Me.tsmi_About.Name = "tsmi_About"
-        Me.tsmi_About.Size = New System.Drawing.Size(213, 26)
+        Me.tsmi_About.Size = New System.Drawing.Size(224, 26)
         Me.tsmi_About.Text = "About"
         '
         'ToolStripMenuItem2
@@ -124,7 +125,7 @@ Partial Class Main5
         Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(213, 26)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
         Me.ToolStripMenuItem2.Text = "                  Donate"
         Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -134,7 +135,7 @@ Partial Class Main5
         Me.pb_Donate.BackgroundImage = CType(resources.GetObject("pb_Donate.BackgroundImage"), System.Drawing.Image)
         Me.pb_Donate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pb_Donate.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.pb_Donate.Location = New System.Drawing.Point(291, 4)
+        Me.pb_Donate.Location = New System.Drawing.Point(641, 9)
         Me.pb_Donate.Margin = New System.Windows.Forms.Padding(4)
         Me.pb_Donate.Name = "pb_Donate"
         Me.pb_Donate.Size = New System.Drawing.Size(107, 27)
@@ -165,7 +166,7 @@ Partial Class Main5
         'bt_Build
         '
         Me.bt_Build.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bt_Build.Location = New System.Drawing.Point(295, 546)
+        Me.bt_Build.Location = New System.Drawing.Point(204, 546)
         Me.bt_Build.Margin = New System.Windows.Forms.Padding(4)
         Me.bt_Build.Name = "bt_Build"
         Me.bt_Build.Size = New System.Drawing.Size(171, 57)
@@ -496,7 +497,7 @@ Partial Class Main5
         Me.gb_Main.Size = New System.Drawing.Size(737, 502)
         Me.gb_Main.TabIndex = 47
         Me.gb_Main.TabStop = False
-        Me.gb_Main.Text = "GroupBox1"
+        Me.gb_Main.Text = "Distribution ROM"
         '
         'gb_Text
         '
@@ -527,6 +528,16 @@ Partial Class Main5
         Me.lb_CharCountNumber.TabIndex = 51
         Me.lb_CharCountNumber.Text = "0"
         Me.lb_CharCountNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lb_CharCount
+        '
+        Me.lb_CharCount.AutoSize = True
+        Me.lb_CharCount.Location = New System.Drawing.Point(240, 79)
+        Me.lb_CharCount.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lb_CharCount.Name = "lb_CharCount"
+        Me.lb_CharCount.Size = New System.Drawing.Size(73, 16)
+        Me.lb_CharCount.TabIndex = 50
+        Me.lb_CharCount.Text = "Char count:"
         '
         'bt_ResetEventMsg
         '
@@ -560,27 +571,29 @@ Partial Class Main5
         Me.gb_Cards.TabStop = False
         Me.gb_Cards.Text = "Cards Selected"
         '
-        'lb_CharCount
+        'bt_ClearForm
         '
-        Me.lb_CharCount.AutoSize = True
-        Me.lb_CharCount.Location = New System.Drawing.Point(240, 79)
-        Me.lb_CharCount.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lb_CharCount.Name = "lb_CharCount"
-        Me.lb_CharCount.Size = New System.Drawing.Size(73, 16)
-        Me.lb_CharCount.TabIndex = 50
-        Me.lb_CharCount.Text = "Char count:"
+        Me.bt_ClearForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.bt_ClearForm.Location = New System.Drawing.Point(382, 546)
+        Me.bt_ClearForm.Margin = New System.Windows.Forms.Padding(4)
+        Me.bt_ClearForm.Name = "bt_ClearForm"
+        Me.bt_ClearForm.Size = New System.Drawing.Size(171, 57)
+        Me.bt_ClearForm.TabIndex = 48
+        Me.bt_ClearForm.Text = "Clear Form"
+        Me.bt_ClearForm.UseVisualStyleBackColor = True
         '
         'Main5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(756, 634)
+        Me.Controls.Add(Me.bt_ClearForm)
         Me.Controls.Add(Me.gb_Main)
         Me.Controls.Add(Me.bt_Build)
         Me.Controls.Add(Me.lklb_Author)
+        Me.Controls.Add(Me.lklb_Update)
         Me.Controls.Add(Me.lb_By)
         Me.Controls.Add(Me.pb_Donate)
-        Me.Controls.Add(Me.lklb_Update)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -609,13 +622,10 @@ Partial Class Main5
     Friend WithEvents lklb_Update As LinkLabel
     Friend WithEvents HoverInfo As ToolTip
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents tsmi_Options As ToolStripMenuItem
     Friend WithEvents pb_Donate As PictureBox
     Friend WithEvents lklb_Author As LinkLabel
     Friend WithEvents lb_By As Label
     Friend WithEvents bt_Build As Button
-    Friend WithEvents tsmi_About As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents cb_Cards As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
@@ -650,4 +660,8 @@ Partial Class Main5
     Friend WithEvents bt_SetRegion As Button
     Friend WithEvents lb_CharCountNumber As Label
     Friend WithEvents lb_CharCount As Label
+    Friend WithEvents tsmi_Options As ToolStripMenuItem
+    Friend WithEvents tsmi_About As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents bt_ClearForm As Button
 End Class

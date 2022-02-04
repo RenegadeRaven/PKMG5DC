@@ -1,8 +1,6 @@
 ﻿'https://www.codeproject.com/Articles/17161/A-NET-Class-for-Creating-Reading-Editing-INI-Files
 
 Imports System.IO
-Imports System.Security
-Imports System.Security.Cryptography
 Imports System.Text
 Public Class IniFile
 

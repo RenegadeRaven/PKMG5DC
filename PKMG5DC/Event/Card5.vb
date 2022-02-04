@@ -1,5 +1,4 @@
 ﻿'Card Class
-Imports System.Text
 Public Class Card5
     Public Data(&H222F) As Byte
 

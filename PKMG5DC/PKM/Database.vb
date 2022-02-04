@@ -1,7 +1,4 @@
-﻿Imports System.IO
-Imports System.Runtime.InteropServices
-
-Public Class Pokemon
+﻿Public Class Pokemon
     Public Property ID As Integer
     Public Property Name As String
 End Class
