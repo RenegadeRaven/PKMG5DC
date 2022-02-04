@@ -23,6 +23,7 @@ Partial Class About
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(About))
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lb_Description = New System.Windows.Forms.Label()
         Me.lb_Includes = New System.Windows.Forms.Label()
@@ -111,7 +112,7 @@ Partial Class About
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(275, 365)
+        Me.ClientSize = New System.Drawing.Size(275, 310)
         Me.Controls.Add(Me.lklb_Source)
         Me.Controls.Add(Me.lb_Source)
         Me.Controls.Add(Me.lklb_12distro)
@@ -119,6 +120,7 @@ Partial Class About
         Me.Controls.Add(Me.lklb_Ndstool)
         Me.Controls.Add(Me.lb_Includes)
         Me.Controls.Add(Me.lb_Description)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "About"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "About"

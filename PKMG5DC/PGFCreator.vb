@@ -439,9 +439,9 @@ Game: " & Origin(InputPK5.Origin))
             Case True
                 MsgBox("Missing Field",,,,, "Error")
             Case Else
-                Main5.Card.Wondercards(Main5.tc_Cards.SelectedIndex) = WC.Data
-                Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
-                Close()
+                Main5.Card.Wondercards(0) = WC.Data
+                Main5.customName = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
+                DialogResult = DialogResult.OK
         End Select
     End Sub
 #End Region
