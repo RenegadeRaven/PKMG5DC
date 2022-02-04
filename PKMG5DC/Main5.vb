@@ -519,7 +519,6 @@ Public Class Main5
                 lb_End.Enabled = True
                 StartDatePicker.Enabled = True
                 EndDatePicker.Enabled = True
-                bt_ResetDate_Click(sender, e)
         End Select
     End Sub
 
