@@ -44,7 +44,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         bt_Build.Enabled = False
     End Sub
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        WriteSettings()
+        WriteIni()
     End Sub
 
 #Region "Essentials"
@@ -82,7 +82,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
                 Reader.Close()
                 File.Delete(TempPath & "\dt.txt")
                 If dat <> dtt Then
-                    lklb_Update.Text = "New Update Available! " & dtt
+                    lklb_Update.Text = "有可用的新版本! " & dtt
                 MenuStrip1.Location = New Point(175, 0)
                 pb_Donate.Location = New Point(119, 427)
                 lklb_Update.Show()
@@ -102,8 +102,8 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
-            MsgBox("No Internet connection!
-    You can not update at the moment.", vbOKOnly, "Error 404")
+            MsgBox("无网络连接!
+    您现在不能更新。", vbOKOnly, "错误 404")
         End If
     End Sub
 
@@ -112,8 +112,8 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
         Else
-            MsgBox("No Internet connection!" & "
-" & "You can look me up later.", 1, "OK",,, "Error" & " 404")
+            MsgB("无网络连接!" & "
+" & "您可以之后再查看", 1, "好的",,, "错误" & " 404")
         End If
     End Sub
 
@@ -123,8 +123,8 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
-            MsgBox("No Internet connection!" & "
-" & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
+            MsgB("无网络连接!" & "
+" & "感谢你。", 1, "好的",,, "错误" & " 404")
         End If
     End Sub
     Private Sub Pb_Donate_MouseDown(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseDown
@@ -139,19 +139,25 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub CreateFolders(ByVal dirs As String())
         Try
             For i = 0 To UBound(dirs) Step 1
-                If Not dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then dirs(i) = Local & dirs(i)
+                If dirs(i).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
+                Else
+                    dirs(i) = Local & dirs(i)
+                End If
                 Do While Not Directory.Exists(dirs(i))
                     If Not Directory.Exists(dirs(i)) Then Directory.CreateDirectory(dirs(i))
                 Loop
             Next i
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
     Private Sub CreateFiles(ByVal files(,))
         Try
             For i = 0 To UBound(files) Step 1
-                If Not files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then files(i, 0) = Local & files(i, 0)
+                If files(i, 0).Contains(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) Then
+                Else
+                    files(i, 0) = Local & files(i, 0)
+                End If
                 Do While Not File.Exists(files(i, 0))
                     If Not File.Exists(files(i, 0)) Then
                         If TypeOf files(i, 1) Is String Then
@@ -163,7 +169,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
                 Loop
             Next i
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MessageBox.Show(ex.Message)
         End Try
     End Sub
 
@@ -171,15 +177,11 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub CheckLocal()
         Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"} ', Local & "\cards"}
         CreateFolders(locals)
-        '*
-        If File.Exists(Local & "\settings.ini") Then
-            ReadIni()
-            File.Delete(Local & "\settings.ini")
+        If Not File.Exists(Local & "\settings.ini") Then
+            File.WriteAllText(Local & "\settings.ini", "")
+            WriteIni()
         End If
-        If Not File.Exists(Local & "\settings.json") Then
-            WriteSettings()
-        End If
-        ReadSettings()
+        ReadIni()
         tscb_Region.SelectedIndex = My.Settings.Region
     End Sub
     'Checks for Ticket
@@ -195,20 +197,22 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         End If
     End Sub
     Private Sub GetTicket()
-        Dim ans = MsgBox("This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?", 2, "Yes", "No",, "Need Liberty Ticket ROM")
+        Dim ans = MsgB("本程序需要你有一个原始的自由船票配信ROM。你有吗？（按enter进行下一步）", 2, "是", "否",, "您需要拥有自由船票配信ROM方可使用本程序")
         Select Case ans
             Case 6
-                ans = MsgBox("Can you select it for me?", 2, "Sure", "Not sure",, "Need Liberty Ticket ROM")
+                ans = MsgB("你能把它选给我看吗？（按enter选择文件）", 2, "当然可以", "我不确定",, "您需要拥有自由船票配信ROM方可使用本程序")
                 Select Case ans
                     Case 6
                         Dim FileSelect As New OpenFileDialog With {
-                        .Filter = "Event ROM (*.nds)|*.nds|All files (*.*)|*.*"}
+                        .Filter = "配信ROM (*.nds)|*.nds|所有文件(*.*)|*.*"}
                         Dim res As DialogResult = FileSelect.ShowDialog()
                         If res = Windows.Forms.DialogResult.Cancel Then
                             Close()
                         Else
                             Dim myFile As String = FileSelect.FileName
-                            If System.IO.File.Exists(Local & "\ticket.nds") Then System.IO.File.Delete(Local & "\ticket.nds")
+                            If System.IO.File.Exists(Local & "\ticket.nds") Then
+                                System.IO.File.Delete(Local & "\ticket.nds")
+                            End If
                             System.IO.File.Copy(myFile, Local & "\ticket.nds")
                             My.Settings.ticket = Local & "\ticket.nds"
                             VerifyTicket()
@@ -224,28 +228,30 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub VerifyTicket()
         Dim myFile As String = My.Settings.ticket
         Dim l = System.IO.File.ReadAllText(myFile)
-        If Not l.Contains("POKWBLIBERTYY8KP01") Then
-            MsgBox("Error: Invaild File", 1, "OK",,, "ERROR FOUND")
+        If l.Contains("POKWBLIBERTYY8KP01") Then
+        Else
+            MsgB("错误: 无效文件", 1, "好的",,, "有错误")
             File.Delete(My.Settings.ticket)
             Close()
-        Else
-            WriteSettings()
         End If
     End Sub
     Private Sub DeSmuME_Check()
         Dim Everest_Registry As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME.exe")
         Dim Everest_Registry2 As Microsoft.Win32.RegistryKey = My.Computer.Registry.ClassesRoot.OpenSubKey("Applications\DeSmuME_0.9.11_x64.exe")
-        If Everest_Registry IsNot Nothing And Everest_Registry2 IsNot Nothing Then
+        If Everest_Registry Is Nothing And Everest_Registry2 Is Nothing Then
+        Else
             Dim gen As New Random
             Dim n = gen.Next(1, 26)
             Dim f = gen.Next(0, 2)
             If (n Mod (System.DateTime.Today.Day Mod 3)) = f Then
                 If My.Computer.Network.IsAvailable Then
-                    Dim ans = MsgBox("Google is your friend.", 2, "I know", "How so?")
-                    If ans = 7 Then Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
+                    Dim ans = MsgB("谷歌/百度是你的好朋友", 2, "我懂了", "所以怎么做?")
+                    If ans = 7 Then
+                        Process.Start("https://www.google.com/search?q=pokemon+liberty+ticket+distribution+rom")
+                    End If
                 End If
             Else
-                MsgBox("Google is your friend.", 1, "OK")
+                MsgB("谷歌/百度是你的好朋友", 1, "好的")
             End If
         End If
     End Sub
@@ -287,7 +293,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             .Padding = New System.Windows.Forms.Padding(3)
             .Size = New Size(278, 315)
             .TabIndex = DelTab.TabIndex
-            .Text = "Card " & (DelTab.TabIndex + If(doneLoad = False, 0, 1))
+            .Text = "卡槽 " & (DelTab.TabIndex + If(doneLoad = False, 0, 1))
             .UseVisualStyleBackColor = True
         End With
         tc_Cards.TabPages.Add(NewTab)
@@ -362,11 +368,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
 #End Region
 #Region "Controls"
     Private Sub Bt_PGF_Click(sender As Object, e As EventArgs) Handles bt_PGF.Click
-        OpenFile.Filter = "Gen 5 Wondercard (*.pgf)|*.pgf;*.wc5|All files (*.*)|*.*"
+        OpenFile.Filter = "Gen5神秘卡片文件 (*.pgf)|*.pgf;*.wc5|所有文件(*.*)|*.*"
         Dim res As DialogResult = OpenFile.ShowDialog()
-        If res = Windows.Forms.DialogResult.Cancel Then
-            Exit Sub
-        Else
+        If res <> Windows.Forms.DialogResult.Cancel Then
             Dim myFile As String = Path.GetFileName(OpenFile.FileName)
             lb_PGF.Text = myFile
             WC.Data = File.ReadAllBytes(OpenFile.FileName)
@@ -434,7 +438,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     End Sub
 
     Private Sub Cb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Region.SelectedIndexChanged
-        If doneLoad Then SyncRegion()
+        If doneLoad Then
+            SyncRegion()
+        End If
     End Sub
     Private Sub SyncRegion()
         Select Case cb_Region.SelectedIndex
@@ -499,9 +505,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             Process.Start(Local & "\tools\compile.bat").WaitForExit()
             Process.Start(Local & "\tools\clean.bat").WaitForExit()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgB(ex.Message)
         End Try
-        SaveFile.Filter = "NDS ROM (*.nds)|*.nds|All files (*.*)|*.*"
+        SaveFile.Filter = "NDS ROM (*.nds)|*.nds|所有文件(*.*)|*.*"
         Dim res As DialogResult = SaveFile.ShowDialog()
         If res <> Windows.Forms.DialogResult.Cancel Then
             If File.Exists(SaveFile.FileName) Then File.Delete(SaveFile.FileName)

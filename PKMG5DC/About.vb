@@ -17,4 +17,7 @@
     Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Source.LinkClicked
         Process.Start("https://github.com/PlasticJustice/PKMG5DC")
     End Sub
+    Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_SourceCHS.LinkClicked
+        Process.Start("https://github.com/Wokann/PKMG5DC_CHS")
+    End Sub
 End Class

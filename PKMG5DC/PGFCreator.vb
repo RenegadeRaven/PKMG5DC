@@ -3,14 +3,14 @@ Public Class PGFCreator
     Dim WC As New PGF 'Wondercard
     Dim InputPK5 As New PK5 'Pokemon Data
     Dim OpenFile As New OpenFileDialog
-    ReadOnly Natures() As String = {"Hardy", "Lonely", "Brave", "Adamant", "Naughty", "Bold", "Docile", "Relaxed", "Impish", "Lax", "Timid", "Hasty", "Serious", "Jolly", "Naive", "Modest",
-        "Mild", "Quiet", "Bashful", "Rash", "Calm", "Gentle", "Sassy", "Careful", "Quirky"} 'List of Natures
+    ReadOnly Natures() As String = {"勤奋", "怕寂寞", "勇敢", "固执", "顽皮", "大胆", "坦率", "悠闲", "淘气", "乐天", "胆小", "急躁", "认真", "爽朗", "天真", "内敛",
+        "慢吞吞", "冷静", "害羞", "马虎", "温和", "温顺", "自大", "慎重", "浮躁"} 'List of Natures
     Private Sub PGFCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If DEBUG Then
         Me.Size = New Size(1344, 579)
 #Else
             Me.Size = New Size(452, 579)
-        cb_CardType.Items.Remove("Pass Power")
+        cb_CardType.Items.Remove("释出之力")
         CenterToScreen()
 #End If
         PopulateItems(cb_Item)
@@ -72,7 +72,7 @@ Public Class PGFCreator
             With WC
                 Select Case WC.CardType
                     Case 1
-                        If lbl_PK5Name.Text <> "Open .pk5 ------->" Then
+                        If lbl_PK5Name.Text <> "打开.pk5文件 ------->" Then
                             .TID = InputPK5.TID
                             .SID = InputPK5.SID
                             If cx_Origin.Checked = False Then .Origin = InputPK5.Origin
@@ -140,9 +140,9 @@ Public Class PGFCreator
     Private Sub Desc()
         With InputPK5
             lbl_Species.Text = GetPokeName(.Dex) & " @ " & GetItemName(.Item)
-            lbl_IVs.Text = "IVs: " & .IV_HP & "/" & .IV_ATK & "/" & .IV_DEF & "/" & .IV_SPA & "/" & .IV_SPD & "/" & .IV_SPE
-            lbl_Ability.Text = "Ability: " & GetAbilityName(.Ability)
-            lbl_Natures.Text = "Nature: " & Natures(.Nature)
+            lbl_IVs.Text = "个体值: " & .IV_HP & "/" & .IV_ATK & "/" & .IV_DEF & "/" & .IV_SPA & "/" & .IV_SPD & "/" & .IV_SPE
+            lbl_Ability.Text = "特性: " & GetAbilityName(.Ability)
+            lbl_Natures.Text = "性格: " & Natures(.Nature)
             lbl_Move1.Text = GetMoveName(.Move1)
             lbl_Move2.Text = GetMoveName(.Move2)
             lbl_Move3.Text = GetMoveName(.Move3)
@@ -180,35 +180,35 @@ Public Class PGFCreator
     Private Function Origin(id As Byte)
         Select Case id
             Case &H1
-                Return "Sapphire"
+                Return "蓝宝石"
             Case &H2
-                Return "Ruby"
+                Return "红宝石"
             Case &H3
-                Return "Emerald"
+                Return "绿宝石"
             Case &H4
-                Return "FireRed"
+                Return "火红"
             Case &H5
-                Return "LeafGreen"
+                Return "叶绿"
             Case &HF
-                Return "Colosseum/XD"
+                Return "圆形竞技场/XD"
             Case &HA
-                Return "Diamond"
+                Return "钻石"
             Case &HB
-                Return "Pearl"
+                Return "珍珠"
             Case &HC
-                Return "Platinum"
+                Return "白金"
             Case &H7
-                Return "HeartGold"
+                Return "心金"
             Case &H8
-                Return "SoulSilver"
+                Return "魂银"
             Case &H14
-                Return "White"
+                Return "白"
             Case &H15
-                Return "Black"
+                Return "黑"
             Case &H16
-                Return "White 2"
+                Return "白2"
             Case &H17
-                Return "Black 2"
+                Return "黑2"
             Case Else
                 Return ""
         End Select
@@ -217,7 +217,7 @@ Public Class PGFCreator
     'Change Card Type
     Private Sub Cb_CardType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_CardType.SelectedIndexChanged
         Select Case cb_CardType.Text
-            Case "Pokémon"
+            Case "宝可梦"
                 gb_Item.Enabled = False
                 gb_Power.Enabled = False
                 gb_Pokemon.Enabled = True
@@ -226,7 +226,7 @@ Public Class PGFCreator
                 gb_Power.Location = New Point(922, 59)
                 Array.Clear(WC.Data, 0, &H5F)
                 WC.CardType = 1
-            Case "Item"
+            Case "道具"
                 gb_Item.Enabled = True
                 gb_Pokemon.Enabled = False
                 gb_Power.Enabled = False
@@ -235,7 +235,7 @@ Public Class PGFCreator
                 gb_Power.Location = New Point(922, 59)
                 Array.Clear(WC.Data, 0, &H5F)
                 WC.CardType = 2
-            Case "Pass Power"
+            Case "释出之力"
                 gb_Item.Enabled = False
                 gb_Pokemon.Enabled = False
                 gb_Power.Enabled = True
@@ -257,30 +257,14 @@ Public Class PGFCreator
         WC.EventTitle = tb_CardTitle.Text
     End Sub
 
-    'To Encrypt, or to decrypt?
-    Private Function Crypto(filePath As String)
-        Dim b As Byte() = File.ReadAllBytes(filePath)
-        If filePath.EndsWith(".ek5") Then
-            Return DecryptIfEncrypted45(b)
-        ElseIf filePath.EndsWith(".pk5") Then
-            Return EncryptIfDecrypted45(b)
-        End If
-        Return b
-    End Function
-
-    'Loads the EK5/PK5 file
-    Private Sub Btn_OpenPKM_Click(sender As Object, e As EventArgs) Handles btn_OpenPKM.Click
-        OpenFile.Filter = "Gen 5 PKM (*.pk5; *.ek5)|*.pk5;*.ek5|All files (*.*)|*.*"
+    'Loads the PK5 file
+    Private Sub Btn_OpenPK5_Click(sender As Object, e As EventArgs) Handles btn_OpenPK5.Click
+        OpenFile.Filter = "Gen 5 PKM (*.pk5)|*.pk5|All files (*.*)|*.*"
         Dim res As DialogResult = OpenFile.ShowDialog()
-        If res = Windows.Forms.DialogResult.Cancel Then
-            Exit Sub
-        Else
-            lbl_PK5Name.Text = OpenFile.SafeFileName
-            If OpenFile.FileName.EndsWith(".ek5") Then
-                InputPK5.Data = Crypto(OpenFile.FileName)
-            ElseIf OpenFile.FileName.EndsWith(".pk5") Then
-                InputPK5.Data = File.ReadAllBytes(OpenFile.FileName)
-            End If
+        If res <> Windows.Forms.DialogResult.Cancel Then
+            Dim myFile As String = Path.GetFileName(OpenFile.FileName)
+            lbl_PK5Name.Text = myFile
+            InputPK5.Data = File.ReadAllBytes(OpenFile.FileName)
         End If
         EnDisAblePKM(True)
         GrabValues()
@@ -320,7 +304,7 @@ Public Class PGFCreator
     'Choose Nature
     Private Sub Cb_Nature_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Nature.SelectedIndexChanged
         Select Case cb_Nature.Text
-            Case "Random"
+            Case "随机"
                 WC.Nature = &HFF
             Case Else
                 WC.Nature = Array.IndexOf(Natures, cb_Nature.Text)
@@ -332,13 +316,13 @@ Public Class PGFCreator
         Select Case cx_PID.Checked
             Case True
                 WC.PID = InputPK5.PID
-                cx_PID.Text = "Set PID"
-                HoverInfo.SetToolTip(cx_PID, "PID will be fixed To the PID from the .pk5
+                cx_PID.Text = "固定PID"
+                HoverInfo.SetToolTip(cx_PID, "PID将按.pk5文件中的设置
 PID: " & Hex(InputPK5.PID))
             Case False
                 WC.PID = &H0
-                cx_PID.Text = "Random PID"
-                HoverInfo.SetToolTip(cx_PID, "PID will be randomized upon recieval in-game")
+                cx_PID.Text = "随机PID"
+                HoverInfo.SetToolTip(cx_PID, "PID将在接收游戏中随机生成")
         End Select
     End Sub
 
@@ -352,8 +336,8 @@ PID: " & Hex(InputPK5.PID))
                 WC.IV_SPE = InputPK5.IV_SPE
                 WC.IV_SPA = InputPK5.IV_SPA
                 WC.IV_SPD = InputPK5.IV_SPD
-                cx_IV.Text = "Set IVs"
-                HoverInfo.SetToolTip(cx_IV, "IVs will be fixed to the IVs from the .pk5
+                cx_IV.Text = "固定IVs"
+                HoverInfo.SetToolTip(cx_IV, "个体值将按.pk5文件中的设置
 " & lbl_IVs.Text)
             Case False
                 WC.IV_HP = &HFF
@@ -362,8 +346,8 @@ PID: " & Hex(InputPK5.PID))
                 WC.IV_SPE = &HFF
                 WC.IV_SPA = &HFF
                 WC.IV_SPD = &HFF
-                cx_IV.Text = "Random IVs"
-                HoverInfo.SetToolTip(cx_IV, "IVs will be randomized upon recieval in-game")
+                cx_IV.Text = "随机个体值"
+                HoverInfo.SetToolTip(cx_IV, "个体值将在接收游戏中随机生成")
         End Select
     End Sub
 
@@ -372,13 +356,13 @@ PID: " & Hex(InputPK5.PID))
         Select Case cx_Lang.Checked
             Case True
                 WC.Language = &H0
-                cx_Lang.Text = "Recipient Language"
-                HoverInfo.SetToolTip(cx_Lang, "Language will be the recieving game's language")
+                cx_Lang.Text = "自适应设定为接收方的语种"
+                HoverInfo.SetToolTip(cx_Lang, "语种将为接收的游戏的语种设置")
             Case False
                 WC.Language = InputPK5.Language
-                cx_Lang.Text = "Set Language"
-                HoverInfo.SetToolTip(cx_Lang, "Language will be fixed to the language from the .pk5
-Language: " & Language(InputPK5.Language))
+                cx_Lang.Text = "固定语种"
+                HoverInfo.SetToolTip(cx_Lang, "语种将按.pk5文件中的设置
+语种: " & Language(InputPK5.Language))
         End Select
     End Sub
 
@@ -387,13 +371,13 @@ Language: " & Language(InputPK5.Language))
         Select Case cx_Origin.Checked
             Case True
                 WC.Origin = &H0
-                cx_Origin.Text = "Recipient Origin Game"
-                HoverInfo.SetToolTip(cx_Origin, "Origin will be the recieving game's origin")
+                cx_Origin.Text = "自适应设定为接收方的游戏版本"
+                HoverInfo.SetToolTip(cx_Origin, "语种将为接收的游戏的游戏版本设置")
             Case False
                 WC.Origin = InputPK5.Origin
-                cx_Origin.Text = "Set Origin Game"
-                HoverInfo.SetToolTip(cx_Origin, "Origin will be fixed to the origin from the .pk5
-Game: " & Origin(InputPK5.Origin))
+                cx_Origin.Text = "固定游戏版本"
+                HoverInfo.SetToolTip(cx_Origin, "游戏版本按.pk5文件中的设置
+游戏版本: " & Origin(InputPK5.Origin))
         End Select
     End Sub
 
@@ -437,10 +421,10 @@ Game: " & Origin(InputPK5.Origin))
         Next i
         Select Case chk
             Case True
-                MsgBox("Missing Field",,,,, "Error")
+                MsgB("缺少字段",,,,, "错误")
             Case Else
                 Main5.Card.Wondercards(Main5.tc_Cards.SelectedIndex) = WC.Data
-                Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (Custom)"
+                Main5.lb_PGF.Text = nud_CardID.Value & " - " & tb_CardTitle.Text & " (自定义)"
                 Close()
         End Select
     End Sub

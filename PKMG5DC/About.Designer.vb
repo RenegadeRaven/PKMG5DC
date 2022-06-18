@@ -31,6 +31,8 @@ Partial Class About
         Me.lklb_12distro = New System.Windows.Forms.LinkLabel()
         Me.lb_Source = New System.Windows.Forms.Label()
         Me.lklb_Source = New System.Windows.Forms.LinkLabel()
+        Me.lb_SourceCHS = New System.Windows.Forms.Label()
+        Me.lklb_SourceCHS = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
         'Timer1
@@ -45,9 +47,8 @@ Partial Class About
         Me.lb_Description.Name = "lb_Description"
         Me.lb_Description.Size = New System.Drawing.Size(276, 60)
         Me.lb_Description.TabIndex = 0
-        Me.lb_Description.Text = "This program builds Distribution ROMs for Gen 5 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pokémon games. With a copy of t" &
-    "he Liberty Ticket" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Distribution ROM and a .pgf event file, you can " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "make a Dist" &
-    "ribution ROM."
+        Me.lb_Description.Text = "本程序用于构建GEN5游戏的配信ROM" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "通过一个原始的自由船票配信ROM" &
+    "和.pgf配信文件，" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "你可以自制一份对应事件的配信ROM。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & ""
         '
         'lb_Includes
         '
@@ -56,7 +57,7 @@ Partial Class About
         Me.lb_Includes.Name = "lb_Includes"
         Me.lb_Includes.Size = New System.Drawing.Size(160, 13)
         Me.lb_Includes.TabIndex = 1
-        Me.lb_Includes.Text = "This program contains copies of:"
+        Me.lb_Includes.Text = "本程序包含以下程序的相关内容："
         '
         'lklb_Ndstool
         '
@@ -95,7 +96,7 @@ Partial Class About
         Me.lb_Source.Name = "lb_Source"
         Me.lb_Source.Size = New System.Drawing.Size(72, 13)
         Me.lb_Source.TabIndex = 5
-        Me.lb_Source.Text = "Source Code:"
+        Me.lb_Source.Text = "源代码:"
         '
         'lklb_Source
         '
@@ -107,11 +108,32 @@ Partial Class About
         Me.lklb_Source.TabStop = True
         Me.lklb_Source.Text = "GitHub"
         '
+        'lb_SourceCHS
+        '
+        Me.lb_SourceCHS.AutoSize = True
+        Me.lb_SourceCHS.Location = New System.Drawing.Point(13, 310)
+        Me.lb_SourceCHS.Name = "lb_SourceCHS"
+        Me.lb_SourceCHS.Size = New System.Drawing.Size(72, 13)
+        Me.lb_SourceCHS.TabIndex = 7
+        Me.lb_SourceCHS.Text = "汉化版源代码:"
+        '
+        'lklb_SourceCHS
+        '
+        Me.lklb_SourceCHS.AutoSize = True
+        Me.lklb_SourceCHS.Location = New System.Drawing.Point(92, 310)
+        Me.lklb_SourceCHS.Name = "lklb_SourceCHS"
+        Me.lklb_SourceCHS.Size = New System.Drawing.Size(40, 13)
+        Me.lklb_SourceCHS.TabIndex = 8
+        Me.lklb_SourceCHS.TabStop = True
+        Me.lklb_SourceCHS.Text = "GitHub-汉化"
+        '       
         'About
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(275, 365)
+        Me.Controls.Add(Me.lklb_SourceCHS)
+        Me.Controls.Add(Me.lb_SourceCHS)
         Me.Controls.Add(Me.lklb_Source)
         Me.Controls.Add(Me.lb_Source)
         Me.Controls.Add(Me.lklb_12distro)
@@ -121,7 +143,7 @@ Partial Class About
         Me.Controls.Add(Me.lb_Description)
         Me.Name = "About"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "About"
+        Me.Text = "关于"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -135,4 +157,6 @@ Partial Class About
     Friend WithEvents lklb_12distro As LinkLabel
     Friend WithEvents lb_Source As Label
     Friend WithEvents lklb_Source As LinkLabel
+    Friend WithEvents lb_SourceCHS As Label
+    Friend WithEvents lklb_SourceCHS As LinkLabel
 End Class
