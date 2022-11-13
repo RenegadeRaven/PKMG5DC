@@ -123,11 +123,14 @@
   <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="HoverInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pb_Donate.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFAAAAAWCAYAAABXEBvcAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAABn5JREFUWEftl3tU
+        vAAADrwBlbxySQAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAABn5JREFUWEftl3tU
         VEUcx69kL7VIUdJTHv8p3yIIIqCJjzTRo4hmkMcMMR4LooC8QhcQFpDloYI8BGF5LA8TgYUFXURRSaEk
         kwRJAUVQsofHMsEg7/yamV02idmDeOwfYc75nr0zv99v7v197m9m9nKaGkrQn44yFkfyxx3q0Vmfx6g6
         CNDFsMEhkivJudShDqUviSAsVFj6b3Bw7niUvSqLrwpCqE0GqL1kcAszwCx4PntlFkqe97YKE7uhRANT
@@ -157,6 +160,15 @@
         EwxmESYFK64SRipc7IYy9EYiqUkYOvFpxxBIrIv4RD9u8xBJjcPgkOEIFab+G2QZjkXphq583vJSJF/f
         jo5bd2OoMCiEc+Xl6++ivOVylGawDYMbq8Lyn8Zx/wCJ2xrGBkXjxAAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="rtb_EventMsg.Text" xml:space="preserve">
+    <value>Input Event Text Here.
+
+This textbox is sized perfectly, so what fits in
+this box is all you can fit. A maximum of 7 
+lines, max 36 characters per line, and a 
+maximum of 252 characters total.
+Make sure you put the new lines(ENTER key)</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

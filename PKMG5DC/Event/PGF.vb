@@ -437,7 +437,7 @@
     End Property
     'FF FF
     '00 00
-    Public Property RecieveDay As Byte
+    Public Property ReceiveDay As Byte
         Get
             Return Data(&HAC)
         End Get
@@ -445,7 +445,7 @@
             Data(&HAC) = value
         End Set
     End Property
-    Public Property RecieveMonth As Byte
+    Public Property ReceiveMonth As Byte
         Get
             Return Data(&HAD)
         End Get
@@ -453,7 +453,7 @@
             Data(&HAD) = value
         End Set
     End Property
-    Public Property RecieveYear As UShort
+    Public Property ReceiveYear As UShort
         Get
             Return BitConverter.ToUInt16(Data, &HAE)
         End Get

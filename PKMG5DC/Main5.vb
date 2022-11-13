@@ -11,38 +11,63 @@ Public Class Main5
     ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
     ReadOnly langs As Byte() = {&H2, &H3, &H4, &H5, &H7} 'List of Language values
     Public mySettings As New IniFile 'Settings.ini File
-    Dim pn_Settings As New Pnl_Settings 'Panel Settings
     Dim doneLoad As Boolean = False 'Has Load finished?
     Dim WC As New PGF 'Wondercard
     Public Shared Card As New Card5 'Distro Card
-    Public ToolVer As String = Application.ProductVersion
+    Public ToolVer As String = Application.ProductVersion 'Get version
+    Public Shared customName As String
+    Dim currItem As Integer 'Selected index on combobox
+    Dim selectedLang(11) As Integer 'Array of selected language that will be retrieved
+    Dim TempCard As New Card5 'Temporary variable that store Card
+    Dim multipleCardsArr(11) 'Array of cards selected by user
 #End Region
 
+    'Main Procedure
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckLocal()
         CheckTicket()
         UpdateChk()
-        Dim tools(,) = {{"\tools\ndstool.exe", My.Resources.ndstool}, {"\tools\extract.bat", "C:
-cd " & Local & "\tools
-ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\compile.bat", "C:
-cd " & Local & "\tools
-ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "C:
-cd " & Local & "\tools
-rd /S/Q data
-del arm9.bin arm7.bin banner.bin header.bin"}}
+        Dim tools As Object = {
+            {"\tools\ndstool.exe", My.Resources.ndstool},
+            {"\tools\armips.exe", My.Resources.armips},
+            {"\tools\options.asm", My.Resources.optionsasm},
+            {"\tools\12distro.asm", My.Resources._12distroasm},
+            {
+                "\tools\firstBatch.bat",
+                "C:" & Environment.NewLine &
+                "cd " & Local & "\tools" & Environment.NewLine &
+                "armips.exe 12distro.asm -erroronwarning" & Environment.NewLine &
+                "ndstool.exe -c 12distro.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin" & Environment.NewLine &
+                "rd /S/Q data" & Environment.NewLine &
+                "del arm9.bin arm7.bin banner.bin header.bin" & Environment.NewLine &
+                "ndstool.exe -x 12distro.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"
+            },
+            {
+                "\tools\secondBatch.bat",
+                "C:" & Environment.NewLine &
+                "cd " & Local & "\tools" & Environment.NewLine &
+                "ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin" & Environment.NewLine &
+                "rd /S/Q data" & Environment.NewLine &
+                "del arm9.bin arm7.bin banner.bin header.bin"
+            },
+            {
+                "\tools\extract.bat",
+                "C:" & Environment.NewLine &
+                "cd " & Local & "\tools" & Environment.NewLine &
+                "ndstool.exe -x ..\ticket.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"
+            }
+        }
+
         If ToolVer <> Application.ProductVersion Then Directory.Delete(Local & "\tools", True)
+
         CheckLocal()
         CreateFiles(tools)
         ToolVer = Application.ProductVersion
-        'For i = 0 To 7
-        '    File.WriteAllBytes(Local & "\cards\Card " & (i + 1) & ".bin", CardPiece.data)
-        'Next
-        Tp_Add_Enter(sender, e)
         doneLoad = True
-        cb_Region.SelectedIndex = My.Settings.Region
-        SyncRegion()
-        bt_Build.Enabled = False
+        StateChanger(False)
     End Sub
+
+    'Handles form closing
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         WriteSettings()
     End Sub
@@ -69,31 +94,30 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         MenuStrip1.Location = New Point(0, 0)
 #Else
         File.WriteAllText(TempPath & "\date.txt", My.Resources._date)
-            Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
-            Me.Text = "PKMG5DC (" & dat & ")"
-            If My.Computer.Network.IsAvailable Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/Resources/date.txt", TempPath & "\dt.txt")
-                Catch
-                    File.WriteAllText(TempPath & "\dt.txt", " ")
-                End Try
-                Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
-                Dim dtt As String = Reader.ReadToEnd
-                Reader.Close()
-                File.Delete(TempPath & "\dt.txt")
-                If dat <> dtt Then
-                    lklb_Update.Text = "New Update Available! " & dtt
+        Dim dat As String = File.ReadAllText(TempPath & "\date.txt")
+        Me.Text = "PKMG5DC (" & dat & ")"
+        If My.Computer.Network.IsAvailable Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/Resources/date.txt", TempPath & "\dt.txt")
+            Catch
+                File.WriteAllText(TempPath & "\dt.txt", " ")
+            End Try
+            Dim Reader As New IO.StreamReader(TempPath & "\dt.txt")
+            Dim dtt As String = Reader.ReadToEnd
+            Reader.Close()
+            File.Delete(TempPath & "\dt.txt")
+            If dat <> dtt Then
+                lklb_Update.Text = "New Update Available! " & dtt
                 MenuStrip1.Location = New Point(175, 0)
-                pb_Donate.Location = New Point(119, 427)
                 lklb_Update.Show()
-                Else
-                    lklb_Update.Hide()
-                    MenuStrip1.Location = New Point(0, 0)
-                End If
             Else
                 lklb_Update.Hide()
+                MenuStrip1.Location = New Point(0, 0)
             End If
-            File.Delete(TempPath & "\date.txt")
+        Else
+            lklb_Update.Hide()
+        End If
+        File.Delete(TempPath & "\date.txt")
 #End If
     End Sub
 
@@ -102,8 +126,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
         Else
-            MsgBox("No Internet connection!
-    You can not update at the moment.", vbOKOnly, "Error 404")
+            MsgBox("No Internet connection!" & Environment.NewLine & "You can not update at the moment.", vbOKOnly, "Error 404")
         End If
     End Sub
 
@@ -112,8 +135,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://github.com/PlasticJustice")
         Else
-            MsgBox("No Internet connection!" & "
-" & "You can look me up later.", 1, "OK",,, "Error" & " 404")
+            MsgBox("No Internet connection!" & Environment.NewLine & "You can look me up later.", 1, "OK",,, "Error" & " 404")
         End If
     End Sub
 
@@ -123,8 +145,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If My.Computer.Network.IsAvailable Then
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
         Else
-            MsgBox("No Internet connection!" & "
-" & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
+            MsgBox("No Internet connection!" & Environment.NewLine & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")
         End If
     End Sub
     Private Sub Pb_Donate_MouseDown(sender As Object, e As MouseEventArgs) Handles pb_Donate.MouseDown
@@ -134,6 +155,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         pb_Donate.Image = Nothing
     End Sub
 #End Region
+
 #Region "Startup"
     'Creates Local Files and Folders
     Private Sub CreateFolders(ByVal dirs As String())
@@ -148,6 +170,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             MsgBox(ex.Message)
         End Try
     End Sub
+
     Private Sub CreateFiles(ByVal files(,))
         Try
             For i = 0 To UBound(files) Step 1
@@ -169,9 +192,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
 
     'Checks Local Folders
     Private Sub CheckLocal()
-        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"} ', Local & "\cards"}
+        Dim locals As String() = {Local.Replace("\PKMG5DC", ""), Local, Local & "\tools"}
         CreateFolders(locals)
-        '*
+
         If File.Exists(Local & "\settings.ini") Then
             ReadIni()
             File.Delete(Local & "\settings.ini")
@@ -179,9 +202,10 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
         If Not File.Exists(Local & "\settings.json") Then
             WriteSettings()
         End If
+
         ReadSettings()
-        tscb_Region.SelectedIndex = My.Settings.Region
     End Sub
+
     'Checks for Ticket
     Private Sub CheckTicket()
         If My.Settings.ticket <> Nothing Then
@@ -194,6 +218,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             GetTicket()
         End If
     End Sub
+
     Private Sub GetTicket()
         Dim ans = MsgBox("This program requires a clean copy of the Liberty Ticket Distribution ROM. Do you have one?", 2, "Yes", "No",, "Need Liberty Ticket ROM")
         Select Case ans
@@ -249,21 +274,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             End If
         End If
     End Sub
-
-    'Private Sub CheckGen()
-    '    Dim n As String = Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName)
-    '    If n.Contains("G4") Then
-    '        Gen = 4
-    '    Else
-    '        Gen = 5
-    '    End If
-    'End Sub
 #End Region
-#Region "Menu"
-    Private Sub Tscb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tscb_Region.SelectedIndexChanged
-        My.Settings.Region = tscb_Region.SelectedIndex
-    End Sub
 
+#Region "Menu"
     Private Sub Tsmi_About_Click(sender As Object, e As EventArgs) Handles tsmi_About.Click
         About.ShowDialog()
     End Sub
@@ -272,241 +285,344 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
     Private Sub ToolStripMenuItem2_MouseHover(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseHover
         ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
     End Sub
+
     Private Sub ToolStripMenuItem2_MouseLeave(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.MouseLeave
         ToolStripMenuItem2.DisplayStyle = ToolStripItemDisplayStyle.Image
     End Sub
 #End Region
-#Region "Tab and Panel"
-    'Adds New Tab
-    Private Sub Tp_Add_Enter(sender As Object, e As EventArgs) Handles tp_Add.Enter
-        Dim DelTab As TabPage = tc_Cards.SelectedTab
-        Dim NewTab As New TabPage()
-        With NewTab
-            .Location = New System.Drawing.Point(4, 22)
-            .Name = "tp_Card" & (DelTab.TabIndex + 1)
-            .Padding = New System.Windows.Forms.Padding(3)
-            .Size = New Size(278, 315)
-            .TabIndex = DelTab.TabIndex
-            .Text = "Card " & (DelTab.TabIndex + If(doneLoad = False, 0, 1))
-            .UseVisualStyleBackColor = True
-        End With
-        tc_Cards.TabPages.Add(NewTab)
-        AddHandler NewTab.Leave, AddressOf Me.SavePanel
-        AddHandler NewTab.Enter, AddressOf Me.MovePanel
-        Card.NumberOfCards += 1
-        Dim NewAddTab As New TabPage()
-        With NewAddTab
-            .Location = New System.Drawing.Point(4, 22)
-            .Text = "    +"
-            .Name = "tp_Add"
-            .Padding = New System.Windows.Forms.Padding(0)
-            .Size = New System.Drawing.Size(278, 315)
-            .TabIndex = tc_Cards.TabPages.Count - 1
-            .UseVisualStyleBackColor = True
-        End With
-        tc_Cards.TabPages.Remove(DelTab)
-        If tc_Cards.TabCount < 8 Then
-            tc_Cards.TabPages.Add(NewAddTab)
-            AddHandler NewAddTab.Enter, AddressOf Me.Tp_Add_Enter
-        End If
-        tc_Cards.SelectedTab = NewTab
-        cb_Region.SelectedIndex = My.Settings.Region
-        SyncRegion()
-    End Sub
 
-    'Moves the panel and load the settings
-    Private Sub MovePanel()
-        tc_Cards.SelectedTab.Controls.Add(Me.pnl_EditCard)
-        With pn_Settings
-            lb_PGF.Text = .pnl_Strings(tc_Cards.SelectedIndex)
-            Select Case .pnl_Strings(tc_Cards.SelectedIndex)
-                Case ""
-                    EnDisAble(False)
-                Case Else
-                    EnDisAble(True)
-            End Select
-            rtb_EventMsg.Text = .pnl_Strings(tc_Cards.SelectedIndex + 8)
-            cb_Region.SelectedIndex = .region(tc_Cards.SelectedIndex)
-            SyncRegion()
-            If .dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = .dates(tc_Cards.SelectedIndex)
-            If .dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = .dates(tc_Cards.SelectedIndex + 8)
-            cb_MaxLimit.Checked = .maxLimit(tc_Cards.SelectedIndex)
-        End With
-        If doneLoad Then
-            cb_Black.Checked = Card.Black(tc_Cards.SelectedIndex)
-            cb_White.Checked = Card.White(tc_Cards.SelectedIndex)
-            cb_Black2.Checked = Card.Black2(tc_Cards.SelectedIndex)
-            cb_White2.Checked = Card.White2(tc_Cards.SelectedIndex)
-        End If
-    End Sub
-
-    'Saves Panel settings
-    Private Sub SavePanel()
-        With pn_Settings
-            .pnl_Strings(tc_Cards.SelectedIndex) = lb_PGF.Text
-            .pnl_Strings(tc_Cards.SelectedIndex + 8) = rtb_EventMsg.Text
-            .region(tc_Cards.SelectedIndex) = cb_Region.SelectedIndex
-            If doneLoad Then .dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
-            If doneLoad Then .dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
-            .maxLimit(tc_Cards.SelectedIndex) = cb_MaxLimit.Checked
-        End With
-    End Sub
-
-    'Panel Settings
-    Private Class Pnl_Settings
-        Public pnl_Strings(15) As String
-        Public maxLimit(7) As Boolean
-        Public region(7) As Byte
-        Public dates(15) As Date
-    End Class
-#End Region
 #Region "Controls"
-    Private Sub Bt_PGF_Click(sender As Object, e As EventArgs) Handles bt_PGF.Click
-        OpenFile.Filter = "Gen 5 Wondercard (*.pgf)|*.pgf;*.wc5|All files (*.*)|*.*"
-        Dim res As DialogResult = OpenFile.ShowDialog()
-        If res = Windows.Forms.DialogResult.Cancel Then
-            Exit Sub
-        Else
-            Dim myFile As String = Path.GetFileName(OpenFile.FileName)
-            lb_PGF.Text = myFile
-            WC.Data = File.ReadAllBytes(OpenFile.FileName)
-            With WC
-                .RecieveDay = 0
-                .RecieveMonth = 0
-                .RecieveYear = 0
-            End With
-            Card.Wondercards(tc_Cards.SelectedIndex) = WC.Data
-            WC = New PGF
-        End If
-        EnDisAble(True)
-        bt_Build.Enabled = True
+    'Check if combobox has changed and update form
+    Private Sub cb_Cards_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Cards.SelectedIndexChanged
+        currItem = cb_Cards.SelectedIndex()
+        Card = multipleCardsArr(currItem)
+
+        rtb_EventTitle.Text = Card.EventTitle(0)
+        rtb_EventMsg.Text = Card.EventText(0)
+        lb_CharCountNumber.Text = rtb_EventMsg.TextLength
+
+        StartDatePicker.Value = New DateTime(Card.StartYears(0), Card.StartMonths(0), Card.StartDays(0))
+        EndDatePicker.Value = New DateTime(Card.EndYears(0), Card.EndMonths(0), Card.EndDays(0))
+
+        cb_MaxLimit.Checked = False
+
+        cb_Black.Checked = Card.Black(0)
+        cb_White.Checked = Card.White(0)
+        cb_Black2.Checked = Card.Black2(0)
+        cb_White2.Checked = Card.White2(0)
+
+        cb_Region.SelectedIndex = selectedLang(currItem)
+
+        multipleCardsArr(currItem) = Card
+        Card = New Card5
     End Sub
 
-    Private Sub Bt_Custom_Click(sender As Object, e As EventArgs) Handles bt_Custom.Click
-        PGFCreator.ShowDialog()
-        Select Case lb_PGF.Text
-            Case "", Nothing
-            Case Else
-                EnDisAble(True)
-                bt_Build.Enabled = True
-        End Select
-    End Sub
-
-    Private Sub EnDisAble(Enable As Boolean)
+    'Changes enabled state of multiple buttons
+    Private Sub StateChanger(Enable As Boolean)
+        gb_Cards.Enabled = Enable
         gb_GameComp.Enabled = Enable
         gb_Region.Enabled = Enable
         gb_DateLimit.Enabled = Enable
-        rtb_EventMsg.Enabled = Enable
-        lb_EventMsg.Enabled = Enable
+        gb_Text.Enabled = Enable
+        bt_Build.Enabled = Enable
+        bt_ClearForm.Enabled = Enable
     End Sub
 
-    Private Sub Cb_Black_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black.CheckedChanged
-        Select Case cb_Black.Checked
-            Case True
-                Card.Black(tc_Cards.SelectedIndex) = True
-            Case False
-                Card.Black(tc_Cards.SelectedIndex) = False
-        End Select
-    End Sub
-    Private Sub Cb_White_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White.CheckedChanged
-        Select Case cb_White.Checked
-            Case True
-                Card.White(tc_Cards.SelectedIndex) = True
-            Case False
-                Card.White(tc_Cards.SelectedIndex) = False
-        End Select
-    End Sub
-    Private Sub Cb_Black2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_Black2.CheckedChanged
-        Select Case cb_Black2.Checked
-            Case True
-                Card.Black2(tc_Cards.SelectedIndex) = True
-            Case False
-                Card.Black2(tc_Cards.SelectedIndex) = False
-        End Select
-    End Sub
-    Private Sub Cb_White2_CheckedChanged(sender As Object, e As EventArgs) Handles cb_White2.CheckedChanged
-        Select Case cb_White2.Checked
-            Case True
-                Card.White2(tc_Cards.SelectedIndex) = True
-            Case False
-                Card.White2(tc_Cards.SelectedIndex) = False
-        End Select
+    'Handles PGF cards
+    Private Sub Bt_PGF_Click(sender As Object, e As EventArgs) Handles bt_PGF.Click
+        OpenFile.Multiselect = True
+        OpenFile.Filter = "Gen 5 Wondercard (*.pgf)|*.pgf;*.wc5|All files (*.*)|*.*"
+        Dim res As DialogResult = OpenFile.ShowDialog()
+
+        'Verify if user has canceled the dialog
+        If res = Windows.Forms.DialogResult.Cancel Then
+            Exit Sub
+        Else
+            'Verify if user has selected more than 12 cards
+            If (OpenFile.FileNames.Length + cb_Cards.Items.Count) > 12 Then
+                MsgBox("Cannot select more than 12 cards", 1, "OK", "", "", "Error!")
+            Else
+                'Loop through all selected files
+                For Each element In OpenFile.FileNames
+                    Card = New Card5
+                    Dim myFile As String = Path.GetFileName(element)
+                    WC.Data = File.ReadAllBytes(element)
+                    With WC
+                        .ReceiveDay = 0
+                        .ReceiveMonth = 0
+                        .ReceiveYear = 0
+                    End With
+                    Card.Wondercards(0) = WC.Data
+                    Card.NumberOfCards = 1
+
+                    rtb_EventTitle.Text = ""
+                    rtb_EventMsg.Text = ""
+
+                    WC = New PGF
+
+                    If cb_Cards.SelectedIndex() = -1 Then
+                        multipleCardsArr(cb_Cards.Items.Count) = Card
+                    ElseIf cb_Cards.SelectedIndex() <> cb_Cards.Items.Count - 1 Then
+                        multipleCardsArr(cb_Cards.Items.Count) = Card
+                    Else
+                        multipleCardsArr(cb_Cards.SelectedIndex() + 1) = Card
+                    End If
+
+                    cb_Cards.SelectedIndex = cb_Cards.Items.Add(myFile)
+
+                    If cb_Cards.Items.Count = 12 Then
+                        bt_PGF.Enabled = False
+                        bt_Custom.Enabled = False
+                    End If
+                Next
+
+                StateChanger(True)
+            End If
+        End If
     End Sub
 
-    Private Sub Cb_Region_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_Region.SelectedIndexChanged
-        If doneLoad Then SyncRegion()
+    'Handles custom pokemon
+    Private Sub Bt_Custom_Click(sender As Object, e As EventArgs) Handles bt_Custom.Click
+        Card = New Card5
+
+        Dim res As DialogResult = PGFCreator.ShowDialog()
+        If res = Windows.Forms.DialogResult.Cancel Then
+            Exit Sub
+        Else
+            Card.NumberOfCards = 1
+
+            rtb_EventTitle.Text = ""
+            rtb_EventMsg.Text = ""
+
+            If cb_Cards.SelectedIndex() = -1 Then
+                multipleCardsArr(cb_Cards.Items.Count) = Card
+                cb_Cards.SelectedIndex = cb_Cards.Items.Add(customName)
+            ElseIf cb_Cards.SelectedIndex() <> cb_Cards.Items.Count - 1 Then
+                multipleCardsArr(cb_Cards.Items.Count) = Card
+                cb_Cards.SelectedIndex = cb_Cards.Items.Add(customName)
+            Else
+                multipleCardsArr(cb_Cards.SelectedIndex() + 1) = Card
+                cb_Cards.SelectedIndex = cb_Cards.Items.Add(customName)
+            End If
+
+            If cb_Cards.Items.Count = 12 Then
+                bt_PGF.Enabled = False
+                bt_Custom.Enabled = False
+            End If
+        End If
+        StateChanger(True)
     End Sub
+
+    'Set and reset region
+    Private Sub bt_SetRegion_Click(sender As Object, e As EventArgs) Handles bt_SetRegion.Click
+        Card = multipleCardsArr(currItem)
+        SyncRegion()
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    Private Sub bt_ResetRegion_Click(sender As Object, e As EventArgs) Handles bt_ResetRegion.Click
+        Card = multipleCardsArr(currItem)
+        cb_Region.SelectedIndex = 0
+        Card.LangChecksum(0) = langCksm(0)
+        Card.Language(0) = langs(0)
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    'Sync region changes
     Private Sub SyncRegion()
+        selectedLang(currItem) = cb_Region.SelectedIndex
         Select Case cb_Region.SelectedIndex
             Case < 5
-                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
-                Card.Language(tc_Cards.SelectedIndex) = langs(cb_Region.SelectedIndex)
+                Card.LangChecksum(0) = langCksm(cb_Region.SelectedIndex)
+                Card.Language(0) = langs(cb_Region.SelectedIndex)
             Case 5
-                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex)
-                Card.Language(tc_Cards.SelectedIndex) = langs(0)
+                Card.LangChecksum(0) = langCksm(cb_Region.SelectedIndex)
+                Card.Language(0) = langs(0)
             Case Else
-                Card.LangChecksum(tc_Cards.SelectedIndex) = langCksm(cb_Region.SelectedIndex - 1)
-                Card.Language(tc_Cards.SelectedIndex) = langs(0)
+                Card.LangChecksum(0) = langCksm(cb_Region.SelectedIndex - 1)
+                Card.Language(0) = langs(0)
         End Select
     End Sub
-    Private Sub StartDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles StartDatePicker.ValueChanged, cb_MaxLimit.CheckedChanged
-        If doneLoad Then
-            Card.StartDays(tc_Cards.SelectedIndex) = StartDatePicker.Value.Day
-            Card.StartMonths(tc_Cards.SelectedIndex) = StartDatePicker.Value.Month
-            Card.StartYears(tc_Cards.SelectedIndex) = StartDatePicker.Value.Year
-        End If
+
+    'Set and reset game compatibility
+    Private Sub bt_SetCompatibility_Click(sender As Object, e As EventArgs) Handles bt_SetCompatibility.Click
+        Card = multipleCardsArr(currItem)
+        Card.Black(0) = cb_Black.Checked
+        Card.White(0) = cb_White.Checked
+        Card.Black2(0) = cb_Black2.Checked
+        Card.White2(0) = cb_White2.Checked
+        multipleCardsArr(currItem) = Card
     End Sub
 
-    Private Sub EndDatePicker_ValueChanged(sender As Object, e As EventArgs) Handles EndDatePicker.ValueChanged, cb_MaxLimit.CheckedChanged
-        If doneLoad Then
-            Card.EndDays(tc_Cards.SelectedIndex) = EndDatePicker.Value.Day
-            Card.EndMonths(tc_Cards.SelectedIndex) = EndDatePicker.Value.Month
-            Card.EndYears(tc_Cards.SelectedIndex) = EndDatePicker.Value.Year
-        End If
+    Private Sub bt_ResetCompatibility_Click(sender As Object, e As EventArgs) Handles bt_ResetCompatibility.Click
+        Card = multipleCardsArr(currItem)
+        Card.Black(0) = False
+        cb_Black.Checked = False
+
+        Card.White(0) = False
+        cb_White.Checked = False
+
+        Card.Black2(0) = False
+        cb_Black2.Checked = False
+
+        Card.White2(0) = False
+        cb_White2.Checked = False
+        multipleCardsArr(currItem) = Card
     End Sub
 
+    'Set and reset date
+    Private Sub bt_SetDate_Click(sender As Object, e As EventArgs) Handles bt_SetDate.Click
+        Card = multipleCardsArr(currItem)
+        'Set Start Date if user changed anything
+        Card.StartDays(0) = StartDatePicker.Value.Day
+        Card.StartMonths(0) = StartDatePicker.Value.Month
+        Card.StartYears(0) = StartDatePicker.Value.Year
+
+        'Set End Date if user changed anything
+        Card.EndDays(0) = EndDatePicker.Value.Day
+        Card.EndMonths(0) = EndDatePicker.Value.Month
+        Card.EndYears(0) = EndDatePicker.Value.Year
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    Private Sub bt_ResetDate_Click(sender As Object, e As EventArgs) Handles bt_ResetDate.Click
+        Card = multipleCardsArr(currItem)
+        If cb_MaxLimit.Checked Then
+            cb_MaxLimit.Checked = False
+        End If
+
+        StartDatePicker.Value = Date.Today
+        EndDatePicker.Value = Date.Today
+        Card.StartDays(0) = Date.Today.Day
+        Card.StartMonths(0) = Date.Today.Month
+        Card.StartYears(0) = Date.Today.Year
+        Card.EndDays(0) = Date.Today.Day
+        Card.EndMonths(0) = Date.Today.Month
+        Card.EndYears(0) = Date.Today.Year
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    'Handles changes on checkbox max date
     Private Sub Cb_MaxLimit_CheckedChanged(sender As Object, e As EventArgs) Handles cb_MaxLimit.CheckedChanged
+        'Set Min Start Date and Max End Date if user marked checkbox
         Select Case cb_MaxLimit.Checked
             Case True
                 lb_Start.Enabled = False
                 lb_End.Enabled = False
-                pn_Settings.dates(tc_Cards.SelectedIndex) = StartDatePicker.Value
-                pn_Settings.dates(tc_Cards.SelectedIndex + 8) = EndDatePicker.Value
                 StartDatePicker.Value = New DateTime(1753, 1, 1)
                 EndDatePicker.Value = New DateTime(9998, 12, 31)
                 StartDatePicker.Enabled = False
                 EndDatePicker.Enabled = False
+                bt_SetDate_Click(sender, e)
             Case False
                 lb_Start.Enabled = True
                 lb_End.Enabled = True
-                If pn_Settings.dates(tc_Cards.SelectedIndex) <> Nothing Then StartDatePicker.Value = pn_Settings.dates(tc_Cards.SelectedIndex)
-                If pn_Settings.dates(tc_Cards.SelectedIndex + 8) <> Nothing Then EndDatePicker.Value = pn_Settings.dates(tc_Cards.SelectedIndex + 8)
                 StartDatePicker.Enabled = True
                 EndDatePicker.Enabled = True
         End Select
     End Sub
 
-    Private Sub Rtb_EventMsg_TextChanged(sender As Object, e As EventArgs) Handles rtb_EventMsg.TextChanged
-        Card.EventText(tc_Cards.SelectedIndex) = rtb_EventMsg.Text.Replace(vbLf, ChrW(&HFFFE))
+    'Update char count on Event Text rtb
+    Private Sub rtb_EventMsg_TextChanged(sender As Object, e As EventArgs) Handles rtb_EventMsg.TextChanged
+        lb_CharCountNumber.Text = rtb_EventMsg.TextLength
     End Sub
 
+    'Set and reset Event text and Evend Title
+    Private Sub bt_SetEventMsg_Click(sender As Object, e As EventArgs) Handles bt_SetEventMsg.Click
+        Card = multipleCardsArr(currItem)
+        'Set event text if user pressed button
+        Card.EventTitle(0) = rtb_EventTitle.Text.Replace(vbLf, ChrW(&HFFFE))
+        Card.EventText(0) = rtb_EventMsg.Text.Replace(vbLf, ChrW(&HFFFE))
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    Private Sub bt_ResetEventMsg_Click(sender As Object, e As EventArgs) Handles bt_ResetEventMsg.Click
+        Card = multipleCardsArr(currItem)
+        'Reset event text if user pressed button
+        rtb_EventTitle.Text = "Event title here!"
+        rtb_EventMsg.Text = ""
+        Card.EventTitle(0) = "Event title here!"
+        Card.EventText(0) = ""
+        multipleCardsArr(currItem) = Card
+    End Sub
+
+    'Build ROM
     Private Sub Bt_Build_Click(sender As Object, e As EventArgs) Handles bt_Build.Click
-        File.WriteAllBytes(Local & "\outputCard.bin", Card.Data)
+        'Loop through all selected cards
+        For index As Integer = 1 To cb_Cards.Items.Count
+            'Verify if the text inside textbox is empty then set all the bytes to FF
+            Card = multipleCardsArr(index - 1)
+            Dim text As String = Card.EventText(0)
+
+            If text.Length < 1 Or text.Contains(vbNullChar) Then
+                Card.EventText(0) = ""
+            End If
+
+            'Create binary based on selected wondercard
+            If index < 10 Then
+                File.WriteAllBytes(Local & "\0" & index & ".bin", Card.Data)
+            Else
+                File.WriteAllBytes(Local & "\" & index & ".bin", Card.Data)
+            End If
+        Next
+
+        'Edit assembly file based on user input
+        Dim options = File.ReadAllLines(Local & "\tools\options.asm")
+        options(1) = ".definelabel amount," & cb_Cards.Items.Count
+        File.WriteAllLines(Local & "\tools\options.asm", options)
+
+        'Decompile and compile ROM based on selected cards
         Try
             Process.Start(Local & "\tools\extract.bat").WaitForExit()
             If File.Exists(Local & "\tools\data\data.bin") Then File.Delete(Local & "\tools\data\data.bin")
-            File.Copy(Local & "\outputCard.bin", Local & "\tools\data\data.bin")
-            Process.Start(Local & "\tools\compile.bat").WaitForExit()
-            Process.Start(Local & "\tools\clean.bat").WaitForExit()
+            Process.Start(Local & "\tools\firstBatch.bat").WaitForExit()
+            For index As Integer = 1 To cb_Cards.Items.Count
+                If index < 10 Then
+                    File.Copy(Local & "\0" & index & ".bin", Local & "\tools\data\0" & index & ".bin")
+                Else
+                    File.Copy(Local & "\" & index & ".bin", Local & "\tools\data\" & index & ".bin")
+                End If
+            Next
+            Process.Start(Local & "\tools\secondBatch.bat").WaitForExit()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+        'Save generated file
         SaveFile.Filter = "NDS ROM (*.nds)|*.nds|All files (*.*)|*.*"
         Dim res As DialogResult = SaveFile.ShowDialog()
         If res <> Windows.Forms.DialogResult.Cancel Then
             If File.Exists(SaveFile.FileName) Then File.Delete(SaveFile.FileName)
             File.Move(Local & "\ticket2.nds", SaveFile.FileName)
+            MsgBox("Your file has been saved successfully!", 1, "OK", "", "", "File saved")
         End If
+    End Sub
+
+    'Clear selected cards and inputs
+    Private Sub bt_ClearForm_Click(sender As Object, e As EventArgs) Handles bt_ClearForm.Click
+        Card = New Card5
+        TempCard = New Card5
+        WC = New PGF
+
+        ReDim selectedLang(0 To 11)
+        ReDim multipleCardsArr(0 To 11)
+
+        cb_Cards.Items.Clear()
+        cb_Black.Checked = False
+        cb_White.Checked = False
+        cb_Black2.Checked = False
+        cb_White2.Checked = False
+        StartDatePicker.Value = Date.Today
+        EndDatePicker.Value = Date.Today
+        rtb_EventTitle.Text = "Input Event Title Here."
+        rtb_EventMsg.Text = "Input Event Text Here." & Environment.NewLine & Environment.NewLine & "This textbox is sized perfectly, so what fits in" & Environment.NewLine & "this box is all you can fit. A maximum of 7 " & Environment.NewLine & "lines, max 36 characters per line, and a " & Environment.NewLine & "maximum of 252 characters total." & Environment.NewLine & "Make sure you put the new lines(ENTER key)"
+
+        If bt_PGF.Enabled = False Or bt_Custom.Enabled = False Then
+            bt_PGF.Enabled = True
+            bt_Custom.Enabled = True
+        End If
+
+        StateChanger(False)
     End Sub
 #End Region
 End Class
