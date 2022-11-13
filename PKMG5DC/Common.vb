@@ -1,5 +1,4 @@
-﻿Imports System.Text
-Module Common
+﻿Module Common
     Public Sub ReadIni()
         With Main5.mySettings
             .Filename = Main5.Local & "\settings.ini"
