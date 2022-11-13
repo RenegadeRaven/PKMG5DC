@@ -30,6 +30,7 @@ Partial Class Main5
         Me.tscb_Region = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsmi_About = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.HoverInfo = New System.Windows.Forms.ToolTip(Me.components)
         Me.pb_Donate = New System.Windows.Forms.PictureBox()
         Me.gb_GameComp = New System.Windows.Forms.GroupBox()
@@ -57,7 +58,6 @@ Partial Class Main5
         Me.pnl_EditCard = New System.Windows.Forms.Panel()
         Me.bt_Build = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.pb_Donate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gb_GameComp.SuspendLayout()
         Me.gb_Region.SuspendLayout()
@@ -72,10 +72,10 @@ Partial Class Main5
         Me.lklb_Update.AutoSize = True
         Me.lklb_Update.Location = New System.Drawing.Point(1, 4)
         Me.lklb_Update.Name = "lklb_Update"
-        Me.lklb_Update.Size = New System.Drawing.Size(116, 13)
+        Me.lklb_Update.Size = New System.Drawing.Size(101, 12)
         Me.lklb_Update.TabIndex = 6
         Me.lklb_Update.TabStop = True
-        Me.lklb_Update.Text = "New Update Available!"
+        Me.lklb_Update.Text = "有可用的新版本！"
         Me.HoverInfo.SetToolTip(Me.lklb_Update, "New Features! Download the new version")
         '
         'MenuStrip1
@@ -85,7 +85,7 @@ Partial Class Main5
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmi_Options})
         Me.MenuStrip1.Location = New System.Drawing.Point(113, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(69, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(52, 25)
         Me.MenuStrip1.Stretch = False
         Me.MenuStrip1.TabIndex = 29
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -94,8 +94,8 @@ Partial Class Main5
         '
         Me.tsmi_Options.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tscb_Region, Me.ToolStripSeparator1, Me.tsmi_About, Me.ToolStripMenuItem2})
         Me.tsmi_Options.Name = "tsmi_Options"
-        Me.tsmi_Options.Size = New System.Drawing.Size(61, 20)
-        Me.tsmi_Options.Text = "Options"
+        Me.tsmi_Options.Size = New System.Drawing.Size(44, 21)
+        Me.tsmi_Options.Text = "选项"
         '
         'tscb_Region
         '
@@ -104,8 +104,8 @@ Partial Class Main5
         Me.tscb_Region.FlatStyle = System.Windows.Forms.FlatStyle.Standard
         Me.tscb_Region.Items.AddRange(New Object() {"English (US/UK/AU)", "Français (France/Québec)", "Italiano (Italy)", "Deutsch (Germany)", "Español (Spain/Latin Americas)", "日本語 (Japan)", "한국어 (South Korea)"})
         Me.tscb_Region.Name = "tscb_Region"
-        Me.tscb_Region.Size = New System.Drawing.Size(130, 23)
-        Me.tscb_Region.ToolTipText = "Default Region"
+        Me.tscb_Region.Size = New System.Drawing.Size(130, 25)
+        Me.tscb_Region.ToolTipText = "默认语种"
         '
         'ToolStripSeparator1
         '
@@ -116,7 +116,7 @@ Partial Class Main5
         '
         Me.tsmi_About.Name = "tsmi_About"
         Me.tsmi_About.Size = New System.Drawing.Size(190, 22)
-        Me.tsmi_About.Text = "About"
+        Me.tsmi_About.Text = "关于"
         '
         'ToolStripMenuItem2
         '
@@ -125,8 +125,8 @@ Partial Class Main5
         Me.ToolStripMenuItem2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
-        Me.ToolStripMenuItem2.Text = "                  Donate"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(190, 22)
+        Me.ToolStripMenuItem2.Text = "                  捐赠"
         Me.ToolStripMenuItem2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'pb_Donate
@@ -137,7 +137,7 @@ Partial Class Main5
         Me.pb_Donate.Cursor = System.Windows.Forms.Cursors.Hand
         Me.pb_Donate.Location = New System.Drawing.Point(218, 3)
         Me.pb_Donate.Name = "pb_Donate"
-        Me.pb_Donate.Size = New System.Drawing.Size(80, 22)
+        Me.pb_Donate.Size = New System.Drawing.Size(80, 20)
         Me.pb_Donate.TabIndex = 32
         Me.pb_Donate.TabStop = False
         '
@@ -147,71 +147,71 @@ Partial Class Main5
         Me.gb_GameComp.Controls.Add(Me.cb_Black2)
         Me.gb_GameComp.Controls.Add(Me.cb_White)
         Me.gb_GameComp.Controls.Add(Me.cb_Black)
-        Me.gb_GameComp.Location = New System.Drawing.Point(6, 67)
+        Me.gb_GameComp.Location = New System.Drawing.Point(6, 62)
         Me.gb_GameComp.Name = "gb_GameComp"
-        Me.gb_GameComp.Size = New System.Drawing.Size(142, 66)
+        Me.gb_GameComp.Size = New System.Drawing.Size(142, 61)
         Me.gb_GameComp.TabIndex = 33
         Me.gb_GameComp.TabStop = False
-        Me.gb_GameComp.Text = "Game Compatibility"
+        Me.gb_GameComp.Text = "可接收配信的游戏版本"
         '
         'cb_White2
         '
         Me.cb_White2.AutoSize = True
-        Me.cb_White2.Location = New System.Drawing.Point(73, 41)
+        Me.cb_White2.Location = New System.Drawing.Point(73, 38)
         Me.cb_White2.Name = "cb_White2"
-        Me.cb_White2.Size = New System.Drawing.Size(63, 17)
+        Me.cb_White2.Size = New System.Drawing.Size(42, 16)
         Me.cb_White2.TabIndex = 3
-        Me.cb_White2.Text = "White 2"
+        Me.cb_White2.Text = "白2"
         Me.cb_White2.UseVisualStyleBackColor = True
         '
         'cb_Black2
         '
         Me.cb_Black2.AutoSize = True
-        Me.cb_Black2.Location = New System.Drawing.Point(12, 41)
+        Me.cb_Black2.Location = New System.Drawing.Point(12, 38)
         Me.cb_Black2.Name = "cb_Black2"
-        Me.cb_Black2.Size = New System.Drawing.Size(62, 17)
+        Me.cb_Black2.Size = New System.Drawing.Size(42, 16)
         Me.cb_Black2.TabIndex = 2
-        Me.cb_Black2.Text = "Black 2"
+        Me.cb_Black2.Text = "黑2"
         Me.cb_Black2.UseVisualStyleBackColor = True
         '
         'cb_White
         '
         Me.cb_White.AutoSize = True
-        Me.cb_White.Location = New System.Drawing.Point(73, 18)
+        Me.cb_White.Location = New System.Drawing.Point(73, 17)
         Me.cb_White.Name = "cb_White"
-        Me.cb_White.Size = New System.Drawing.Size(54, 17)
+        Me.cb_White.Size = New System.Drawing.Size(36, 16)
         Me.cb_White.TabIndex = 1
-        Me.cb_White.Text = "White"
+        Me.cb_White.Text = "白"
         Me.cb_White.UseVisualStyleBackColor = True
         '
         'cb_Black
         '
         Me.cb_Black.AutoSize = True
-        Me.cb_Black.Location = New System.Drawing.Point(12, 18)
+        Me.cb_Black.Location = New System.Drawing.Point(12, 17)
         Me.cb_Black.Name = "cb_Black"
-        Me.cb_Black.Size = New System.Drawing.Size(53, 17)
+        Me.cb_Black.Size = New System.Drawing.Size(36, 16)
         Me.cb_Black.TabIndex = 0
-        Me.cb_Black.Text = "Black"
+        Me.cb_Black.Text = "黑"
         Me.cb_Black.UseVisualStyleBackColor = True
         '
         'gb_Region
         '
         Me.gb_Region.Controls.Add(Me.cb_Region)
-        Me.gb_Region.Location = New System.Drawing.Point(6, 139)
+        Me.gb_Region.Location = New System.Drawing.Point(6, 129)
         Me.gb_Region.Name = "gb_Region"
-        Me.gb_Region.Size = New System.Drawing.Size(142, 41)
+        Me.gb_Region.Size = New System.Drawing.Size(142, 46)
         Me.gb_Region.TabIndex = 34
         Me.gb_Region.TabStop = False
-        Me.gb_Region.Text = "Region"
+        Me.gb_Region.Text = "语种"
         '
         'cb_Region
         '
         Me.cb_Region.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_Region.FormattingEnabled = True
         Me.cb_Region.Items.AddRange(New Object() {"English (US/UK/AU)", "Français (France/Québec)", "Italiano (Italy)", "Deutsch (Germany)", "Español (Spain/Latin Americas)", "日本語 (Japan)", "한국어 (South Korea)"})
-        Me.cb_Region.Location = New System.Drawing.Point(6, 14)
+        Me.cb_Region.Location = New System.Drawing.Point(6, 13)
         Me.cb_Region.Name = "cb_Region"
-        Me.cb_Region.Size = New System.Drawing.Size(130, 21)
+        Me.cb_Region.Size = New System.Drawing.Size(130, 20)
         Me.cb_Region.TabIndex = 35
         '
         'gb_DateLimit
@@ -221,48 +221,48 @@ Partial Class Main5
         Me.gb_DateLimit.Controls.Add(Me.lb_Start)
         Me.gb_DateLimit.Controls.Add(Me.EndDatePicker)
         Me.gb_DateLimit.Controls.Add(Me.StartDatePicker)
-        Me.gb_DateLimit.Location = New System.Drawing.Point(155, 67)
+        Me.gb_DateLimit.Location = New System.Drawing.Point(155, 62)
         Me.gb_DateLimit.Name = "gb_DateLimit"
-        Me.gb_DateLimit.Size = New System.Drawing.Size(117, 113)
+        Me.gb_DateLimit.Size = New System.Drawing.Size(139, 113)
         Me.gb_DateLimit.TabIndex = 35
         Me.gb_DateLimit.TabStop = False
-        Me.gb_DateLimit.Text = "Date Limit"
+        Me.gb_DateLimit.Text = "可接收配信的时间范围"
         '
         'cb_MaxLimit
         '
         Me.cb_MaxLimit.AutoSize = True
-        Me.cb_MaxLimit.Location = New System.Drawing.Point(12, 89)
+        Me.cb_MaxLimit.Location = New System.Drawing.Point(12, 91)
         Me.cb_MaxLimit.Name = "cb_MaxLimit"
-        Me.cb_MaxLimit.Size = New System.Drawing.Size(95, 17)
+        Me.cb_MaxLimit.Size = New System.Drawing.Size(108, 16)
         Me.cb_MaxLimit.TabIndex = 4
-        Me.cb_MaxLimit.Text = "Auto Max Limit"
+        Me.cb_MaxLimit.Text = "自动满时间范围"
         Me.cb_MaxLimit.UseVisualStyleBackColor = True
         '
         'lb_End
         '
         Me.lb_End.AutoSize = True
-        Me.lb_End.Location = New System.Drawing.Point(8, 51)
+        Me.lb_End.Location = New System.Drawing.Point(8, 52)
         Me.lb_End.Name = "lb_End"
-        Me.lb_End.Size = New System.Drawing.Size(29, 13)
+        Me.lb_End.Size = New System.Drawing.Size(35, 12)
         Me.lb_End.TabIndex = 3
-        Me.lb_End.Text = "End:"
+        Me.lb_End.Text = "结束:"
         '
         'lb_Start
         '
         Me.lb_Start.AutoSize = True
-        Me.lb_Start.Location = New System.Drawing.Point(8, 16)
+        Me.lb_Start.Location = New System.Drawing.Point(8, 15)
         Me.lb_Start.Name = "lb_Start"
-        Me.lb_Start.Size = New System.Drawing.Size(32, 13)
+        Me.lb_Start.Size = New System.Drawing.Size(35, 12)
         Me.lb_Start.TabIndex = 2
-        Me.lb_Start.Text = "Start:"
+        Me.lb_Start.Text = "开始:"
         '
         'EndDatePicker
         '
         Me.EndDatePicker.CustomFormat = "yyyy/MM/dd"
         Me.EndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.EndDatePicker.Location = New System.Drawing.Point(8, 64)
+        Me.EndDatePicker.Location = New System.Drawing.Point(8, 65)
         Me.EndDatePicker.Name = "EndDatePicker"
-        Me.EndDatePicker.Size = New System.Drawing.Size(102, 20)
+        Me.EndDatePicker.Size = New System.Drawing.Size(102, 21)
         Me.EndDatePicker.TabIndex = 1
         Me.EndDatePicker.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
         '
@@ -270,28 +270,28 @@ Partial Class Main5
         '
         Me.StartDatePicker.CustomFormat = "yyyy/MM/dd"
         Me.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.StartDatePicker.Location = New System.Drawing.Point(8, 29)
+        Me.StartDatePicker.Location = New System.Drawing.Point(8, 27)
         Me.StartDatePicker.Name = "StartDatePicker"
-        Me.StartDatePicker.Size = New System.Drawing.Size(102, 20)
+        Me.StartDatePicker.Size = New System.Drawing.Size(102, 21)
         Me.StartDatePicker.TabIndex = 0
         Me.StartDatePicker.Value = New Date(2018, 10, 5, 0, 0, 0, 0)
         '
         'lb_EventMsg
         '
         Me.lb_EventMsg.AutoSize = True
-        Me.lb_EventMsg.Location = New System.Drawing.Point(30, 183)
+        Me.lb_EventMsg.Location = New System.Drawing.Point(31, 178)
         Me.lb_EventMsg.Name = "lb_EventMsg"
-        Me.lb_EventMsg.Size = New System.Drawing.Size(84, 13)
+        Me.lb_EventMsg.Size = New System.Drawing.Size(59, 12)
         Me.lb_EventMsg.TabIndex = 37
-        Me.lb_EventMsg.Text = "Event Message:"
+        Me.lb_EventMsg.Text = "事件描述:"
         '
         'rtb_EventMsg
         '
-        Me.rtb_EventMsg.Location = New System.Drawing.Point(30, 196)
+        Me.rtb_EventMsg.Location = New System.Drawing.Point(32, 193)
         Me.rtb_EventMsg.MaxLength = 252
         Me.rtb_EventMsg.Name = "rtb_EventMsg"
         Me.rtb_EventMsg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None
-        Me.rtb_EventMsg.Size = New System.Drawing.Size(223, 97)
+        Me.rtb_EventMsg.Size = New System.Drawing.Size(223, 90)
         Me.rtb_EventMsg.TabIndex = 36
         Me.rtb_EventMsg.Text = ""
         Me.rtb_EventMsg.WordWrap = False
@@ -299,9 +299,9 @@ Partial Class Main5
         'lklb_Author
         '
         Me.lklb_Author.AutoSize = True
-        Me.lklb_Author.Location = New System.Drawing.Point(15, 434)
+        Me.lklb_Author.Location = New System.Drawing.Point(15, 401)
         Me.lklb_Author.Name = "lklb_Author"
-        Me.lklb_Author.Size = New System.Drawing.Size(47, 13)
+        Me.lklb_Author.Size = New System.Drawing.Size(41, 12)
         Me.lklb_Author.TabIndex = 40
         Me.lklb_Author.TabStop = True
         Me.lklb_Author.Text = "Regnum"
@@ -309,9 +309,9 @@ Partial Class Main5
         'lb_By
         '
         Me.lb_By.AutoSize = True
-        Me.lb_By.Location = New System.Drawing.Point(1, 434)
+        Me.lb_By.Location = New System.Drawing.Point(1, 401)
         Me.lb_By.Name = "lb_By"
-        Me.lb_By.Size = New System.Drawing.Size(18, 13)
+        Me.lb_By.Size = New System.Drawing.Size(17, 12)
         Me.lb_By.TabIndex = 41
         Me.lb_By.Text = "by"
         '
@@ -321,19 +321,19 @@ Partial Class Main5
         Me.bt_Custom.Location = New System.Drawing.Point(6, 6)
         Me.bt_Custom.Name = "bt_Custom"
         Me.bt_Custom.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.bt_Custom.Size = New System.Drawing.Size(130, 23)
+        Me.bt_Custom.Size = New System.Drawing.Size(130, 21)
         Me.bt_Custom.TabIndex = 44
-        Me.bt_Custom.Text = "Custom"
+        Me.bt_Custom.Text = "自定义"
         Me.bt_Custom.UseVisualStyleBackColor = True
         '
         'lb_PGF
         '
         Me.lb_PGF.AutoEllipsis = True
         Me.lb_PGF.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lb_PGF.Location = New System.Drawing.Point(6, 38)
+        Me.lb_PGF.Location = New System.Drawing.Point(6, 35)
         Me.lb_PGF.Margin = New System.Windows.Forms.Padding(3, 3, 3, 0)
         Me.lb_PGF.Name = "lb_PGF"
-        Me.lb_PGF.Size = New System.Drawing.Size(266, 17)
+        Me.lb_PGF.Size = New System.Drawing.Size(266, 16)
         Me.lb_PGF.TabIndex = 43
         Me.lb_PGF.Text = "▲▲▲ Open .pgf"
         Me.lb_PGF.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -342,9 +342,9 @@ Partial Class Main5
         '
         Me.bt_PGF.Location = New System.Drawing.Point(142, 6)
         Me.bt_PGF.Name = "bt_PGF"
-        Me.bt_PGF.Size = New System.Drawing.Size(130, 23)
+        Me.bt_PGF.Size = New System.Drawing.Size(130, 21)
         Me.bt_PGF.TabIndex = 42
-        Me.bt_PGF.Text = "Open .pgf"
+        Me.bt_PGF.Text = "打开 .pgf文件"
         Me.bt_PGF.UseVisualStyleBackColor = True
         '
         'tc_Cards
@@ -352,11 +352,11 @@ Partial Class Main5
         Me.tc_Cards.Controls.Add(Me.tp_Add)
         Me.tc_Cards.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.tc_Cards.ItemSize = New System.Drawing.Size(21, 18)
-        Me.tc_Cards.Location = New System.Drawing.Point(8, 27)
+        Me.tc_Cards.Location = New System.Drawing.Point(8, 25)
         Me.tc_Cards.Name = "tc_Cards"
         Me.tc_Cards.Padding = New System.Drawing.Point(2, 3)
         Me.tc_Cards.SelectedIndex = 0
-        Me.tc_Cards.Size = New System.Drawing.Size(286, 341)
+        Me.tc_Cards.Size = New System.Drawing.Size(305, 315)
         Me.tc_Cards.TabIndex = 45
         '
         'tp_Add
@@ -365,7 +365,7 @@ Partial Class Main5
         Me.tp_Add.Location = New System.Drawing.Point(4, 22)
         Me.tp_Add.Name = "tp_Add"
         Me.tp_Add.Padding = New System.Windows.Forms.Padding(3)
-        Me.tp_Add.Size = New System.Drawing.Size(278, 315)
+        Me.tp_Add.Size = New System.Drawing.Size(297, 289)
         Me.tp_Add.TabIndex = 1
         Me.tp_Add.Text = "    +"
         Me.tp_Add.UseVisualStyleBackColor = True
@@ -382,24 +382,24 @@ Partial Class Main5
         Me.pnl_EditCard.Controls.Add(Me.bt_PGF)
         Me.pnl_EditCard.Location = New System.Drawing.Point(0, 0)
         Me.pnl_EditCard.Name = "pnl_EditCard"
-        Me.pnl_EditCard.Size = New System.Drawing.Size(278, 315)
+        Me.pnl_EditCard.Size = New System.Drawing.Size(301, 291)
         Me.pnl_EditCard.TabIndex = 45
         '
         'bt_Build
         '
         Me.bt_Build.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.bt_Build.Location = New System.Drawing.Point(95, 380)
+        Me.bt_Build.Location = New System.Drawing.Point(95, 351)
         Me.bt_Build.Name = "bt_Build"
-        Me.bt_Build.Size = New System.Drawing.Size(128, 46)
+        Me.bt_Build.Size = New System.Drawing.Size(128, 42)
         Me.bt_Build.TabIndex = 46
-        Me.bt_Build.Text = "Build Event ROM"
+        Me.bt_Build.Text = "生成配信ROM"
         Me.bt_Build.UseVisualStyleBackColor = True
         '
         'Main5
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(302, 450)
+        Me.ClientSize = New System.Drawing.Size(325, 415)
         Me.Controls.Add(Me.bt_Build)
         Me.Controls.Add(Me.tc_Cards)
         Me.Controls.Add(Me.lklb_Author)
@@ -411,7 +411,7 @@ Partial Class Main5
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Main5"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "PKMG5DC"
+        Me.Text = "PKMG5DC(汉化by卧看微尘)"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         CType(Me.pb_Donate, System.ComponentModel.ISupportInitialize).EndInit()

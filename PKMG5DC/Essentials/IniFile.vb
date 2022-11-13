@@ -13,7 +13,7 @@ Public Class IniFile
     Private _ds As DataSet
     Private _dv As DataView
     Private _dr As DataRow
-    Private TmpStringComplete As New StringBuilder
+    Private TmpStringInhaltKomplett As New StringBuilder
     Private StringIniFile As String
 
     Public Property Filename() As String
@@ -75,12 +75,12 @@ Public Class IniFile
                 End If
                 If tmpStringLine.StartsWith(_strIniArgumentsBegins) Then
                     tmpBool = True
-                    _strPrefix = TmpStringComplete.ToString
+                    _strPrefix = TmpStringInhaltKomplett.ToString
                 End If
-                TmpStringComplete.Append(tmpStringLine & Environment.NewLine)
+                TmpStringInhaltKomplett.Append(tmpStringLine & Environment.NewLine)
             Loop Until tmpStringLine Is Nothing
             ssr.Close()
-            StringIniFile = TmpStringComplete.ToString
+            StringIniFile = TmpStringInhaltKomplett.ToString
             Return True
             _ds.AcceptChanges()
         Catch ex As Exception

@@ -1,0 +1,11 @@
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.vbproj.AssemblyReference.cache
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.vbproj.SuggestedBindingRedirects.cache
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.CustomMessageBox.resources
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.About.resources
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.Main5.resources
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.Resources.resources
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.PGFCreator.resources
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.vbproj.GenerateResource.cache
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.vbproj.CoreCompileInputs.cache
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.exe
+D:\2022\11_宝可梦_配信器源码\Gen5\PKMG5DC-2.0.0.1_CHS\PKMG5DC\obj\Debug\PKMG5DC.pdb
