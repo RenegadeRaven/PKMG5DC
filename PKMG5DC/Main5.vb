@@ -29,7 +29,8 @@ cd " & Local & "\tools
 ndstool.exe -c ..\ticket2.nds -9 arm9.bin -7 arm7.bin -d data -t banner.bin -h header.bin"}, {"\tools\clean.bat", "C:
 cd " & Local & "\tools
 rd /S/Q data
-del arm9.bin arm7.bin banner.bin header.bin"}}
+del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", My.Resources.silent_extract},
+        '{"\tools\silent_compile.vbs", My.Resources.silent_compile}, {"\tools\silent_clean.vbs", My.Resources.silent_clean}}
         If ToolVer <> Application.ProductVersion Then Directory.Delete(Local & "\tools", True)
         CheckLocal()
         CreateFiles(tools)
@@ -371,9 +372,9 @@ del arm9.bin arm7.bin banner.bin header.bin"}}
             lb_PGF.Text = myFile
             WC.Data = File.ReadAllBytes(OpenFile.FileName)
             With WC
-                .RecieveDay = 0
-                .RecieveMonth = 0
-                .RecieveYear = 0
+                .ReceiveDay = 0
+                .ReceiveMonth = 0
+                .ReceiveYear = 0
             End With
             Card.Wondercards(tc_Cards.SelectedIndex) = WC.Data
             WC = New PGF
