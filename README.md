@@ -19,3 +19,6 @@ This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event
  * [DarkFader](https://github.com/darkfader) for [NDSTool](https://gbatemp.net/download/nintendo-ds-rom-tool-ndstool.29352/)
  ### Gen 6 & 7
  * [Professor Oak](https://digiex.net/members/professor-oak.50286/) for everything <sup>so far</sup> Gen 6 & 7 distro related
+
+ ## Donate
+[![button](https://i.imgur.com/4yHCJNa.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E)
