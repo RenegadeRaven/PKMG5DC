@@ -12,6 +12,10 @@ This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event
 
 
  ## Credits
+ * [Project Pokémon](https://projectpokemon.org/home/docs/) for Technical Documentation
+ ### Gen 5
  * [Prof. 9](https://github.com/Prof9) for [Pokémon Duodecuple Distribution hack](https://gbatemp.net/threads/pokemon-duodecuple-distribution-hack.285080/)
  * [Kingcom](https://github.com/Kingcom) for [ARMIPS](http://aerie.wingdreams.net/?page_id=6)
  * [DarkFader](https://github.com/darkfader) for [NDSTool](https://gbatemp.net/download/nintendo-ds-rom-tool-ndstool.29352/)
+ ### Gen 6 & 7
+ * [Profressor Oak](https://digiex.net/members/professor-oak.50286/) for everything ^(so far) Gen 6 & 7 distro related
