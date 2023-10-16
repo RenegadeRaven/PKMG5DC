@@ -5,7 +5,7 @@ Public Class Main5
     Public Shared ReadOnly apppath As String = My.Application.Info.DirectoryPath 'Path to .exe directory
     Public Shared ReadOnly res As String = Path.GetFullPath(Application.StartupPath & "\..\..\Resources\") 'Path to Project Resources
     Public Shared ReadOnly TempPath As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Temp" 'Path to Temp
-    Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\Regnum\PKMG5DC" 'Path to Local folder
+    Public Shared ReadOnly Local As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) & "\RenegadeRaven\PKMG5DC" 'Path to Local folder
     Dim OpenFile As New OpenFileDialog 'Open File Window
     Dim SaveFile As New SaveFileDialog 'Save File Window
     ReadOnly langCksm As UShort() = {&H83BC, &H9D36, &H39AA, &H4418, &HE061, &HF57A} 'List of Language Checksums
@@ -59,7 +59,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", 
     " & ControlChars.Quote & "version" & ControlChars.Quote & ": " & ControlChars.Quote & My.Application.Info.Version.ToString & ControlChars.Quote & "
     }")
         If My.Computer.Network.IsAvailable Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/version.txt", TempPath & "\vsn.txt")
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/PKMG5DC/master/PKMG5DC/version.txt", TempPath & "\vsn.txt")
             Dim Reader As New IO.StreamReader(TempPath & "\vsn.txt")
             Dim v As String = Reader.ReadToEnd
             Reader.Close()
@@ -74,7 +74,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", 
             Me.Text = "PKMG5DC (" & dat & ")"
             If My.Computer.Network.IsAvailable Then
                 Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/PlasticJustice/PKMG5DC/master/PKMG5DC/Resources/date.txt", TempPath & "\dt.txt")
+                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/RenegadeRaven/PKMG5DC/master/PKMG5DC/Resources/date.txt", TempPath & "\dt.txt")
                 Catch
                     File.WriteAllText(TempPath & "\dt.txt", " ")
                 End Try
@@ -101,7 +101,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", 
     'Link to Update version
     Private Sub Lklb_Update_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Update.LinkClicked
         If My.Computer.Network.IsAvailable Then
-            Process.Start("https://github.com/PlasticJustice/PKMG5DC/releases/latest")
+            Process.Start("https://github.com/RenegadeRaven/PKMG5DC/releases/latest")
         Else
             MsgBox("No Internet connection!
     You can not update at the moment.", vbOKOnly, "Error 404")
@@ -111,7 +111,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", 
     'Link the Author's, yours truly, Github Page
     Private Sub Lklb_Author_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Author.LinkClicked
         If My.Computer.Network.IsAvailable Then
-            Process.Start("https://github.com/PlasticJustice")
+            Process.Start("https://github.com/RenegadeRaven")
         Else
             MsgBox("No Internet connection!" & "
 " & "You can look me up later.", 1, "OK",,, "Error" & " 404")

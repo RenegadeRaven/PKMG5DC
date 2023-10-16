@@ -63,10 +63,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>60BE65DE8B23BD89153A729E77677150B1D8B64C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>27D10E60025F9845A5BFC3A20DB5D34A92080DEF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Regnum.pfx</ManifestKeyFile>
+    <ManifestKeyFile>RenegadeRaven.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MSBuild.AutoILMerge.Task, Version=1.0.0.0, Culture=en-US, processorArchitecture=MSIL">
@@ -188,13 +188,13 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Regnum.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="content\ILMergeOrder.txt" />
     <Content Include="favicon1.ico" />
     <Content Include="ILMergeInternalizeExcludeList.txt" />
     <Content Include="ILMergeOrder.txt" />
+    <None Include="RenegadeRaven.pfx" />
     <None Include="Resources\12distro\ndstool.exe" />
     <None Include="Resources\DonateButton\ppdbs.png" />
     <None Include="Resources\DonateButton\ppdb.png" />

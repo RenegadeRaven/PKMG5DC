@@ -10,10 +10,10 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("PKMG5DC")>
 <Assembly: AssemblyDescription("Creates Pokémon Distribution ROMs for Gen 5")>
-<Assembly: AssemblyCompany("Regnum")>
+<Assembly: AssemblyCompany("RenegadeRaven")>
 <Assembly: AssemblyProduct("Gen 5 Pokémon Distribution ROM Creator")>
-<Assembly: AssemblyCopyright("Copyright © Regnum 2018-2020")>
-<Assembly: AssemblyTrademark("Regnum")>
+<Assembly: AssemblyCopyright("Copyright © RenegadeRaven 2018-2020")>
+<Assembly: AssemblyTrademark("RenegadeRaven")>
 
 <Assembly: ComVisible(False)>
 
