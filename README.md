@@ -1,4 +1,4 @@
-# PKMG5DC ![Language](https://img.shields.io/badge/Language-Visual%20Basic-blue.svg) ![Version](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPlasticJustice%2FPKMG5DC%2Fmaster%2FPKMG5DC%2Fversion.json&query=%24.version&colorB=10ADED&prefix=v)
+# PKMG5DC ![Language](https://img.shields.io/badge/Language-Visual%20Basic-blue.svg) ![Version](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https%3A%2F%2Fraw.githubusercontent.com%2FRenegadeRaven%2FPKMG5DC%2Fmaster%2FPKMG5DC%2Fversion.json&query=%24.version&colorB=10ADED&prefix=v)
 
 This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event file and a clean copy of the Liberty Ticket distribution ROM (both not included).
 
@@ -21,4 +21,4 @@ This program can build custom Gen 5 Pokémon Distribution ROMs from a .pgf event
  * [Professor Oak](https://digiex.net/members/professor-oak.50286/) for everything <sup>so far</sup> Gen 6 & 7 distro related
 
  ## Donate
-[![button](https://i.imgur.com/4yHCJNa.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E)
+[![button](https://i.imgur.com/4yHCJNa.png)](https://paypal.me/RenegadeRainbowRaven)

@@ -122,7 +122,7 @@ del arm9.bin arm7.bin banner.bin header.bin"}} ', {"\tools\silent_extract.vbs", 
     Private Sub Pb_Donate_Click(sender As Object, e As EventArgs) Handles pb_Donate.Click
         System.Threading.Thread.Sleep(200)
         If My.Computer.Network.IsAvailable Then
-            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGSCC5VGSGN3E")
+            Process.Start("https://paypal.me/RenegadeRainbowRaven")
         Else
             MsgBox("No Internet connection!" & "
 " & "I appreciate the gesture.", 1, "OK",,, "Error" & " 404")

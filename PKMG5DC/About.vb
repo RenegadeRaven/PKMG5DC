@@ -15,6 +15,6 @@
         Process.Start("https://gbatemp.net/threads/pokemon-duodecuple-distribution-hack.285080/")
     End Sub
     Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lklb_Source.LinkClicked
-        Process.Start("https://github.com/PlasticJustice/PKMG5DC")
+        Process.Start("https://github.com/RenegadeRaven/PKMG5DC")
     End Sub
 End Class
